@@ -1,7 +1,7 @@
-@import "palette";
+@use "palette";
 
 body {
   padding: 10vw 5vw;
-  background-color: $purple-6;
-  color: $white;
+  background-color: palette.$purple-6;
+  color: palette.$pink
 }
