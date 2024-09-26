@@ -1,25 +1,32 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import './index.css'
-import { ErrorPage } from './pages/ErrorPage'
-import { Root } from './routes/Root'
-
+import { ErrorPage } from './view/pages/ErrorPage'
+import { GamePage } from './view/routes/Game'
+import { Root } from './view/routes/Root'
+import { Search } from './view/routes/Search'
 
 const router = createBrowserRouter(
 	[
 		{
-			path   : '/',
-			element: <Root />,
-			errorElement: <ErrorPage />,
-			children: [
-				
+			path        : '/',
+			element     : <Root/>,
+			errorElement: <ErrorPage/>,
+			children    : [
+				{
+					path: 'search',
+					element: <Search />
+				},
+				{
+					path: 'search/:id',
+					element: <GamePage />
+				}
 			]
 		}
 	])
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
-		<RouterProvider router={router} />
+		<RouterProvider router={router}/>
 	</StrictMode>
 )

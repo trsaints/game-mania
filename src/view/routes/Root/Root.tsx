@@ -1,5 +1,4 @@
-import { Link, Outlet } from 'react-router-dom'
-
+import { Form, Link, Outlet } from 'react-router-dom'
 
 function Root() {
 	const currentDate = new Date();
@@ -15,10 +14,23 @@ function Root() {
 				</nav>
 			</header>
 
+			<Form method='post'>
+				<fieldset>
+					<legend>Search</legend>
+					
+					<p>
+						<label htmlFor='search'>Search Term</label>
+						<input type='search' id='search' />
+					</p>
+				</fieldset>
+
+				<button type='submit'>Search</button>
+			</Form>
+
 			<Outlet/>
 
 			<footer>
-				<h2>Game Mania - 
+				<h2>Game Mania -
 					<time dateTime={currentDate.getFullYear().toString()}>
 						{currentDate.getFullYear()}
 					</time>
