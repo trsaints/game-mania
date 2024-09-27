@@ -1,10 +1,8 @@
 import { StrictMode }                          from 'react'
 import { createRoot }                          from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { ErrorPage }                           from './view/pages/ErrorPage'
-import { GamePage }                            from './view/routes/Game'
-import { Root }                                from './view/routes/Root'
-import { Search }                              from './view/routes/Search'
+import { ErrorPage }              from 'src/views/pages'
+import { GamePage, Root, Search } from './views/routes'
 
 
 const mainRouter = createBrowserRouter(
