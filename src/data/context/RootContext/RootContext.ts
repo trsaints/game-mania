@@ -3,7 +3,8 @@ import { IRootContext }  from './IRootContext'
 
 
 const RootContext = createContext<IRootContext>({
-													clientSecret: ''
+													clientSecret: '',
+													setClientSecret: () => {}
 												})
 
 export { RootContext }
