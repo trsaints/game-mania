@@ -1,30 +1,17 @@
-import { Form, Outlet } from 'react-router-dom'
+import { Outlet }              from 'react-router-dom'
 import { RootContextProvider } from '../../../data/context/RootContext'
-import { Footer } from '../../components/Footer'
-import { Header } from '../../components/Header'
+import { Footer }              from '../../components/Footer'
+import { Header }              from '../../components/Header'
+import { SearchForm }          from '../../components/SearchForm'
+
 
 function Root() {
-	
 	return (
 		<RootContextProvider>
-			<Header />
-
-			<Form method='post'>
-				<fieldset>
-					<legend>Search</legend>
-
-					<p>
-						<label htmlFor='search'>Search Term</label>
-						<input type='search' id='search' />
-					</p>
-				</fieldset>
-
-				<button type='submit'>Search</button>
-			</Form>
-
+			<Header/>
+			<SearchForm/>
 			<Outlet/>
-
-			<Footer />
+			<Footer/>
 		</RootContextProvider>
 	)
 }
