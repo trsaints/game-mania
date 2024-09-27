@@ -1,16 +1,15 @@
-import react            from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
+import tsconfigPaths from 'vite-tsconfig-paths'
 
-// https://vitejs.dev/config/
-export default defineConfig(
-{
-    plugins: [react()],
-    resolve: {
-        alias: {
-            src: '/src',
-            data: '/src/data',
-            view: '/src/views',
-            services: '/src/services'
-        }
-    }
-})
+export default defineConfig({
+                                plugins: [react(), tsconfigPaths()],
+                                resolve: {
+                                    alias: {
+                                        '@src': '/src',
+                                        '@data': '/src/data',
+                                        '@views': '/src/views',
+                                        '@services': '/src/services',
+                                    },
+                                },
+                            });
