@@ -1,7 +1,9 @@
 import { PropsWithChildren, useEffect, useState } from 'react'
-import { apiService } from '../../../services/apiService.ts'
-import { IRootContext } from './IRootContext.ts'
-import { RootContext } from './RootContext.ts'
+import {
+	apiService
+}                                                 from '../../../services/apiService.ts'
+import { IRootContext }                           from './IRootContext.ts'
+import { RootContext }                            from './RootContext.ts'
 
 
 function RootContextProvider({children}: PropsWithChildren) {

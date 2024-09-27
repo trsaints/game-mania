@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom'
+import { Link }    from 'react-router-dom'
+import style       from './Header.module.scss'
 import { IHeader } from './IHeader'
-import style from './Header.module.scss'
 
 
 function Header(props: IHeader) {

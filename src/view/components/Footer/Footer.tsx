@@ -1,10 +1,10 @@
+import style       from './Footer.module.scss'
 import { IFooter } from './IFooter'
-import style from './Footer.module.scss'
 
 
 function Footer(props: IFooter) {
-	const currentDate = new Date();
-	
+	const currentDate = new Date()
+
 	return (
 		<footer className={style.Footer}>
 			<h2>Game Mania -

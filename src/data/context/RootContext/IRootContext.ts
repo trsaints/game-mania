@@ -1,1 +1,3 @@
-export interface IRootContext {}
+export interface IRootContext {
+	clientSecret: string
+}

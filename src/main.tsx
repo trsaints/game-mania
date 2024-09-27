@@ -1,12 +1,13 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { StrictMode }                          from 'react'
+import { createRoot }                          from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { ErrorPage } from './view/pages/ErrorPage'
-import { GamePage } from './view/routes/Game'
-import { Root } from './view/routes/Root'
-import { Search } from './view/routes/Search'
+import { ErrorPage }                           from './view/pages/ErrorPage'
+import { GamePage }                            from './view/routes/Game'
+import { Root }                                from './view/routes/Root'
+import { Search }                              from './view/routes/Search'
 
-const router = createBrowserRouter(
+
+const mainRouter = createBrowserRouter(
 	[
 		{
 			path        : '/',
@@ -14,12 +15,12 @@ const router = createBrowserRouter(
 			errorElement: <ErrorPage/>,
 			children    : [
 				{
-					path: 'search',
-					element: <Search />
+					path   : 'search',
+					element: <Search/>
 				},
 				{
-					path: 'search/:id',
-					element: <GamePage />
+					path   : 'search/:id',
+					element: <GamePage/>
 				}
 			]
 		}
@@ -27,6 +28,6 @@ const router = createBrowserRouter(
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
-		<RouterProvider router={router}/>
+		<RouterProvider router={mainRouter}/>
 	</StrictMode>
 )

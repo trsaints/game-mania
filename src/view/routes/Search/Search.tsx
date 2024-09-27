@@ -1,5 +1,5 @@
 import { ISearch } from './ISearch.ts'
-import style from './Search.module.scss'
+import style       from './Search.module.scss'
 
 
 function Search(props: ISearch) {
