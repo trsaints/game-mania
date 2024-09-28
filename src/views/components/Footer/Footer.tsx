@@ -1,8 +1,7 @@
-import style       from './Footer.module.scss'
-import { IFooter } from './IFooter'
+import style from './Footer.module.scss'
 
 
-function Footer(props: IFooter) {
+function Footer() {
 	const currentDate = new Date()
 
 	return (

@@ -1,8 +1,6 @@
-import { Outlet }              from 'react-router-dom'
-import { RootContextProvider } from '../../../data/context/RootContext'
-import { Footer }              from '../../components/Footer'
-import { Header }              from '../../components/Header'
-import { SearchForm }          from '../../components/SearchForm'
+import { RootContextProvider }        from '@data/context/RootContext'
+import { Footer, Header, SearchForm } from '@views/components'
+import { Outlet }                     from 'react-router-dom'
 
 
 function Root() {

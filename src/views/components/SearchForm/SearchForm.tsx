@@ -1,9 +1,8 @@
 import { Form }        from 'react-router-dom'
-import { ISearchForm } from './ISearchForm'
 import style           from './SearchForm.module.scss'
 
 
-function SearchForm(props: ISearchForm) {
+function SearchForm() {
 	return (
 		<Form method="post" className={style.SearchForm}>
 			<fieldset>

@@ -1,9 +1,8 @@
-import { Link }    from 'react-router-dom'
-import style       from './Header.module.scss'
-import { IHeader } from './IHeader'
+import { Link } from 'react-router-dom'
+import style    from './Header.module.scss'
 
 
-function Header(props: IHeader) {
+function Header() {
 	return (
 		<header className={style.Header}>
 			<h1>Game Mania</h1>

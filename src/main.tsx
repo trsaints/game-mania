@@ -1,8 +1,8 @@
+import { ErrorPage }                           from '@views/pages'
+import { Root, Search }                        from '@views/routes'
 import { StrictMode }                          from 'react'
 import { createRoot }                          from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { ErrorPage }              from '@views/pages'
-import { GamePage, Root, Search } from '@views/routes'
 
 
 const mainRouter = createBrowserRouter(
@@ -15,10 +15,6 @@ const mainRouter = createBrowserRouter(
 				{
 					path   : 'search',
 					element: <Search/>
-				},
-				{
-					path   : 'search/:id',
-					element: <GamePage/>
 				}
 			]
 		}
