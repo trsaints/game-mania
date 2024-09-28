@@ -15,7 +15,7 @@ function GameContextProvider({children}: PropsWithChildren) {
 
 	useEffect(() => {
 		GameService.getGames().then(games => setLoadedGames(games))
-	})
+	}, [])
 
 	const context: IGameContext = {
 		games: loadedGames,

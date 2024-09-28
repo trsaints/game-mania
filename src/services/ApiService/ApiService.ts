@@ -12,5 +12,5 @@ export const ApiService = {
 
 
 function createRouteUrl(route: string) {
-	return `${import.meta.env.VITE_API_URL_BACKEND}/${route}?token&key=${import.meta.env.VITE_API_CLIENT_SECRET}`
+	return `${import.meta.env.VITE_API_URL_BACKEND}${route}?token&key=${import.meta.env.VITE_API_CLIENT_SECRET}`
 }
