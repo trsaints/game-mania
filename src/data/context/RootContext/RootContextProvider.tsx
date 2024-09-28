@@ -1,14 +1,11 @@
-import { PropsWithChildren, useState } from 'react'
-import { IRootContext }                from './IRootContext.ts'
-import { RootContext }                 from './RootContext.ts'
+import { PropsWithChildren } from 'react'
+import { IRootContext }      from './IRootContext.ts'
+import { RootContext }       from './RootContext.ts'
 
 
 function RootContextProvider({children}: PropsWithChildren) {
-	const [clientSecret, setClientSecret] = useState<string>(import.meta.env.VITE_API_CLIENT_SECRET)
-
 	const context: IRootContext = {
-		clientSecret   : clientSecret,
-		setClientSecret: setClientSecret
+		clientSecret: import.meta.env.VITE_API_CLIENT_SECRET
 	}
 
 	return (<RootContext.Provider value={context}>
