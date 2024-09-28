@@ -1,23 +1,16 @@
-import { PropsWithChildren, useEffect, useState } from 'react'
-import {
-	ApiService
-}                                                 from '../../../services/ApiService.ts'
-import { IRootContext }                           from './IRootContext.ts'
-import { RootContext }                            from './RootContext.ts'
+import { PropsWithChildren, useState } from 'react'
+import { IRootContext }                from './IRootContext.ts'
+import { RootContext }                 from './RootContext.ts'
 
 
 function RootContextProvider({children}: PropsWithChildren) {
-	const [clientSecret, setClientSecret] = useState<string>('')
-
-	useEffect(() => {
-		ApiService.getApiToken().then((data: string) => setClientSecret(data))
-	}, [])
+	const [clientSecret, setClientSecret] = useState<string>(import.meta.env.VITE_API_CLIENT_SECRET)
 
 	const context: IRootContext = {
-		clientSecret: clientSecret,
+		clientSecret   : clientSecret,
 		setClientSecret: setClientSecret
-	}	
-	
+	}
+
 	return (<RootContext.Provider value={context}>
 		{children}
 	</RootContext.Provider>)

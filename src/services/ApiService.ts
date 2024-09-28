@@ -1,20 +1,11 @@
 import axios from 'axios'
 
-
-export namespace ApiService {
-	export async function getApiToken() {
-		const clientId     = import.meta.env.VITE_API_CLIENT_ID as string,
-			  clientSecret = import.meta.env.VITE_API_CLIENT_SECRET as string,
-			  apiUrl       = `https://id.twitch.tv/oauth2/token`
-
-		const result = await axios.post(apiUrl, null, {
-			params: {
-				client_id    : clientId,
-				client_secret: clientSecret,
-				grant_type   : 'client_credentials'
-			}
-		})
-
-		return result.data?.access_token
-	}
+export const ApiService = {	
+	
 }
+
+const gameApi = axios.create({
+							 baseURL: import.meta.env.VITE_API_URL_BACKEND
+									  ?? 'http://localhost:3333'
+						 })
+
