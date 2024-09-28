@@ -13,11 +13,8 @@ async function getGames(): Promise<Game[]> {
         results.map((r: Game) => r as Game)
     
     const response = await ApiService.gameApi.get(baseUrl)
-    const games = mapToGameArray(response.data.results)
     
-    if (games === undefined) return []
-    
-    return games
+    return mapToGameArray(response.data?.results) ?? []
 }
 
 async function getGameById(id: number): Promise<Game> {
