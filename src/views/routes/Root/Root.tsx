@@ -1,16 +1,16 @@
-import { RootContextProvider }        from '@data/context/RootContext'
+import { GameContextProvider }        from '@data/context'
 import { Footer, Header, SearchForm } from '@views/components'
 import { Outlet }                     from 'react-router-dom'
 
 
 function Root() {
 	return (
-		<RootContextProvider>
+		<GameContextProvider>
 			<Header/>
 			<SearchForm/>
 			<Outlet/>
 			<Footer/>
-		</RootContextProvider>
+		</GameContextProvider>
 	)
 }
 

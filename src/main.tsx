@@ -1,5 +1,6 @@
 import { ErrorPage }                           from '@views/pages'
 import { Root, Search }                        from '@views/routes'
+import { Home }                                from '@views/routes/Home'
 import { StrictMode }                          from 'react'
 import { createRoot }                          from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
@@ -12,6 +13,10 @@ const mainRouter = createBrowserRouter(
 			element     : <Root/>,
 			errorElement: <ErrorPage/>,
 			children    : [
+				{
+					path: '/',
+					element: <Home/>
+				},
 				{
 					path   : 'search',
 					element: <Search/>

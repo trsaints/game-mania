@@ -6,7 +6,11 @@ const gameApi = axios.create({
 							 })
 
 export const ApiService = {	
-	gameApi
+	gameApi,
+	createRouteUrl
 }
 
 
+function createRouteUrl(route: string) {
+	return `${import.meta.env.VITE_API_URL_BACKEND}${route}?token&key=${import.meta.env.VITE_API_CLIENT_SECRET}`
+}

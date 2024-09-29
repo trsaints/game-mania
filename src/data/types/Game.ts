@@ -1,41 +1,71 @@
+import { Platform, Platforms } from '@data/types'
+
+export type GameProperties = keyof Game
+
 export type Game = {
+	id: number
+	slug: string
 	name: string
-	genres: number[]
-	category: GameCategory
-	firstReleaseDate: number
-	involvedCompanies: number[]
-	platforms: number[]
-	status: GameStatus
-	totalRating: number
-	similarGames: number[]
-	summary: string
+	released: string
+	tba: boolean
+	backgroundImage: string
+	rating: number
+	ratingTop: number
+	ratingsCount: number
+	reviewsCount: number
+	reviewsTextCount: number
+	added: number
+	addedByStatus: unknown
+	metacritic: number
+	playtime: number
+	suggestionsCount: 0
+	updated: string
+	esrbRating: {
+		id: number
+		slug: 'everyone'
+		name: 'Everyone'
+	}
+	parentPlatforms: ParentPlatforms
+	platforms: Platforms
+	genres: Genre[]
+	dominantColor: string
+	shortsScreenshots: Image[]
+	stores: Store[]
+	tags: Tag[]
 }
 
-export enum GameCategory {
-	mainGame,
-	dlcAddon,
-	expansion,
-	bundle,
-	standaloneExpansion,
-	mod,
-	episode,
-	season,
-	remake,
-	remaster,
-	expandedGame,
-	port,
-	fork,
-	update,
-	pack,
+type Tag = {
+	games_count: number
+	id: number
+	image_background: string
+	language: string
+	name: string
+	slug: string
+}
+ 
+type Store = {
+	domain: string
+	games_count: number
+	id: number
+	image_background: string
+	name: string
+	slug: string
 }
 
-export enum GameStatus {
-	released,
-	alpha,
-	beta,
-	early_access,
-	offline,
-	cancelled,
-	rumored,
-	delisted,
+type Image = {
+	id: number
+	image: string
 }
+
+type ParentPlatforms = {
+	platforms: Platform[]
+}
+
+type Genre = {
+	id: number
+	name: string
+	slug: string
+	imageBackground: string
+}
+
+
