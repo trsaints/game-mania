@@ -1,4 +1,4 @@
 import { ComponentProps } from 'react'
 
 
-export interface IHome extends ComponentProps<T> {}
+export interface IHome extends ComponentProps<'article'> {}
