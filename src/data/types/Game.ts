@@ -1,5 +1,6 @@
-import { Platforms } from '@data/types'
+import { Platform, Platforms } from '@data/types'
 
+export type GameProperties = keyof Game
 
 export type Game = {
 	id: number
@@ -11,7 +12,8 @@ export type Game = {
 	rating: number
 	ratingTop: number
 	ratingsCount: number
-	reviewsTextCount: string
+	reviewsCount: number
+	reviewsTextCount: number
 	added: number
 	addedByStatus: unknown
 	metacritic: number
@@ -20,11 +22,43 @@ export type Game = {
 	updated: string
 	esrbRating: {
 		id: number
-		slug: "everyone"
-		name: "Everyone"
+		slug: 'everyone'
+		name: 'Everyone'
 	}
+	parentPlatforms: ParentPlatforms
 	platforms: Platforms
-	genres: Genre[] 
+	genres: Genre[]
+	dominantColor: string
+	shortsScreenshots: Image[]
+	stores: Store[]
+	tags: Tag[]
+}
+
+type Tag = {
+	games_count: number
+	id: number
+	image_background: string
+	language: string
+	name: string
+	slug: string
+}
+ 
+type Store = {
+	domain: string
+	games_count: number
+	id: number
+	image_background: string
+	name: string
+	slug: string
+}
+
+type Image = {
+	id: number
+	image: string
+}
+
+type ParentPlatforms = {
+	platforms: Platform[]
 }
 
 type Genre = {

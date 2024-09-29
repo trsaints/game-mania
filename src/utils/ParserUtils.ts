@@ -5,7 +5,7 @@ export const ParserUtils = {
 function convertSnakeToCamelCase(snakeText: string) {
 	const tokens = snakeText.split('_')
 
-	if (tokens.length === 1) return tokens
+	if (tokens.length === 1) return tokens[0]
 
 	const upperCasedTokens = tokens.map((t, i) => {
 		if (i === 0) return t
@@ -19,8 +19,8 @@ function convertSnakeToCamelCase(snakeText: string) {
 	let result = ''
 
 	for (let i = 0; i < upperCasedTokens.length; i++) {
-		result.concat(upperCasedTokens[i])
+		result = result.concat(upperCasedTokens[i])
 	}
-
+	
 	return result
 }
