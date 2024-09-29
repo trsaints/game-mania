@@ -39,3 +39,7 @@ input{
   -webkit-appearance: none;
   border-radius: 0;
 }
+
+summary::marker {
+  content: none;
+}
