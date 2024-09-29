@@ -6,11 +6,12 @@ function GameCard({game}: IGameCard) {
 	return (
 		<article className={style.GameCard}>
             <header>
-                <h2>{game.name} ({game.released})</h2>
-                <p>{game.rating}</p>
+                <h2>Name: {game.name}</h2>
+				<p>Released at: {new Date(game.released).getFullYear()}</p>
+                <p>Rating: {game.rating}/{game.ratingTop}</p>
             </header>
-            
-            <p></p>
+			
+            <p>Genre: {game.genres[0].name}</p>
         </article>
     )
 }
