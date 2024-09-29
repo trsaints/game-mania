@@ -1,2 +1,24 @@
+@use "src/palette";
+
 .Header {
+  background-image: linear-gradient(to bottom, palette.$black-d2, palette.$black-d4);
+  padding: 5vw;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  box-shadow: 0 0 8px palette.$black-d5;
+  
+  .Banner {
+    height: 10vh;
+  }
+
+  .Links {
+    display: grid;
+    gap: 2vh;
+  }
+  
+  .Menu-Button {
+    background-image: none;
+    background-color: transparent;
+  }
 }
