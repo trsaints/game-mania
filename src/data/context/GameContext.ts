@@ -3,7 +3,9 @@ import { IGameContext }  from './IGameContext'
 
 const GameContext = createContext<IGameContext>({
 													games          : [],
-													setSelectedGame: () => {}
+													gameSearch: '',
+													setSelectedGame: () => {},
+													setGameSearch: () => {}
 												})
 
 export { GameContext }

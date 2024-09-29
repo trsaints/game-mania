@@ -11,6 +11,7 @@ import { PropsWithChildren, useEffect, useState } from 'react'
 
 function GameContextProvider({children}: PropsWithChildren) {
 	const [loadedGames, setLoadedGames]   = useState<Game[]>([])
+	const [gameSearch, setGameSearch] = useState<string>('')
 	const [selectedGame, setSelectedGame] = useState<Game | undefined>()
 
 	useEffect(() => {
@@ -20,7 +21,9 @@ function GameContextProvider({children}: PropsWithChildren) {
 	const context: IGameContext = {
 		games: loadedGames,
 		selectedGame,
-		setSelectedGame
+		gameSearch,
+		setSelectedGame,
+		setGameSearch
 	}
 
 	return (<GameContext.Provider value={context}>
