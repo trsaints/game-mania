@@ -1,4 +1,5 @@
 import { Game } from '@data/types'
+import { GameDetails } from '@data/types/GameDetails.ts'
 import { ApiService } from '@services/ApiService'
 import { ParserUtils } from '@src/utils'
 
@@ -11,17 +12,17 @@ async function getGames(): Promise<Game[]> {
     const baseUrl = ApiService.createRouteUrl("games")
     const response = await ApiService.gameApi.get(baseUrl)
     
-    return response.data?.results.map(mapToGameType) ?? []
+    return response.data?.results.map(mapToGameType<Game>) ?? []
 }
 
-async function getGameById(id: number): Promise<Game> {
+async function getGameById(id: number): Promise<GameDetails> {
     const gameUrl = ApiService.createRouteUrl(`games/${id}`)
     const response = await ApiService.gameApi.get(gameUrl)
     
-    return mapToGameType(response.data)
+    return mapToGameType<GameDetails>(response.data)
 }
 
-function mapToGameType(data: any): Game {
+function mapToGameType<T>(data: any): T {
     let mappedGame: any = {}
     const dataEntries = Object.entries(data)
     
@@ -37,6 +38,6 @@ function mapToGameType(data: any): Game {
         mappedGame[camelCasedKey] = value
     })
     
-    return mappedGame as Game
+    return mappedGame as T
 }
 

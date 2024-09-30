@@ -15,7 +15,13 @@ function GameContextProvider({children}: PropsWithChildren) {
 	const [selectedGame, setSelectedGame] = useState<Game | undefined>()
 
 	useEffect(() => {
-		GameService.getGames().then(games => setLoadedGames(games))
+		GameService.getGames().then(games => {
+			setLoadedGames(games)
+			console.log(games[0])
+		})
+		
+		GameService.getGameById(1).then(g => console.log(g))
+		
 	}, [])
 
 	const context: IGameContext = {

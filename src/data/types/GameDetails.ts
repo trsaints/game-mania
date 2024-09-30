@@ -1,32 +1,32 @@
-export type GameDetails = {
+import { Developer, GameCommons, Publisher } from '@data/types'
+
+
+export type GameDetails = GameCommons & {
 	nameOriginal: string
 	description: string
-	metacriticPlatforms: [
-		{
-			metascore: number
-			url: string
-		}
-	]
+	metacriticPlatforms: unknown[]
 	backgroundImageAdditional: string
 	website: string
-	ratings: {}
-	reactions: {}
 	screenshotsCount: number
 	moviesCount: number
 	creatorsCount: number
 	achievementsCount: number
-	parentAchievementsCount: string
+	parentAchievementsCount: number
 	redditUrl: string
 	redditName: string
 	redditDescription: string
 	redditLogo: string
 	redditCount: number
-	twitchCount: string
-	youtubeCount: string
+	twitchCount: number
+	youtubeCount: number
 	alternativeNames: string[]
 	metacriticUrl: string
 	parentsCount: number
 	additionsCount: number
 	gameSeriesCount: number
-
+	developers: Developer[]
+	publishers: Publisher[]
+	descriptionRaw: string
 }
+
+

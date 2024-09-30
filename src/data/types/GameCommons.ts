@@ -1,24 +1,42 @@
-import { EsrbRating } from '@data/types/EsrbRating.ts'
-import { Platforms }  from '@data/types/Platforms.ts'
+import {
+	AddedByStatus,
+	EsrbRating,
+	Genre,
+	ParentPlatform,
+	Platform,
+	Rating,
+	Store,
+	Tag
+} from '@data/types'
 
 
 export type GameCommons = {
-	id: number
-	slug: string
-	name: string
-	metacritic: number
+	rating: number
+	ratingTop: number
+	ratings: Rating[]
+	added: number
+	addedByStatus: AddedByStatus
+	playtime: number
 	released: string
 	tba: boolean
 	updated: string
 	backgroundImage: string
-	rating: number
-	ratingTop: number
-	added: number
-	addedByStatus: {}
-	playtime: number
-	reviewsTextCount: string
+	id: number
+	slug: string
+	name: string
+	metacritic: unknown
+	reviewsTextCount: number
 	ratingsCount: number
 	suggestionsCount: number
+	userGame: unknown
+	reviewsCount: number
+	saturatedColor: string
+	dominantColor: string
+	parentPlatforms: ParentPlatform[]
+	platforms: Platform[]
+	stores: Store[]
+	genres: Genre[]
+	tags: Tag[]
 	esrbRating: EsrbRating
-	platforms: Platforms
+	clip: unknown
 }
