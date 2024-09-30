@@ -6,17 +6,25 @@ function Footer() {
 
 	return (
 		<footer className={style.Footer}>
-			<h2>Game Mania -
-				<time dateTime={currentDate.getFullYear().toString()}>
-					{currentDate.getFullYear()}
-				</time>
-			</h2>
-			<p>Feito por
+			<p>Feito por {' '}
 				<a href="https://github.com/trsaints"
 				   target="_blank"
 				   rel="noreferrer noopener"
-				>Trsaints</a>
+				>@Trsaints</a> - {' '}
+				<time dateTime={currentDate.getFullYear().toString()}>
+					{currentDate.getFullYear()}
+				</time>
 			</p>
+
+			<nav className={style.Navbar}>
+				<a href="#genres">genres</a>
+				<a href="#tags">tags</a>
+				<a href="#publishers">publishers</a>
+			</nav>
+
+			<img className={style.Banner} src="/LOGO.svg"
+				 alt='Website logo, with the following slogan: "Game Mania: the next level awaits"'
+			/>
 		</footer>
 	)
 }
