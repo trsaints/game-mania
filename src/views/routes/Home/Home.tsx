@@ -33,9 +33,13 @@ function Home() {
 				</li>
 			</menu>
 
-			<ul>{gameList}</ul>
+			<ul className={style.GameList}>
+				{gameList}
+				<li>
+					<Link to="/search">see all</Link>
+				</li>
+			</ul>
 
-			<Link to="/search">see all</Link>
 		</article>
 	)
 }

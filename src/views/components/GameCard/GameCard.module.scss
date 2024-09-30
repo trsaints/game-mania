@@ -26,6 +26,7 @@
 
   .Details {
     margin: 0 5vw 2vh 5vw;
+    font-size: 0.7rem;
   }
 
   .Genres {
@@ -40,7 +41,6 @@
 
   .Tags {
     @extend .Details;
-    font-size: 0.7rem;
     color: palette.$white-d6;
   }
 }
