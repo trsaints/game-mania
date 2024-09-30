@@ -1,71 +1,24 @@
-import { Platform, Platforms } from '@data/types'
+import { Platform }       from '@data/types'
+import { GameCommons }    from '@data/types/GameCommons.ts'
+import { GameGenre }      from '@data/types/GameGenre.ts'
+import { GameScreenshot } from '@data/types/GameScreenshot.ts'
+import { GameStore }      from '@data/types/GameStore.ts'
+import { GameTag }        from '@data/types/GameTag.ts'
 
-export type GameProperties = keyof Game
 
-export type Game = {
-	id: number
-	slug: string
-	name: string
-	released: string
-	tba: boolean
-	backgroundImage: string
-	rating: number
-	ratingTop: number
-	ratingsCount: number
+export type Game = GameCommons & {
 	reviewsCount: number
-	reviewsTextCount: number
-	added: number
-	addedByStatus: unknown
-	metacritic: number
-	playtime: number
-	suggestionsCount: 0
-	updated: string
-	esrbRating: {
-		id: number
-		slug: 'everyone'
-		name: 'Everyone'
-	}
 	parentPlatforms: ParentPlatforms
-	platforms: Platforms
-	genres: Genre[]
+	genres: GameGenre[]
 	dominantColor: string
-	shortsScreenshots: Image[]
-	stores: Store[]
-	tags: Tag[]
-}
-
-type Tag = {
-	games_count: number
-	id: number
-	image_background: string
-	language: string
-	name: string
-	slug: string
-}
- 
-type Store = {
-	domain: string
-	games_count: number
-	id: number
-	image_background: string
-	name: string
-	slug: string
-}
-
-type Image = {
-	id: number
-	image: string
+	shortsScreenshots: GameScreenshot[]
+	stores: GameStore[]
+	tags: GameTag[]
 }
 
 type ParentPlatforms = {
 	platforms: Platform[]
 }
 
-type Genre = {
-	id: number
-	name: string
-	slug: string
-	imageBackground: string
-}
 
 
