@@ -5,6 +5,7 @@ import {
 	Platform,
 	Publisher,
 	Recommended,
+	Screenshots,
 	Tag
 }                      from '@data/types'
 import { ApiService }  from '@services/ApiService'
@@ -14,7 +15,8 @@ import { ParserUtils } from '@src/utils'
 export const GameService = {
 	getGames,
 	getGameById,
-	getRecommendations
+	getRecommendations,
+	getScreenshots
 }
 
 async function getGames(): Promise<Game[]> {
@@ -70,16 +72,28 @@ function mapToGame(data: any): Game {
 			return store
 		})
 	}
-	
+
 	return mappedData
 }
 
-async function getRecommendations() {
+async function getRecommendations(): Promise<Recommended> {
+	const recentId = Math.floor(Math.random() * 1000)
+	const dailyId = Math.floor(Math.random() * 1000)
+
 	return {
-		recent: await GameService.getGameById(Math.floor(Math.random()
-														 * 1000)),
-		daily : await GameService.getGameById(Math.floor(Math.random()
-														 * 1000))
+		recent: await GameService.getGameById(recentId),
+		daily : await GameService.getGameById(dailyId),
+
+		recentScreenshots: await GameService.getScreenshots(recentId),
+		dailyScreenshots : await GameService.getScreenshots(dailyId)
 	} as Recommended
 }
 
+async function getScreenshots(id: number): Promise<Screenshots> {
+	const routeUrl = ApiService.createRouteUrl(`games/${id}/screenshots`)
+	const response = await ApiService.gameApi.get(routeUrl)
+
+	console.log(response.data?.results)
+	
+	return response.data?.results as Screenshots
+}
