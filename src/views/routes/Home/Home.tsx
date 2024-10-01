@@ -14,22 +14,31 @@ function Home() {
 	const [recommended, setRecommended] = useState<Recommended>()
 
 	useEffect(() => {
-		GameService.getRecommendations().then(r => setRecommended(r))
+		GameService.getRecommendations().then(r => {
+			setRecommended(r)
+		})
 	}, [])
 
 	const gameContext = useContext(GameContext)
-	const gameList = gameContext.games
-								.map(g =>
-										 (<li key={g.id}>
-											 <GameCard game={g}/>
-										 </li>))
+	const gameList    = gameContext.games
+								   .map(g =>
+											(<li key={g.id}>
+												<GameCard game={g}/>
+											</li>))
+	
+	const recentPanel =
+			  (recommended?.recent && recommended?.recentScreenshots)
+			  && <GamePanel game={recommended?.recent} screenshots={recommended?.recentScreenshots}/>
 
+	const dailyPanel =
+			  (recommended?.daily && recommended?.dailyScreenshots)
+			  && <GamePanel game={recommended?.daily} screenshots={recommended?.dailyScreenshots}/>
 
 	return (
 		<article className={style.Home}>
 			<h2>Welcome</h2>
 
-			{recommended?.recent && <GamePanel game={recommended.recent}/>}
+			{recentPanel}
 
 			<article>
 				<h3>Navigate by genre</h3>
@@ -59,7 +68,7 @@ function Home() {
 
 			<h2>Daily Suggestion</h2>
 
-			{recommended?.daily && <GamePanel game={recommended.daily}/>}
+			{dailyPanel}
 		</article>
 	)
 }
