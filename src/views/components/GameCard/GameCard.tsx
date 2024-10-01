@@ -3,7 +3,7 @@ import { IGameCard } from './IGameCard'
 
 
 function GameCard({game}: IGameCard) {
-	const gameTags = game.tags.map(t => t.name).slice(0,3).join(',')
+	const gameTags = game.tags.map(t => t.name).slice(0,3).join(', ')
 	
 	return (
 		<article className={style.GameCard}>

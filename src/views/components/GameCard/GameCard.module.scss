@@ -5,12 +5,13 @@
   box-shadow: 0 0 8px palette.$black-d5;
   border-radius: 16px;
   font-weight: bold;
-  height: 60vh;
+  height: 80vh;
+  width: 90vw;
 
   .Banner {
-    /* Banner height should be 70% of the GameCard height (40vh), 
+    /* Banner height should be 70% of the GameCard height, 
        but 2vh of margin must be subtracted */
-    height: 38vh;
+    height: 54vh;
     max-width: 100%;
     object-fit: cover;
     border-top-left-radius: 16px;
