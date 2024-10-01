@@ -1,8 +1,24 @@
 export const ParserUtils = {
-	convertSnakeToCamelCase
+	convertSnakeToCamelCase: toCamelCase,
+	mapToCamelCase
 }
 
-function convertSnakeToCamelCase(snakeText: string) {
+function mapToCamelCase(data: any) {
+	let mappedData: any = {}
+	const dataEntries   = Object.entries(data)
+
+	dataEntries.forEach(([key, value]) => {
+		const parsedKey = key.includes('_')
+						  ? ParserUtils.convertSnakeToCamelCase(key)
+						  : key
+
+		mappedData[parsedKey] = value
+	})
+
+	return mappedData
+}
+
+function toCamelCase(snakeText: string) {
 	const tokens = snakeText.split('_')
 
 	if (tokens.length === 1) return tokens[0]

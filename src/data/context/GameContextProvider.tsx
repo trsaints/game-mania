@@ -11,17 +11,11 @@ import { PropsWithChildren, useEffect, useState } from 'react'
 
 function GameContextProvider({children}: PropsWithChildren) {
 	const [loadedGames, setLoadedGames]   = useState<Game[]>([])
-	const [gameSearch, setGameSearch] = useState<string>('')
+	const [gameSearch, setGameSearch]     = useState<string>('')
 	const [selectedGame, setSelectedGame] = useState<Game | undefined>()
 
 	useEffect(() => {
-		GameService.getGames().then(games => {
-			setLoadedGames(games)
-			console.log(games[0])
-		})
-		
-		GameService.getGameById(1).then(g => console.log(g))
-		
+		GameService.getGames().then(games => setLoadedGames(games))
 	}, [])
 
 	const context: IGameContext = {
