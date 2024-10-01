@@ -1,5 +1,14 @@
 export type Platform = {
-	id: number
-	slug: string
-	name: string
+	platform: {
+		id: 1
+		name: string
+		slug: string
+		image: string
+		yearEnd: unknown
+		yearStart: unknown
+		gamesCount: number
+		imageBackground: string
+	}
+	released_at: string
+	requirements: unknown
 }

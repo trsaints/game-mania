@@ -1,0 +1,44 @@
+@use 'src/palette';
+
+.GamePanel {
+	background-image: linear-gradient(palette.$black-d5, palette.$black-d5);
+	border-radius: 16px;
+	padding: 2.5vh 5vw;
+
+	.Header {
+		margin-bottom: 10vh;
+
+		.Released, .Publisher, .Description {
+			margin-bottom: 2.5vh;
+		}
+
+		.Released, .Publisher {
+			font-size: 1.2rem;
+			font-weight: bold;
+		}
+
+		.Tags {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 2vw;
+			
+			.GenreTag {
+				background-color: palette.$white-d6;
+				border-radius: 16px;
+				padding: 1vh 2.5vw;
+				width: fit-content;
+				color: palette.$black-d2;
+			}
+		}
+	}
+
+	.Screenshots {
+		display: grid;
+		gap: 2.5vh;
+
+		.Banner {
+			border-radius: 8px;
+			overflow: hidden;
+		}
+	}
+}

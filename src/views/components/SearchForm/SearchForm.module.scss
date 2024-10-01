@@ -1,2 +1,33 @@
+@use 'src/palette';
+
+.SearchWidget {
+  background-image: linear-gradient(to bottom, palette.$black, palette.$black-d2);
+  box-shadow: 0 0 8px palette.$black-d5;
+  border-radius: 8px;
+  margin: 10vh 5vw;
+  padding: 5vw;
+  display: grid;
+  gap: 8vh;
+}
+
 .SearchForm {
+  display: flex;
+  
+  .SearchInput {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+}
+
+.SearchMenu {
+  display: grid;
+  justify-content: center;
+  gap: 2vh;
+  color: palette.$cyan;
+  text-shadow: 0 0 8px palette.$cyan;
+  font-variant: small-caps;
+  
+  .SearchOptions {
+    padding-left: 5vw;
+  }
 }

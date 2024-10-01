@@ -1,8 +1,24 @@
 export const ParserUtils = {
-	convertSnakeToCamelCase
+	toCamelCase,
+	mapToCamelCase
 }
 
-function convertSnakeToCamelCase(snakeText: string) {
+function mapToCamelCase(data: any): unknown {
+	let mappedData: any = {}
+	const dataEntries   = Object.entries(data)
+
+	dataEntries.forEach(([key, value]) => {
+		const parsedKey = key.includes('_')
+						  ? toCamelCase(key)
+						  : key
+
+		mappedData[parsedKey] = value
+	})
+
+	return mappedData
+}
+
+function toCamelCase(snakeText: string) {
 	const tokens = snakeText.split('_')
 
 	if (tokens.length === 1) return tokens[0]
@@ -11,16 +27,10 @@ function convertSnakeToCamelCase(snakeText: string) {
 		if (i === 0) return t
 
 		const upperCasedLetter = t.toUpperCase()[0]
-		const slicedToken = t.slice(1, t.length)
+		const slicedToken      = t.slice(1, t.length)
 
 		return upperCasedLetter.concat(slicedToken)
 	})
 
-	let result = ''
-
-	for (let i = 0; i < upperCasedTokens.length; i++) {
-		result = result.concat(upperCasedTokens[i])
-	}
-	
-	return result
+	return upperCasedTokens.join('')
 }
