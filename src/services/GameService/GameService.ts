@@ -81,19 +81,16 @@ async function getRecommendations(): Promise<Recommended> {
 	const dailyId = Math.floor(Math.random() * 1000)
 
 	return {
-		recent: await GameService.getGameById(recentId),
-		daily : await GameService.getGameById(dailyId),
-
+		recent           : await GameService.getGameById(recentId),
+		daily            : await GameService.getGameById(dailyId),
 		recentScreenshots: await GameService.getScreenshots(recentId),
 		dailyScreenshots : await GameService.getScreenshots(dailyId)
-	} as Recommended
+	}
 }
 
 async function getScreenshots(id: number): Promise<Screenshots> {
 	const routeUrl = ApiService.createRouteUrl(`games/${id}/screenshots`)
 	const response = await ApiService.gameApi.get(routeUrl)
-
-	console.log(response.data?.results)
 	
-	return response.data?.results as Screenshots
+	return response.data as Screenshots
 }
