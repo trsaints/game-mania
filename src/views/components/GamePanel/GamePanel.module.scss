@@ -1,2 +1,5 @@
+@use 'src/palette';
+
 .GamePanel {
+  background-image: linear-gradient(palette.$black-d5, palette.$black-d5);
 }

@@ -2,8 +2,9 @@ import style          from './GamePanel.module.scss'
 import { IGamePanel } from './IGamePanel'
 
 
-function GamePanel({game}: IGamePanel) {
-	const gameTags = game.tags.slice(0,3).map(t => <li key={`t-${t.id}`}>{t.name}</li>)
+function GamePanel({game, screenshots}: IGamePanel) {
+	const gameGenres = game.genres.slice(0, 3)
+						   .map(g => <li key={`t-${g.id}`}>{g.name}</li>)
 
 	return (
 		<article className={style.GamePanel}>
@@ -17,11 +18,33 @@ function GamePanel({game}: IGamePanel) {
 				</p>
 
 				<p>Publisher: {game.publishers[0].name}</p>
+
+				<p>{game.descriptionRaw}</p>
+
+				<ul>{gameGenres}</ul>
 			</header>
 
-			<p>{game.descriptionRaw}</p>
+			<article>
+				<figure>
+					<img src={screenshots.results[0].image ?? ''} alt=""/>
+					<figcaption></figcaption>
+				</figure>
 
-			<ul>{gameTags}</ul>
+				<menu>
+					<li>
+						<img src={screenshots.results[1].image ?? ''} alt=""/>
+						<button>Click to see</button>
+					</li>
+					<li>
+						<img src={screenshots.results[2].image ?? ''} alt=""/>
+						<button>Click to see</button>
+					</li>
+					<li>
+						<img src={screenshots.results[3].image ?? ''} alt=""/>
+						<button>Click to see</button>
+					</li>
+				</menu>
+			</article>
 		</article>
 	)
 }
