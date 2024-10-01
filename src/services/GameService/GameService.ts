@@ -1,11 +1,20 @@
-import { Developer, Game, Genre, Platform, Publisher, Tag } from '@data/types'
-import { ApiService }                                       from '@services/ApiService'
-import { ParserUtils }                                      from '@src/utils'
+import {
+	Developer,
+	Game,
+	Genre,
+	Platform,
+	Publisher,
+	Recommended,
+	Tag
+}                      from '@data/types'
+import { ApiService }  from '@services/ApiService'
+import { ParserUtils } from '@src/utils'
 
 
 export const GameService = {
 	getGames,
-	getGameById
+	getGameById,
+	getRecommendations
 }
 
 async function getGames(): Promise<Game[]> {
@@ -61,9 +70,16 @@ function mapToGame(data: any): Game {
 			return store
 		})
 	}
-
-	console.log(mappedData)
-
+	
 	return mappedData
+}
+
+async function getRecommendations() {
+	return {
+		recent: await GameService.getGameById(Math.floor(Math.random()
+														 * 1000)),
+		daily : await GameService.getGameById(Math.floor(Math.random()
+														 * 1000))
+	} as Recommended
 }
 
