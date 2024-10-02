@@ -19,7 +19,9 @@ interface IHeader extends PropsWithChildren {
 
 function Header({game}: IHeader) {
 	const gameGenres = game.genres.slice(0, 3)
-						   .map(g => <li className={style.GenreTag} key={`t-${g.id}`}>{g.name}</li>)
+						   .map(g => <li className={style.GenreTag}
+										 key={`t-${g.id}`}
+						   >{g.name}</li>)
 
 	return (
 		<header className={style.Header}>
@@ -47,38 +49,38 @@ interface IBanner extends PropsWithChildren {
 
 function Banner({name, screenshots}: IBanner) {
 	return (
-		<article>
-			<figure>
-				<img className={style.Banner}
-					 src={screenshots?.results[0].image ?? ''}
-					 alt=""
+		<article className={style.Banner}>
+			<figure className={style.Main}>
+				<img
+					src={screenshots?.results[0]?.image ?? ''}
+					alt=""
 				/>
 				<figcaption>{`Game banner for the "${name}" game`}</figcaption>
 			</figure>
 
 			<menu className={style.Screenshots}>
-				<li>
-					<img className={style.Banner}
-						 src={screenshots?.results[1].image ?? ''}
+				<li className={style.Card}>
+					<button>Click to see</button>
+
+					<img src={screenshots?.results[1]?.image ?? ''}
 						 alt=""
 					/>
-					<button>Click to see</button>
 				</li>
-				
-				<li>
-					<img className={style.Banner}
-						 src={screenshots?.results[2].image ?? ''}
+
+				<li className={style.Card}>
+					<button>Click to see</button>
+
+					<img src={screenshots?.results[2]?.image ?? ''}
 						 alt=""
 					/>
-					<button>Click to see</button>
 				</li>
-				
-				<li>
-					<img className={style.Banner}
-						 src={screenshots?.results[3].image ?? ''}
+
+				<li className={style.Card}>
+					<button>Click to see</button>
+
+					<img src={screenshots?.results[3]?.image ?? ''}
 						 alt=""
 					/>
-					<button>Click to see</button>
 				</li>
 			</menu>
 		</article>
