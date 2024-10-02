@@ -1,4 +1,5 @@
 import { GameContext }                     from '@data/context'
+import { Game }                            from '@data/types'
 import { Recommended }                     from '@data/types/Recommended.ts'
 import {
 	GameService
@@ -25,22 +26,39 @@ function Home() {
 											(<li key={g.id}>
 												<GameCard game={g}/>
 											</li>))
-	
+
 	const recentPanel =
 			  (recommended?.recent && recommended?.recentScreenshots)
-			  && <GamePanel game={recommended?.recent} screenshots={recommended?.recentScreenshots}/>
+			  && <GamePanel game={recommended?.recent}
+                            screenshots={recommended?.recentScreenshots}
+              />
 
 	const dailyPanel =
 			  (recommended?.daily && recommended?.dailyScreenshots)
-			  && <GamePanel game={recommended?.daily} screenshots={recommended?.dailyScreenshots}/>
+			  && <GamePanel game={recommended?.daily}
+                            screenshots={recommended?.dailyScreenshots}
+              />
+
+	const getInlineBanner = (game?: Game) => {
+		return {
+			background: `linear-gradient(
+						 to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)) 100%,
+						 url(${game?.backgroundImage}) no-repeat center / cover`
+		}
+	}
 
 	return (
 		<article className={style.Home}>
 			<h2>Welcome</h2>
 
-			{recentPanel}
+			<article className={style.Banner}
+					 style={getInlineBanner(recommended?.recent!)}
+			>
+				<h3>Popular</h3>
+				{recentPanel}
+			</article>
 
-			<article>
+			<article className={style.Selection}>
 				<h3>Navigate by genre</h3>
 
 				<menu className={style.Menu}>
@@ -66,9 +84,12 @@ function Home() {
 				</ul>
 			</article>
 
-			<h2>Daily Suggestion</h2>
-
-			{dailyPanel}
+			<article className={style.Banner}
+					 style={getInlineBanner(recommended?.daily)}
+			>
+				<h2>Daily Suggestion</h2>
+				{dailyPanel}
+			</article>
 		</article>
 	)
 }
