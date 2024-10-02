@@ -1,8 +1,6 @@
 @use 'src/palette';
 
 .Home {
-  padding: 10vh 5vw;
-  
   .Menu {
     display: flex;
     flex-wrap: wrap;
@@ -17,6 +15,11 @@
       background-image: linear-gradient(to bottom, palette.$white-d, palette.$white-d6);
       box-shadow: 0 0 8px palette.$black-d5;
     }
+  }
+  
+  .Banner, .Selection {
+    padding: 10vh 5vw;
+    margin-bottom: 10vh;
   }
   
   .GameList {
