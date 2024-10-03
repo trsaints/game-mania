@@ -1,6 +1,8 @@
 export const ParserUtils = {
 	toCamelCase,
-	mapToCamelCase
+	mapToCamelCase,
+	toSnakeCase,
+	mapToSnakeCase
 }
 
 function mapToCamelCase(data: any): unknown {
@@ -10,6 +12,21 @@ function mapToCamelCase(data: any): unknown {
 	dataEntries.forEach(([key, value]) => {
 		const parsedKey = key.includes('_')
 						  ? toCamelCase(key)
+						  : key
+
+		mappedData[parsedKey] = value
+	})
+
+	return mappedData
+}
+
+function mapToSnakeCase(data: any): unknown {
+	let mappedData: any = {}
+	const dataEntries   = Object.entries(data)
+
+	dataEntries.forEach(([key, value]) => {
+		const parsedKey = key.match(/[A-Z]/) !== null
+						  ? toSnakeCase(key)
 						  : key
 
 		mappedData[parsedKey] = value
@@ -33,4 +50,15 @@ function toCamelCase(snakeText: string) {
 	})
 
 	return upperCasedTokens.join('')
+}
+
+function toSnakeCase(camelText: string) {
+	const keywords = [...camelText.matchAll(/[A-Z]/g)]
+	let result     = camelText
+
+	for (let k of keywords) {
+		result = result.replace(k[0], `_${k[0].toLowerCase()}`)
+	}
+
+	return result
 }
