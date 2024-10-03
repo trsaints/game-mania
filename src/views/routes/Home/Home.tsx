@@ -87,7 +87,7 @@ function Home() {
 			<article className={style.Banner}
 					 style={getInlineBanner(recommended?.daily)}
 			>
-				<h2>Daily Suggestion</h2>
+				<h3>Daily Suggestion</h3>
 				{dailyPanel}
 			</article>
 		</article>

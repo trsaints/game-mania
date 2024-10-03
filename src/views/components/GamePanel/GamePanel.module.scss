@@ -24,7 +24,7 @@
 			font-weight: bold;
 			color: palette.$black-d2;
 			gap: 2vw;
-			
+
 			.GenreTag {
 				background-color: palette.$white-d6;
 				border-radius: 16px;
@@ -37,25 +37,33 @@
 	.Banner {
 		display: grid;
 		gap: 10vh;
-		
+
 		img {
 			border-radius: 8px;
 			width: 100%;
+			height: 100%;
+			object-fit: cover;
 		}
-		
+
 		.Main {
-			img { height: 25vh; object-fit: cover }
+			img {
+				height: 25vh;
+				object-fit: cover
+			}
 		}
-		
+
 		.Screenshots {
 			display: flex;
 			flex-wrap: wrap;
 			gap: 5vw;
-			
+
 			.Card {
 				flex-basis: 37.5vw;
+				height: 15vh;
 				position: relative;
 				isolation: isolate;
+				overflow: hidden;
+				border-radius: 8px;
 				
 				button {
 					position: absolute;
