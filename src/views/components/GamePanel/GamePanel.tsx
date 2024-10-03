@@ -4,7 +4,7 @@ import style                 from './GamePanel.module.scss'
 import { IGamePanel }        from './IGamePanel'
 
 
-function GamePanel({game, screenshots}: IGamePanel) {
+function GamePanel({ game, screenshots }: IGamePanel) {
 	return (
 		<article className={style.GamePanel}>
 			<Header game={game}/>
@@ -17,11 +17,14 @@ interface IHeader extends PropsWithChildren {
 	game: Game
 }
 
-function Header({game}: IHeader) {
-	const gameGenres = game.genres.slice(0, 3)
-						   .map(g => <li className={style.GenreTag}
-										 key={`t-${g.id}`}
-						   >{g.name}</li>)
+function Header({ game }: IHeader) {
+	const gameGenres = game.genres
+						   .slice(0, 3)
+						   .map(g =>
+									<li className={style.GenreTag}
+										key={`t-${g.id}`}
+									>{g.name}</li>
+						   )
 
 	return (
 		<header className={style.Header}>
@@ -47,7 +50,19 @@ interface IBanner extends PropsWithChildren {
 	screenshots: Screenshots
 }
 
-function Banner({name, screenshots}: IBanner) {
+function Banner({ name, screenshots }: IBanner) {
+	const screenshotsList = screenshots.results.map(r => {
+		return (
+			<li className={style.Card} key={`${r.id}-${typeof (r)}`}>
+				<button>Click to see</button>
+
+				<img src={r?.image ?? ''}
+					 alt=""
+				/>
+			</li>
+		)
+	})
+
 	return (
 		<article className={style.Banner}>
 			<figure className={style.Main}>
@@ -59,29 +74,7 @@ function Banner({name, screenshots}: IBanner) {
 			</figure>
 
 			<menu className={style.Screenshots}>
-				<li className={style.Card}>
-					<button>Click to see</button>
-
-					<img src={screenshots?.results[1]?.image ?? ''}
-						 alt=""
-					/>
-				</li>
-
-				<li className={style.Card}>
-					<button>Click to see</button>
-
-					<img src={screenshots?.results[2]?.image ?? ''}
-						 alt=""
-					/>
-				</li>
-
-				<li className={style.Card}>
-					<button>Click to see</button>
-
-					<img src={screenshots?.results[3]?.image ?? ''}
-						 alt=""
-					/>
-				</li>
+				{screenshotsList}
 			</menu>
 		</article>
 	)
