@@ -1,5 +1,5 @@
 import { Form } from 'react-router-dom'
-import style    from './SearchForm.module.scss'
+import style    from './SearchWidget.module.scss'
 
 
 function SearchWidget() {
