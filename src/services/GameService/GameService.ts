@@ -1,3 +1,4 @@
+import { GameRequestParams } from '@data/requests/GameRequestParams.ts'
 import {
 	Developer,
 	Game,
@@ -7,9 +8,9 @@ import {
 	Recommended,
 	Screenshots,
 	Tag
-}                      from '@data/types'
-import { ApiService }  from '@services/ApiService'
-import { ParserUtils } from '@src/utils'
+}                            from '@data/types'
+import { ApiService }        from '@services/ApiService'
+import { ParserUtils }       from '@src/utils'
 
 
 export const GameService = {
@@ -19,9 +20,11 @@ export const GameService = {
 	getScreenshots
 }
 
-async function getGames(): Promise<Game[]> {
+async function getGames(params?: GameRequestParams): Promise<Game[]> {
 	const baseUrl  = ApiService.createRouteUrl('games')
-	const response = await ApiService.gameApi.get(baseUrl)
+	const response = await ApiService.gameApi.get(baseUrl, {
+		params: params ? ParserUtils.mapToSnakeCase(params) : {}
+	})
 
 	return response.data?.results.map(mapToGame) ?? []
 }
@@ -67,7 +70,8 @@ function mapToGame(data: any): Game {
 
 	if (mappedData.stores) {
 		mappedData.stores = mappedData.stores.map(store => {
-			store.store = ParserUtils.mapToCamelCase(store.store) as typeof store.store
+			store.store
+				= ParserUtils.mapToCamelCase(store.store) as typeof store.store
 
 			return store
 		})
@@ -78,7 +82,7 @@ function mapToGame(data: any): Game {
 
 async function getRecommendations(): Promise<Recommended> {
 	const recentId = Math.floor(Math.random() * 1000)
-	const dailyId = Math.floor(Math.random() * 1000)
+	const dailyId  = Math.floor(Math.random() * 1000)
 
 	return {
 		recent           : await GameService.getGameById(recentId),
@@ -91,6 +95,6 @@ async function getRecommendations(): Promise<Recommended> {
 async function getScreenshots(id: number): Promise<Screenshots> {
 	const routeUrl = ApiService.createRouteUrl(`games/${id}/screenshots`)
 	const response = await ApiService.gameApi.get(routeUrl)
-	
+
 	return response.data as Screenshots
 }
