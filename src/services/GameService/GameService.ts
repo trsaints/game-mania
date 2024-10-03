@@ -9,9 +9,9 @@ import {
 	Screenshots,
 	Store,
 	Tag
-}                            from '@data/types'
-import { ApiService }        from '@services/ApiService'
-import { ParserUtils }       from '@src/utils'
+}                      from '@data/types'
+import { ApiService }  from '@src/services'
+import { ParserUtils } from '@src/utils'
 
 
 export const GameService = {
