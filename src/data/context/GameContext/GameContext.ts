@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { IGameContext }  from './IGameContext'
+import { IGameContext }  from './IGameContext.ts'
 
 const GameContext = createContext<IGameContext>({
 													games          : [],

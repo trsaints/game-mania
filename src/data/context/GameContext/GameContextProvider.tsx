@@ -1,7 +1,4 @@
-import { GameContext }                            from '@data/context/GameContext.ts'
-import {
-	IGameContext
-}                                                 from '@data/context/IGameContext.ts'
+import { GameContext, IGameContext }              from '@data/context'
 import { Game }                                   from '@data/types'
 import { GameService }                            from '@src/services'
 import { PropsWithChildren, useEffect, useState } from 'react'
