@@ -1,7 +1,8 @@
 @use 'src/palette';
+@use 'sass:color';
 
 .GamePanel {
-	background-image: linear-gradient(palette.$black-d5, palette.$black-d5);
+	background-color: color.scale(palette.$black-d5, $alpha: -20%);
 	border-radius: 16px;
 	padding: 2.5vh 5vw;
 
@@ -20,25 +21,60 @@
 		.Tags {
 			display: flex;
 			flex-wrap: wrap;
+			font-weight: bold;
+			color: palette.$black-d2;
 			gap: 2vw;
-			
+
 			.GenreTag {
 				background-color: palette.$white-d6;
 				border-radius: 16px;
 				padding: 1vh 2.5vw;
 				width: fit-content;
-				color: palette.$black-d2;
 			}
 		}
 	}
 
-	.Screenshots {
+	.Banner {
 		display: grid;
-		gap: 2.5vh;
+		gap: 10vh;
 
-		.Banner {
+		img {
 			border-radius: 8px;
-			overflow: hidden;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		.Main {
+			img {
+				height: 25vh;
+				object-fit: cover
+			}
+		}
+
+		.Screenshots {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 5vw;
+
+			.Card {
+				flex-basis: 37.5vw;
+				height: 15vh;
+				position: relative;
+				isolation: isolate;
+				overflow: hidden;
+				border-radius: 8px;
+				
+				button {
+					position: absolute;
+					z-index: 2;
+					width: 100%;
+					height: 100%;
+					color: palette.$white;
+					font-weight: bold;
+					background-color: color.scale(palette.$black, $alpha: -50%);
+				}
+			}
 		}
 	}
 }

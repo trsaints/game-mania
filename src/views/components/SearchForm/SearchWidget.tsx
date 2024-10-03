@@ -14,9 +14,9 @@ function SearchWidget() {
 function SearchForm() {
 	return (
 		<Form method="post" className={style.SearchForm}>
-			<label htmlFor="search">Keyword</label>
-			<input className={style.SearchInput} type="search" id="search"/>
-			<button className='primary' type="submit">Search</button>
+			<label className={style.Label} htmlFor="search">Keyword</label>
+			<input className={style.Search} type="search" id="search"/>
+			<button className={`primary ${style.Submit}`} type="submit">Search</button>
 		</Form>
 	)
 }
