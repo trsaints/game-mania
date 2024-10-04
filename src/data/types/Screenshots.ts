@@ -1,3 +1,6 @@
+import { Image } from '@data/types/Image.ts'
+
+
 export type Screenshots = {
 	count: number
 	next?: string
@@ -5,10 +8,3 @@ export type Screenshots = {
 	results: Image[]
 }
 
-type Image = {
-	id: number
-	image: string
-	hidden: boolean
-	width: number
-	height: number
-}

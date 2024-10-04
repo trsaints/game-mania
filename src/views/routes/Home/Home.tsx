@@ -51,7 +51,7 @@ export function Home() {
 	}
 
 	return (
-		<article className={style.Home}>
+		<main className={style.Home}>
 			<h2>Welcome</h2>
 
 			<article className={style.Banner}
@@ -69,7 +69,7 @@ export function Home() {
 				<h3>Daily Suggestion</h3>
 				{dailyPanel}
 			</article>
-		</article>
+		</main>
 	)
 }
 
