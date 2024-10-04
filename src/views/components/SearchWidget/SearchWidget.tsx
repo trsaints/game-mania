@@ -1,5 +1,6 @@
-import { Genre, Publisher, Tag } from '@data/types'
-import { useState }              from 'react'
+import { Genre, Publisher, Tag }                      from '@data/types'
+import { GenreService, PublisherService, TagService } from '@src/services'
+import { useEffect, useState }                        from 'react'
 import { Form, Link }            from 'react-router-dom'
 import style                     from './SearchWidget.module.scss'
 
@@ -14,6 +15,12 @@ function SearchWidget() {
 		tags,
 		publishers
 	}
+
+	useEffect(() => {
+		GenreService.getGenres({ pageSize: 5 }).then(g => setGenres(g))
+		TagService.getTags({ pageSize: 5}).then(t => setTags(t))
+		PublisherService.getPublishers({ pageSize: 5 }).then(p => setPublishers(p))
+	}, [])
 
 	return (
 		<aside className={style.SearchWidget}>
