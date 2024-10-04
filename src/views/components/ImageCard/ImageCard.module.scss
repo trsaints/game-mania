@@ -3,11 +3,11 @@
 
 .ImageCard {
 	border-radius : 8px;
-	width         : 37.5vw;
 	height        : 15vh;
 	isolation     : isolate;
 	overflow      : hidden;
 	position      : relative;
+	width         : 37.5vw;
 
 	button {
 		background-color : color.scale(palette.$black, $alpha : -50%);

@@ -2,36 +2,36 @@
 
 .Home {
 	h2 {
-		padding-inline: 5vw;
+		padding-inline : 5vw;
 	}
 
 	.Menu {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 2vw;
-		margin-block: 10vh;
+		display      : flex;
+		flex-wrap    : wrap;
+		gap          : 2vw;
+		margin-block : 10vh;
 
 		.Option {
-			background-image: linear-gradient(to bottom, palette.$white-d, palette.$white-d6);
-			border-radius: 32px;
-			box-shadow: 0 0 8px palette.$black-d5;
-			color: palette.$black-d2;
-			font-weight: bold;
-			text-transform: uppercase;
+			background-image : linear-gradient(to bottom, palette.$white-d, palette.$white-d6);
+			border-radius    : 32px;
+			box-shadow       : 0 0 8px palette.$black-d5;
+			color            : palette.$black-d2;
+			font-weight      : bold;
+			text-transform   : uppercase;
 		}
 	}
 
 	.Banner, .Selection {
-		padding: 10vh 5vw;
+		padding : 10vh 5vw;
 	}
 
 	.Banner {
-		margin-bottom: 10vh;
+		margin-bottom : 10vh;
 	}
 
 	.GameList {
-		display: grid;
-		gap: 4.4vh;
-		margin-bottom: 10vh;
+		display       : grid;
+		gap           : 4.4vh;
+		margin-bottom : 10vh;
 	}
 }
