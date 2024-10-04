@@ -1,49 +1,49 @@
 @use 'palette';
 
 @font-face {
-	font-family: 'Redhat Display';
-	src: url("assets/fonts/RedHatDisplay-VariableFont_wght.ttf") format('truetype');
-	font-style: normal;
+	font-family : 'Redhat Display';
+	src         : url("assets/fonts/RedHatDisplay-VariableFont_wght.ttf") format('truetype');
+	font-style  : normal;
 }
 
 :root {
-	font-family: 'Redhat Display', serif;
+	font-family : 'Redhat Display', serif;
 }
 
 body {
-	background-color: palette.$black-d2;
-	color: palette.$white;
+	background-color : palette.$black-d2;
+	color            : palette.$white;
 }
 
 h1, h2, h3 {
-	font-weight: bold;
-	margin-bottom: 10vh;
-	text-transform: uppercase;
+	font-weight    : bold;
+	margin-bottom  : 10vh;
+	text-transform : uppercase;
 }
 
 h2 {
-	font-size: 3.2rem;
+	font-size : 3.2rem;
 }
 
 h3 {
-	font-size: 2rem;
+	font-size : 2rem;
 }
 
 a {
-	color: palette.$cyan;
-	font-weight: bold;
+	color       : palette.$cyan;
+	font-weight : bold;
 }
 
 button {
-	border-radius: 8px;
-	font-weight: bold;
-	padding: 2vh 5vw;
+	border-radius : 8px;
+	font-weight   : bold;
+	padding       : 2vh 5vw;
 }
 
 button.primary {
-	background-image: linear-gradient(to bottom, palette.$cyan, palette.$cyan-d5);
+	background-image : linear-gradient(to bottom, palette.$cyan, palette.$cyan-d5);
 }
 
 button.secondary {
-	background-image: linear-gradient(to bottom, palette.$white, palette.$white-d6);
+	background-image : linear-gradient(to bottom, palette.$white, palette.$white-d6);
 }

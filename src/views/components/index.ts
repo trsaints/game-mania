@@ -1,4 +1,6 @@
 export * from './Footer/Footer'
 export * from './Header/Header'
-export * from '@views/components/SearchWidget/SearchWidget.tsx'
+export * from './SearchWidget/SearchWidget'
 export * from './GameCard/GameCard'
+export * from './GamePanel/GamePanel'
+export * from './ImageCard/ImageCard'

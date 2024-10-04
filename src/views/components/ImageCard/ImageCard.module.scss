@@ -1,0 +1,28 @@
+@use 'src/palette';
+@use 'sass:color';
+
+.ImageCard {
+	border-radius : 8px;
+	height        : 15vh;
+	isolation     : isolate;
+	overflow      : hidden;
+	position      : relative;
+	width         : 37.5vw;
+
+	button {
+		background-color : color.scale(palette.$black, $alpha : -50%);
+		color            : palette.$white;
+		font-weight      : bold;
+		height           : 100%;
+		position         : absolute;
+		width            : 100%;
+		z-index          : 2;
+	}
+
+	img {
+		border-radius : 8px;
+		height        : 100%;
+		object-fit    : cover;
+		width         : 100%;
+	}
+}
