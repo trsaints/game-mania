@@ -1,9 +1,12 @@
 import { GameContext }                     from '@data/context'
-import { Game }                            from '@data/types'
+import { Game, Genre }                     from '@data/types'
 import { Recommended }                     from '@data/types/Recommended.ts'
 import {
 	GameService
 }                                          from '@services/GameService/GameService.ts'
+import {
+	GenreService
+}                                          from '@services/GenreService/GenreService.ts'
 import { GameCard }                        from '@views/components'
 import { GamePanel }                       from '@views/components/GamePanel'
 import { useContext, useEffect, useState } from 'react'
@@ -11,39 +14,39 @@ import { Link }                            from 'react-router-dom'
 import style                               from './Home.module.scss'
 
 
-function Home() {
+export function Home() {
 	const [recommended, setRecommended] = useState<Recommended>()
+	const [genres, setGenres]           = useState<Genre[]>()
 
 	useEffect(() => {
-		GameService.getRecommendations().then(r => {
-			setRecommended(r)
-		})
+		GameService.getRecommendations()
+				   .then(r => setRecommended(r))
+		GenreService.getGenres({}).then(g => setGenres(g))
 	}, [])
 
 	const gameContext = useContext(GameContext)
-	const gameList    = gameContext.games
-								   .map(g =>
-											(<li key={g.id}>
-												<GameCard game={g}/>
-											</li>))
 
 	const recentPanel =
-			  (recommended?.recent && recommended?.recentScreenshots)
+			  ((recommended?.recent)
+			  && (recommended?.recentScreenshots))
 			  && <GamePanel game={recommended?.recent}
                             screenshots={recommended?.recentScreenshots}
               />
 
 	const dailyPanel =
-			  (recommended?.daily && recommended?.dailyScreenshots)
+			  ((recommended?.daily)
+			  && (recommended?.dailyScreenshots))
 			  && <GamePanel game={recommended?.daily}
                             screenshots={recommended?.dailyScreenshots}
               />
 
 	const getInlineBanner = (game?: Game) => {
 		return {
-			background: `linear-gradient(
-						 to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)) 100%,
-						 url(${game?.backgroundImage}) no-repeat center / cover`
+			background: `linear-gradient(to bottom, 
+										 rgba(0, 0, 0, 0.8), 
+										 rgba(0, 0, 0, 0.8)) 100%,
+						 				 url(${game?.backgroundImage}) 
+						 				 no-repeat center / cover`
 		}
 	}
 
@@ -58,31 +61,7 @@ function Home() {
 				{recentPanel}
 			</article>
 
-			<article className={style.Selection}>
-				<h3>Navigate by genre</h3>
-
-				<menu className={style.Menu}>
-					<li>
-						<button className={style.Option}>action</button>
-					</li>
-					<li>
-						<button className={style.Option}>adventure</button>
-					</li>
-					<li>
-						<button className={style.Option}>platform</button>
-					</li>
-					<li>
-						<button className={style.Option}>rpg</button>
-					</li>
-				</menu>
-
-				<ul className={style.GameList}>
-					{gameList}
-					<li>
-						<Link to="/search">see all</Link>
-					</li>
-				</ul>
-			</article>
+			<Selection games={gameContext.games} genres={genres ?? []}/>
 
 			<article className={style.Banner}
 					 style={getInlineBanner(recommended?.daily)}
@@ -94,4 +73,41 @@ function Home() {
 	)
 }
 
-export { Home }
+interface ISelection {
+	games: Game[]
+	genres: Genre[]
+}
+
+function Selection({ games, genres }: ISelection) {
+	const gameList = games.map(g =>
+								   (<li key={g.id}>
+									   <GameCard game={g}/>
+								   </li>))
+
+	const genreList = genres.map(g => {
+		const key = `selection-${typeof (g)}-${g.id}`
+
+		return (
+			<li key={key}>
+				<button className={style.Option}>{g.name}</button>
+			</li>
+		)
+	})
+
+	return (
+		<article className={style.Selection}>
+			<h3>Navigate by genre</h3>
+
+			<menu className={style.Menu}>
+				{genreList}
+			</menu>
+
+			<ul className={style.GameList}>
+				{gameList}
+				<li>
+					<Link to="/search">see all</Link>
+				</li>
+			</ul>
+		</article>)
+}
+

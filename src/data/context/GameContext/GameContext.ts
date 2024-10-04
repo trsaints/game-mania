@@ -1,11 +1,12 @@
+import { IGameContext }  from '@data/context'
 import { createContext } from 'react'
-import { IGameContext }  from './IGameContext'
+
 
 const GameContext = createContext<IGameContext>({
 													games          : [],
-													gameSearch: '',
+													gameSearch     : '',
 													setSelectedGame: () => {},
-													setGameSearch: () => {}
+													setGameSearch  : () => {}
 												})
 
 export { GameContext }

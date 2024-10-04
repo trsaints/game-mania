@@ -2,12 +2,12 @@
 
 .SearchWidget {
 	background-image: linear-gradient(to bottom, palette.$black, palette.$black-d2);
-	box-shadow: 0 0 8px palette.$black-d5;
 	border-radius: 8px;
-	margin: 10vh 5vw;
-	padding: 5vw;
+	box-shadow: 0 0 8px palette.$black-d5;
 	display: grid;
 	gap: 8vh;
+	margin: 10vh 5vw;
+	padding: 5vw;
 
 	.SearchForm {
 		display: grid;
@@ -16,37 +16,37 @@
 			"search submit";
 
 		.Label {
-			grid-area: label;
 			background-image: linear-gradient(to bottom, palette.$cyan, palette.$cyan-d5);
-			color: palette.$black-d5;
-			font-weight: bold;
-			padding: 1vh 2.5vw 1vh 2.5vw;
-			margin-left: 8px;
 			border-top-left-radius: 8px;
 			border-top-right-radius: 8px;
+			color: palette.$black-d5;
+			font-weight: bold;
+			grid-area: label;
+			margin-left: 8px;
+			padding: 1vh 2.5vw 1vh 2.5vw;
 			width: fit-content;
 		}
-		
+
 		.Search {
-			grid-area: search;
-			border-top-left-radius: 8px;
 			border-bottom-left-radius: 8px;
-			width: calc(100% + 2.5vw);
+			border-top-left-radius: 8px;
+			grid-area: search;
 			padding: 2vh 5vw;
+			width: calc(100% + 2.5vw);
 		}
-		
+
 		.Submit {
 			grid-area: submit;
 		}
 	}
 
 	.SearchMenu {
-		display: grid;
-		justify-content: center;
-		gap: 2vh;
 		color: palette.$cyan;
-		text-shadow: 0 0 8px palette.$cyan;
+		display: grid;
 		font-variant: small-caps;
+		gap: 2vh;
+		justify-content: center;
+		text-shadow: 0 0 8px palette.$cyan;
 
 		.SearchOptions {
 			padding-left: 5vw;

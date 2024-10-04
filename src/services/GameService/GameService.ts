@@ -1,3 +1,4 @@
+import { GameRequestParams } from '@data/requests'
 import {
 	Developer,
 	Game,
@@ -6,10 +7,11 @@ import {
 	Publisher,
 	Recommended,
 	Screenshots,
+	Store,
 	Tag
-}                      from '@data/types'
-import { ApiService }  from '@services/ApiService'
-import { ParserUtils } from '@src/utils'
+}                            from '@data/types'
+import { ApiService }        from '@src/services'
+import { ParserUtils }       from '@src/utils'
 
 
 export const GameService = {
@@ -19,9 +21,11 @@ export const GameService = {
 	getScreenshots
 }
 
-async function getGames(): Promise<Game[]> {
+async function getGames(params?: GameRequestParams): Promise<Game[]> {
 	const baseUrl  = ApiService.createRouteUrl('games')
-	const response = await ApiService.gameApi.get(baseUrl)
+	const response = await ApiService.gameApi.get(baseUrl, {
+		params: params ? ParserUtils.mapToSnakeCase(params) : {}
+	})
 
 	return response.data?.results.map(mapToGame) ?? []
 }
@@ -37,12 +41,7 @@ function mapToGame(data: any): Game {
 	const mappedData = ParserUtils.mapToCamelCase(data) as Game
 
 	if (mappedData.platforms) {
-		mappedData.platforms = mappedData.platforms.map(mainPlatform => {
-			mainPlatform.platform = ParserUtils
-			.mapToCamelCase(mainPlatform.platform) as typeof mainPlatform.platform
-
-			return ParserUtils.mapToCamelCase(mainPlatform) as Platform
-		})
+		mappedData.platforms = mapToPlatforms(mappedData.platforms)
 	}
 
 	if (mappedData.developers) {
@@ -66,19 +65,33 @@ function mapToGame(data: any): Game {
 	}
 
 	if (mappedData.stores) {
-		mappedData.stores = mappedData.stores.map(store => {
-			store.store = ParserUtils.mapToCamelCase(store.store) as typeof store.store
-
-			return store
-		})
+		mappedData.stores = mapToStores(mappedData.stores)
 	}
 
 	return mappedData
 }
 
+function mapToPlatforms(platforms: Platform[]) {
+	return platforms.map(mainPlatform => {
+		mainPlatform.platform = ParserUtils
+		.mapToCamelCase(mainPlatform.platform) as typeof mainPlatform.platform
+
+		return ParserUtils.mapToCamelCase(mainPlatform) as Platform
+	})
+}
+
+function mapToStores(stores: Store[]) {
+	return stores.map(store => {
+		store.store
+			= ParserUtils.mapToCamelCase(store.store) as typeof store.store
+
+		return store
+	})
+}
+
 async function getRecommendations(): Promise<Recommended> {
 	const recentId = Math.floor(Math.random() * 1000)
-	const dailyId = Math.floor(Math.random() * 1000)
+	const dailyId  = Math.floor(Math.random() * 1000)
 
 	return {
 		recent           : await GameService.getGameById(recentId),
@@ -91,6 +104,6 @@ async function getRecommendations(): Promise<Recommended> {
 async function getScreenshots(id: number): Promise<Screenshots> {
 	const routeUrl = ApiService.createRouteUrl(`games/${id}/screenshots`)
 	const response = await ApiService.gameApi.get(routeUrl)
-	
+
 	return response.data as Screenshots
 }

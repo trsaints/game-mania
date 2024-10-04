@@ -11,10 +11,21 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@src/*": ["./src/*"],
-      "@data/*": ["./src/data/*"],
-      "@views/*": ["./src/views/*"],
-      "@services/*": ["./src/services/*"]
+      "@src/*": [
+        "./src/*"
+      ],
+      "@data/*": [
+        "./src/data/*"
+      ],
+      "@views/*": [
+        "./src/views/*"
+      ],
+      "@services/*": [
+        "./src/services/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ]
     }
   }
 }

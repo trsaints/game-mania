@@ -1,47 +1,47 @@
 @use 'src/palette';
 
 .GameCard {
-  background-image: linear-gradient(to bottom, palette.$black-d2, palette.$black-d4);
-  box-shadow: 0 0 8px palette.$black-d5;
-  border-radius: 16px;
-  font-weight: bold;
-  height: 80vh;
-  width: 90vw;
+	background-image: linear-gradient(to bottom, palette.$black-d2, palette.$black-d4);
+	border-radius: 16px;
+	box-shadow: 0 0 8px palette.$black-d5;
+	font-weight: bold;
+	height: 80vh;
+	width: 90vw;
 
-  .Banner {
-    /* Banner height should be 70% of the GameCard height, 
-       but 2vh of margin must be subtracted */
-    height: 54vh;
-    width: 100%;
-    object-fit: cover;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
-  }
+	.Banner {
+		/* Banner height should be 70% of the GameCard height, 
+		   but 2vh of margin must be subtracted */
+		border-top-left-radius: 16px;
+		border-top-right-radius: 16px;
+		height: 54vh;
+		object-fit: cover;
+		width: 100%;
+	}
 
-  .Name {
-    font-size: 1.2rem;
-    margin-block: 2vh;
-    padding-inline: 5vw;
-    width: 100%;
-  }
+	.Name {
+		font-size: 1.2rem;
+		margin-block: 2vh;
+		padding-inline: 5vw;
+		width: 100%;
+	}
 
-  .Details {
-    margin: 0 5vw 2vh 5vw;
-    font-size: 0.7rem;
-  }
+	.Details {
+		font-size: 0.7rem;
+		margin: 0 5vw 2vh 5vw;
+	}
 
-  .Genres {
-    @extend .Details;
+	.Genres {
+		@extend .Details;
 
-    background-color: palette.$white-d6;
-    border-radius: 16px;
-    padding: 1vh 2.5vw;
-    width: fit-content;
-    color: palette.$black-d2;
-  }
+		background-color: palette.$white-d6;
+		border-radius: 16px;
+		color: palette.$black-d2;
+		padding: 1vh 2.5vw;
+		width: fit-content;
+	}
 
-  .Tags {
-    @extend .Details;
-    color: palette.$white-d6;
-  }
+	.Tags {
+		@extend .Details;
+		color: palette.$white-d6;
+	}
 }

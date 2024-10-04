@@ -1,3 +1,3 @@
-export * from './IGameContext'
-export * from './GameContext'
-export * from './GameContextProvider'
+export * from './GameContext/IGameContext'
+export * from './GameContext/GameContext'
+export * from './GameContext/GameContextProvider'

@@ -1,25 +1,25 @@
 @use "src/palette";
 
 .Header {
-  background-image: linear-gradient(to bottom, palette.$black-d2, palette.$black-d4);
-  padding: 5vw;
-  display: grid;
-  place-items: center;
-  text-align: center;
-  box-shadow: 0 0 8px palette.$black-d5;
-  
-  .Banner {
-    height: 10vh;
-  }
+	background-image: linear-gradient(to bottom, palette.$black-d2, palette.$black-d4);
+	box-shadow: 0 0 8px palette.$black-d5;
+	display: grid;
+	padding: 5vw;
+	place-items: center;
+	text-align: center;
 
-  .Links {
-    display: grid;
-    gap: 2vh;
-  }
-  
-  .MenuButton {
-    background-image: none;
-    background-color: transparent;
-    color: palette.$white;
-  }
+	.Banner {
+		height: 10vh;
+	}
+
+	.Links {
+		display: grid;
+		gap: 2vh;
+	}
+
+	.MenuButton {
+		background-color: transparent;
+		background-image: none;
+		color: palette.$white;
+	}
 }

@@ -10,7 +10,8 @@ function Footer() {
 				<a href="https://github.com/trsaints"
 				   target="_blank"
 				   rel="noreferrer noopener"
-				>@Trsaints</a> - {' '}
+				>@Trsaints</a> {' - '}
+
 				<time dateTime={currentDate.getFullYear().toString()}>
 					{currentDate.getFullYear()}
 				</time>
