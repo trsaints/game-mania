@@ -2,79 +2,60 @@
 @use 'sass:color';
 
 .GamePanel {
-	background-color: color.scale(palette.$black-d5, $alpha: -20%);
-	border-radius: 16px;
-	padding: 2.5vh 5vw;
+	background-color : color.scale(palette.$black-d5, $alpha : -20%);
+	border-radius    : 16px;
+	padding          : 2.5vh 5vw;
 
 	.Header {
-		margin-bottom: 10vh;
+		margin-bottom : 10vh;
 
 		.Released, .Publisher, .Description {
-			margin-bottom: 2.5vh;
+			margin-bottom : 2.5vh;
 		}
 
 		.Released, .Publisher {
-			font-size: 1.2rem;
-			font-weight: bold;
+			font-size   : 1.2rem;
+			font-weight : bold;
 		}
 
 		.Tags {
-			color: palette.$black-d2;
-			display: flex;
-			flex-wrap: wrap;
-			font-weight: bold;
-			gap: 2vw;
+			color       : palette.$black-d2;
+			display     : flex;
+			flex-wrap   : wrap;
+			font-weight : bold;
+			gap         : 2vw;
 
 			.GenreTag {
-				background-color: palette.$white-d6;
-				border-radius: 16px;
-				padding: 1vh 2.5vw;
-				width: fit-content;
+				background-color : palette.$white-d6;
+				border-radius    : 16px;
+				padding          : 1vh 2.5vw;
+				width            : fit-content;
 			}
 		}
 	}
 
 	.Banner {
-		display: grid;
-		gap: 10vh;
+		display : grid;
+		gap     : 10vh;
 
 		img {
-			border-radius: 8px;
-			height: 100%;
-			object-fit: cover;
-			width: 100%;
+			border-radius : 8px;
+			height        : 100%;
+			object-fit    : cover;
+			width         : 100%;
 		}
 
 		.Main {
 			img {
-				height: 25vh;
-				object-fit: cover
+				height     : 25vh;
+				object-fit : cover
 			}
 		}
 
 		.Screenshots {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 5vw;
-
-			.Card {
-				border-radius: 8px;
-				flex-basis: 37.5vw;
-				height: 15vh;
-				isolation: isolate;
-				overflow: hidden;
-				position: relative;
-
-				button {
-					background-color: color.scale(palette.$black, $alpha: -50%);
-					color: palette.$white;
-					font-weight: bold;
-					height: 100%;
-					position: absolute;
-					width: 100%;
-					z-index: 2;
-				}
-			}
+			display   : flex;
+			flex-wrap : wrap;
+			gap       : 5vw;
 		}
 	}
 }
