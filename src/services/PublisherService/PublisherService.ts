@@ -12,7 +12,7 @@ export const PublisherService = {
 async function getPublishers(params: PublisherRequestParams): Promise<Publisher[]> {
 	const baseUrl  = ApiService.createRouteUrl('publishers')
 	const response = await ApiService.gameApi.get(baseUrl, {
-		params: params ?  ParserUtils.mapToSnakeCase(params) : {}
+		params: params ? ParserUtils.mapToSnakeCase(params) : {}
 	})
 
 	return response?.data?.results.map(

@@ -20,8 +20,8 @@ async function getTags(params: TagRequestParams): Promise<Tag[]> {
 }
 
 async function getTagById(id: number): Promise<Tag> {
-	const baseUrl = ApiService.createRouteUrl(`tags/${id}`)
+	const baseUrl  = ApiService.createRouteUrl(`tags/${id}`)
 	const response = await ApiService.gameApi.get(baseUrl)
-	
+
 	return ParserUtils.mapToCamelCase(response?.data) as Tag
 }

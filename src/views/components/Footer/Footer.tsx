@@ -11,7 +11,7 @@ function Footer() {
 				   target="_blank"
 				   rel="noreferrer noopener"
 				>@Trsaints</a> {' - '}
-				
+
 				<time dateTime={currentDate.getFullYear().toString()}>
 					{currentDate.getFullYear()}
 				</time>

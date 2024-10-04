@@ -22,9 +22,11 @@ function GameContextProvider({ children }: PropsWithChildren) {
 		setGameSearch
 	}
 
-	return (<GameContext.Provider value={context}>
-		{children}
-	</GameContext.Provider>)
+	return (
+		<GameContext.Provider value={context}>
+			{children}
+		</GameContext.Provider>
+	)
 }
 
 export { GameContextProvider }
