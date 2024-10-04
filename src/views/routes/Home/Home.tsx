@@ -8,6 +8,7 @@ import {
 	GenreService
 }                                          from '@services/GenreService/GenreService.ts'
 import { GameCard }                        from '@views/components'
+import { Gallery }                         from '@views/components/Gallery'
 import { GamePanel }                       from '@views/components/GamePanel'
 import { useContext, useEffect, useState } from 'react'
 import { Link }                            from 'react-router-dom'
@@ -68,6 +69,16 @@ export function Home() {
 			>
 				<h3>Daily Suggestion</h3>
 				{dailyPanel}
+			</article>
+
+			<article className={style.Gallery}>
+				<h3>gallery</h3>
+
+				{recommended?.recentScreenshots
+				 && <Gallery screenshots={recommended?.recentScreenshots}/>}
+
+				{recommended?.dailyScreenshots
+				 && <Gallery screenshots={recommended?.dailyScreenshots}/>}
 			</article>
 		</main>
 	)

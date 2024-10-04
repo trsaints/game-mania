@@ -15,9 +15,7 @@ function Gallery({ screenshots }: IGallery) {
 
 	return (
 		<aside className={style.Gallery}>
-			<h3>gallery</h3>
-
-			<ul>{cards}</ul>
+			<ul className={style.Screenshots}>{cards}</ul>
 
 			<Link to="/search">see all</Link>
 		</aside>
