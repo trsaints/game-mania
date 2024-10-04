@@ -1,8 +1,9 @@
 import { Genre, Publisher, Tag }                      from '@data/types'
 import { GenreService, PublisherService, TagService } from '@src/services'
 import { useEffect, useState }                        from 'react'
-import { Form, Link }            from 'react-router-dom'
-import style                     from './SearchWidget.module.scss'
+import { Form, Link }                                 from 'react-router-dom'
+import style
+													  from './SearchWidget.module.scss'
 
 
 function SearchWidget() {
@@ -18,8 +19,9 @@ function SearchWidget() {
 
 	useEffect(() => {
 		GenreService.getGenres({ pageSize: 5 }).then(g => setGenres(g))
-		TagService.getTags({ pageSize: 5}).then(t => setTags(t))
-		PublisherService.getPublishers({ pageSize: 5 }).then(p => setPublishers(p))
+		TagService.getTags({ pageSize: 5 }).then(t => setTags(t))
+		PublisherService.getPublishers({ pageSize: 5 })
+						.then(p => setPublishers(p))
 	}, [])
 
 	return (
@@ -35,7 +37,7 @@ function SearchForm() {
 		<Form method="get" className={style.SearchForm} action="/search">
 			<label className={style.Label} htmlFor="search">Keyword</label>
 			<input className={style.Search} type="search" id="search"/>
-			
+
 			<button className={`primary ${style.Submit}`}
 					type="submit"
 			>

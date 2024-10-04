@@ -21,7 +21,7 @@ export function Home() {
 	useEffect(() => {
 		GameService.getRecommendations()
 				   .then(r => setRecommended(r))
-		GenreService.getGenres().then(g => setGenres(g))
+		GenreService.getGenres({}).then(g => setGenres(g))
 	}, [])
 
 	const gameContext = useContext(GameContext)
@@ -61,7 +61,7 @@ export function Home() {
 				{recentPanel}
 			</article>
 
-			<Selection games={gameContext.games} genres={genres ?? []} />
+			<Selection games={gameContext.games} genres={genres ?? []}/>
 
 			<article className={style.Banner}
 					 style={getInlineBanner(recommended?.daily)}

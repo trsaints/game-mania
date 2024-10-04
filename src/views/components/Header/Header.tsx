@@ -12,9 +12,11 @@ function Header() {
 			/>
 
 			<menu className={style.Links}>
-				<li><button className={style.MenuButton}>Show Menu</button></li>
-				<li><Link to='/'>Home</Link></li>
-				<li><Link to='/search'>Search</Link></li>
+				<li>
+					<button className={style.MenuButton}>Show Menu</button>
+				</li>
+				<li><Link to="/">Home</Link></li>
+				<li><Link to="/search">Search</Link></li>
 			</menu>
 		</header>
 	)

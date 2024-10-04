@@ -1,4 +1,4 @@
 import { ComponentProps } from 'react'
 
 
-export interface IErrorPage extends ComponentProps<	'article'> {}
+export interface IErrorPage extends ComponentProps<'article'> {}

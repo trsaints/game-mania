@@ -1,5 +1,5 @@
-import { createContext } from 'react'
 import { IGameContext }  from '@data/context'
+import { createContext } from 'react'
 
 
 const GameContext = createContext<IGameContext>({

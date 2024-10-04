@@ -1,18 +1,18 @@
 @use 'src/palette';
 
 .Footer {
-  padding: 5vh 5vw;
-  background-image: linear-gradient(to bottom, palette.$black-d3, palette.$black-d5);
-  display: grid;
-  justify-content: center;
-  text-align: center;
-  gap: 10vh;
-  box-shadow: 0 0 8px palette.$black-d5;
-  font-weight: bold;
-  
-  .Navbar {
-    display: grid;
-    justify-content: center;
-    gap: 2vh;
-  }
+	background-image: linear-gradient(to bottom, palette.$black-d3, palette.$black-d5);
+	box-shadow: 0 0 8px palette.$black-d5;
+	display: grid;
+	font-weight: bold;
+	gap: 10vh;
+	justify-content: center;
+	padding: 5vh 5vw;
+	text-align: center;
+
+	.Navbar {
+		display: grid;
+		gap: 2vh;
+		justify-content: center;
+	}
 }

@@ -1,49 +1,49 @@
-*, *:before, *:after{
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font: inherit;
-  vertical-align: baseline;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  text-size-adjust: none;
+*, *:before, *:after {
+	border: 0;
+	box-sizing: border-box;
+	font: inherit;
+	-webkit-font-smoothing: antialiased;
+	margin: 0;
+	padding: 0;
+	text-rendering: optimizeLegibility;
+	text-size-adjust: none;
+	vertical-align: baseline;
 }
 
-footer, header, nav, section, main{
-  display: block;
+footer, header, nav, section, main {
+	display: block;
 }
 
-body{
-  line-height: 1;
+body {
+	line-height: 1;
 }
 
 ol, ul, menu {
-  list-style: none;
+	list-style: none;
 }
 
-blockquote, q{
-  quotes: none;
+blockquote, q {
+	quotes: none;
 }
 
-blockquote:before, blockquote:after, q:before, q:after{
-  content: none;
+blockquote:before, blockquote:after, q:before, q:after {
+	content: none;
 }
 
-table{
-  border-collapse: collapse;
-  border-spacing: 0;
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
-input{
-  -webkit-appearance: none;
-  border-radius: 0;
+input {
+	-webkit-appearance: none;
+	border-radius: 0;
 }
 
 summary::marker {
-  content: none;
+	content: none;
 }
 
 img {
-  max-width: 100%;
+	max-width: 100%;
 }
