@@ -14,7 +14,7 @@ export type GameRequestParams = {
 	creators?: string
 	dates?: string
 	updated?: string
-	platforms_count?: number
+	platformsCount?: number
 	metacritic?: string
 	excludeCollection?: number
 	excludeAdditions?: boolean
