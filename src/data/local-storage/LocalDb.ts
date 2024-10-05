@@ -1,15 +1,15 @@
 import { ILocalDb } from '@data/local-storage/'
 import {
-	Game,
-	Genre,
+	GameData,
+	GenreData,
 	LocalDbStore,
-	Platform,
-	Publisher,
-	Tag
+	PlatformData,
+	PublisherData,
+	TagData
 }                   from '@data/types'
 
 
-export type ApiData = Game | Platform | Publisher | Genre | Tag
+export type ApiData = GameData | PlatformData | PublisherData | GenreData | TagData
 
 export class LocalDb
 	implements ILocalDb<ApiData>

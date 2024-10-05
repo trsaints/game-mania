@@ -1,5 +1,5 @@
-import { Game, Screenshots } from '@data/types'
-import { ImageCard }         from '@views/components'
+import { GameData, Screenshots } from '@data/types'
+import { ImageCard }             from '@views/components'
 import { PropsWithChildren } from 'react'
 import style                 from './GamePanel.module.scss'
 import { IGamePanel }        from './IGamePanel'
@@ -15,7 +15,7 @@ function GamePanel({ game, screenshots }: IGamePanel) {
 }
 
 interface IHeader extends PropsWithChildren {
-	game: Game
+	game: GameData
 }
 
 function Header({ game }: IHeader) {

@@ -1,5 +1,5 @@
-import { Genre, Platform, Publisher, Tag } from '@data/types'
-import { ISearchFilter }                   from './ISearchFilter'
+import { GenreData, PlatformData, PublisherData, TagData } from '@data/types'
+import { ISearchFilter }                                   from './ISearchFilter'
 import style                               from './SearchFilter.module.scss'
 
 
@@ -69,7 +69,7 @@ function SearchFilter(props: ISearchFilter) {
 }
 
 interface IFilterOptions {
-	options: Publisher[] | Genre[] | Tag[] | Platform[]
+	options: PublisherData[] | GenreData[] | TagData[] | PlatformData[]
 	typeName: string
 }
 

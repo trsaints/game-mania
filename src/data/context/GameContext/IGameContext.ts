@@ -1,11 +1,11 @@
-import { Game }                     from '@data/types'
+import { GameData }                 from '@data/types'
 import { Dispatch, SetStateAction } from 'react'
 
 
 export interface IGameContext {
-	games: Game[]
+	games: GameData[]
 	gameSearch: string
-	selectedGame?: Game
-	setSelectedGame: Dispatch<SetStateAction<Game | undefined>>
+	selectedGame?: GameData
+	setSelectedGame: Dispatch<SetStateAction<GameData | undefined>>
 	setGameSearch: Dispatch<SetStateAction<string>>
 }

@@ -2,15 +2,15 @@ import {
 	AddedByStatus,
 	EsrbRating,
 	GamesPlatform,
-	Genre,
+	GenreData,
 	ParentPlatform,
 	Rating,
 	Store,
-	Tag
+	TagData
 } from '@data/types'
 
 
-export type GameCommons = {
+export type GameCommonsData = {
 	rating: number
 	ratingTop: number
 	ratings: Rating[]
@@ -35,8 +35,8 @@ export type GameCommons = {
 	parentPlatforms: ParentPlatform[]
 	platforms: GamesPlatform[]
 	stores: Store[]
-	genres: Genre[]
-	tags: Tag[]
+	genres: GenreData[]
+	tags: TagData[]
 	esrbRating: EsrbRating
 	clip: unknown
 }

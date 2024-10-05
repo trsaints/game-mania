@@ -1,4 +1,4 @@
-export type Publisher = {
+export type PublisherData = {
 	id: number
 	name: string
 	slug: string

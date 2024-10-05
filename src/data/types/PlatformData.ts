@@ -1,4 +1,4 @@
-export type Platform = {
+export type PlatformData = {
 	id: 1
 	name: string
 	slug: string

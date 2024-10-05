@@ -1,14 +1,14 @@
 import { GameRequestParams } from '@data/requests'
 import {
 	Developer,
-	Game,
+	GameData,
 	GamesPlatform,
-	Genre,
-	Publisher,
+	GenreData,
+	PublisherData,
 	Recommended,
 	Screenshots,
 	Store,
-	Tag
+	TagData
 }                            from '@data/types'
 import { ApiService }        from '@src/services'
 import { ParserUtils }       from '@src/utils'
@@ -21,7 +21,7 @@ export const GameService = {
 	getScreenshots
 }
 
-async function getGames(params?: GameRequestParams): Promise<Game[]> {
+async function getGames(params?: GameRequestParams): Promise<GameData[]> {
 	const baseUrl  = ApiService.createRouteUrl('games')
 	const response = await ApiService.gameApi.get(baseUrl, {
 		params: params ? ParserUtils.mapToSnakeCase(params) : {}
@@ -30,15 +30,15 @@ async function getGames(params?: GameRequestParams): Promise<Game[]> {
 	return response.data?.results.map(mapToGame) ?? []
 }
 
-async function getGameById(id: number): Promise<Game> {
+async function getGameById(id: number): Promise<GameData> {
 	const gameUrl  = ApiService.createRouteUrl(`games/${id}`)
 	const response = await ApiService.gameApi.get(gameUrl)
 
 	return mapToGame(response.data)
 }
 
-function mapToGame(data: any): Game {
-	const mappedData = ParserUtils.mapToCamelCase(data) as Game
+function mapToGame(data: any): GameData {
+	const mappedData = ParserUtils.mapToCamelCase(data) as GameData
 
 	if (mappedData.platforms) {
 		mappedData.platforms = mapToPlatforms(mappedData.platforms)
@@ -51,17 +51,17 @@ function mapToGame(data: any): Game {
 
 	if (mappedData.publishers) {
 		mappedData.publishers = mappedData.publishers.map(p => ParserUtils
-		.mapToCamelCase(p) as Publisher)
+		.mapToCamelCase(p) as PublisherData)
 	}
 
 	if (mappedData.tags) {
 		mappedData.tags = mappedData.tags.map(t => ParserUtils
-		.mapToCamelCase(t) as Tag)
+		.mapToCamelCase(t) as TagData)
 	}
 
 	if (mappedData.genres) {
 		mappedData.genres = mappedData.genres.map(g => ParserUtils
-		.mapToCamelCase(g) as Genre)
+		.mapToCamelCase(g) as GenreData)
 	}
 
 	if (mappedData.stores) {

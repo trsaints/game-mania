@@ -1,4 +1,4 @@
-export type Genre = {
+export type GenreData = {
 	id: number
 	name: string
 	slug: string
