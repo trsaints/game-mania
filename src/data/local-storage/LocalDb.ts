@@ -38,7 +38,7 @@ export class LocalDb
 		})
 	}
 
-	create(storages: LocalDbStore<ApiData>[]): void {
+	create<T extends ApiData[]>(storages: { [K in keyof T]: LocalDbStore<T[K]> }): void {
 		if (this.isCreated()) return
 
 		this.openStorage()
