@@ -2,13 +2,13 @@
 
 .Search {
 	h2, .GameList {
-		padding-inline : 5vw;
 		margin-block   : 10vh;
+		padding-inline : 5vw;
 	}
 
 	.GameList {
 		display   : flex;
-		gap       : 4.4vh;
 		flex-wrap : wrap;
+		gap       : 4.4vh;
 	}
 }

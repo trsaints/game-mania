@@ -1,9 +1,9 @@
 import {
 	AddedByStatus,
 	EsrbRating,
+	GamesPlatform,
 	Genre,
 	ParentPlatform,
-	GamesPlatform,
 	Rating,
 	Store,
 	Tag

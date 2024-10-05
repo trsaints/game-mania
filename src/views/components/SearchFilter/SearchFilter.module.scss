@@ -1,60 +1,59 @@
 @use 'src/palette';
 
 .SearchFilter {
-	padding-inline   : 5vw;
-	margin-block     : 10vh;
-
 	background-image : linear-gradient(to bottom, palette.$black, palette.$black-d2);
 	border-radius    : 8px;
 	box-shadow       : 0 0 8px palette.$black-d5;
 	display          : grid;
 	gap              : 2vh;
 	margin           : 10vh 5vw;
+	margin-block     : 10vh;
 	padding          : 5vw;
-	
+	padding-inline   : 5vw;
+
 	label, summary, select {
-		text-transform: uppercase;
-		color: palette.$cyan;
+		color          : palette.$cyan;
+		text-transform : uppercase;
 	}
-	
+
 	details[open] {
 		summary {
-			margin-bottom: 2vh;
+			margin-bottom : 2vh;
 		}
 	}
-	
+
 	input {
-		padding: 1vh;
-		border-radius: 4px;
-		background-color: palette.$white-d6;
-		border: 1px solid palette.$black;
-		
+		background-color : palette.$white-d6;
+		border           : 1px solid palette.$black;
+		border-radius    : 4px;
+		padding          : 1vh;
+
 		&[type='checkbox'] {
-			display: inline-block;
-			margin-right: 2vw;
-			width : 8vw;
-			height: 8vw;
+			display      : inline-block;
+			height       : 8vw;
+			margin-right : 2vw;
+			width        : 8vw;
 
 			&:checked {
-				background-color: palette.$cyan;
-				box-shadow: 0 0 4px palette.$cyan;
+				background-color : palette.$cyan;
+				box-shadow       : 0 0 4px palette.$cyan;
 			}
 		}
 	}
 
 	select {
-		margin-left: 4vw;
-		background-color: palette.$black-d2;
+		background-color : palette.$black-d2;
 		background-image : linear-gradient(to bottom, palette.$black, palette.$black-d2);
-		padding: 1vh 4vw;
-		border-radius: 8px;
-		box-shadow: 0 0 8px palette.$black-d5;
+		border-radius    : 8px;
+		box-shadow       : 0 0 8px palette.$black-d5;
+		margin-left      : 4vw;
+		padding          : 1vh 4vw;
 	}
-	
+
 	.SearchOption {
-		display: grid;
-		grid-template-columns: auto 1fr;
-		align-items: center;
-		margin-bottom: 2vh;
+		align-items           : center;
+		display               : grid;
+		grid-template-columns : auto 1fr;
+		margin-bottom         : 2vh;
 	}
 }

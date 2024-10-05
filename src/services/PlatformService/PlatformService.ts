@@ -1,7 +1,7 @@
-import { Platform }              from '@data/types'
-import { ParserUtils }           from '@src/utils'
-import { ApiService }            from '@src/services'
 import { PlatformRequestParams } from '@data/requests'
+import { Platform }              from '@data/types'
+import { ApiService }            from '@src/services'
+import { ParserUtils }           from '@src/utils'
 
 
 export const PlatformService = {

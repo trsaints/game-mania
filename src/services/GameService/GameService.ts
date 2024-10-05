@@ -2,8 +2,8 @@ import { GameRequestParams } from '@data/requests'
 import {
 	Developer,
 	Game,
-	Genre,
 	GamesPlatform,
+	Genre,
 	Publisher,
 	Recommended,
 	Screenshots,

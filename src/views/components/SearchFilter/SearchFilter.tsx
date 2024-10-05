@@ -34,7 +34,9 @@ function SearchFilter(props: ISearchFilter) {
 				<details>
 					<summary>publishers:</summary>
 
-					<FilterOptions options={props.publishers} typeName='publisher'/>
+					<FilterOptions options={props.publishers}
+								   typeName="publisher"
+					/>
 				</details>
 			</li>
 

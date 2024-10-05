@@ -5,9 +5,12 @@ import {
 }                                                     from '@services/PlatformService/PlatformService.ts'
 import { GenreService, PublisherService, TagService } from '@src/services'
 import { GameCard }                                   from '@views/components'
-import { SearchFilter }                               from '@views/components/SearchFilter'
+import {
+	SearchFilter
+}                                                     from '@views/components/SearchFilter'
 import { useContext, useEffect, useState }            from 'react'
-import style                                          from './Search.module.scss'
+import style
+													  from './Search.module.scss'
 
 
 function Search() {
@@ -22,11 +25,12 @@ function Search() {
 		GenreService.getGenres({}).then(g => setGenres(g))
 		TagService.getTags({}).then(t => setTags(t))
 	}, [])
-	
+
 	const gameContext = useContext(GameContext)
-	
-	const gameList = gameContext.games.map(g => 
-											   (<li key={`game-${g.id}`}><GameCard game={g}/></li>))
+
+	const gameList = gameContext.games.map(g =>
+											   (<li key={`game-${g.id}`}>
+												   <GameCard game={g}/></li>))
 
 	return (
 		<main className={style.Search}>
@@ -37,7 +41,7 @@ function Search() {
 						  genres={genres}
 						  tags={tags}
 			/>
-			
+
 			<ul className={style.GameList}>{gameList}</ul>
 		</main>
 	)
