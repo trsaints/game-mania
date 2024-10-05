@@ -38,7 +38,7 @@ function Search() {
 						  tags={tags}
 			/>
 			
-			<ul>{gameList}</ul>
+			<ul className={style.GameList}>{gameList}</ul>
 		</main>
 	)
 }

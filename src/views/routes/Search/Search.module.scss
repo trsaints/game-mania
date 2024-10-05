@@ -1,2 +1,14 @@
+@use 'src/palette';
+
 .Search {
+	h2, .GameList {
+		padding-inline : 5vw;
+		margin-block   : 10vh;
+	}
+
+	.GameList {
+		display   : flex;
+		gap       : 4.4vh;
+		flex-wrap : wrap;
+	}
 }

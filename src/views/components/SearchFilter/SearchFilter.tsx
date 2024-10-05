@@ -74,9 +74,9 @@ interface IFilterOptions {
 function FilterOptions({ options, typeName }: IFilterOptions) {
 	const optionsList = options.map(p => {
 		return (
-			<p>
-				<label htmlFor={p.name}>{p.name}</label>
+			<p className={style.SearchOption}>
 				<input type="checkbox" id={p.name} name={p.name}/>
+				<label htmlFor={p.name}>{p.name}</label>
 			</p>
 		)
 	})
