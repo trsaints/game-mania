@@ -1,9 +1,9 @@
 import {
 	AddedByStatus,
 	EsrbRating,
+	GamesPlatform,
 	Genre,
 	ParentPlatform,
-	Platform,
 	Rating,
 	Store,
 	Tag
@@ -33,7 +33,7 @@ export type GameCommons = {
 	saturatedColor: string
 	dominantColor: string
 	parentPlatforms: ParentPlatform[]
-	platforms: Platform[]
+	platforms: GamesPlatform[]
 	stores: Store[]
 	genres: Genre[]
 	tags: Tag[]

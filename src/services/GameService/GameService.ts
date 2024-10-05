@@ -2,8 +2,8 @@ import { GameRequestParams } from '@data/requests'
 import {
 	Developer,
 	Game,
+	GamesPlatform,
 	Genre,
-	Platform,
 	Publisher,
 	Recommended,
 	Screenshots,
@@ -71,12 +71,12 @@ function mapToGame(data: any): Game {
 	return mappedData
 }
 
-function mapToPlatforms(platforms: Platform[]) {
+function mapToPlatforms(platforms: GamesPlatform[]) {
 	return platforms.map(mainPlatform => {
 		mainPlatform.platform = ParserUtils
 		.mapToCamelCase(mainPlatform.platform) as typeof mainPlatform.platform
 
-		return ParserUtils.mapToCamelCase(mainPlatform) as Platform
+		return ParserUtils.mapToCamelCase(mainPlatform) as GamesPlatform
 	})
 }
 

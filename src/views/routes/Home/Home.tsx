@@ -1,15 +1,7 @@
 import { GameContext }                     from '@data/context'
-import { Game, Genre }                     from '@data/types'
-import { Recommended }                     from '@data/types/Recommended.ts'
-import {
-	GameService
-}                                          from '@services/GameService/GameService.ts'
-import {
-	GenreService
-}                                          from '@services/GenreService/GenreService.ts'
-import { GameCard }                        from '@views/components'
-import { Gallery }                         from '@views/components/Gallery'
-import { GamePanel }                       from '@views/components/GamePanel'
+import { Game, Genre, Recommended }        from '@data/types'
+import { GameService, GenreService }       from '@src/services'
+import { Gallery, GameCard, GamePanel }    from '@views/components'
 import { useContext, useEffect, useState } from 'react'
 import { Link }                            from 'react-router-dom'
 import style                               from './Home.module.scss'
@@ -20,8 +12,7 @@ export function Home() {
 	const [genres, setGenres]           = useState<Genre[]>()
 
 	useEffect(() => {
-		GameService.getRecommendations()
-				   .then(r => setRecommended(r))
+		GameService.getRecommendations().then(r => setRecommended(r))
 		GenreService.getGenres({}).then(g => setGenres(g))
 	}, [])
 
