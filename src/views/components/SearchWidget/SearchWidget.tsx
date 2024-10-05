@@ -1,4 +1,4 @@
-import { GenreData, PublisherData, TagData }          from '@data/types'
+import { Genre, Publisher, Tag }                      from '@data/types'
 import { GenreService, PublisherService, TagService } from '@src/services'
 import { useEffect, useState }                        from 'react'
 import { Form, Link }                                 from 'react-router-dom'
@@ -7,9 +7,9 @@ import style
 
 
 function SearchWidget() {
-	const [genres, setGenres]         = useState<GenreData[]>([])
-	const [tags, setTags]             = useState<TagData[]>([])
-	const [publishers, setPublishers] = useState<PublisherData[]>([])
+	const [genres, setGenres]         = useState<Genre[]>([])
+	const [tags, setTags]             = useState<Tag[]>([])
+	const [publishers, setPublishers] = useState<Publisher[]>([])
 
 	const props: ISearchNavbar = {
 		genres,
@@ -48,13 +48,13 @@ function SearchForm() {
 }
 
 interface ISearchNavbar {
-	genres: GenreData[]
-	tags: TagData[]
-	publishers: PublisherData[]
+	genres: Genre[]
+	tags: Tag[]
+	publishers: Publisher[]
 }
 
 function SearchNavbar(props: ISearchNavbar) {
-	const getList = (data: GenreData[] | TagData[] | PublisherData[]) => data.map(d => {
+	const getList = (data: Genre[] | Tag[] | Publisher[]) => data.map(d => {
 		const key = `search-${typeof (d)}-${d.id}`
 
 		return (<li key={key}><Link to="/search">{d.name}</Link></li>)

@@ -1,8 +1,8 @@
-import { PlatformData } from '@data/types/PlatformData.ts'
+import { Platform } from '@data/types/Platform.ts'
 
 
 export type GamesPlatform = {
-	platform: PlatformData
+	platform: Platform
 	releasedAt: string
 	requirements: unknown
 }

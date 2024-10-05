@@ -1,4 +1,4 @@
-export type TagData = {
+export type Tag = {
 	id: number
 	name: string
 	slug: string

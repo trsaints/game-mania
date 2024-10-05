@@ -1,12 +1,12 @@
-import { GameContext, IGameContext } from '@data/context'
-import { GameData }                  from '@data/types'
-import { GameService }               from '@src/services'
+import { GameContext, IGameContext }              from '@data/context'
+import { Game }                                   from '@data/types'
+import { GameService }                            from '@src/services'
 import { PropsWithChildren, useEffect, useState } from 'react'
 
 
 function GameContextProvider({ children }: PropsWithChildren) {
-	const [games, setGames]               = useState<GameData[]>([])
-	const [selectedGame, setSelectedGame] = useState<GameData | undefined>()
+	const [games, setGames]               = useState<Game[]>([])
+	const [selectedGame, setSelectedGame] = useState<Game | undefined>()
 	const [gameSearch, setGameSearch]     = useState<string>('')
 
 	useEffect(() => {

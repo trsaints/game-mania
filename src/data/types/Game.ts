@@ -1,7 +1,7 @@
-import { Developer, GameCommonsData, PublisherData, ShortScreenshot } from '@data/types'
+import { Developer, GameCommons, Publisher, ShortScreenshot } from '@data/types'
 
 
-export type GameData = GameCommonsData & {
+export type Game = GameCommons & {
 	nameOriginal: string
 	description: string
 	metacriticPlatforms: unknown[]
@@ -25,7 +25,7 @@ export type GameData = GameCommonsData & {
 	additionsCount: number
 	gameSeriesCount: number
 	developers: Developer[]
-	publishers: PublisherData[]
+	publishers: Publisher[]
 	descriptionRaw: string
 	shortScreenshots?: ShortScreenshot[]
 }

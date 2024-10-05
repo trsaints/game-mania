@@ -1,9 +1,9 @@
-import { GameData, Screenshots } from '@data/types'
+import { Game, Screenshots } from '@data/types'
 
 
 export type Recommended = {
-	recent: GameData
-	daily: GameData
+	recent: Game
+	daily: Game
 	recentScreenshots: Screenshots
 	dailyScreenshots: Screenshots
 }

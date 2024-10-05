@@ -1,8 +1,8 @@
-import { GameContext }                                     from '@data/context'
-import { GenreData, PlatformData, PublisherData, TagData } from '@data/types'
+import { GameContext }                                from '@data/context'
+import { Genre, Platform, Publisher, Tag }            from '@data/types'
 import {
 	PlatformService
-}                                                          from '@services/PlatformService/PlatformService.ts'
+}                                                     from '@services/PlatformService/PlatformService.ts'
 import { GenreService, PublisherService, TagService } from '@src/services'
 import { GameCard }                                   from '@views/components'
 import {
@@ -14,10 +14,10 @@ import style
 
 
 function Search() {
-	const [publishers, setPublishers] = useState<PublisherData[]>([])
-	const [platforms, setPlatforms]   = useState<PlatformData[]>([])
-	const [genres, setGenres]         = useState<GenreData[]>([])
-	const [tags, setTags]             = useState<TagData[]>([])
+	const [publishers, setPublishers] = useState<Publisher[]>([])
+	const [platforms, setPlatforms]   = useState<Platform[]>([])
+	const [genres, setGenres]         = useState<Genre[]>([])
+	const [tags, setTags]             = useState<Tag[]>([])
 
 	useEffect(() => {
 		PublisherService.getPublishers({}).then(p => setPublishers(p))

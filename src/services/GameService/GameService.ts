@@ -1,14 +1,14 @@
 import { GameRequestParams } from '@data/requests'
 import {
 	Developer,
-	GameData,
+	Game,
 	GamesPlatform,
-	GenreData,
-	PublisherData,
+	Genre,
+	Publisher,
 	Recommended,
 	Screenshots,
 	Store,
-	TagData
+	Tag
 }                            from '@data/types'
 import { ApiService }        from '@src/services'
 import { ParserUtils }       from '@src/utils'
@@ -21,7 +21,7 @@ export const GameService = {
 	getScreenshots
 }
 
-async function getGames(params?: GameRequestParams): Promise<GameData[]> {
+async function getGames(params?: GameRequestParams): Promise<Game[]> {
 	const baseUrl  = ApiService.createRouteUrl('games')
 	const response = await ApiService.gameApi.get(baseUrl, {
 		params: params ? ParserUtils.mapToSnakeCase(params) : {}
@@ -30,15 +30,15 @@ async function getGames(params?: GameRequestParams): Promise<GameData[]> {
 	return response.data?.results.map(mapToGame) ?? []
 }
 
-async function getGameById(id: number): Promise<GameData> {
+async function getGameById(id: number): Promise<Game> {
 	const gameUrl  = ApiService.createRouteUrl(`games/${id}`)
 	const response = await ApiService.gameApi.get(gameUrl)
 
 	return mapToGame(response.data)
 }
 
-function mapToGame(data: any): GameData {
-	const mappedData = ParserUtils.mapToCamelCase(data) as GameData
+function mapToGame(data: any): Game {
+	const mappedData = ParserUtils.mapToCamelCase(data) as Game
 
 	if (mappedData.platforms) {
 		mappedData.platforms = mapToPlatforms(mappedData.platforms)
@@ -51,17 +51,17 @@ function mapToGame(data: any): GameData {
 
 	if (mappedData.publishers) {
 		mappedData.publishers = mappedData.publishers.map(p => ParserUtils
-		.mapToCamelCase(p) as PublisherData)
+		.mapToCamelCase(p) as Publisher)
 	}
 
 	if (mappedData.tags) {
 		mappedData.tags = mappedData.tags.map(t => ParserUtils
-		.mapToCamelCase(t) as TagData)
+		.mapToCamelCase(t) as Tag)
 	}
 
 	if (mappedData.genres) {
 		mappedData.genres = mappedData.genres.map(g => ParserUtils
-		.mapToCamelCase(g) as GenreData)
+		.mapToCamelCase(g) as Genre)
 	}
 
 	if (mappedData.stores) {

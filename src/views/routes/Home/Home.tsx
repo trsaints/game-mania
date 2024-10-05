@@ -1,6 +1,6 @@
-import { GameContext }                      from '@data/context'
-import { GameData, GenreData, Recommended } from '@data/types'
-import { GameService, GenreService }        from '@src/services'
+import { GameContext }                     from '@data/context'
+import { Game, Genre, Recommended }        from '@data/types'
+import { GameService, GenreService }       from '@src/services'
 import { Gallery, GameCard, GamePanel }    from '@views/components'
 import { useContext, useEffect, useState } from 'react'
 import { Link }                            from 'react-router-dom'
@@ -9,7 +9,7 @@ import style                               from './Home.module.scss'
 
 export function Home() {
 	const [recommended, setRecommended] = useState<Recommended>()
-	const [genres, setGenres]           = useState<GenreData[]>()
+	const [genres, setGenres]           = useState<Genre[]>()
 
 	useEffect(() => {
 		GameService.getRecommendations().then(r => setRecommended(r))
@@ -32,7 +32,7 @@ export function Home() {
                             screenshots={recommended?.dailyScreenshots}
               />
 
-	const getInlineBanner = (game?: GameData) => {
+	const getInlineBanner = (game?: Game) => {
 		return {
 			background: `linear-gradient(to bottom, 
 										 rgba(0, 0, 0, 0.8), 
@@ -76,8 +76,8 @@ export function Home() {
 }
 
 interface ISelection {
-	games: GameData[]
-	genres: GenreData[]
+	games: Game[]
+	genres: Genre[]
 }
 
 function Selection({ games, genres }: ISelection) {
