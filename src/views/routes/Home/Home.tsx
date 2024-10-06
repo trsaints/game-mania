@@ -8,6 +8,7 @@ import style                               from './Home.module.scss'
 
 export function Home() {
 	const [recommended, setRecommended] = useState<Recommended>()
+
 	const {
 			  games,
 			  genres,
@@ -15,14 +16,15 @@ export function Home() {
 			  genreService,
 			  setGames,
 			  setGenres
-		  }                             = useContext(
-		RootContext)
+		  } = useContext(RootContext)
 
 	useEffect(() => {
-		gameService?.getAll({}).then(gameData => setGames(gameData))
+		gameService?.getAll({})
+				   .then(gameData => setGames(gameData))
 		gameService?.getRecommendations()
 				   .then(recommendedData => setRecommended(recommendedData))
-		genreService?.getAll({}).then(genreData => setGenres(genreData))
+		genreService?.getAll({})
+					.then(genreData => setGenres(genreData))
 	}, [])
 
 	const recentPanel =

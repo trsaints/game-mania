@@ -15,7 +15,7 @@ function RootContextProvider({ children }: PropsWithChildren) {
 		genres,
 		selectedGame,
 		gameSearch,
-		gameService: GameService,
+		gameService : GameService,
 		genreService: GenreService,
 		setSelectedGame,
 		setGameSearch,
