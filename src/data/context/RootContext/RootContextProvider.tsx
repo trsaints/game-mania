@@ -9,14 +9,13 @@ function RootContextProvider({ children }: PropsWithChildren) {
 	const [genres, setGenres]             = useState<Genre[]>()
 	const [selectedGame, setSelectedGame] = useState<Game>()
 	const [gameSearch, setGameSearch]     = useState<string>()
-	const gameService                     = new GameService()
 
 	const context: IRootContext = {
 		games,
 		genres,
 		selectedGame,
 		gameSearch,
-		gameService,
+		gameService: GameService,
 		setSelectedGame,
 		setGameSearch,
 		setGames,

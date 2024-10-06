@@ -1,10 +1,10 @@
-import { RootContext }                  from '@data/context'
-import { Game, Genre, Recommended }     from '@data/types'
-import { GameService, GenreService }    from '@src/services'
-import { Gallery, GameCard, GamePanel } from '@views/components'
+import { RootContext }                     from '@data/context'
+import { Game, Genre, Recommended }        from '@data/types'
+import { GenreService }                    from '@src/services'
+import { Gallery, GameCard, GamePanel }    from '@views/components'
 import { useContext, useEffect, useState } from 'react'
 import { Link }                            from 'react-router-dom'
-import style                            from './Home.module.scss'
+import style                               from './Home.module.scss'
 
 
 export function Home() {
@@ -14,6 +14,8 @@ export function Home() {
 
 	useEffect(() => {
 		gameService?.getAll({}).then(gameData => setGames(gameData))
+		gameService?.getRecommendations()
+				   .then(recommendedData => setRecommended(recommendedData))
 		GenreService.getAll({}).then(genreData => setGenres(genreData))
 	}, [])
 
