@@ -1,6 +1,6 @@
 import { PlatformRequestParams }    from '@data/requests'
 import { Platform }                 from '@data/types'
-import { ApiService, IDataService } from '@src/services'
+import { ApiService, IDataService } from '@services/index.ts'
 import { ParserUtils }              from '@src/utils'
 
 

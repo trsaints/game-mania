@@ -1,6 +1,6 @@
 import { PublisherRequestParams }   from '@data/requests'
 import { Publisher }                from '@data/types'
-import { ApiService, IDataService } from '@src/services'
+import { ApiService, IDataService } from '@services/index.ts'
 import { ParserUtils }              from '@src/utils'
 
 

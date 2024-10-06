@@ -11,7 +11,7 @@ import {
 	Tag
 }                            from '@data/types'
 import { IGameService }      from '@services/interfaces'
-import { ApiService }        from '@src/services'
+import { ApiService }        from '@services/index.ts'
 import { ParserUtils }       from '@src/utils'
 
 
