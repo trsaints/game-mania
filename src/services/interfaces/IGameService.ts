@@ -1,7 +1,11 @@
-import { Game, GamesPlatform, Recommended, Screenshots } from '@data/types'
 import {
-	IDataService
-}                                                        from '@services/interfaces'
+	Game,
+	GamesPlatform,
+	Recommended,
+	Screenshots,
+	Store
+}                       from '@data/types'
+import { IDataService } from '@services/interfaces'
 
 
 export interface IGameService extends IDataService<Game> {
@@ -9,7 +13,9 @@ export interface IGameService extends IDataService<Game> {
 
 	mapToGame(data: any): Game
 
-	mapToPlatforms(platforms: GamesPlatform[]): GamesPlatform[]
+	mapToStores(stores: Store[]): Store[]
+
+	mapToGamesPlatforms(platforms: GamesPlatform[]): GamesPlatform[]
 
 	getScreenshots(id: number): Promise<Screenshots>
 }
