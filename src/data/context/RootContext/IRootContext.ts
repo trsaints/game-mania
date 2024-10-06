@@ -1,4 +1,5 @@
 import { Game, Genre }              from '@data/types'
+import { IGameService }             from '@src/services'
 import { Dispatch, SetStateAction } from 'react'
 
 
@@ -7,8 +8,9 @@ export interface IRootContext {
 	genres?: Genre[]
 	gameSearch?: string
 	selectedGame?: Game
-	setSelectedGame?: Dispatch<SetStateAction<Game | undefined>>
-	setGameSearch?: Dispatch<SetStateAction<string | undefined>>
-	setGenres?: Dispatch<SetStateAction<Genre[] | undefined>>
-	setGames?: Dispatch<SetStateAction<Game[] | undefined>>
+	setSelectedGame: Dispatch<SetStateAction<Game | undefined>>
+	setGameSearch: Dispatch<SetStateAction<string | undefined>>
+	setGenres: Dispatch<SetStateAction<Genre[] | undefined>>
+	setGames: Dispatch<SetStateAction<Game[] | undefined>>
+	gameService?: IGameService
 }
