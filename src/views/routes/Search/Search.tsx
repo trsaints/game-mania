@@ -1,6 +1,5 @@
-import { GameContext } from '@data/context'
+import { RootContext } from '@data/context'
 import {
-	Genre,
 	Platform,
 	Publisher,
 	Tag
@@ -28,31 +27,33 @@ import style           from './Search.module.scss'
 function Search() {
 	const [publishers, setPublishers] = useState<Publisher[]>([])
 	const [platforms, setPlatforms]   = useState<Platform[]>([])
-	const [genres, setGenres]         = useState<Genre[]>([])
 	const [tags, setTags]             = useState<Tag[]>([])
+
+	const { games, genres, setGenres } = useContext(RootContext)
+
+	const gameList = games?.map(g =>
+									(<li key={`game-${g.id}`}>
+										<GameCard game={g}/></li>))
 
 	useEffect(() => {
 		PublisherService.getAll({}).then(p => setPublishers(p))
 		PlatformService.getAll({}).then(p => setPlatforms(p))
-		GenreService.getAll({}).then(g => setGenres(g))
 		TagService.getAll({}).then(t => setTags(t))
+
+		if (setGenres) {
+			GenreService.getAll({}).then(g => setGenres(g))
+		}
 	}, [])
-
-	const gameContext = useContext(GameContext)
-
-	const gameList = gameContext.games.map(g =>
-											   (<li key={`game-${g.id}`}>
-												   <GameCard game={g}/></li>))
 
 	return (
 		<main className={style.Search}>
 			<h2>Search your next favorite game</h2>
 
-			<SearchFilter publishers={publishers}
-						  platforms={platforms}
-						  genres={genres}
-						  tags={tags}
-			/>
+			{genres && <SearchFilter publishers={publishers}
+                                     platforms={platforms}
+                                     genres={genres}
+                                     tags={tags}
+            />}
 
 			<ul className={style.GameList}>{gameList}</ul>
 		</main>

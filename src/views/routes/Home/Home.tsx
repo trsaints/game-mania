@@ -1,22 +1,14 @@
-import { GameContext }                     from '@data/context'
-import { Game, Genre, Recommended }        from '@data/types'
-import { GameService, GenreService }       from '@src/services'
-import { Gallery, GameCard, GamePanel }    from '@views/components'
-import { useContext, useEffect, useState } from 'react'
-import { Link }                            from 'react-router-dom'
-import style                               from './Home.module.scss'
+import { RootContext }                  from '@data/context'
+import { Game, Genre, Recommended }     from '@data/types'
+import { Gallery, GameCard, GamePanel } from '@views/components'
+import { useContext, useState }         from 'react'
+import { Link }                         from 'react-router-dom'
+import style                            from './Home.module.scss'
 
 
 export function Home() {
 	const [recommended, setRecommended] = useState<Recommended>()
-	const [genres, setGenres]           = useState<Genre[]>()
-
-	useEffect(() => {
-		GameService.getRecommendations().then(r => setRecommended(r))
-		GenreService.getAll({}).then(g => setGenres(g))
-	}, [])
-
-	const gameContext = useContext(GameContext)
+	const gameContext                   = useContext(RootContext)
 
 	const recentPanel =
 			  ((recommended?.recent)
@@ -53,7 +45,8 @@ export function Home() {
 				{recentPanel}
 			</article>
 
-			<Selection games={gameContext.games} genres={genres ?? []}/>
+			{gameContext.games
+			 && <Selection games={gameContext.games} genres={[]}/>}
 
 			<article className={style.Banner}
 					 style={getInlineBanner(recommended?.daily)}
