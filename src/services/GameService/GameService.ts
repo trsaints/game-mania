@@ -10,18 +10,21 @@ import {
 	Store,
 	Tag
 }                            from '@data/types'
+import { IGameService }      from '@services/interfaces'
 import { ApiService }        from '@src/services'
 import { ParserUtils }       from '@src/utils'
 
 
-export const GameService = {
-	getGames,
-	getGameById,
+export const GameService: IGameService = {
+	getAll,
+	getById,
 	getRecommendations,
-	getScreenshots
+	getScreenshots,
+	mapToGame,
+	mapToPlatforms
 }
 
-async function getGames(params?: GameRequestParams): Promise<Game[]> {
+async function getAll(params?: GameRequestParams): Promise<Game[]> {
 	const baseUrl  = ApiService.createRouteUrl('games')
 	const response = await ApiService.gameApi.get(baseUrl, {
 		params: params ? ParserUtils.mapToSnakeCase(params) : {}
@@ -30,7 +33,7 @@ async function getGames(params?: GameRequestParams): Promise<Game[]> {
 	return response.data?.results.map(mapToGame) ?? []
 }
 
-async function getGameById(id: number): Promise<Game> {
+async function getById(id: number): Promise<Game> {
 	const gameUrl  = ApiService.createRouteUrl(`games/${id}`)
 	const response = await ApiService.gameApi.get(gameUrl)
 
@@ -94,10 +97,10 @@ async function getRecommendations(): Promise<Recommended> {
 	const dailyId  = Math.floor(Math.random() * 1000)
 
 	return {
-		recent           : await GameService.getGameById(recentId),
-		daily            : await GameService.getGameById(dailyId),
-		recentScreenshots: await GameService.getScreenshots(recentId),
-		dailyScreenshots : await GameService.getScreenshots(dailyId)
+		daily            : await getById(dailyId),
+		recent           : await getById(recentId),
+		recentScreenshots: await getScreenshots(recentId),
+		dailyScreenshots : await getScreenshots(dailyId)
 	}
 }
 

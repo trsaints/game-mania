@@ -18,9 +18,9 @@ function SearchWidget() {
 	}
 
 	useEffect(() => {
-		GenreService.getGenres({ pageSize: 5 }).then(g => setGenres(g))
-		TagService.getTags({ pageSize: 5 }).then(t => setTags(t))
-		PublisherService.getPublishers({ pageSize: 5 })
+		GenreService.getAll({ pageSize: 5 }).then(g => setGenres(g))
+		TagService.getAll({ pageSize: 5 }).then(t => setTags(t))
+		PublisherService.getAll({ pageSize: 5 })
 						.then(p => setPublishers(p))
 	}, [])
 

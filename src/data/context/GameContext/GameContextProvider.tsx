@@ -10,7 +10,7 @@ function GameContextProvider({ children }: PropsWithChildren) {
 	const [gameSearch, setGameSearch]     = useState<string>('')
 
 	useEffect(() => {
-		GameService.getGames({ metacritic: '90,100' })
+		GameService.getAll({})
 				   .then(games => setGames(games))
 	}, [])
 

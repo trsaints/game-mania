@@ -1,15 +1,15 @@
-import { PlatformRequestParams } from '@data/requests'
-import { Platform }              from '@data/types'
-import { ApiService }            from '@src/services'
-import { ParserUtils }           from '@src/utils'
+import { PlatformRequestParams }    from '@data/requests'
+import { Platform }                 from '@data/types'
+import { ApiService, IDataService } from '@src/services'
+import { ParserUtils }              from '@src/utils'
 
 
-export const PlatformService = {
-	getPlatforms,
-	getPlatformById
+export const PlatformService: IDataService<Platform> = {
+	getAll,
+	getById
 }
 
-async function getPlatforms(params: PlatformRequestParams): Promise<Platform[]> {
+async function getAll(params: PlatformRequestParams): Promise<Platform[]> {
 	const baseUrl  = ApiService.createRouteUrl('platforms')
 	const response = await ApiService.gameApi.get(baseUrl, {
 		params: params ? ParserUtils.mapToSnakeCase(params) : {}
@@ -19,7 +19,7 @@ async function getPlatforms(params: PlatformRequestParams): Promise<Platform[]> 
 		(r: any) => ParserUtils.mapToCamelCase(r)) as Platform[] ?? []
 }
 
-async function getPlatformById(id: number): Promise<Platform> {
+async function getById(id: number): Promise<Platform> {
 	const baseUrl  = ApiService.createRouteUrl(`platforms/${id}`)
 	const response = await ApiService.gameApi.get(baseUrl)
 

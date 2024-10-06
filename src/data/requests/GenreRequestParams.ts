@@ -1,5 +1,6 @@
-export type GenreRequestParams = {
+import { DataRequestParams } from '@data/requests'
+
+
+export type GenreRequestParams = DataRequestParams & {
 	ordering?: string
-	page?: number
-	pageSize?: number
 }

@@ -13,7 +13,7 @@ export function Home() {
 
 	useEffect(() => {
 		GameService.getRecommendations().then(r => setRecommended(r))
-		GenreService.getGenres({}).then(g => setGenres(g))
+		GenreService.getAll({}).then(g => setGenres(g))
 	}, [])
 
 	const gameContext = useContext(GameContext)
