@@ -19,7 +19,7 @@ export function Home() {
 		  } = useContext(RootContext)
 
 	useEffect(() => {
-		gameService?.getAll({})
+		gameService?.getAll({metacritic: '90,100'})
 				   .then(gameData => setGames(gameData))
 		gameService?.getRecommendations()
 				   .then(recommendedData => setRecommended(recommendedData))
