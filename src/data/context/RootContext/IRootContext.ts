@@ -1,6 +1,6 @@
-import { Game, Genre }              from '@data/types'
-import { IGameService }             from '@src/services'
-import { Dispatch, SetStateAction } from 'react'
+import { Game, Genre }                from '@data/types'
+import { IDataService, IGameService } from '@src/services'
+import { Dispatch, SetStateAction }   from 'react'
 
 
 export interface IRootContext {
@@ -13,4 +13,5 @@ export interface IRootContext {
 	setGenres: Dispatch<SetStateAction<Genre[] | undefined>>
 	setGames: Dispatch<SetStateAction<Game[] | undefined>>
 	gameService?: IGameService
+	genreService?: IDataService<Genre>
 }

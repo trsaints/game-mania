@@ -1,6 +1,6 @@
 import { IRootContext, RootContext }   from '@data/context'
 import { Game, Genre }                 from '@data/types'
-import { GameService }                 from '@src/services'
+import { GameService, GenreService }   from '@src/services'
 import { PropsWithChildren, useState } from 'react'
 
 
@@ -16,6 +16,7 @@ function RootContextProvider({ children }: PropsWithChildren) {
 		selectedGame,
 		gameSearch,
 		gameService: GameService,
+		genreService: GenreService,
 		setSelectedGame,
 		setGameSearch,
 		setGames,

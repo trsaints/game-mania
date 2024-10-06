@@ -1,27 +1,15 @@
-import { RootContext } from '@data/context'
-import {
-	Platform,
-	Publisher,
-	Tag
-}                      from '@data/types'
-import {
-	GenreService,
-	PlatformService,
-	PublisherService,
-	TagService
-}                      from '@src/services'
+import { RootContext }                                   from '@data/context'
+import { Platform, Publisher, Tag }                      from '@data/types'
+import { PlatformService, PublisherService, TagService } from '@src/services'
 import {
 	GameCard
-}                      from '@views/components'
+}                                                        from '@views/components'
 import {
 	SearchFilter
-}                      from '@views/components/SearchFilter'
-import {
-	useContext,
-	useEffect,
-	useState
-}                      from 'react'
-import style           from './Search.module.scss'
+}                                                        from '@views/components/SearchFilter'
+import { useContext, useEffect, useState }               from 'react'
+import style
+														 from './Search.module.scss'
 
 
 function Search() {
@@ -29,7 +17,7 @@ function Search() {
 	const [platforms, setPlatforms]   = useState<Platform[]>([])
 	const [tags, setTags]             = useState<Tag[]>([])
 
-	const { games, genres, setGenres } = useContext(RootContext)
+	const { games, genres, genreService, setGenres } = useContext(RootContext)
 
 	const gameList = games?.map(g =>
 									(<li key={`game-${g.id}`}>
@@ -41,7 +29,7 @@ function Search() {
 		TagService.getAll({}).then(t => setTags(t))
 
 		if (setGenres) {
-			GenreService.getAll({}).then(g => setGenres(g))
+			genreService?.getAll({}).then(g => setGenres(g))
 		}
 	}, [])
 

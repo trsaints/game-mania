@@ -1,6 +1,5 @@
 import { RootContext }                     from '@data/context'
 import { Game, Genre, Recommended }        from '@data/types'
-import { GenreService }                    from '@src/services'
 import { Gallery, GameCard, GamePanel }    from '@views/components'
 import { useContext, useEffect, useState } from 'react'
 import { Link }                            from 'react-router-dom'
@@ -8,15 +7,22 @@ import style                               from './Home.module.scss'
 
 
 export function Home() {
-	const [recommended, setRecommended]                       = useState<Recommended>()
-	const { games, genres, gameService, setGames, setGenres } = useContext(
+	const [recommended, setRecommended] = useState<Recommended>()
+	const {
+			  games,
+			  genres,
+			  gameService,
+			  genreService,
+			  setGames,
+			  setGenres
+		  }                             = useContext(
 		RootContext)
 
 	useEffect(() => {
 		gameService?.getAll({}).then(gameData => setGames(gameData))
 		gameService?.getRecommendations()
 				   .then(recommendedData => setRecommended(recommendedData))
-		GenreService.getAll({}).then(genreData => setGenres(genreData))
+		genreService?.getAll({}).then(genreData => setGenres(genreData))
 	}, [])
 
 	const recentPanel =
