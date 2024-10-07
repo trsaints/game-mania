@@ -1,17 +1,15 @@
 import { Game, Genre, Platform, Publisher, Tag } from '@data/types'
-import { IDataService, IGameService }            from '@src/services'
+import {
+	DataServiceDictionary, IApiMiddleware
+} from '@src/middlewares/ApiMiddleware.ts'
 import { Dispatch, SetStateAction }              from 'react'
 
 
 export interface IRootContext {
 	gameSearch?: string
-	gameService?: IGameService
 	games?: Game[]
-	genreService?: IDataService<Genre>
 	genres?: Genre[]
-	platformService?: IDataService<Platform>
 	platforms?: Platform[]
-	publisherService?: IDataService<Publisher>
 	publishers?: Publisher[]
 	selectedGame?: Game
 	setGameSearch: Dispatch<SetStateAction<string | undefined>>
@@ -21,6 +19,7 @@ export interface IRootContext {
 	setPublishers: Dispatch<SetStateAction<Publisher[] | undefined>>
 	setSelectedGame: Dispatch<SetStateAction<Game | undefined>>
 	setTags: Dispatch<SetStateAction<Tag[] | undefined>>
-	tagService?: IDataService<Tag>
-	tags?: Tag[]
+	tags?: Tag[],
+	dataServiceDictionary: DataServiceDictionary
+	apiMiddleware: IApiMiddleware
 }
