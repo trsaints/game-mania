@@ -1,5 +1,6 @@
 import { RootContext }                     from '@data/context'
 import { Game, Genre, Recommended }        from '@data/types'
+import { db }                              from '@src/main.tsx'
 import { Gallery, GameCard, GamePanel }    from '@views/components'
 import { useContext, useEffect, useState } from 'react'
 import { Link }                            from 'react-router-dom'
@@ -12,19 +13,15 @@ export function Home() {
 	const {
 			  games,
 			  genres,
-			  gameService,
-			  genreService,
+			  apiMiddleware,
+			  dataServiceDictionary,
 			  setGames,
 			  setGenres
 		  } = useContext(RootContext)
 
 	useEffect(() => {
-		gameService?.getAll({metacritic: '90,100'})
-				   .then(gameData => setGames(gameData))
-		gameService?.getRecommendations()
-				   .then(recommendedData => setRecommended(recommendedData))
-		genreService?.getAll({})
-					.then(genreData => setGenres(genreData))
+		apiMiddleware?.getAll('games', dataServiceDictionary, db)
+					 .then(gameData => setGames(gameData as Game[]))
 	}, [])
 
 	const recentPanel =
