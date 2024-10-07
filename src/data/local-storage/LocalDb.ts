@@ -16,8 +16,6 @@ export class LocalDb
 {
 	private readonly _name: string
 	private readonly _version: number
-	private _request?: IDBRequest
-	private _db?: IDBDatabase
 	private readonly _loadKey: string
 
 	constructor(name: string, version: number) {
@@ -26,28 +24,37 @@ export class LocalDb
 		this._loadKey = `${this._name}_db_created`
 	}
 
-	openStorage(): void {
-		this._request = indexedDB.open(this._name, this._version)
+	openRequest() {
+		return indexedDB.open(this._name, this._version)
+	}
 
-		this._request?.addEventListener('success', () => {
-			this._db = this._request?.result as IDBDatabase
-		})
+	openObjectStore(storageName: string,
+					mode: IDBTransactionMode
+	): Promise<IDBObjectStore> {
+		return new Promise<IDBObjectStore>((resolve, reject) => {
+			const openRequest = this.openRequest()
 
-		this._request.addEventListener('error', () => {
-			this._db = undefined
+			openRequest.addEventListener('success', () => {
+				const transaction = openRequest.result.transaction(storageName,
+																   mode)
+				resolve(transaction.objectStore(storageName))
+			})
+
+			openRequest.addEventListener('error',
+										 () => reject(openRequest.error))
 		})
 	}
 
 	create<T extends ApiData[]>(storages: { [K in keyof T]: LocalDbStore<T[K]> }): void {
 		if (this.isCreated()) return
 
-		this.openStorage()
+		const request = this.openRequest()
 
-		this._request?.addEventListener('upgradeneeded', () => {
-			this._db = this._request?.result as IDBDatabase
+		request?.addEventListener('upgradeneeded', () => {
+			const { result } = request
 
 			storages.forEach(s => {
-				const objectStore = this._db?.createObjectStore(s.name, s)
+				const objectStore = result.createObjectStore(s.name, s)
 
 				if (objectStore === undefined) return
 
@@ -60,97 +67,73 @@ export class LocalDb
 		})
 	}
 
-	getObjectById(storageName: string, key: number): ApiData {
-		if (!this.isCreated()) return {} as ApiData
-		
-		this.openStorage()
-		
-		const transaction = this._db?.transaction(storageName)
+	getObjectById(storageName: string, key: number): Promise<ApiData> {
+		return new Promise<ApiData>(async (resolve, reject) => {
+			const objectStore   = await this.openObjectStore(storageName,
+															 'readonly')
+			const idbGetRequest = objectStore.get(key)
 
-		if (transaction === undefined) return {} as ApiData
-
-		const objectStore = transaction.objectStore(storageName)
-		const index       = objectStore.index('id')
-		const getRequest  = index.get(key)
-
-		let result: ApiData = {} as ApiData
-
-		getRequest.addEventListener('success', () => {
-			result = getRequest.result
+			idbGetRequest.addEventListener('success',
+										   () => resolve(idbGetRequest.result))
+			idbGetRequest.addEventListener('error',
+										   () => reject('operation failed'))
 		})
-
-		return result
 	}
 
-	getAll(storageName: string): ApiData[] {
-		if (!this.isCreated()) return []
-		
-		this.openStorage()
-		
-		const transaction = this._db?.transaction(storageName)
+	getAll(storageName: string): Promise<ApiData[]> {
+		return new Promise<ApiData[]>(async (resolve, reject) => {
+			const objectStore   = await this.openObjectStore(storageName,
+															 'readonly')
+			const idbGetRequest = objectStore.getAll()
 
-		if (transaction === undefined) return []
-
-		const objectStore = transaction.objectStore(storageName)
-		const getRequest  = objectStore.getAll()
-
-		let result: ApiData[] = []
-
-		getRequest.addEventListener('success', () => {
-			result = getRequest.result
+			idbGetRequest.addEventListener('success',
+										   () => resolve(idbGetRequest.result))
+			idbGetRequest.addEventListener('error',
+										   () => reject('operation failed'))
 		})
-
-		return result
 	}
 
-	addObject(storageName: string, object: ApiData): boolean {
-		if (!this.isCreated()) return false
+	addObject(storageName: string, object: ApiData): Promise<boolean> {
+		return new Promise<boolean>(async (resolve, reject) => {
+			if (!this.isCreated() || !object) reject(false)
 
-		this.openStorage()
-		
-		const transaction = this._db?.transaction(storageName, 'readwrite')
+			const objectStore   = await this.openObjectStore(storageName,
+															 'readwrite')
+			const idbAddRequest = objectStore.add(object)
 
-		if (transaction === undefined) return false
-
-		const objectStore = transaction.objectStore(storageName)
-		const addRequest  = objectStore.add(object)
-
-		addRequest.addEventListener('error', () => false)
-
-		return true
+			idbAddRequest.addEventListener('success', () => resolve(true))
+			idbAddRequest.addEventListener('error', () => resolve(false))
+		})
 	}
 
-	removeObject(storageName: string, key: keyof ApiData): boolean {
-		const transaction = this._db?.transaction(storageName, 'readwrite')
+	removeObject(storageName: string, key: keyof ApiData): Promise<boolean> {
+		return new Promise<boolean>(async (resolve, reject) => {
+			if (!this.isCreated()) reject(false)
 
-		if (transaction === undefined) return false
+			const objectStore      = await this.openObjectStore(storageName,
+																'readwrite')
+			const idbDeleteRequest = objectStore.delete(key)
 
-		const objectStore   = transaction.objectStore(storageName)
-		const deleteRequest = objectStore.delete(key)
-
-		deleteRequest.addEventListener('error', () => false)
-
-		return true
+			idbDeleteRequest.addEventListener('success',
+											  () => resolve(true))
+			idbDeleteRequest.addEventListener('error', () => resolve(false))
+		})
 	}
 
 	updateObject(storageName: string,
 				 key: keyof ApiData,
 				 newObject: ApiData
-	): boolean {
-		const transaction = this._db?.transaction(storageName, 'readwrite')
+	): Promise<boolean> {
+		return new Promise<boolean>(async (resolve, reject) => {
+			if (!this.isCreated() || !newObject) reject(false)
 
-		if (transaction === undefined) return false
+			const objectStore   = await this.openObjectStore(storageName,
+															 'readwrite')
+			const idbPutRequest = objectStore.put(newObject, key)
 
-		const objectStore = transaction.objectStore(storageName)
-		let request       = objectStore.get(key)
-
-		request.addEventListener('success', () => {
-			request = objectStore.put(newObject)
-
-			request.addEventListener('error', () => false)
+			idbPutRequest.addEventListener('success', () => resolve(true))
+			idbPutRequest.addEventListener('error', () => resolve(false))
 		})
-
-		return true
 	}
 
 	isCreated(): boolean {

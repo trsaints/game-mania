@@ -3,19 +3,19 @@ import { LocalDbStore } from '@data/types/LocalDbStore.ts'
 
 
 export interface ILocalDb<T> {
-	openStorage(): void
+	openObjectStore(storageName: string, mode: IDBTransactionMode): Promise<IDBObjectStore>
 
 	create<T extends ApiData[]>(storages: { [K in keyof T]: LocalDbStore<T[K]> }): void
 
-	getObjectById(storageName: string, key: number): T
+	getObjectById(storageName: string, key: number): Promise<T>
 
-	getAll(storageName: string): T[]
+	getAll(storageName: string): Promise<T[]>
 
-	addObject(storageName: string, object: T): boolean
+	addObject(storageName: string, object: T): Promise<boolean>
 
-	removeObject(storageName: string, key: keyof T): boolean
+	removeObject(storageName: string, key: keyof T): Promise<boolean>
 
-	updateObject(storageName: string, key: keyof T, newObject: T): boolean
+	updateObject(storageName: string, key: keyof T, newObject: T): Promise<boolean>
 
 	isCreated(): boolean
 
