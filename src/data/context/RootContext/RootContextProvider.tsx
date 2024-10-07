@@ -14,6 +14,7 @@ import {
 	PublisherService,
 	TagService
 }                                                from '@src/services'
+import { StartupUtils }                          from '@utils/StartupUtils.ts'
 import { PropsWithChildren, useState }           from 'react'
 
 
@@ -53,6 +54,8 @@ function RootContextProvider({ children }: PropsWithChildren) {
 		tags,
 		apiMiddleware: new ApiMiddleware(dataServiceDictionary, localDb)
 	}
+	
+	StartupUtils.initializeDb(localDb)
 
 	return (
 		<RootContext.Provider value={context}>
