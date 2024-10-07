@@ -1,5 +1,3 @@
-import { LocalDb }                             from '@data/local-storage'
-import { StartupUtils }                        from '@utils/StartupUtils.ts'
 import { ErrorPage }                           from '@views/pages'
 import { Root, Search }                        from '@views/routes'
 import { Home }                                from '@views/routes/Home'
@@ -10,12 +8,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './reset.scss'
 import './style.scss'
 
-
-export const db = new LocalDb('game-mania', 1)
-
-document.addEventListener('DOMContentLoaded', () => {
-	StartupUtils.initializeDb(db)
-})
 
 const mainRouter = createBrowserRouter(
 	[
