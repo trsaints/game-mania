@@ -1,8 +1,10 @@
 import { IRootContext, RootContext }             from '@data/context'
 import { Game, Genre, Platform, Publisher, Tag } from '@data/types'
 import {
-	ApiMiddleware,
 	DataServiceDictionary
+}                                                from '@data/types/DataServiceDictionary.ts'
+import {
+	ApiMiddleware
 }                                                from '@src/middlewares/ApiMiddleware.ts'
 import {
 	GameService,
@@ -46,8 +48,7 @@ function RootContextProvider({ children }: PropsWithChildren) {
 		setSelectedGame,
 		setTags,
 		tags,
-		dataServiceDictionary,
-		apiMiddleware: ApiMiddleware
+		apiMiddleware: new ApiMiddleware(dataServiceDictionary)
 	}
 
 	return (

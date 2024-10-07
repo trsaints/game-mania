@@ -14,15 +14,14 @@ export function Home() {
 			  games,
 			  genres,
 			  apiMiddleware,
-			  dataServiceDictionary,
 			  setGames,
 			  setGenres
 		  } = useContext(RootContext)
 
 	useEffect(() => {
-		apiMiddleware?.getAll('games', dataServiceDictionary, db)
+		apiMiddleware?.getAll('games', db)
 					 .then(gameData => setGames(gameData as Game[]))
-		apiMiddleware.getAll('genres', dataServiceDictionary, db)
+		apiMiddleware?.getAll('genres', db)
 					 .then(genreData => setGenres(genreData as Genre[]))
 	}, [])
 
@@ -40,15 +39,14 @@ export function Home() {
                             screenshots={recommended?.dailyScreenshots}
               />
 
-	const getInlineBanner = (game?: Game) => {
-		return {
+	const getInlineBanner = (game?: Game) =>
+		({
 			background: `linear-gradient(to bottom, 
 										 rgba(0, 0, 0, 0.8), 
 										 rgba(0, 0, 0, 0.8)) 100%,
 						 				 url(${game?.backgroundImage}) 
 						 				 no-repeat center / cover`
-		}
-	}
+		})
 
 	return (
 		<main className={style.Home}>
