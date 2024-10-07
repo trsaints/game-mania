@@ -33,13 +33,15 @@ async function getAll(route: keyof DataServiceDictionary,
 					  dataService: DataServiceDictionary,
 					  localDb: ILocalDb<ApiData>
 ): Promise<ApiData[]> {
-	let data = localDb.getAll(route)
+	let data = await localDb.getAll(route)
 
 	if (data.length > 0) return data
 
 	data = await dataService[route].getAll({})
 
-	data.forEach(record => localDb.addObject(route, record))
+	for (const record of data) {
+		localDb.addObject(route, record)
+	}
 
 	return data
 }
@@ -49,7 +51,7 @@ async function getById(route: keyof DataServiceDictionary,
 					   localDb: ILocalDb<ApiData>,
 					   id: number
 ): Promise<ApiData> {
-	let data = localDb.getObjectById(route, id)
+	let data = await localDb.getObjectById(route, id)
 
 	if (data) return data
 

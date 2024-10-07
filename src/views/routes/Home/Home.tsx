@@ -22,6 +22,8 @@ export function Home() {
 	useEffect(() => {
 		apiMiddleware?.getAll('games', dataServiceDictionary, db)
 					 .then(gameData => setGames(gameData as Game[]))
+		apiMiddleware.getAll('genres', dataServiceDictionary, db)
+					 .then(genreData => setGenres(genreData as Genre[]))
 	}, [])
 
 	const recentPanel =
