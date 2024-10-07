@@ -1,4 +1,5 @@
 import { IRootContext, RootContext }             from '@data/context'
+import { LocalDb }                               from '@data/local-storage'
 import { Game, Genre, Platform, Publisher, Tag } from '@data/types'
 import {
 	DataServiceDictionary
@@ -33,6 +34,8 @@ function RootContextProvider({ children }: PropsWithChildren) {
 		tags      : TagService
 	}
 
+	const localDb = new LocalDb('game-mania', 1)
+
 	const context: IRootContext = {
 		gameSearch,
 		games,
@@ -48,7 +51,7 @@ function RootContextProvider({ children }: PropsWithChildren) {
 		setSelectedGame,
 		setTags,
 		tags,
-		apiMiddleware: new ApiMiddleware(dataServiceDictionary)
+		apiMiddleware: new ApiMiddleware(dataServiceDictionary, localDb)
 	}
 
 	return (

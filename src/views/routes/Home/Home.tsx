@@ -1,6 +1,5 @@
 import { RootContext }                     from '@data/context'
 import { Game, Genre, Recommended }        from '@data/types'
-import { db }                              from '@src/main.tsx'
 import { Gallery, GamePanel, Selection }   from '@views/components'
 import { useContext, useEffect, useState } from 'react'
 import style                               from './Home.module.scss'
@@ -18,9 +17,9 @@ export function Home() {
 		  } = useContext(RootContext)
 
 	useEffect(() => {
-		apiMiddleware?.getAll('games', db)
+		apiMiddleware?.getAll('games')
 					 .then(gameData => setGames(gameData as Game[]))
-		apiMiddleware?.getAll('genres', db)
+		apiMiddleware?.getAll('genres')
 					 .then(genreData => setGenres(genreData as Genre[]))
 	}, [])
 
