@@ -61,6 +61,10 @@ export class LocalDb
 	}
 
 	getObjectById(storageName: string, key: number): ApiData {
+		if (!this.isCreated()) return {} as ApiData
+		
+		this.openStorage()
+		
 		const transaction = this._db?.transaction(storageName)
 
 		if (transaction === undefined) return {} as ApiData
@@ -79,6 +83,10 @@ export class LocalDb
 	}
 
 	getAll(storageName: string): ApiData[] {
+		if (!this.isCreated()) return []
+		
+		this.openStorage()
+		
 		const transaction = this._db?.transaction(storageName)
 
 		if (transaction === undefined) return []
@@ -96,6 +104,10 @@ export class LocalDb
 	}
 
 	addObject(storageName: string, object: ApiData): boolean {
+		if (!this.isCreated()) return false
+
+		this.openStorage()
+		
 		const transaction = this._db?.transaction(storageName, 'readwrite')
 
 		if (transaction === undefined) return false
