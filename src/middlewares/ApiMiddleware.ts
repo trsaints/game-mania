@@ -7,38 +7,39 @@ import {
 
 export class ApiMiddleware implements IApiMiddleware {
 	private readonly _dataServiceDictionary: DataServiceDictionary
+	private readonly _localDb: ILocalDb<ApiData>
 
-	constructor(dataServiceDictionary: DataServiceDictionary) {
+	constructor(dataServiceDictionary: DataServiceDictionary,
+				localDb: ILocalDb<ApiData>
+	) {
 		this._dataServiceDictionary = dataServiceDictionary
+		this._localDb               = localDb
 	}
 
-	async getAll(route: keyof DataServiceDictionary,
-				 localDb: ILocalDb<ApiData>
-	): Promise<ApiData[]> {
-		let data = await localDb.getAll(route)
+	async getAll(route: keyof DataServiceDictionary): Promise<ApiData[]> {
+		let data = await this._localDb.getAll(route)
 
 		if (data.length > 0) return data
 
 		data = await this._dataServiceDictionary[route].getAll({})
 
 		for (const record of data) {
-			localDb.addObject(route, record)
+			this._localDb.addObject(route, record)
 		}
 
 		return data
 	}
 
 	async getById(route: keyof DataServiceDictionary,
-				  localDb: ILocalDb<ApiData>,
 				  id: number
 	): Promise<ApiData> {
-		let data = await localDb.getObjectById(route, id)
+		let data = await this._localDb.getObjectById(route, id)
 
 		if (data) return data
 
 		data = await this._dataServiceDictionary[route].getById(id)
 
-		localDb.addObject(route, data)
+		this._localDb.addObject(route, data)
 
 		return data
 	}
