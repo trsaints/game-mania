@@ -60,17 +60,20 @@ export class LocalDb
 		})
 	}
 
-	getObject(storageName: string, key: keyof ApiData): ApiData {
+	getObjectById(storageName: string, key: number): ApiData {
 		const transaction = this._db?.transaction(storageName)
 
 		if (transaction === undefined) return {} as ApiData
 
 		const objectStore = transaction.objectStore(storageName)
-		const getRequest  = objectStore.get(key)
+		const index       = objectStore.index('id')
+		const getRequest  = index.get(key)
 
 		let result: ApiData = {} as ApiData
 
-		getRequest.addEventListener('success', () => result = getRequest.result)
+		getRequest.addEventListener('success', () => {
+			result = getRequest.result
+		})
 
 		return result
 	}
@@ -83,9 +86,13 @@ export class LocalDb
 		const objectStore = transaction.objectStore(storageName)
 		const getRequest  = objectStore.getAll()
 
-		getRequest.addEventListener('success', () => [])
+		let result: ApiData[] = []
 
-		return getRequest.result
+		getRequest.addEventListener('success', () => {
+			result = getRequest.result
+		})
+
+		return result
 	}
 
 	addObject(storageName: string, object: ApiData): boolean {

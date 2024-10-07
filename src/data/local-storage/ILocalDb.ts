@@ -7,7 +7,7 @@ export interface ILocalDb<T> {
 
 	create<T extends ApiData[]>(storages: { [K in keyof T]: LocalDbStore<T[K]> }): void
 
-	getObject(storageName: string, key: keyof T): T
+	getObjectById(storageName: string, key: number): T
 
 	getAll(storageName: string): T[]
 
