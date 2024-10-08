@@ -26,20 +26,6 @@ export function Home() {
 					 .then(recommendedData => setRecommended(recommendedData))
 	}, [])
 
-	const recentPanel =
-			  ((recommended?.recent)
-			  && (recommended?.recentScreenshots))
-			  && <GamePanel game={recommended?.recent}
-                            screenshots={recommended?.recentScreenshots}
-              />
-
-	const dailyPanel =
-			  ((recommended?.daily)
-			  && (recommended?.dailyScreenshots))
-			  && <GamePanel game={recommended?.daily}
-                            screenshots={recommended?.dailyScreenshots}
-              />
-
 	return (
 		<main className={style.Home}>
 			<h2>Welcome</h2>
@@ -48,7 +34,8 @@ export function Home() {
 					 style={StylingUtils.getInlineBanner(recommended?.recent!)}
 			>
 				<h3>Popular</h3>
-				{recentPanel}
+
+				<RecentPanel recommended={recommended}/>
 			</article>
 
 			{(games && genres) && <Selection games={games} genres={genres}/>}
@@ -57,7 +44,7 @@ export function Home() {
 					 style={StylingUtils.getInlineBanner(recommended?.daily)}
 			>
 				<h3>Daily Suggestion</h3>
-				{dailyPanel}
+				<DailyPanel recommended={recommended} />
 			</article>
 
 			<article className={style.Gallery}>
@@ -73,3 +60,26 @@ export function Home() {
 	)
 }
 
+interface IRecommendedPanel {
+	recommended?: Recommended
+}
+
+function RecentPanel({ recommended }: IRecommendedPanel) {
+	return (
+		((recommended?.recent)
+		&& (recommended?.recentScreenshots))
+		&& <GamePanel game={recommended?.recent}
+                      screenshots={recommended?.recentScreenshots}
+        />
+	)
+}
+
+function DailyPanel({ recommended }: IRecommendedPanel) {
+	return (
+		((recommended?.daily)
+		&& (recommended?.dailyScreenshots))
+		&& <GamePanel game={recommended?.daily}
+                      screenshots={recommended?.dailyScreenshots}
+        />
+	)
+}
