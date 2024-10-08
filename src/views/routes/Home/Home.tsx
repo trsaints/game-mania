@@ -18,9 +18,9 @@ export function Home() {
 		  } = useContext(RootContext)
 
 	useEffect(() => {
-		apiMiddleware?.getAll('games')
+		apiMiddleware?.getAll('games', {})
 					 .then(gameData => setGames(gameData as Game[]))
-		apiMiddleware?.getAll('genres')
+		apiMiddleware?.getAll('genres', {})
 					 .then(genreData => setGenres(genreData as Genre[]))
 		apiMiddleware?.getRecommendations()
 					 .then(recommendedData => setRecommended(recommendedData))
@@ -44,7 +44,7 @@ export function Home() {
 					 style={StylingUtils.getInlineBanner(recommended?.daily)}
 			>
 				<h3>Daily Suggestion</h3>
-				<DailyPanel recommended={recommended} />
+				<DailyPanel recommended={recommended}/>
 			</article>
 
 			<article className={style.Gallery}>
