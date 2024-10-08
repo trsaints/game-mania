@@ -27,11 +27,7 @@ export class ApiMiddleware implements IApiMiddleware {
 
 		data = await this._dataServiceDictionary[route].getAll(params)
 
-		for (const record of data) {
-			this._localDb.addObject(route, record)
-		}
-
-		return data
+		return await this._localDb.addBulk(route, data)
 	}
 
 	async getById(route: keyof DataServiceDictionary,

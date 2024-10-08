@@ -48,10 +48,10 @@ export class LocalDb
 	create<T extends ApiData[]>(storages: { [K in keyof T]: LocalDbStore<T[K]> }): void {
 		if (this.isCreated()) return
 
-		const request = this.openRequest()
+		const openRequest = this.openRequest()
 
-		request?.addEventListener('upgradeneeded', () => {
-			const { result } = request
+		openRequest?.addEventListener('upgradeneeded', () => {
+			const { result } = openRequest
 
 			storages.forEach(s => {
 				const objectStore = result.createObjectStore(s.name, s)
@@ -103,6 +103,47 @@ export class LocalDb
 
 			idbAddRequest.addEventListener('success', () => resolve(true))
 			idbAddRequest.addEventListener('error', () => resolve(false))
+		})
+	}
+
+	addBulk(storageName: string, objects: ApiData[]): Promise<ApiData[]> {
+		return new Promise<ApiData[]>(async (resolve, reject) => {
+			if (!this.isCreated() || objects.length < 1) reject(false)
+
+			const addedObjects: ApiData[] = []
+
+			const objectStore = await this.openObjectStore(storageName,
+														   'readwrite')
+
+			const idbGetRequest             = objectStore.getAllKeys('id')
+			let existingKeys: IDBValidKey[] = []
+
+			idbGetRequest.addEventListener('success', () => {
+				existingKeys = idbGetRequest.result
+			})
+
+			idbGetRequest.addEventListener('error',
+										   () => reject('couldn\'t read'
+														+ ' database entries'))
+
+			for (const object of objects) {
+				const keyExists = existingKeys.findIndex(i => i === object.id)
+								  !== -1
+
+				if (keyExists) {
+					console.warn(`skipping entry ${object.id}`)
+					continue
+				}
+
+				const idbAddRequest = objectStore.add(object)
+
+				idbAddRequest.addEventListener('success',
+											   () => addedObjects.push(object))
+				idbAddRequest.addEventListener('error',
+											   () => console.log(`failed to add entry ${object.id}`))
+			}
+
+			resolve(addedObjects)
 		})
 	}
 

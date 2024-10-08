@@ -12,6 +12,8 @@ export interface ILocalDb<T> {
 	getAll(storageName: string): Promise<T[]>
 
 	addObject(storageName: string, object: T): Promise<boolean>
+	
+	addBulk(storageName: string, objects: T[]): Promise<ApiData[]>
 
 	removeObject(storageName: string, key: keyof T): Promise<boolean>
 
