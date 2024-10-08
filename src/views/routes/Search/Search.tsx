@@ -26,13 +26,13 @@ function Search() {
 									</li>))
 
 	useEffect(() => {
-		apiMiddleware?.getAll('publishers')
+		apiMiddleware?.getAll('publishers', {})
 					 .then(apiData => setPublishers(apiData as Publisher[]))
-		apiMiddleware?.getAll('platforms')
+		apiMiddleware?.getAll('platforms', {})
 					 .then(apiData => setPlatforms(apiData as Platform[]))
-		apiMiddleware?.getAll('tags')
+		apiMiddleware?.getAll('tags', {})
 					 .then(apiData => setTags(apiData as Tag[]))
-		apiMiddleware?.getAll('genres')
+		apiMiddleware?.getAll('genres', {})
 					 .then(apiData => setGenres(apiData as Genre[]))
 	}, [])
 
