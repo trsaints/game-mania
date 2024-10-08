@@ -21,6 +21,8 @@ export function Home() {
 					 .then(gameData => setGames(gameData as Game[]))
 		apiMiddleware?.getAll('genres')
 					 .then(genreData => setGenres(genreData as Genre[]))
+		apiMiddleware?.getRecommendations()
+					 .then(recommendedData => setRecommended(recommendedData))
 	}, [])
 
 	const recentPanel =
