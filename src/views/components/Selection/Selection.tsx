@@ -1,28 +1,18 @@
-import { Genre }      from '@data/types'
-import { GameCard }   from '@views/components'
-import { ISelection } from '@views/components/Selection/ISelection.tsx'
-import style          from '@views/routes/Home/Home.module.scss'
-import { Link }       from 'react-router-dom'
+import { Game, Genre } from '@data/types'
+import { GameCard }    from '@views/components'
+import { ISelection }  from '@views/components/Selection/ISelection.tsx'
+import style           from '@views/routes/Home/Home.module.scss'
+import { Link }        from 'react-router-dom'
 
 
 export function Selection({ games, genres }: ISelection) {
-	const gameList = games.map(g =>
-								   (<li key={g.id}>
-									   <GameCard game={g}/>
-								   </li>))
 
 	return (
 		<article className={style.Selection}>
 			<h3>Navigate by genre</h3>
 
 			<GenreFilter genres={genres}/>
-
-			<ul className={style.GameList}>
-				{gameList}
-				<li>
-					<Link to="/search">see all</Link>
-				</li>
-			</ul>
+			<GameList games={games}/>
 		</article>)
 }
 
@@ -41,7 +31,29 @@ function GenreFilter({ genres }: IGenreFilter) {
 		)
 	})
 
-	return (<menu className={style.Menu}>
-		{genreList}
-	</menu>)
+	return (
+		<menu className={style.Menu}>
+			{genreList}
+		</menu>
+	)
+}
+
+interface IGameList {
+	games: Game[]
+}
+
+function GameList({ games }: IGameList) {
+	const gameList = games.map(g =>
+								   (<li key={g.id}>
+									   <GameCard game={g}/>
+								   </li>))
+
+	return (
+		<ul className={style.GameList}>
+			{gameList}
+			<li>
+				<Link to="/search">see all</Link>
+			</li>
+		</ul>
+	)
 }
