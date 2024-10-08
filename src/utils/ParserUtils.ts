@@ -1,7 +1,5 @@
 export const ParserUtils = {
-	toCamelCase,
 	mapToCamelCase,
-	toSnakeCase,
 	mapToSnakeCase
 }
 
@@ -35,7 +33,7 @@ function mapToSnakeCase(data: any): unknown {
 	return mappedData
 }
 
-function toCamelCase(snakeText: string) {
+function toCamelCase(snakeText: string): string {
 	const tokens = snakeText.split('_')
 
 	if (tokens.length === 1) return tokens[0]
@@ -52,7 +50,7 @@ function toCamelCase(snakeText: string) {
 	return upperCasedTokens.join('')
 }
 
-function toSnakeCase(camelText: string) {
+function toSnakeCase(camelText: string): string {
 	const keywords = [...camelText.matchAll(/[A-Z]/g)]
 	let result     = camelText
 

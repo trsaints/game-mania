@@ -1,15 +1,15 @@
-import { TagRequestParams } from '@data/requests'
-import { Tag }              from '@data/types'
-import { ApiService }       from '@src/services'
-import { ParserUtils }      from '@src/utils'
+import { TagRequestParams }         from '@data/requests'
+import { Tag }                      from '@data/types'
+import { ApiService, IDataService } from '@services/index.ts'
+import { ParserUtils }              from '@src/utils'
 
 
-export const TagService = {
-	getTags,
-	getTagById
+export const TagService: IDataService<Tag> = {
+	getAll,
+	getById
 }
 
-async function getTags(params: TagRequestParams): Promise<Tag[]> {
+async function getAll(params: TagRequestParams): Promise<Tag[]> {
 	const baseUrl  = ApiService.createRouteUrl('tags')
 	const response = await ApiService.gameApi.get(baseUrl, {
 		params: params ? ParserUtils.mapToSnakeCase(params) : {}
@@ -19,7 +19,7 @@ async function getTags(params: TagRequestParams): Promise<Tag[]> {
 		(r: any) => ParserUtils.mapToCamelCase(r)) as Tag[] ?? []
 }
 
-async function getTagById(id: number): Promise<Tag> {
+async function getById(id: number): Promise<Tag> {
 	const baseUrl  = ApiService.createRouteUrl(`tags/${id}`)
 	const response = await ApiService.gameApi.get(baseUrl)
 

@@ -1,5 +1,6 @@
-export type PlatformRequestParams = {
+import { DataRequestParams } from '@data/requests'
+
+
+export type PlatformRequestParams = DataRequestParams & {
 	ordering?: string
-	page?: number
-	pageSize?: number
 }

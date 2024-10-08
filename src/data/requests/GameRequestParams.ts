@@ -1,7 +1,8 @@
-export type GameRequestParams = {
+import { DataRequestParams } from '@data/requests'
+
+
+export type GameRequestParams = DataRequestParams & {
 	search?: string
-	page?: number
-	pageSize?: number
 	searchPrecise?: boolean
 	searchExact?: boolean
 	parentPlatforms?: string

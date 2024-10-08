@@ -1,4 +1,4 @@
-export type TagRequestParams = {
-	page?: number
-	pageSize?: number
-}
+import { DataRequestParams } from '@data/requests/DataRequestParams.ts'
+
+
+export type TagRequestParams = DataRequestParams 

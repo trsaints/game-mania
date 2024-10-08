@@ -1,4 +1,4 @@
-export type PublisherRequestParams = {
-	page?: number
-	pageSize?: number
-}
+import { DataRequestParams } from '@data/requests'
+
+
+export type PublisherRequestParams = DataRequestParams
