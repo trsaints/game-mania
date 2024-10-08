@@ -1,15 +1,14 @@
-import { GameRequestParams }              from '@data/requests'
-import { Game, Recommended, Screenshots } from '@data/types'
-import { ApiService }                     from '@services/index.ts'
-import { IGameService }                   from '@services/interfaces'
-import { ParserUtils }                    from '@src/utils'
-import { TypeUtils }                      from '@utils/TypeUtils.ts'
+import { GameRequestParams } from '@data/requests'
+import { Game, Screenshots } from '@data/types'
+import { ApiService }        from '@services/index.ts'
+import { IGameService }      from '@services/interfaces'
+import { ParserUtils }       from '@src/utils'
+import { TypeUtils }         from '@utils/TypeUtils.ts'
 
 
 export const GameService: IGameService = {
 	getAll,
 	getById,
-	getRecommendations,
 	getScreenshots
 }
 
@@ -27,18 +26,6 @@ async function getById(id: number): Promise<Game> {
 	const response = await ApiService.gameApi.get(gameUrl)
 
 	return TypeUtils.mapToGame(response.data)
-}
-
-async function getRecommendations(): Promise<Recommended> {
-	const recentId = Math.floor(Math.random() * 1000)
-	const dailyId  = Math.floor(Math.random() * 1000)
-
-	return {
-		daily            : await getById(dailyId),
-		recent           : await getById(recentId),
-		recentScreenshots: await getScreenshots(recentId),
-		dailyScreenshots : await getScreenshots(dailyId)
-	}
 }
 
 async function getScreenshots(id: number): Promise<Screenshots> {

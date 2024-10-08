@@ -1,5 +1,6 @@
 import { ApiData, ILocalDb }     from '@data/local-storage'
 import { DataServiceDictionary } from '@data/types/DataServiceDictionary.ts'
+import { Game, Recommended }     from '@src/data/types'
 import {
 	IApiMiddleware
 }                                from '@src/middlewares/interfaces/IApiMiddleware.ts'
@@ -42,6 +43,20 @@ export class ApiMiddleware implements IApiMiddleware {
 		this._localDb.addObject(route, data)
 
 		return data
+	}
+
+	async getRecommendations(): Promise<Recommended> {
+		const recentId = Math.floor(Math.random() * 1000)
+		const dailyId  = Math.floor(Math.random() * 1000)
+
+		return {
+			daily            : await this.getById('games', dailyId) as Game,
+			recent           : await this.getById('games', recentId) as Game,
+			recentScreenshots: await this._dataServiceDictionary.games.getScreenshots(
+				recentId),
+			dailyScreenshots : await this._dataServiceDictionary.games.getScreenshots(
+				dailyId)
+		}
 	}
 }
 
