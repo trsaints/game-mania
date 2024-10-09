@@ -93,6 +93,39 @@ export class LocalDb
 		})
 	}
 
+	searchObjects(storageName: string,
+				  searchContent: string
+	): Promise<ApiData[]> {
+		return new Promise<ApiData[]>(async (resolve, reject) => {
+			if (!this.isCreated()) reject('local database not found')
+
+			const objectStore      = await this.openObjectStore(storageName,
+																'readonly')
+			const idbCursorRequest = objectStore.openCursor()
+
+			idbCursorRequest.addEventListener('error',
+											  () => reject(idbCursorRequest.error))
+
+			idbCursorRequest.addEventListener('success', () => {
+				const cursor             = idbCursorRequest.result
+				const results: ApiData[] = []
+
+				if (cursor) {
+					const value              = cursor.value as ApiData
+					const concatenatedValues = `${value.id}${value.name}${value.slug}`
+
+					if (concatenatedValues.includes(searchContent)) {
+						results.push(value)
+					}
+
+					cursor.continue()
+				}
+				
+				resolve(results)
+			})
+		})
+	}
+
 	addObject(storageName: string, object: ApiData): Promise<boolean> {
 		return new Promise<boolean>(async (resolve, reject) => {
 			if (!this.isCreated() || !object) reject(false)

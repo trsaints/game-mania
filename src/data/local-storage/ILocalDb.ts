@@ -10,6 +10,8 @@ export interface ILocalDb<T> {
 	getObjectById(storageName: string, key: number): Promise<T>
 
 	getAll(storageName: string): Promise<T[]>
+	
+	searchObjects(storageName: string, searchContent: string): Promise<T[]>
 
 	addObject(storageName: string, object: T): Promise<boolean>
 	
