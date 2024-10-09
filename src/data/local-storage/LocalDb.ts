@@ -102,7 +102,8 @@ export class LocalDb
 			const idbAddRequest = objectStore.add(object)
 
 			idbAddRequest.addEventListener('success', () => resolve(true))
-			idbAddRequest.addEventListener('error', () => resolve(false))
+			idbAddRequest.addEventListener('error',
+										   () => reject(idbAddRequest.error))
 		})
 	}
 
@@ -157,7 +158,8 @@ export class LocalDb
 
 			idbDeleteRequest.addEventListener('success',
 											  () => resolve(true))
-			idbDeleteRequest.addEventListener('error', () => resolve(false))
+			idbDeleteRequest.addEventListener('error',
+											  () => reject(idbDeleteRequest.error))
 		})
 	}
 
@@ -173,7 +175,8 @@ export class LocalDb
 			const idbPutRequest = objectStore.put(newObject, key)
 
 			idbPutRequest.addEventListener('success', () => resolve(true))
-			idbPutRequest.addEventListener('error', () => resolve(false))
+			idbPutRequest.addEventListener('error',
+										   () => reject(idbPutRequest.error))
 		})
 	}
 
@@ -185,6 +188,5 @@ export class LocalDb
 		indexedDB.deleteDatabase(this._name)
 		localStorage.removeItem(this._loadKey)
 	}
-
 }
 
