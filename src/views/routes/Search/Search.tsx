@@ -13,6 +13,7 @@ export { Search }
 function Search() {
 	const {
 			  games,
+			  gameSearch,
 			  genres,
 			  platforms,
 			  publishers,
@@ -35,6 +36,10 @@ function Search() {
 					 .then(apiData => setGenres(apiData as Genre[]))
 	}, [])
 
+	const filteredGames = games?.filter(g => {
+		return g.name.toLowerCase().includes(gameSearch?.toLowerCase() ?? '')
+	})
+
 	return (
 		<main className={style.Search}>
 			<h2>Search your next favorite game</h2>
@@ -47,7 +52,7 @@ function Search() {
                  tags={tags}
              />}
 
-			{games && <GameList games={games}/>}
+			{filteredGames && <GameList games={filteredGames}/>}
 		</main>
 	)
 }
