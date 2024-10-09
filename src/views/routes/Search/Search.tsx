@@ -1,10 +1,14 @@
-import { RootContext }                     from '@data/context'
-import { Genre, Platform, Publisher, Tag } from '@data/types'
-import { GameCard }                        from '@views/components'
-import { SearchFilter }                    from '@views/components/SearchFilter'
-import { useContext, useEffect }           from 'react'
-import style                               from './Search.module.scss'
+import { RootContext }                           from '@data/context'
+import { Game, Genre, Platform, Publisher, Tag } from '@data/types'
+import { GameCard }                              from '@views/components'
+import {
+	SearchFilter
+}                                                from '@views/components/SearchFilter'
+import { useContext, useEffect }                 from 'react'
+import style                                     from './Search.module.scss'
 
+
+export { Search }
 
 function Search() {
 	const {
@@ -19,11 +23,6 @@ function Search() {
 			  setTags,
 			  tags
 		  } = useContext(RootContext)
-
-	const gameList = games?.map(g =>
-									(<li key={`game-${g.id}`}>
-										<GameCard game={g}/>
-									</li>))
 
 	useEffect(() => {
 		apiMiddleware?.getAll('publishers', {})
@@ -48,9 +47,22 @@ function Search() {
                  tags={tags}
              />}
 
-			<ul className={style.GameList}>{gameList}</ul>
+			{games && <GameList games={games}/>}
 		</main>
 	)
 }
 
-export { Search }
+interface IGameList {
+	games: Game[]
+}
+
+function GameList({ games }: IGameList) {
+	const listItems = (games?.map(g =>
+									  (<li key={`game-${g.id}`}>
+										  <GameCard game={g}/>
+									  </li>)))
+
+	return (
+		<ul className={style.GameList}>{listItems}</ul>
+	)
+}

@@ -6,7 +6,7 @@ function GameCard({ game }: IGameCard) {
 	const gameTags = game.tags.map(t => t.name).slice(0, 3).join(', ')
 
 	return (
-		<article className={style.GameCard}>
+		<article className={style.GameCard} data-id={game.id}>
 			<header>
 				<figure>
 					<img className={style.Banner}
