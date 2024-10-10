@@ -10,6 +10,9 @@ import {
 	Publisher,
 	Tag
 }                   from '@data/types'
+import {
+	LocalDbUtils
+}                   from '@utils/LocalDbUtils.ts'
 
 
 export type ApiData = Game | Platform | Publisher | Genre | Tag
@@ -105,28 +108,11 @@ export class LocalDb
 			const results: ApiData[] = []
 
 			idbCursorRequest.addEventListener('success', () => {
-				const cursor = idbCursorRequest.result
-
-				if (!cursor) {
-					resolve(results)
-
-					return
-				}
-
-				const value = cursor.value as ApiData
-
-				if (params?.search) {
-					const concatenatedValues = `${value.id}${value.name}${value.slug}`
-					if (concatenatedValues.trim()
-										  .toLowerCase()
-										  .includes(params.search
-														  .trim()
-														  .toLowerCase())) {
-						results.push(value)
-					}
-				}
-
-				cursor.continue()
+				LocalDbUtils.filterObjects(idbCursorRequest,
+										   resolve,
+										   results,
+										   params
+				)
 			})
 		})
 	}
@@ -163,7 +149,7 @@ export class LocalDb
 				idbAddRequest.addEventListener('success',
 											   () => addedObjects.push(object)
 				)
-				
+
 				idbAddRequest.addEventListener('error',
 											   () => console.log(`failed to add entry ${object.id}`)
 				)
