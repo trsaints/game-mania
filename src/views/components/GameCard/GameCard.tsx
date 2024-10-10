@@ -22,7 +22,7 @@ function GameCard({ game }: IGameCard) {
 			</p>
 
 			<p className={style.Genres}>
-				Genre: {game.genres[0].name}
+				Genre: {game.genres[0]?.name ?? 'Not listed'}
 			</p>
 
 			<p className={style.Tags}>
