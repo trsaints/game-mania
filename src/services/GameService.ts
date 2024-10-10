@@ -1,4 +1,4 @@
-import { GameRequestParams } from '@data/requests'
+import { DataRequestParams } from '@data/requests'
 import { Game, Screenshots } from '@data/types'
 import { ApiService }        from '@services/index.ts'
 import { IGameService }      from '@services/interfaces'
@@ -12,7 +12,7 @@ export const GameService: IGameService = {
 	getScreenshots
 }
 
-async function getAll(params?: GameRequestParams): Promise<Game[]> {
+async function getAll(params?: DataRequestParams): Promise<Game[]> {
 	const baseUrl  = ApiService.createRouteUrl('games')
 	const response = await ApiService.gameApi.get(baseUrl, {
 		params: params ? ParserUtils.mapToSnakeCase(params) : {}

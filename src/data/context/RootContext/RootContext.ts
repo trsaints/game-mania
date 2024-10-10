@@ -4,7 +4,6 @@ import { createContext } from 'react'
 
 const RootContext = createContext<IRootContext>({
 													setGenres      : () => {},
-													setGameSearch  : () => {},
 													setGames       : () => {},
 													setSelectedGame: () => {},
 													setPlatforms   : () => {},

@@ -1,10 +1,14 @@
-import { RootContext }                     from '@data/context'
-import { Genre, Platform, Publisher, Tag } from '@data/types'
-import { GameCard }                        from '@views/components'
-import { SearchFilter }                    from '@views/components/SearchFilter'
-import { useContext, useEffect }           from 'react'
-import style                               from './Search.module.scss'
+import { RootContext }                           from '@data/context'
+import { Game, Genre, Platform, Publisher, Tag } from '@data/types'
+import { GameCard }                              from '@views/components'
+import {
+	SearchFilter
+}                                                from '@views/components/SearchFilter'
+import { useContext, useEffect }                 from 'react'
+import style                                     from './Search.module.scss'
 
+
+export { Search }
 
 function Search() {
 	const {
@@ -14,16 +18,12 @@ function Search() {
 			  publishers,
 			  apiMiddleware,
 			  setGenres,
+			  setGames,
 			  setPlatforms,
 			  setPublishers,
 			  setTags,
 			  tags
 		  } = useContext(RootContext)
-
-	const gameList = games?.map(g =>
-									(<li key={`game-${g.id}`}>
-										<GameCard game={g}/>
-									</li>))
 
 	useEffect(() => {
 		apiMiddleware?.getAll('publishers', {})
@@ -34,11 +34,16 @@ function Search() {
 					 .then(apiData => setTags(apiData as Tag[]))
 		apiMiddleware?.getAll('genres', {})
 					 .then(apiData => setGenres(apiData as Genre[]))
+
+		if (games) return
+
+		apiMiddleware?.getAll('games', { pageSize: 100, metacritic: '80,100' })
+					 .then(apiData => setGames(apiData as Game[]))
 	}, [])
 
 	return (
 		<main className={style.Search}>
-			<h2>Search your next favorite game</h2>
+			<h2 id="search-header">Search your next favorite game</h2>
 
 			{(genres && publishers && platforms && tags)
 			 && <SearchFilter
@@ -48,9 +53,22 @@ function Search() {
                  tags={tags}
              />}
 
-			<ul className={style.GameList}>{gameList}</ul>
+			{games && <GameList games={games}/>}
 		</main>
 	)
 }
 
-export { Search }
+interface IGameList {
+	games: Game[]
+}
+
+function GameList({ games }: IGameList) {
+	const listItems = (games?.map(g =>
+									  (<li key={`game-${g.id}`}>
+										  <GameCard game={g}/>
+									  </li>)))
+
+	return (
+		<ul className={style.GameList}>{listItems}</ul>
+	)
+}

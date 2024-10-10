@@ -1,5 +1,8 @@
 import { ILocalDb } from '@data/local-storage/'
 import {
+	DataRequestParams
+}                   from '@data/requests'
+import {
 	Game,
 	Genre,
 	LocalDbStore,
@@ -7,6 +10,9 @@ import {
 	Publisher,
 	Tag
 }                   from '@data/types'
+import {
+	LocalDbUtils
+}                   from '@utils/LocalDbUtils.ts'
 
 
 export type ApiData = Game | Platform | Publisher | Genre | Tag
@@ -36,12 +42,14 @@ export class LocalDb
 
 			openRequest.addEventListener('success', () => {
 				const transaction = openRequest.result.transaction(storageName,
-																   mode)
+																   mode
+				)
 				resolve(transaction.objectStore(storageName))
 			})
 
 			openRequest.addEventListener('error',
-										 () => reject(openRequest.error))
+										 () => reject(openRequest.error)
+			)
 		})
 	}
 
@@ -60,7 +68,8 @@ export class LocalDb
 
 				s.indices.forEach(i => objectStore.createIndex(i.index,
 															   i.index,
-															   i.options))
+															   i.options
+				))
 			})
 
 			localStorage.setItem(this._loadKey, 'true')
@@ -70,26 +79,41 @@ export class LocalDb
 	getObjectById(storageName: string, key: number): Promise<ApiData> {
 		return new Promise<ApiData>(async (resolve, reject) => {
 			const objectStore   = await this.openObjectStore(storageName,
-															 'readonly')
+															 'readonly'
+			)
 			const idbGetRequest = objectStore.get(key)
 
 			idbGetRequest.addEventListener('success',
-										   () => resolve(idbGetRequest.result))
+										   () => resolve(idbGetRequest.result)
+			)
 			idbGetRequest.addEventListener('error',
-										   () => reject('operation failed'))
+										   () => reject('operation failed')
+			)
 		})
 	}
 
-	getAll(storageName: string): Promise<ApiData[]> {
+	getAll(storageName: string,
+		   params?: DataRequestParams
+	): Promise<ApiData[]> {
 		return new Promise<ApiData[]>(async (resolve, reject) => {
-			const objectStore   = await this.openObjectStore(storageName,
-															 'readonly')
-			const idbGetRequest = objectStore.getAll()
+			const objectStore      = await this.openObjectStore(storageName,
+																'readonly'
+			)
+			const idbCursorRequest = objectStore.openCursor()
 
-			idbGetRequest.addEventListener('success',
-										   () => resolve(idbGetRequest.result))
-			idbGetRequest.addEventListener('error',
-										   () => reject('operation failed'))
+			idbCursorRequest.addEventListener('error',
+											  () => reject(idbCursorRequest.error)
+			)
+
+			const results: ApiData[] = []
+
+			idbCursorRequest.addEventListener('success', () => {
+				LocalDbUtils.filterObjects(idbCursorRequest,
+										   resolve,
+										   results,
+										   params
+				)
+			})
 		})
 	}
 
@@ -98,11 +122,14 @@ export class LocalDb
 			if (!this.isCreated() || !object) reject(false)
 
 			const objectStore   = await this.openObjectStore(storageName,
-															 'readwrite')
+															 'readwrite'
+			)
 			const idbAddRequest = objectStore.add(object)
 
 			idbAddRequest.addEventListener('success', () => resolve(true))
-			idbAddRequest.addEventListener('error', () => resolve(false))
+			idbAddRequest.addEventListener('error',
+										   () => reject(idbAddRequest.error)
+			)
 		})
 	}
 
@@ -113,34 +140,19 @@ export class LocalDb
 			const addedObjects: ApiData[] = []
 
 			const objectStore = await this.openObjectStore(storageName,
-														   'readwrite')
-
-			const idbGetRequest             = objectStore.getAllKeys('id')
-			let existingKeys: IDBValidKey[] = []
-
-			idbGetRequest.addEventListener('success', () => {
-				existingKeys = idbGetRequest.result
-			})
-
-			idbGetRequest.addEventListener('error',
-										   () => reject('couldn\'t read'
-														+ ' database entries'))
+														   'readwrite'
+			)
 
 			for (const object of objects) {
-				const keyExists = existingKeys.findIndex(i => i === object.id)
-								  !== -1
-
-				if (keyExists) {
-					console.warn(`skipping entry ${object.id}`)
-					continue
-				}
-
 				const idbAddRequest = objectStore.add(object)
 
 				idbAddRequest.addEventListener('success',
-											   () => addedObjects.push(object))
+											   () => addedObjects.push(object)
+				)
+
 				idbAddRequest.addEventListener('error',
-											   () => console.log(`failed to add entry ${object.id}`))
+											   () => console.log(`failed to add entry ${object.id}`)
+				)
 			}
 
 			resolve(addedObjects)
@@ -152,12 +164,16 @@ export class LocalDb
 			if (!this.isCreated()) reject(false)
 
 			const objectStore      = await this.openObjectStore(storageName,
-																'readwrite')
+																'readwrite'
+			)
 			const idbDeleteRequest = objectStore.delete(key)
 
 			idbDeleteRequest.addEventListener('success',
-											  () => resolve(true))
-			idbDeleteRequest.addEventListener('error', () => resolve(false))
+											  () => resolve(true)
+			)
+			idbDeleteRequest.addEventListener('error',
+											  () => reject(idbDeleteRequest.error)
+			)
 		})
 	}
 
@@ -169,11 +185,14 @@ export class LocalDb
 			if (!this.isCreated() || !newObject) reject(false)
 
 			const objectStore   = await this.openObjectStore(storageName,
-															 'readwrite')
+															 'readwrite'
+			)
 			const idbPutRequest = objectStore.put(newObject, key)
 
 			idbPutRequest.addEventListener('success', () => resolve(true))
-			idbPutRequest.addEventListener('error', () => resolve(false))
+			idbPutRequest.addEventListener('error',
+										   () => reject(idbPutRequest.error)
+			)
 		})
 	}
 
@@ -185,6 +204,5 @@ export class LocalDb
 		indexedDB.deleteDatabase(this._name)
 		localStorage.removeItem(this._loadKey)
 	}
-
 }
 

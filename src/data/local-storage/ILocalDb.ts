@@ -1,4 +1,5 @@
 import { ApiData }      from '@data/local-storage/LocalDb.ts'
+import { DataRequestParams } from '@data/requests'
 import { LocalDbStore } from '@data/types/LocalDbStore.ts'
 
 
@@ -9,8 +10,8 @@ export interface ILocalDb<T> {
 
 	getObjectById(storageName: string, key: number): Promise<T>
 
-	getAll(storageName: string): Promise<T[]>
-
+	getAll(storageName: string, params?: DataRequestParams): Promise<T[]>
+	
 	addObject(storageName: string, object: T): Promise<boolean>
 	
 	addBulk(storageName: string, objects: T[]): Promise<ApiData[]>
