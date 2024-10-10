@@ -1,5 +1,5 @@
 import { ApiData, ILocalDb }     from '@data/local-storage'
-import { GameRequestParams }     from '@data/requests'
+import { DataRequestParams }     from '@data/requests'
 import { DataServiceDictionary } from '@data/types/DataServiceDictionary.ts'
 import { Game, Recommended }     from '@src/data/types'
 import {
@@ -19,7 +19,7 @@ export class ApiMiddleware implements IApiMiddleware {
 	}
 
 	async getAll(route: keyof DataServiceDictionary,
-				 params: GameRequestParams
+				 params: DataRequestParams
 	): Promise<ApiData[]> {
 		let data = await this._localDb.getAll(route)
 

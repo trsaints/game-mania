@@ -1,6 +1,1 @@
-export * from './GameRequestParams'
-export * from './TagRequestParams'
-export * from './GenreRequestParams'
-export * from './PublisherRequestParams'
-export * from './PlatformRequestParams'
 export * from './DataRequestParams'
