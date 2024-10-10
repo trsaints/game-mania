@@ -19,7 +19,6 @@ import { PropsWithChildren, useState }           from 'react'
 
 
 function RootContextProvider({ children }: PropsWithChildren) {
-	const [gameSearch, setGameSearch]     = useState<string>()
 	const [games, setGames]               = useState<Game[]>()
 	const [genres, setGenres]             = useState<Genre[]>()
 	const [platforms, setPlatforms]       = useState<Platform[]>()
@@ -38,13 +37,11 @@ function RootContextProvider({ children }: PropsWithChildren) {
 	const localDb = new LocalDb('game-mania', 1)
 
 	const context: IRootContext = {
-		gameSearch,
 		games,
 		genres,
 		platforms,
 		publishers,
 		selectedGame,
-		setGameSearch,
 		setGames,
 		setGenres,
 		setPlatforms,

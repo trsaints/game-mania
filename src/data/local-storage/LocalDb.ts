@@ -126,12 +126,10 @@ export class LocalDb
 										  .includes(searchContent.trim()
 																 .toLowerCase())) {
 						results.push(value)
-						console.log(`found "${searchContent}" within "${concatenatedValues}"`)
 					}
 
 					cursor.continue()
 				} else {
-					console.log(results)
 					resolve(results)
 				}
 			})

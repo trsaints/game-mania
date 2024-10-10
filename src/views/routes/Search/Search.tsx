@@ -13,7 +13,6 @@ export { Search }
 function Search() {
 	const {
 			  games,
-			  gameSearch,
 			  genres,
 			  platforms,
 			  publishers,
@@ -36,7 +35,7 @@ function Search() {
 		apiMiddleware?.getAll('genres', {})
 					 .then(apiData => setGenres(apiData as Genre[]))
 
-		if (gameSearch || games) return
+		if (games) return
 
 		apiMiddleware?.getAll('games', { pageSize: 100, metacritic: '80,100' })
 					 .then(apiData => setGames(apiData as Game[]))
