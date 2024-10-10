@@ -1,4 +1,4 @@
-import { PublisherRequestParams }   from '@data/requests'
+import { DataRequestParams }        from '@data/requests'
 import { Publisher }                from '@data/types'
 import { ApiService, IDataService } from '@services/index.ts'
 import { ParserUtils }              from '@src/utils'
@@ -9,7 +9,7 @@ export const PublisherService: IDataService<Publisher> = {
 	getById
 }
 
-async function getAll(params: PublisherRequestParams): Promise<Publisher[]> {
+async function getAll(params: DataRequestParams): Promise<Publisher[]> {
 	const baseUrl  = ApiService.createRouteUrl('publishers')
 	const response = await ApiService.gameApi.get(baseUrl, {
 		params: params ? ParserUtils.mapToSnakeCase(params) : {}

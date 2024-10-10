@@ -1,4 +1,4 @@
-import { TagRequestParams }         from '@data/requests'
+import { DataRequestParams }        from '@data/requests'
 import { Tag }                      from '@data/types'
 import { ApiService, IDataService } from '@services/index.ts'
 import { ParserUtils }              from '@src/utils'
@@ -9,7 +9,7 @@ export const TagService: IDataService<Tag> = {
 	getById
 }
 
-async function getAll(params: TagRequestParams): Promise<Tag[]> {
+async function getAll(params: DataRequestParams): Promise<Tag[]> {
 	const baseUrl  = ApiService.createRouteUrl('tags')
 	const response = await ApiService.gameApi.get(baseUrl, {
 		params: params ? ParserUtils.mapToSnakeCase(params) : {}
