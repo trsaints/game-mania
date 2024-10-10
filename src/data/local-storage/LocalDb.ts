@@ -125,47 +125,9 @@ export class LocalDb
 						results.push(value)
 					}
 				}
-				
+
 				cursor.continue()
 			})
-		})
-	}
-
-	searchObjects(storageName: string,
-				  searchContent: string
-	): Promise<ApiData[]> {
-		return new Promise<ApiData[]>(async (resolve, reject) => {
-			if (!this.isCreated()) reject('local database not found')
-
-			const objectStore      = await this.openObjectStore(storageName,
-																'readonly'
-			)
-			const idbCursorRequest = objectStore.openCursor()
-
-			const results: ApiData[] = []
-
-			idbCursorRequest.addEventListener('success', () => {
-				const cursor = idbCursorRequest.result
-
-				if (cursor) {
-					const value              = cursor.value as ApiData
-					const concatenatedValues = `${value.id}${value.name}${value.slug}`
-
-					if (concatenatedValues.trim().toLowerCase()
-										  .includes(searchContent.trim()
-																 .toLowerCase())) {
-						results.push(value)
-					}
-
-					cursor.continue()
-				} else {
-					resolve(results)
-				}
-			})
-
-			idbCursorRequest.addEventListener('error',
-											  () => reject(idbCursorRequest.error)
-			)
 		})
 	}
 
@@ -195,32 +157,13 @@ export class LocalDb
 														   'readwrite'
 			)
 
-			const idbGetRequest             = objectStore.getAllKeys('id')
-			let existingKeys: IDBValidKey[] = []
-
-			idbGetRequest.addEventListener('success', () => {
-				existingKeys = idbGetRequest.result
-			})
-
-			idbGetRequest.addEventListener('error',
-										   () => reject('couldn\'t read'
-														+ ' database entries')
-			)
-
 			for (const object of objects) {
-				const keyExists = existingKeys.findIndex(i => i === object.id)
-								  !== -1
-
-				if (keyExists) {
-					console.warn(`skipping entry ${object.id}`)
-					continue
-				}
-
 				const idbAddRequest = objectStore.add(object)
 
 				idbAddRequest.addEventListener('success',
 											   () => addedObjects.push(object)
 				)
+				
 				idbAddRequest.addEventListener('error',
 											   () => console.log(`failed to add entry ${object.id}`)
 				)

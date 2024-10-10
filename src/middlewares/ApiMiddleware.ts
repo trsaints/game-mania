@@ -44,34 +44,6 @@ export class ApiMiddleware implements IApiMiddleware {
 		return data
 	}
 
-	async search(route: keyof DataServiceDictionary,
-				 searchContent: string
-	): Promise<ApiData[]> {
-		let data = await this._localDb.searchObjects(route, searchContent)
-
-		if (data.length > 0) return data
-
-		if (route !== 'games') {
-			const fetchedData = await this._dataServiceDictionary[route].getAll(
-				{ pageSize: 1000 })
-
-			data = fetchedData
-			.filter(d => d.name.includes(searchContent)
-						 || d.slug.includes(searchContent))
-
-			this._localDb.addBulk(route, data)
-
-			return data
-		}
-
-		data = await this._dataServiceDictionary[route]
-		.getAll({ search: searchContent })
-
-		this._localDb.addBulk(route, data)
-
-		return data
-	}
-
 	async getRecommendations(): Promise<Recommended> {
 		const recentId = Math.floor(Math.random() * 1000)
 		const dailyId  = Math.floor(Math.random() * 1000)

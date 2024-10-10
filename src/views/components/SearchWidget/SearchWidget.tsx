@@ -47,7 +47,7 @@ function SearchForm() {
 
 		if (!newSearch) return
 
-		apiMiddleware?.search('games', newSearch)
+		apiMiddleware?.getAll('games', { search: newSearch })
 					 .then(apiData => setGames(apiData as Game[]))
 		navigator('/search')
 
