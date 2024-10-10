@@ -6,7 +6,7 @@ import { DataServiceDictionary } from '@data/types/DataServiceDictionary.ts'
 
 export interface IApiMiddleware {
 	getAll(route: keyof DataServiceDictionary,
-		   params: DataRequestParams
+		   params?: DataRequestParams
 	): Promise<ApiData[]>
 
 	getById(route: keyof DataServiceDictionary, id: number): Promise<ApiData>

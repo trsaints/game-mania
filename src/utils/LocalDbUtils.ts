@@ -21,15 +21,26 @@ function filterObjects(idbCursorRequest: IDBRequest,
 
 	const value = cursor.value as ApiData
 
-	if (params?.search) {
-		const concatenatedValues = `${value.id}${value.name}${value.slug}`
-		if (concatenatedValues.trim()
-							  .toLowerCase()
-							  .includes(params.search
-											  .trim()
-											  .toLowerCase())) {
+	if (!params) {
+		results.push(value)
+		cursor.continue()
+
+		return
+	}
+
+	if (params.search) {
+		const concatenatedValues = `${value.id}${value.slug}${value.name}`.toLowerCase()
+		if (concatenatedValues.includes(params.search.toLowerCase())) {
 			results.push(value)
 		}
+	}
+	
+	if (params.pageSize && results.length === params.pageSize) {
+		resolve(results)
+		
+		return
+	} else {
+		results.push(value)
 	}
 
 	cursor.continue()
