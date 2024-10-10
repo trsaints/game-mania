@@ -18,7 +18,7 @@ export function Home() {
 		  } = useContext(RootContext)
 
 	useEffect(() => {
-		apiMiddleware?.getAll('games', {})
+		apiMiddleware?.getAll('games', { search: 'de' })
 					 .then(gameData => setGames(gameData as Game[]))
 		apiMiddleware?.getAll('genres', {})
 					 .then(genreData => setGenres(genreData as Genre[]))

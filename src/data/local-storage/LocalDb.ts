@@ -1,5 +1,8 @@
 import { ILocalDb } from '@data/local-storage/'
 import {
+	DataRequestParams
+}                   from '@data/requests'
+import {
 	Game,
 	Genre,
 	LocalDbStore,
@@ -86,19 +89,45 @@ export class LocalDb
 		})
 	}
 
-	getAll(storageName: string): Promise<ApiData[]> {
+	getAll(storageName: string,
+		   params?: DataRequestParams
+	): Promise<ApiData[]> {
 		return new Promise<ApiData[]>(async (resolve, reject) => {
-			const objectStore   = await this.openObjectStore(storageName,
-															 'readonly'
+			const objectStore      = await this.openObjectStore(storageName,
+																'readonly'
 			)
-			const idbGetRequest = objectStore.getAll()
+			const idbCursorRequest = objectStore.openCursor()
 
-			idbGetRequest.addEventListener('success',
-										   () => resolve(idbGetRequest.result)
+			idbCursorRequest.addEventListener('error',
+											  () => reject(idbCursorRequest.error)
 			)
-			idbGetRequest.addEventListener('error',
-										   () => reject('operation failed')
-			)
+
+			const results: ApiData[] = []
+
+			idbCursorRequest.addEventListener('success', () => {
+				const cursor = idbCursorRequest.result
+
+				if (!cursor) {
+					resolve(results)
+
+					return
+				}
+
+				const value = cursor.value as ApiData
+
+				if (params?.search) {
+					const concatenatedValues = `${value.id}${value.name}${value.slug}`
+					if (concatenatedValues.trim()
+										  .toLowerCase()
+										  .includes(params.search
+														  .trim()
+														  .toLowerCase())) {
+						results.push(value)
+					}
+				}
+				
+				cursor.continue()
+			})
 		})
 	}
 
