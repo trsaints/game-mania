@@ -19,6 +19,7 @@ function Search() {
 			  publishers,
 			  apiMiddleware,
 			  setGenres,
+			  setGames,
 			  setPlatforms,
 			  setPublishers,
 			  setTags,
@@ -34,15 +35,16 @@ function Search() {
 					 .then(apiData => setTags(apiData as Tag[]))
 		apiMiddleware?.getAll('genres', {})
 					 .then(apiData => setGenres(apiData as Genre[]))
-	}, [])
 
-	const filteredGames = games?.filter(g => {
-		return g.name.toLowerCase().includes(gameSearch?.toLowerCase() ?? '')
-	})
+		if (gameSearch || games) return
+
+		apiMiddleware?.getAll('games', { pageSize: 100, metacritic: '80,100' })
+					 .then(apiData => setGames(apiData as Game[]))
+	}, [])
 
 	return (
 		<main className={style.Search}>
-			<h2 id='search-header'>Search your next favorite game</h2>
+			<h2 id="search-header">Search your next favorite game</h2>
 
 			{(genres && publishers && platforms && tags)
 			 && <SearchFilter
@@ -52,7 +54,7 @@ function Search() {
                  tags={tags}
              />}
 
-			{filteredGames && <GameList games={filteredGames}/>}
+			{games && <GameList games={games}/>}
 		</main>
 	)
 }

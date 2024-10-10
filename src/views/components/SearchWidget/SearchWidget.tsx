@@ -1,5 +1,5 @@
 import { RootContext }                                from '@data/context'
-import { Genre, Publisher, Tag }                      from '@data/types'
+import { Game, Genre, Publisher, Tag }                from '@data/types'
 import { GenreService, PublisherService, TagService } from '@src/services'
 import * as React                                     from 'react'
 import { useContext, useEffect, useState }            from 'react'
@@ -35,17 +35,20 @@ function SearchWidget() {
 }
 
 function SearchForm() {
-	const { setGameSearch } = useContext(RootContext)
-	const navigator         = useNavigate()
+	const { apiMiddleware, setGames } = useContext(RootContext)
+
+	const navigator = useNavigate()
 
 	const search = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 
-		const data = new FormData(e.target as HTMLFormElement)
+		const data      = new FormData(e.target as HTMLFormElement)
+		const newSearch = data.get('search_content') as string
 
-		if (!data) return
+		if (!newSearch) return
 
-		setGameSearch(data.get('search_content') as string)
+		apiMiddleware?.search('games', newSearch)
+					 .then(apiData => setGames(apiData as Game[]))
 		navigator('/search')
 
 		setTimeout(() => window.location.assign('#search-header'), 200)
