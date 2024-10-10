@@ -3,7 +3,7 @@ import { Genre, Publisher, Tag }                      from '@data/types'
 import { GenreService, PublisherService, TagService } from '@src/services'
 import * as React                                     from 'react'
 import { useContext, useEffect, useState }            from 'react'
-import { Form, Link }                                 from 'react-router-dom'
+import { Form, Link, useNavigate }                    from 'react-router-dom'
 import style
 													  from './SearchWidget.module.scss'
 
@@ -36,6 +36,7 @@ function SearchWidget() {
 
 function SearchForm() {
 	const { setGameSearch } = useContext(RootContext)
+	const navigator         = useNavigate()
 
 	const search = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
@@ -45,6 +46,9 @@ function SearchForm() {
 		if (!data) return
 
 		setGameSearch(data.get('search_content') as string)
+		navigator('/search')
+
+		setTimeout(() => window.location.assign('#search-header'), 200)
 	}
 
 	return (
@@ -56,7 +60,7 @@ function SearchForm() {
 			<label className={style.Label}
 				   htmlFor="search_content"
 			>Keyword</label>
-			
+
 			<input className={style.Search}
 				   type="search"
 				   id="search_content"

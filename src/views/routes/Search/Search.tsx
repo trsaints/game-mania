@@ -42,7 +42,7 @@ function Search() {
 
 	return (
 		<main className={style.Search}>
-			<h2>Search your next favorite game</h2>
+			<h2 id='search-header'>Search your next favorite game</h2>
 
 			{(genres && publishers && platforms && tags)
 			 && <SearchFilter
