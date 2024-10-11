@@ -1,5 +1,5 @@
 import { ApiData }           from '@data/local-storage'
-import { DataRequestParams } from '@data/requests'
+import { DataRequestParams } from 'src/data/request-parameters'
 
 
 export const LocalDbUtils = {

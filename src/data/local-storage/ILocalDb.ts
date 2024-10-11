@@ -1,6 +1,6 @@
-import { ApiData }      from '@data/local-storage/LocalDb.ts'
-import { DataRequestParams } from '@data/requests'
-import { LocalDbStore } from '@data/types/LocalDbStore.ts'
+import { ApiData }           from '@data/local-storage/LocalDb.ts'
+import { DataRequestParams } from 'src/data/request-parameters'
+import { LocalDbStore }      from '@data/types/LocalDbStore.ts'
 
 
 export interface ILocalDb<T> {
