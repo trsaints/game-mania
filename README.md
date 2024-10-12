@@ -77,6 +77,8 @@ to how actual game stores do.
             - [Root]
             - [Search]
 
+---
+
 ## Dependencies
 
 This project relies directly on the following dependencies:
@@ -106,6 +108,8 @@ This project relies directly on the following dependencies:
 * vite: ^5.4.1
 * vite-tsconfig-paths: ^5.0.1
 
+---
+
 ## Design System
 
 This section provides information regarding the visual aspects of the project's
@@ -116,6 +120,8 @@ layout.
 A simple prototype as built using Figma for providing a general look of how the
 application should be implemented. It can be found
 on [the project's prototype link](https://www.figma.com/design/NuDXuXFtXRA7aBTbMXg4RA/PROT%C3%93TIPO-GAME-MANIA?node-id=0-1&t=w6hP0w9PStL1vvUt-1)
+
+---
 
 ### Palette
 
@@ -164,6 +170,8 @@ These colors can be visualized in the pictures below:
 
 ![BLACK.png](public/BLACK.png)
 
+---
+
 ### Typography
 
 The entire project typography relies on
@@ -171,6 +179,8 @@ the [RedHat Display Font](https://github.com/RedHatOfficial/RedHatFont) only,
 provided under the SIL Open Font license. All rights reserved.
 
 ![img.png](public/REDHAT_DISPLAY_FONT.png)
+
+---
 
 ## Project Structure
 
@@ -192,11 +202,134 @@ The Game Mania project's file structure is provided as follows:
 
 ### Assets
 
+Assets are static resources that can be used for multiple purposes within
+the project. These may include either images, fonts, source text documents etc.
+
+---
+
 ### Data
+
+The `@src/data` namespace is meant for containing pieces of software that are
+dominant
+in the aspects of working with data. It is the namespace containing either
+static data models, like types or interfaces, or data operations such as
+context, for
+global state management, and database abstractions.
 
 #### Context
 
+The `@data/context` module is responsible for providing global state
+managements for data that is shared between various UI components of the
+system.
+
+The existing contexts in the project are:
+
+* [Root Context](#root-context)
+
+##### Root Context
+
+The `RootContext` is responsible for providing common state management
+across the whole application, providing data that is likely to be used
+within any existing UI component, not restricted to a given component or an
+application route, page or similar.
+
+The data provided by the `RootContext` is defined within the `IRootContext`
+interface:
+
+```typescript
+export interface IRootContext {
+	games?: Game[]
+	genres?: Genre[]
+	platforms?: Platform[]
+	publishers?: Publisher[]
+	selectedGame?: Game
+	setGames: Dispatch<SetStateAction<Game[] | undefined>>
+	setGenres: Dispatch<SetStateAction<Genre[] | undefined>>
+	setPlatforms: Dispatch<SetStateAction<Platform[] | undefined>>
+	setPublishers: Dispatch<SetStateAction<Publisher[] | undefined>>
+	setSelectedGame: Dispatch<SetStateAction<Game | undefined>>
+	setTags: Dispatch<SetStateAction<Tag[] | undefined>>
+	tags?: Tag[],
+	apiMiddleware?: IApiMiddleware
+}
+```
+
+---
+
 #### Local Storage
+
+The `@data/local-storage` module is responsible for providing client-side database operations. This module actually relies on the `IndexedDB` API implementation of browsers, and is likely to be described as an abstraction layer for simplifying access to the API.
+
+The main representation of the module is the `LocalDb` class, which is an implementation of the `ILocalDb` interface, providing a set of abstractions for working more effectively with the `IndexedDB` API.
+
+This abstraction was required due to the fact that the `IndexedDB` API was specified within an era where Javascript `Promise`s didn't exist and, due to such context, it relies on many callbacks for each internal request for the database. Dealing with that API directly is not recommended, and may lead to inconsistencies within the application.
+
+The `ILocalDb` interface defines the behaviors implemented by the `LocalDb` class, as follows: 
+
+```typescript
+export interface ILocalDb<T> {
+	openObjectStore(storageName: string, mode: IDBTransactionMode): Promise<IDBObjectStore>
+
+	create<T extends ApiData[]>(storages: { [K in keyof T]: LocalDbStore<T[K]> }): void
+
+	getObjectById(storageName: string, key: number): Promise<T>
+
+	getAll(storageName: string, params?: DataRequestParams): Promise<T[]>
+
+	addObject(storageName: string, object: T): Promise<boolean>
+
+	addBulk(storageName: string, objects: T[]): Promise<ApiData[]>
+
+	removeObject(storageName: string, key: keyof T): Promise<boolean>
+
+	updateObject(storageName: string, key: keyof T, newObject: T): Promise<boolean>
+
+	isCreated(): boolean
+
+	reset(): void
+}
+```
+
+##### ILocalDb.openObjectStore
+
+---
+
+##### ILocalDb.create
+
+---
+
+##### ILocalDb.getObjectById
+
+--- 
+
+##### ILocalDb.getAll
+
+---
+
+##### ILocalDb.addObject
+
+---
+
+##### ILocalDb.addBulk
+
+---
+
+##### ILocalDb.removeObject
+
+---
+
+##### ILocalDb.updateObject
+
+---
+
+
+##### ILocalDb.isCreated
+
+---
+
+##### ILocalDb.reset
+
+---
 
 #### Request Parameters
 
