@@ -1,4 +1,4 @@
-import { LocalDb } from '@data/local-storage'
+import { LocalDb }       from '@data/local-storage'
 import {
 	Game,
 	Genre,
@@ -6,10 +6,11 @@ import {
 	Platform,
 	Publisher,
 	Tag
-}                  from '@data/types'
+}                        from '@data/types'
+import { IStartupUtils } from '@utils/interfaces/IStartupUtils.ts'
 
 
-export const StartupUtils = {
+export const StartupUtils: IStartupUtils = {
 	initializeDb
 }
 
