@@ -1,10 +1,12 @@
-import { Game } from '@data/types'
+import { Game }              from '@data/types'
+import { IStylingUtils }     from '@utils/interfaces/IStylingUtils.ts'
+import { InlineBannerStyle } from '@data/types/InlineBannerStyle.ts'
 
-export const StylingUtils = {
+export const StylingUtils: IStylingUtils = {
 	getInlineBanner
 }
 
-function getInlineBanner(game?: Game) {
+function getInlineBanner(game?: Game): InlineBannerStyle {
 	return (
 		{
 			background: `linear-gradient(to bottom, 
