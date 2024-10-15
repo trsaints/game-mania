@@ -714,7 +714,8 @@ type Recommended = {
 
 ##### Screenshots
 
-The `Screenshots` type defines the structure of the `games/{id}/screenshots` endpoint responses.
+The `Screenshots` type defines the structure of the `games/{id}/screenshots`
+endpoint responses.
 
 ```typescript
 type Screenshots = {
@@ -729,7 +730,8 @@ type Screenshots = {
 
 ##### Short Screenshot
 
-The `ShortScreenshot` type defines the structure of the `short_screenshots` property from `games/{id}` endpoint responses.
+The `ShortScreenshot` type defines the structure of the `short_screenshots`
+property from `games/{id}` endpoint responses.
 
 ```typescript
 type ShortScreenshot = {
@@ -742,7 +744,9 @@ type ShortScreenshot = {
 
 ##### Store
 
-The `Store` type defines both the structure of one or more data records of the `stores` property from `games` endpoint responses and the `stores` endpoint responses.
+The `Store` type defines both the structure of one or more data records of the
+`stores` property from `games` endpoint responses and the `stores` endpoint
+responses.
 
 ```typescript
 type Store = {
@@ -777,7 +781,9 @@ type StoreIndex<T> = {
 
 ##### Tag
 
-The `Tag` type defines the structure of both one or more data records of the `tags` property from `games` endpoint responses and the `tags` endpoint responses.
+The `Tag` type defines the structure of both one or more data records of the
+`tags` property from `games` endpoint responses and the `tags` endpoint
+responses.
 
 ```typescript
 type Tag = {
@@ -790,10 +796,135 @@ type Tag = {
 }
 ```
 
+---
+
 ### Middlewares
+
+The `@src/middlewares` module is responsible for providing middleware functions
+for the application.
+
+The existing middlewares in the project are:
+
+* [Api Middleware](#api-middleware)
+
+#### Api Middleware
+
+The `ApiMiddleware` class is responsible for providing a middleware for
+intercepting API requests and responses, providing a set of behaviors for
+selecting between data provided locally or from the API.
+
+The behavior of the `ApiMiddleware` class is defined within the `IApiMiddleware`
+interface:
+
+```typescript
+export interface IApiMiddleware {
+	getAll(route: keyof DataServiceDictionary,
+		   params?: DataRequestParams
+	): Promise<ApiData[]>
+
+	getById(route: keyof DataServiceDictionary, id: number): Promise<ApiData>
+
+	getRecommendations(): Promise<Recommended>
+}
+```
+
+---
 
 ### Services
 
+The `@src/services` module is responsible for providing services that handle
+more logical aspects for the application, such as API connections.
+
+The existing services in the project are:
+
+* [Api Service](#api-service)
+* [Game Service](#game-service)
+* [Genre Service](#genre-service)
+* [Platform Service](#platform-service)
+* [Publisher Service](#publisher-service)
+* [Tag Service](#tag-service)
+
+#### Api Service
+
+The `ApiService` class is responsible for providing a service for providing the
+actual API connection for the application.
+
+The behavior of the `ApiService` class is defined within the `IApiService`
+interface:
+
+```typescript
+interface IApiService {
+	createRouteUrl(route: string): string
+
+	gameApi: AxiosInstance
+}
+```
+
+---
+
+#### Data Service
+
+The `DataService` implementations are responsible for providing a service for
+handling data operations for the application.
+
+The behavior of a `DataService` class is defined within the `IDataService`
+interface:
+
+```typescript
+interface IDataService<T> {
+	getAll(params: DataRequestParams): Promise<T[]>
+
+	getById(id: number): Promise<T>
+}
+```
+
+--- 
+
+#### Game Service
+
+The `GameService` class is an implementation of `IDataService` responsible for
+providing a service for handling `Game`
+data operations for the application. `Game` data is provided by the `games`
+endpoint of the API.
+
+The behavior of the `GameService` class is defined within the `IGameService`,
+extending the `IDataService` interface:
+
+```typescript
+interface IGameService extends IDataService<Game> {
+	getScreenshots(id: number): Promise<Screenshots>
+}
+```
+
+---
+
+#### Genre Service
+
+The `GenreService` class is an implementation of `IDataService` responsible for
+providing a service for handling `Genre` data operations for the application.
+`Genre` data is provided by both the `genres` endpoint of the API or as a property
+of the `games` endpoint response.
+
+---
+
+#### Platform Service
+
+The `PlatformService` class is an implementation of `IDataService` responsible
+for providing a service for handling `Platform` data operations for the application.
+`Platform` data is provided by both the `platforms` endpoint of the API or as a property of the `games` endpoint response.
+
+---
+
 ### Utils
+
+The `@src/utils` module is responsible for providing utility functions for the application. These functions are meant to be used for providing common behaviors across the application, or functionalities that are not directly related to the business logic of the application.
+
+The existing utilities in the project are:
+
+* [Local Db Utils](#local-db-utils)
+* [Parser Utils](#parser-utils)
+* [Startup Utils](#startup-utils)
+* [Styling Utils](#styling-utils)
+* [Type Utils](#type-utils)
 
 ### Views
