@@ -1,5 +1,5 @@
-import { DataRequestParams }        from '@data/requests'
-import { Platform }                 from '@data/types'
+import { DataRequestParams } from 'src/data/request-parameters'
+import { Platform }          from '@data/types'
 import { ApiService, IDataService } from '@services/index.ts'
 import { ParserUtils }              from '@src/utils'
 

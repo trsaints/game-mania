@@ -1,5 +1,5 @@
 import { ApiData, ILocalDb }     from '@data/local-storage'
-import { DataRequestParams }     from '@data/requests'
+import { DataRequestParams }     from 'src/data/request-parameters'
 import { DataServiceDictionary } from '@data/types/DataServiceDictionary.ts'
 import { Game, Recommended }     from '@src/data/types'
 import {

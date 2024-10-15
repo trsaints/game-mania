@@ -1,4 +1,4 @@
-import { DataRequestParams } from '@data/requests'
+import { DataRequestParams } from 'src/data/request-parameters'
 import { Game, Screenshots } from '@data/types'
 import { ApiService }        from '@services/index.ts'
 import { IGameService }      from '@services/interfaces'

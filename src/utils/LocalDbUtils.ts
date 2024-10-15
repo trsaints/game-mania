@@ -1,8 +1,9 @@
 import { ApiData }           from '@data/local-storage'
-import { DataRequestParams } from '@data/requests'
+import { DataRequestParams } from 'src/data/request-parameters'
+import { ILocalDbUtils }     from '@utils/interfaces/ILocalDbUtils.ts'
 
 
-export const LocalDbUtils = {
+export const LocalDbUtils: ILocalDbUtils = {
 	filterObjects
 }
 

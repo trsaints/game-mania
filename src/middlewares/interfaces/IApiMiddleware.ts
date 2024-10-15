@@ -1,5 +1,5 @@
 import { ApiData }           from '@data/local-storage'
-import { DataRequestParams } from '@data/requests'
+import { DataRequestParams } from 'src/data/request-parameters'
 import { Recommended }       from '@data/types'
 import { DataServiceDictionary } from '@data/types/DataServiceDictionary.ts'
 

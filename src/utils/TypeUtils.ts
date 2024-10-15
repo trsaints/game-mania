@@ -9,10 +9,13 @@ import {
 	Tag
 }                      from '@data/types'
 import { ParserUtils } from '@utils/ParserUtils.ts'
+import { ITypeUtils }  from '@utils/interfaces/ITypeUtils.ts'
 
 
-export const TypeUtils = {
-	mapToGame
+export const TypeUtils: ITypeUtils = {
+	mapToGame,
+	mapToGamesPlatforms,
+	mapToStores
 }
 
 function mapToGame(data: any): Game {
@@ -25,22 +28,22 @@ function mapToGame(data: any): Game {
 
 	if (mappedData.developers) {
 		mappedData.developers = mappedData.developers.map(d => ParserUtils
-		.mapToCamelCase(d) as Developer)
+			.mapToCamelCase(d) as Developer)
 	}
 
 	if (mappedData.publishers) {
 		mappedData.publishers = mappedData.publishers.map(p => ParserUtils
-		.mapToCamelCase(p) as Publisher)
+			.mapToCamelCase(p) as Publisher)
 	}
 
 	if (mappedData.tags) {
 		mappedData.tags = mappedData.tags.map(t => ParserUtils
-		.mapToCamelCase(t) as Tag)
+			.mapToCamelCase(t) as Tag)
 	}
 
 	if (mappedData.genres) {
 		mappedData.genres = mappedData.genres.map(g => ParserUtils
-		.mapToCamelCase(g) as Genre)
+			.mapToCamelCase(g) as Genre)
 	}
 
 	if (mappedData.stores) {
@@ -62,7 +65,7 @@ function mapToStores(stores: Store[]): Store[] {
 function mapToGamesPlatforms(platforms: GamesPlatform[]): GamesPlatform[] {
 	return platforms.map(mainPlatform => {
 		mainPlatform.platform = ParserUtils
-		.mapToCamelCase(mainPlatform.platform) as Platform
+			.mapToCamelCase(mainPlatform.platform) as Platform
 
 		return ParserUtils.mapToCamelCase(mainPlatform) as GamesPlatform
 	})

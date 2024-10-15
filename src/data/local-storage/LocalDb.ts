@@ -1,7 +1,7 @@
 import { ILocalDb } from '@data/local-storage/'
 import {
 	DataRequestParams
-}                   from '@data/requests'
+}                   from 'src/data/request-parameters'
 import {
 	Game,
 	Genre,
