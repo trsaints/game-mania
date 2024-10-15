@@ -1,6 +1,10 @@
-export const ParserUtils = {
+import { IParserUtils } from '@utils/interfaces/IParserUtils.ts'
+
+export const ParserUtils: IParserUtils = {
 	mapToCamelCase,
-	mapToSnakeCase
+	mapToSnakeCase,
+	toCamelCase,
+	toSnakeCase
 }
 
 function mapToCamelCase(data: any): unknown {
