@@ -927,4 +927,93 @@ The existing utilities in the project are:
 * [Styling Utils](#styling-utils)
 * [Type Utils](#type-utils)
 
+#### Local Db Utils
+
+The `LocalDbUtils` class is responsible for providing utility functions for the
+`LocalDb` class.
+
+The behavior of the `LocalDbUtils` class is defined within the `ILocalDbUtils`
+interface:
+
+```typescript
+interface ILocalDbUtils {
+	filterObjects(idbCursorRequest: IDBRequest,
+				  resolve: (value: (ApiData[] | PromiseLike<ApiData[]>)) => void,
+				  results: ApiData[],
+				  params?: DataRequestParams
+	): void
+}
+```
+
+---
+
+#### Parser Utils
+
+The `ParserUtils` class is responsible for providing utility functions for
+parsing data either from or to the API. These functions are meant for providing
+a more consistent behavior for the application, as the API may provide data in
+different formats.
+
+The behavior of the `ParserUtils` class is defined within the `IParserUtils`
+interface:
+
+```typescript
+interface IParserUtils {
+	mapToCamelCase(data: any): unknown
+	mapToSnakeCase(data: any): unknown
+	toCamelCase(snakeText: string): string
+	toSnakeCase(camelText: string): string
+}
+```
+
+---
+
+#### Startup Utils
+
+The `StartupUtils` class is responsible for providing utility functions for
+starting up the application. These functions are meant for setting up the initial state of the application, such as initializing the database, etc.
+
+The behavior of the `StartupUtils` class is defined within the `IStartupUtils`
+interface:
+
+```typescript
+interface IStartupUtils {
+	initializeDb(db: LocalDb): void
+}
+```
+
+---
+
+#### Styling Utils
+
+The `StylingUtils` class is responsible for providing utility functions for the
+styling of the application. These functions are meant for providing a more flexible way of styling the application, as some styles may be dependent on the application's state, which can't be defined statically.
+
+The behavior of the `StylingUtils` class is defined within the `IStylingUtils`
+interface:
+
+```typescript
+interface IStylingUtils {
+	getInlineBanner(game?: Game): InlineBannerStyle
+}
+```
+
+---
+
+#### Type Utils
+
+The `TypeUtils` class is responsible for providing utility functions for the type system of the application. These functions are meant for providing a more consistent behavior for the application, as the type system may be complex and require some additional behaviors for working effectively.
+
+The behavior of the `TypeUtils` class is defined within the `ITypeUtils` interface:
+
+```typescript
+interface ITypeUtils {
+	mapToGame(data: any): Game
+	mapToStores(stores: Store[]): Store[]
+	mapToGamesPlatforms(platforms: GamesPlatform[]): GamesPlatform[]
+}
+```
+
+---
+
 ### Views
