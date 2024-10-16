@@ -1017,3 +1017,42 @@ interface ITypeUtils {
 ---
 
 ### Views
+
+The `@src/views` module is responsible for providing the views of the application. These views are meant for providing the actual user interface of the application, and are composed of TSX functional components.
+
+The views are divided into three main categories:
+* [Components](#components): Reusable components that can be used across multiple pages.
+* [Pages](#pages): Components that represent a single page of the application.
+* [Routes](#routes): Components that represent a single route of the application.
+
+#### Components
+
+The `@src/views/components` module is responsible for providing reusable components that can be used across multiple pages of the application. These are highly dependent on the application's state, meaning that they make no sense by themselves, but only when used within a page/route.
+
+The existing components in the project are:
+* [Footer](#footer)
+* [Gallery](#gallery)
+* [Game Card](#game-card)
+* [Game Panel](#game-panel)
+* [Header](#header)
+* [Image Card](#image-card)
+* [Search Filter](#search-filter)
+* [Search Widget](#search-widget)
+* [Selection](#selection)
+
+#### Pages
+
+The `@src/views/pages` module is responsible for providing components that represent a single page of the application. These components are independent of the application's state, meaning that they can be used by themselves at any given route.
+
+The existing pages in the project are:
+* [Error Page](#error-page)
+
+#### Routes
+
+The `@src/views/routes` module is responsible for providing components that represent a single route of the application. These components are the main containers for both components and pages, and are meant for providing the actual user interface of the application. Routes are highly dependent on the application's state, but different from components, they are meant for dealing directly with the application's state, usually by using React's context API.
+
+The existing routes in the project are:
+* [Game](#game)
+* [Home](#home)
+* [Root](#root)
+* [Search](#search)
