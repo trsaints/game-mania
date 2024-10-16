@@ -11,7 +11,7 @@ function filterObjects(idbCursorRequest: IDBRequest,
 					   resolve: (value: (ApiData[] | PromiseLike<ApiData[]>)) => void,
 					   results: ApiData[],
 					   params?: DataRequestParams
-) {
+): void {
 	const cursor = idbCursorRequest.result
 
 	if (!cursor) {
@@ -29,19 +29,17 @@ function filterObjects(idbCursorRequest: IDBRequest,
 		return
 	}
 
+	if (params.pageSize && results.length === params.pageSize) {
+		resolve(results)
+
+		return
+	}
+
 	if (params.search) {
 		const concatenatedValues = `${value.id}${value.slug}${value.name}`.toLowerCase()
 		if (concatenatedValues.includes(params.search.toLowerCase())) {
 			results.push(value)
 		}
-	}
-	
-	if (params.pageSize && results.length === params.pageSize) {
-		resolve(results)
-		
-		return
-	} else {
-		results.push(value)
 	}
 
 	cursor.continue()
