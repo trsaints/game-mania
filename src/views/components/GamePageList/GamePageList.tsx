@@ -6,10 +6,13 @@ export { GamePageList }
 
 function GamePageList({ games }: IGamePageList) {
 	return (
-		<div className={style.GamePageList}>
+		<ul className={style.GameList}>
 			{games.map(game => (
-				<GameCard game={game} key={`game-${game.id}`}/>))
+				<li key={`game-${game.id}`}>
+					<GameCard game={game}/>
+				</li>
+			))
 			}
-		</div>
+		</ul>
 	)
 }
