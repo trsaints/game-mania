@@ -17,14 +17,16 @@ export function Selection({ games, genres }: ISelection) {
 										   g.genres.findIndex(t => t.slug
 																   === selectedGenre)
 										   !== -1)
-	
+
 	const filterByGenre = (e: React.MouseEvent) => {
 
-		const target   = e.target as HTMLElement
+		const target = e.target as HTMLElement
 		const listItem = target.closest('[data-slug]') as HTMLLIElement
-		
-		if (!listItem) return 
-		
+
+		if (! listItem) {
+			return
+		}
+
 		setSelectedGenre(listItem.dataset['slug'] ?? '')
 	}
 
@@ -33,7 +35,7 @@ export function Selection({ games, genres }: ISelection) {
 			<h3>Navigate by genre</h3>
 
 			<GenreFilter genres={genres}/>
-			<GamePageList games={filteredGames}/>
+			<GamePageList games={filteredGames} pageCount={10}/>
 		</article>)
 }
 
