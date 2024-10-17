@@ -1,25 +1,26 @@
 @use "src/palette";
 
 .GamePageList {
-	padding: 10vh 5vw;
+	padding : 10vh 5vw;
 
 	.CountFilter {
-		display: grid;
-		grid-template-areas:
-		"label  blank "
-		"count submit";
-		margin-bottom: 10vh;
+		display             : grid;
+		align-items         : center;
+		grid-template-areas :
+		"label  count submit ";
+		margin-bottom       : 10vh;
 
 		label {
-			grid-area: label;
-			margin-bottom: 2vh;
-			text-transform: uppercase;
-			color: palette.$cyan;
-			text-shadow: 0 0 8px palette.$cyan;
+			grid-area      : label;
+			text-transform : uppercase;
+			color          : palette.$cyan;
+			text-shadow    : 0 0 8px palette.$cyan;
+			height         : fit-content;
+			margin-right   : 3vw;
 		}
 
 		input {
-			grid-area: count;
+			grid-area                 : count;
 			border-bottom-left-radius : 8px;
 			border-top-left-radius    : 8px;
 			padding                   : 2vh 5vw;
@@ -27,7 +28,9 @@
 		}
 
 		button {
-			grid-area: submit;
+			grid-area      : submit;
+			text-transform : capitalize;
+			height         : 100%;
 		}
 	}
 
@@ -39,7 +42,7 @@
 
 	.PageSelection {
 		display         : flex;
-		flex-wrap: wrap;
+		flex-wrap       : wrap;
 		justify-content : center;
 		gap             : 2vw;
 
