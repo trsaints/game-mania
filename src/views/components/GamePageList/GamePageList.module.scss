@@ -1,6 +1,8 @@
 @use "src/palette";
 
 .GamePageList {
+	padding: 10vh 5vw;
+
 	.CountFilter {
 		display: grid;
 		grid-template-areas:

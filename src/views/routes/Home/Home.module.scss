@@ -1,8 +1,9 @@
-@use 'src/palette';
+@use "src/palette";
 
 .Home {
 	h2 {
-		padding-inline : 5vw;
+		margin-block: 10vh;
+		padding-inline: 5vw;
 	}
 
 	.Menu {
@@ -21,11 +22,8 @@
 		}
 	}
 
-	.Banner, .Selection {
-		padding : 10vh 5vw;
-	}
-
 	.Banner {
+		padding       : 10vh 5vw;
 		margin-bottom : 10vh;
 	}
 
