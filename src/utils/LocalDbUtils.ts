@@ -14,7 +14,7 @@ function filterObjects(idbCursorRequest: IDBRequest,
 ): void {
 	const cursor = idbCursorRequest.result
 
-	if (!cursor) {
+	if (! cursor) {
 		resolve(results)
 
 		return
@@ -22,24 +22,28 @@ function filterObjects(idbCursorRequest: IDBRequest,
 
 	const value = cursor.value as ApiData
 
-	if (!params) {
+	if (! params) {
 		results.push(value)
 		cursor.continue()
 
 		return
 	}
 
-	if (params.pageSize && results.length === params.pageSize) {
+	const hasReachedPageSize = params.pageSize
+							   && results.length === params.pageSize
+	const hasSearchMatch = params.search
+						   && `${value.id}${value.slug}${value.name}`.toLowerCase()
+																	 .includes(
+																		 params.search.toLowerCase())
+
+	if (! hasReachedPageSize && ! params.search) {
+		results.push(value)
+	} else if (! hasReachedPageSize && hasSearchMatch) {
+		results.push(value)
+	} else if (hasReachedPageSize) {
 		resolve(results)
 
 		return
-	}
-
-	if (params.search) {
-		const concatenatedValues = `${value.id}${value.slug}${value.name}`.toLowerCase()
-		if (concatenatedValues.includes(params.search.toLowerCase())) {
-			results.push(value)
-		}
 	}
 
 	cursor.continue()
