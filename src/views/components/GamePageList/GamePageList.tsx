@@ -64,9 +64,9 @@ interface ICountFilter extends ComponentProps<'form'> {
 function CountFilter({ onHandleSubmit }: ICountFilter) {
 	return (
 		<form className={style.CountFilter} onSubmit={onHandleSubmit}>
-			<label form="item-count">Items per page:</label>
+			<label htmlFor="item-count">Items per page:</label>
 			<input type="search" name="item-count" id="item-count"/>
-			<button type="submit">save</button>
+			<button className='primary' type="submit">save</button>
 		</form>
 	)
 }

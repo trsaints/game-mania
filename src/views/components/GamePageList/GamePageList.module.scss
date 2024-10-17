@@ -1,5 +1,51 @@
-.GameList {
-  display: grid;
-  gap: 4.4vh;
-  margin-bottom: 10vh;
+@use "src/palette";
+
+.GamePageList {
+	.CountFilter {
+		display: grid;
+		grid-template-areas:
+		"label  blank "
+		"count submit";
+		margin-bottom: 10vh;
+
+		label {
+			grid-area: label;
+			margin-bottom: 2vh;
+			text-transform: uppercase;
+			color: palette.$cyan;
+			text-shadow: 0 0 8px palette.$cyan;
+		}
+
+		input {
+			grid-area: count;
+			border-bottom-left-radius : 8px;
+			border-top-left-radius    : 8px;
+			padding                   : 2vh 5vw;
+			width                     : calc(100% + 2.5vw);
+		}
+
+		button {
+			grid-area: submit;
+		}
+	}
+
+	.GameList {
+		display       : grid;
+		gap           : 4.4vh;
+		margin-bottom : 5vh;
+	}
+
+	.PageSelection {
+		display         : flex;
+		flex-wrap: wrap;
+		justify-content : center;
+		gap             : 2vw;
+
+		button {
+			border-radius : 100%;
+			width         : 3em;
+			height        : 3em;
+			text-align    : center;
+		}
+	}
 }
