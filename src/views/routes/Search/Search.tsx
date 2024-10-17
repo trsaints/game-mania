@@ -6,6 +6,9 @@ import {
 }                                                from '@views/components/SearchFilter'
 import { useContext, useEffect }                 from 'react'
 import style                                     from './Search.module.scss'
+import {
+	GamePageList
+}                                                from '@views/components/GamePageList'
 
 
 export { Search }
@@ -35,7 +38,9 @@ function Search() {
 		apiMiddleware?.getAll('genres', {})
 					 .then(apiData => setGenres(apiData as Genre[]))
 
-		if (games) return
+		if (games) {
+			return
+		}
 
 		apiMiddleware?.getAll('games', { pageSize: 100, metacritic: '80,100' })
 					 .then(apiData => setGames(apiData as Game[]))
@@ -53,22 +58,7 @@ function Search() {
                  tags={tags}
              />}
 
-			{games && <GameList games={games}/>}
+			{games && <GamePageList games={games}/>}
 		</main>
-	)
-}
-
-interface IGameList {
-	games: Game[]
-}
-
-function GameList({ games }: IGameList) {
-	const listItems = (games?.map(g =>
-									  (<li key={`game-${g.id}`}>
-										  <GameCard game={g}/>
-									  </li>)))
-
-	return (
-		<ul className={style.GameList}>{listItems}</ul>
 	)
 }

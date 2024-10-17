@@ -1,12 +1,10 @@
-import { Game, Genre }              from '@data/types'
-import { GameCard }                 from '@views/components'
+import { Genre }                    from '@data/types'
 import {
 	ISelection
 }                                   from '@views/components/Selection/ISelection.tsx'
-import style                        from '@views/routes/Home/Home.module.scss'
+import style                        from './Selection.module.scss'
 import * as React                   from 'react'
 import { ComponentProps, useState } from 'react'
-import { Link }                     from 'react-router-dom'
 import { GamePageList }             from '@views/components/GamePageList'
 
 
@@ -32,10 +30,10 @@ export function Selection({ games, genres }: ISelection) {
 
 	return (
 		<article className={style.Selection} onClick={filterByGenre}>
-			<h3>Navigate by genre</h3>
+			<h3 className={style.MainHeader}>Navigate by genre</h3>
 
 			<GenreFilter genres={genres}/>
-			<GamePageList games={filteredGames} pageCount={10}/>
+			<GamePageList games={filteredGames}/>
 		</article>)
 }
 
