@@ -1,5 +1,4 @@
 module.exports = {
-  root: true,
   ignores: ["node_modules/**"],
   overrides: [
     {
