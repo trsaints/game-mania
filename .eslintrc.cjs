@@ -5,7 +5,6 @@ module.exports = {
     "@typescript-eslint": require("@typescript-eslint/eslint-plugin")
   },
   rules: {
-    semi: "off",
     "@typescript-eslint/semi": ["error", "never"],
   }
 };
