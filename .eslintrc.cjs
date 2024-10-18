@@ -1,18 +1,15 @@
-module.exports = [
-  {
-    ignores: ["node_modules/**"],
-  },
-  {
-    files: ["**/*.ts", "**/*.tsx"],
-    languageOptions: {
+module.exports = {
+  root: true,
+  ignores: ["node_modules/**"],
+  overrides: [
+    {
+      files: ["**/*.ts", "**/*.tsx"],
       parser: "@typescript-eslint/parser",
+      plugins: ["@typescript-eslint"],
+      rules: {
+        semi: "off",
+        "@typescript-eslint/semi": ["error", "never"],
+      },
     },
-    plugins: {
-      "@typescript-eslint": require("@typescript-eslint/eslint-plugin"),
-    },
-    rules: {
-      semi: "off",
-      "@typescript-eslint/semi": ["error", "never"],
-    },
-  },
-];
+  ],
+};
