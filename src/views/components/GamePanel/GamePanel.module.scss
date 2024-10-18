@@ -1,5 +1,5 @@
-@use 'src/palette';
-@use 'sass:color';
+@use "src/palette";
+@use "sass:color";
 
 .GamePanel {
 	background-color : color.scale(palette.$black-d5, $alpha : -20%);
@@ -39,9 +39,13 @@
 		gap     : 10vh;
 
 		.Main {
+			border-radius : 8px;
+			overflow      : hidden;
+
 			img {
 				height     : 25vh;
-				object-fit : cover
+				object-fit : cover;
+				width      : 100%;
 			}
 		}
 
