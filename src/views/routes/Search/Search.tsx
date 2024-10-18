@@ -1,6 +1,5 @@
 import { RootContext }                           from '@data/context'
 import { Game, Genre, Platform, Publisher, Tag } from '@data/types'
-import { GameCard }                              from '@views/components'
 import {
 	SearchFilter
 }                                                from '@views/components/SearchFilter'
@@ -20,12 +19,12 @@ function Search() {
 			  platforms,
 			  publishers,
 			  apiMiddleware,
+			  tags,
 			  setGenres,
 			  setGames,
 			  setPlatforms,
 			  setPublishers,
-			  setTags,
-			  tags
+			  setTags
 		  } = useContext(RootContext)
 
 	useEffect(() => {
