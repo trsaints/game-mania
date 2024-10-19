@@ -1,7 +1,5 @@
 import { ILocalDb } from '@data/local-storage/'
-import {
-	DataRequestParams
-}                   from 'src/data/request-parameters'
+import { DataRequestParams } from 'src/data/request-parameters'
 import {
 	Game,
 	Genre,
@@ -9,17 +7,14 @@ import {
 	Platform,
 	Publisher,
 	Tag
-}                   from '@data/types'
-import {
-	LocalDbUtils
-}                   from '@utils/LocalDbUtils.ts'
+} from '@data/types'
+import { LocalDbUtils } from '@utils/LocalDbUtils.ts'
 
 
 export type ApiData = Game | Platform | Publisher | Genre | Tag
 
 export class LocalDb
-	implements ILocalDb<ApiData>
-{
+	implements ILocalDb<ApiData> {
 	private readonly _name: string
 	private readonly _version: number
 	private readonly _loadKey: string
@@ -77,103 +72,108 @@ export class LocalDb
 	}
 
 	getObjectById(storageName: string, key: number): Promise<ApiData> {
-		return new Promise<ApiData>(async (resolve, reject) => {
-			const objectStore   = await this.openObjectStore(storageName,
-															 'readonly'
-			)
-			const idbGetRequest = objectStore.get(key)
+		return new Promise<ApiData>((resolve, reject) => {
+			this.openObjectStore(storageName, 'readonly')
+				.then(objectStore => {
+					const idbGetRequest = objectStore.get(key)
 
-			idbGetRequest.addEventListener('success',
-										   () => resolve(idbGetRequest.result)
-			)
-			idbGetRequest.addEventListener('error',
-										   () => reject('operation failed')
-			)
+					idbGetRequest.addEventListener('success',
+												   () => resolve(idbGetRequest.result)
+					)
+					idbGetRequest.addEventListener('error',
+												   () => reject(
+													   'operation failed')
+					)
+				})
 		})
 	}
 
 	getAll(storageName: string,
 		   params?: DataRequestParams
 	): Promise<ApiData[]> {
-		return new Promise<ApiData[]>(async (resolve, reject) => {
-			const objectStore      = await this.openObjectStore(storageName,
-																'readonly'
-			)
-			const idbCursorRequest = objectStore.openCursor()
+		return new Promise<ApiData[]>((resolve, reject) => {
+			this.openObjectStore(storageName, 'readonly')
+				.then(objectStore => {
+					const idbCursorRequest = objectStore.openCursor()
 
-			idbCursorRequest.addEventListener('error',
-											  () => reject(idbCursorRequest.error)
-			)
+					idbCursorRequest.addEventListener('error',
+													  () => reject(
+														  idbCursorRequest.error)
+					)
 
-			const results: ApiData[] = []
+					const results: ApiData[] = []
 
-			idbCursorRequest.addEventListener('success', () => {
-				LocalDbUtils.filterObjects(idbCursorRequest,
-										   resolve,
-										   results,
-										   params
-				)
-			})
+					idbCursorRequest.addEventListener('success', () => {
+						LocalDbUtils.filterObjects(idbCursorRequest,
+												   resolve,
+												   results,
+												   params
+						)
+					})
+				})
 		})
 	}
 
 	addObject(storageName: string, object: ApiData): Promise<boolean> {
-		return new Promise<boolean>(async (resolve, reject) => {
-			if (!this.isCreated() || !object) reject(false)
+		return new Promise<boolean>((resolve, reject) => {
+			if (! this.isCreated() || ! object) reject(false)
 
-			const objectStore   = await this.openObjectStore(storageName,
-															 'readwrite'
-			)
-			const idbAddRequest = objectStore.add(object)
+			this.openObjectStore(storageName, 'readwrite')
+				.then(objectStore => {
+					const idbAddRequest = objectStore.add(object)
 
-			idbAddRequest.addEventListener('success', () => resolve(true))
-			idbAddRequest.addEventListener('error',
-										   () => reject(idbAddRequest.error)
-			)
+					idbAddRequest.addEventListener('success',
+												   () => resolve(true)
+					)
+					idbAddRequest.addEventListener('error',
+												   () => reject(idbAddRequest.error)
+					)
+				})
 		})
 	}
 
 	addBulk(storageName: string, objects: ApiData[]): Promise<ApiData[]> {
-		return new Promise<ApiData[]>(async (resolve, reject) => {
-			if (!this.isCreated() || objects.length < 1) reject(false)
+		return new Promise<ApiData[]>((resolve, reject) => {
+			if (! this.isCreated() || objects.length < 1) reject(false)
 
 			const addedObjects: ApiData[] = []
 
-			const objectStore = await this.openObjectStore(storageName,
-														   'readwrite'
-			)
+			this.openObjectStore(storageName, 'readwrite')
+				.then(objectStore => {
+					for (const object of objects) {
+						const idbAddRequest = objectStore.add(object)
 
-			for (const object of objects) {
-				const idbAddRequest = objectStore.add(object)
+						idbAddRequest.addEventListener('success',
+													   () => addedObjects.push(
+														   object)
+						)
 
-				idbAddRequest.addEventListener('success',
-											   () => addedObjects.push(object)
-				)
+						idbAddRequest.addEventListener('error',
+													   () => console.log(`failed to add entry ${object.id}`)
+						)
+					}
 
-				idbAddRequest.addEventListener('error',
-											   () => console.log(`failed to add entry ${object.id}`)
-				)
-			}
-
-			resolve(addedObjects)
+					resolve(addedObjects)
+				})
 		})
 	}
 
 	removeObject(storageName: string, key: keyof ApiData): Promise<boolean> {
-		return new Promise<boolean>(async (resolve, reject) => {
-			if (!this.isCreated()) reject(false)
+		return new Promise<boolean>((resolve, reject) => {
+			if (! this.isCreated()) reject(false)
 
-			const objectStore      = await this.openObjectStore(storageName,
-																'readwrite'
-			)
-			const idbDeleteRequest = objectStore.delete(key)
+			this.openObjectStore(storageName, 'readwrite')
+				.then(objectStore => {
+					const idbDeleteRequest = objectStore.delete(key)
 
-			idbDeleteRequest.addEventListener('success',
-											  () => resolve(true)
-			)
-			idbDeleteRequest.addEventListener('error',
-											  () => reject(idbDeleteRequest.error)
-			)
+					idbDeleteRequest.addEventListener('success',
+													  () => resolve(true)
+					)
+					idbDeleteRequest.addEventListener('error',
+													  () => reject(
+														  idbDeleteRequest.error)
+					)
+				})
 		})
 	}
 
@@ -181,18 +181,20 @@ export class LocalDb
 				 key: keyof ApiData,
 				 newObject: ApiData
 	): Promise<boolean> {
-		return new Promise<boolean>(async (resolve, reject) => {
-			if (!this.isCreated() || !newObject) reject(false)
+		return new Promise<boolean>((resolve, reject) => {
+			if (! this.isCreated() || ! newObject) reject(false)
 
-			const objectStore   = await this.openObjectStore(storageName,
-															 'readwrite'
-			)
-			const idbPutRequest = objectStore.put(newObject, key)
+			this.openObjectStore(storageName, 'readwrite')
+				.then(objectStore => {
+					const idbPutRequest = objectStore.put(newObject, key)
 
-			idbPutRequest.addEventListener('success', () => resolve(true))
-			idbPutRequest.addEventListener('error',
-										   () => reject(idbPutRequest.error)
-			)
+					idbPutRequest.addEventListener('success',
+												   () => resolve(true)
+					)
+					idbPutRequest.addEventListener('error',
+												   () => reject(idbPutRequest.error)
+					)
+				})
 		})
 	}
 
