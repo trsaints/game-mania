@@ -1,4 +1,4 @@
-import { DataRequestParams } from 'src/data/request-parameters'
+import { DataRequestParams } from '@data/request-parameters'
 
 
 export interface IDataService<T> {

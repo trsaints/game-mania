@@ -1,21 +1,23 @@
-import { IRootContext, RootContext }             from '@data/context'
-import { LocalDb }                               from '@data/local-storage'
-import { Game, Genre, Platform, Publisher, Tag } from '@data/types'
+import { IRootContext, RootContext } from '@data/context'
+import { LocalDb } from '@data/local-storage'
 import {
-	DataServiceDictionary
-}                                                from '@data/types/DataServiceDictionary.ts'
-import {
-	ApiMiddleware
-}                                                from '@src/middlewares/ApiMiddleware.ts'
+	DataServiceDictionary,
+	Game,
+	Genre,
+	Platform,
+	Publisher,
+	Tag
+} from '@data/types'
+import { ApiMiddleware } from '@src/middlewares'
 import {
 	GameService,
 	GenreService,
 	PlatformService,
 	PublisherService,
 	TagService
-}                                                from '@src/services'
-import { StartupUtils }                          from '@utils/StartupUtils.ts'
-import { PropsWithChildren, useState }           from 'react'
+} from '@src/services'
+import { StartupUtils } from '@src/utils'
+import { PropsWithChildren, useState } from 'react'
 
 
 function RootContextProvider({ children }: PropsWithChildren) {
@@ -51,7 +53,7 @@ function RootContextProvider({ children }: PropsWithChildren) {
 		tags,
 		apiMiddleware: new ApiMiddleware(dataServiceDictionary, localDb)
 	}
-	
+
 	StartupUtils.initializeDb(localDb)
 
 	return (

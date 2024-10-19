@@ -1,9 +1,8 @@
 import { DataRequestParams } from 'src/data/request-parameters'
 import { Game, Screenshots } from '@data/types'
-import { ApiService }        from '@services/index.ts'
-import { IGameService }      from '@services/interfaces'
-import { ParserUtils }       from '@src/utils'
-import { TypeUtils }         from '@utils/TypeUtils.ts'
+import { ApiService } from '@src/services'
+import { IGameService } from '@services/interfaces'
+import { ParserUtils, TypeUtils } from '@src/utils'
 
 
 export const GameService: IGameService = {

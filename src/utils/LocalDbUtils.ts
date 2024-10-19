@@ -1,6 +1,6 @@
-import { ApiData }           from '@data/local-storage'
-import { DataRequestParams } from 'src/data/request-parameters'
-import { ILocalDbUtils }     from '@utils/interfaces/ILocalDbUtils.ts'
+import { ApiData } from '@data/local-storage'
+import { DataRequestParams } from '@data/request-parameters'
+import { ILocalDbUtils } from '@utils/interfaces'
 
 
 export const LocalDbUtils: ILocalDbUtils = {
@@ -31,10 +31,10 @@ function filterObjects(idbCursorRequest: IDBRequest,
 
 	const hasReachedPageSize = params.pageSize
 							   && results.length === params.pageSize
-	const hasSearchMatch = params.search
-						   && `${value.id}${value.slug}${value.name}`.toLowerCase()
-																	 .includes(
-																		 params.search.toLowerCase())
+	const hasSearchMatch     = params.search
+							   && `${value.id}${value.slug}${value.name}`.toLowerCase()
+								   .includes(
+									   params.search.toLowerCase())
 
 	if (! hasReachedPageSize && ! params.search) {
 		results.push(value)

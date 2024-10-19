@@ -1,4 +1,4 @@
-import { IParserUtils } from '@utils/interfaces/IParserUtils.ts'
+import { IParserUtils } from '@utils/interfaces'
 
 export const ParserUtils: IParserUtils = {
 	mapToCamelCase,

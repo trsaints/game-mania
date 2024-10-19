@@ -7,9 +7,9 @@ import {
 	Publisher,
 	Store,
 	Tag
-}                      from '@data/types'
-import { ParserUtils } from '@utils/ParserUtils.ts'
-import { ITypeUtils }  from '@utils/interfaces/ITypeUtils.ts'
+} from '@data/types'
+import { ParserUtils } from '@src/utils'
+import { ITypeUtils } from '@utils/interfaces'
 
 
 export const TypeUtils: ITypeUtils = {
@@ -56,7 +56,8 @@ function mapToGame(data: never): Game {
 function mapToStores(stores: Store[]): Store[] {
 	return stores.map(store => {
 		store.store
-			= ParserUtils.mapToCamelCase(store.store as never) as typeof store.store
+			=
+			ParserUtils.mapToCamelCase(store.store as never) as typeof store.store
 
 		return store
 	})

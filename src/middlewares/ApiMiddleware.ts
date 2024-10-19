@@ -1,10 +1,7 @@
-import { ApiData, ILocalDb }     from '@data/local-storage'
-import { DataRequestParams }     from 'src/data/request-parameters'
-import { DataServiceDictionary } from '@data/types/DataServiceDictionary.ts'
-import { Game, Recommended }     from '@src/data/types'
-import {
-	IApiMiddleware
-}                                from '@src/middlewares/interfaces/IApiMiddleware.ts'
+import { ApiData, ILocalDb } from '@data/local-storage'
+import { DataRequestParams } from '@data/request-parameters'
+import { DataServiceDictionary, Game, Recommended } from '@data/types'
+import { IApiMiddleware } from '@src/middlewares'
 
 
 export class ApiMiddleware implements IApiMiddleware {

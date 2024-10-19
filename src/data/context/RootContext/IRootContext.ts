@@ -1,8 +1,6 @@
 import { Game, Genre, Platform, Publisher, Tag } from '@data/types'
-import {
-	IApiMiddleware
-}                                                from '@src/middlewares/interfaces/IApiMiddleware.ts'
-import { Dispatch, SetStateAction }              from 'react'
+import { IApiMiddleware } from '@src/middlewares'
+import { Dispatch, SetStateAction } from 'react'
 
 
 export interface IRootContext {

@@ -1,6 +1,5 @@
-import { Game }              from '@data/types'
-import { IStylingUtils }     from '@utils/interfaces/IStylingUtils.ts'
-import { InlineBannerStyle } from '@data/types/InlineBannerStyle.ts'
+import { Game, InlineBannerStyle } from '@data/types'
+import { IStylingUtils } from '@utils/interfaces'
 
 export const StylingUtils: IStylingUtils = {
 	getInlineBanner
