@@ -1,12 +1,12 @@
 {
   "name": "game-mania",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.7.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint game-mania",
+    "lint": "eslint 'src/**/*.{js,ts,tsx}'",
     "preview": "vite preview"
   },
   "dependencies": {

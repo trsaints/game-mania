@@ -31,7 +31,7 @@ export function Home() {
 			<h2>Welcome</h2>
 
 			<article className={style.Banner}
-					 style={StylingUtils.getInlineBanner(recommended?.recent!)}
+					 style={StylingUtils.getInlineBanner(recommended?.recent)}
 			>
 				<h3>Popular</h3>
 
