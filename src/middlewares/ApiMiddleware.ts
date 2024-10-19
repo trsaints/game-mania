@@ -39,6 +39,8 @@ export class ApiMiddleware implements IApiMiddleware {
 
 		data = await this._dataServiceDictionary[route].getById(id)
 
+		// noinspection ES6MissingAwait
+
 		this._localDb.addObject(route, data)
 
 		return data

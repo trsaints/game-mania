@@ -15,7 +15,7 @@ export const GameService: IGameService = {
 async function getAll(params?: DataRequestParams): Promise<Game[]> {
 	const baseUrl  = ApiService.createRouteUrl('games')
 	const response = await ApiService.gameApi.get(baseUrl, {
-		params: params ? ParserUtils.mapToSnakeCase(params) : {}
+		params: params ? ParserUtils.mapToSnakeCase(params as never) : {}
 	})
 
 	return response.data?.results.map(TypeUtils.mapToGame) ?? []
@@ -25,7 +25,7 @@ async function getById(id: number): Promise<Game> {
 	const gameUrl  = ApiService.createRouteUrl(`games/${id}`)
 	const response = await ApiService.gameApi.get(gameUrl)
 
-	return TypeUtils.mapToGame(response.data)
+	return TypeUtils.mapToGame(response.data as never)
 }
 
 async function getScreenshots(id: number): Promise<Screenshots> {
