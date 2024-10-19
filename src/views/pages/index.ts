@@ -1,1 +1,2 @@
-export * from './ErrorPage/ErrorPage'
+export * from './ErrorPage'
+export * from './GamePage'
