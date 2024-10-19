@@ -7,8 +7,8 @@ export const ParserUtils: IParserUtils = {
 	toSnakeCase
 }
 
-function mapToCamelCase(data: any): unknown {
-	let mappedData: any = {}
+function mapToCamelCase(data: never): unknown {
+	const mappedData: Record<string, unknown> = {}
 	const dataEntries   = Object.entries(data)
 
 	dataEntries.forEach(([key, value]) => {
@@ -22,8 +22,8 @@ function mapToCamelCase(data: any): unknown {
 	return mappedData
 }
 
-function mapToSnakeCase(data: any): unknown {
-	let mappedData: any = {}
+function mapToSnakeCase(data: never): unknown {
+	const mappedData: Record<string, unknown> = {}
 	const dataEntries   = Object.entries(data)
 
 	dataEntries.forEach(([key, value]) => {
@@ -58,7 +58,7 @@ function toSnakeCase(camelText: string): string {
 	const keywords = [...camelText.matchAll(/[A-Z]/g)]
 	let result     = camelText
 
-	for (let k of keywords) {
+	for (const k of keywords) {
 		result = result.replace(k[0], `_${k[0].toLowerCase()}`)
 	}
 
