@@ -1,4 +1,4 @@
-import { Screenshots }    from '@data/types'
+import { Screenshots } from '@data/types'
 import { ComponentProps } from 'react'
 
 

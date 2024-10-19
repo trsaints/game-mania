@@ -1,4 +1,4 @@
-import { Game }           from '@data/types'
+import { Game } from '@data/types'
 import { ComponentProps } from 'react'
 
 

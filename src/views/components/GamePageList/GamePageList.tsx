@@ -1,21 +1,19 @@
 import { IGamePageList } from './IGamePageList.ts'
-import style
-						 from './GamePageList.module.scss'
-import {
-	GameCard
-}                        from '@views/components'
+import style from './GamePageList.module.scss'
+import { GameCard } from '@views/components'
 import React, {
 	ComponentProps,
 	Dispatch,
 	FormEvent,
-	FormEventHandler, SetStateAction,
+	FormEventHandler,
+	SetStateAction,
 	useState
-}                        from 'react'
+} from 'react'
 
 export { GamePageList }
 
 function GamePageList({ games }: IGamePageList) {
-	const [itemCount, setItemCount] = useState(10)
+	const [itemCount, setItemCount]     = useState(10)
 	const [currentPage, setCurrentPage] = useState(0)
 
 	const currentGames = games.slice(currentPage * itemCount,
@@ -26,7 +24,7 @@ function GamePageList({ games }: IGamePageList) {
 		e.preventDefault()
 
 		const targetData = new FormData(e.target as HTMLFormElement)
-		const newCount = Number(targetData.get('item-count'))
+		const newCount   = Number(targetData.get('item-count'))
 
 		if (! newCount) {
 			return
@@ -66,7 +64,7 @@ function CountFilter({ onHandleSubmit }: ICountFilter) {
 		<form className={style.CountFilter} onSubmit={onHandleSubmit}>
 			<label htmlFor="item-count">Items per page:</label>
 			<input type="search" name="item-count" id="item-count"/>
-			<button className='primary' type="submit">save</button>
+			<button className="primary" type="submit">save</button>
 		</form>
 	)
 }
@@ -82,7 +80,7 @@ function PageSelection({
 						   itemCount,
 						   setCurrentPage
 					   }: IPageSelection) {
-	const pageCount = gamesCount / itemCount
+	const pageCount   = gamesCount / itemCount
 	const pageButtons = Array.from({
 									   length: pageCount > 1
 											   ? pageCount + 1
@@ -99,7 +97,7 @@ function PageSelection({
 	)
 
 	const changePage = (e: React.MouseEvent<HTMLMenuElement>) => {
-		const target = e.target as HTMLMenuElement
+		const target        = e.target as HTMLMenuElement
 		const pressedButton = target.closest('[data-page]') as HTMLButtonElement
 
 		if (! pressedButton) {

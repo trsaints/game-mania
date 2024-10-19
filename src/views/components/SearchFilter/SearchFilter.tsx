@@ -1,6 +1,6 @@
 import { Genre, Platform, Publisher, Tag } from '@data/types'
-import { ISearchFilter }                   from './ISearchFilter'
-import style                               from './SearchFilter.module.scss'
+import { ISearchFilter } from './ISearchFilter'
+import style from './SearchFilter.module.scss'
 
 
 function SearchFilter(props: ISearchFilter) {

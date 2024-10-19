@@ -1,13 +1,13 @@
-@use 'palette';
+@use "palette";
 
 @font-face {
-	font-family : 'Redhat Display';
-	src         : url("assets/fonts/RedHatDisplay-VariableFont_wght.ttf") format('truetype');
+	font-family : "Redhat Display";
+	src         : url("assets/fonts/RedHatDisplay-VariableFont_wght.ttf") format("truetype");
 	font-style  : normal;
 }
 
 :root {
-	font-family : 'Redhat Display', serif;
+	font-family : "Redhat Display", serif;
 }
 
 body {

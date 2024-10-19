@@ -1,7 +1,7 @@
 import { ImageCard } from '@views/components'
-import { Link }      from 'react-router-dom'
-import style         from './Gallery.module.scss'
-import { IGallery }  from './IGallery'
+import { Link } from 'react-router-dom'
+import style from './Gallery.module.scss'
+import { IGallery } from './IGallery'
 
 
 export { Gallery }

@@ -1,4 +1,4 @@
-import style         from './GameCard.module.scss'
+import style from './GameCard.module.scss'
 import { IGameCard } from './IGameCard'
 
 

@@ -1,11 +1,10 @@
-import { RootContext }                                from '@data/context'
-import { Game, Genre, Publisher, Tag }                from '@data/types'
+import { RootContext } from '@data/context'
+import { Game, Genre, Publisher, Tag } from '@data/types'
 import { GenreService, PublisherService, TagService } from '@src/services'
-import * as React                                     from 'react'
-import { useContext, useEffect, useState }            from 'react'
-import { Form, Link, useNavigate }                    from 'react-router-dom'
-import style
-													  from './SearchWidget.module.scss'
+import * as React from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { Form, Link, useNavigate } from 'react-router-dom'
+import style from './SearchWidget.module.scss'
 
 
 function SearchWidget() {
@@ -23,7 +22,7 @@ function SearchWidget() {
 		GenreService.getAll({ pageSize: 5 }).then(g => setGenres(g))
 		TagService.getAll({ pageSize: 5 }).then(t => setTags(t))
 		PublisherService.getAll({ pageSize: 5 })
-						.then(p => setPublishers(p))
+			.then(p => setPublishers(p))
 	}, [])
 
 	return (
@@ -45,10 +44,10 @@ function SearchForm() {
 		const data      = new FormData(e.target as HTMLFormElement)
 		const newSearch = data.get('search_content') as string
 
-		if (!newSearch) return
+		if (! newSearch) return
 
 		apiMiddleware?.getAll('games', { search: newSearch })
-					 .then(apiData => setGames(apiData as Game[]))
+			.then(apiData => setGames(apiData as Game[]))
 		navigator('/search')
 
 		setTimeout(() => window.location.assign('#search-header'), 200)

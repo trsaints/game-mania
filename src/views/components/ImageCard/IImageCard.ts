@@ -1,4 +1,4 @@
-import { Image }          from '@data/types/Image.ts'
+import { Image } from '@data/types/Image.ts'
 import { ComponentProps } from 'react'
 
 

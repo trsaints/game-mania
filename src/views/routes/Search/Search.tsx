@@ -1,13 +1,9 @@
-import { RootContext }                           from '@data/context'
+import { RootContext } from '@data/context'
 import { Game, Genre, Platform, Publisher, Tag } from '@data/types'
-import {
-	SearchFilter
-}                                                from '@views/components/SearchFilter'
-import { useContext, useEffect }                 from 'react'
-import style                                     from './Search.module.scss'
-import {
-	GamePageList
-}                                                from '@views/components/GamePageList'
+import { SearchFilter } from '@views/components/SearchFilter'
+import { useContext, useEffect } from 'react'
+import style from './Search.module.scss'
+import { GamePageList } from '@views/components/GamePageList'
 
 
 export { Search }
@@ -29,20 +25,20 @@ function Search() {
 
 	useEffect(() => {
 		apiMiddleware?.getAll('publishers', {})
-					 .then(apiData => setPublishers(apiData as Publisher[]))
+			.then(apiData => setPublishers(apiData as Publisher[]))
 		apiMiddleware?.getAll('platforms', {})
-					 .then(apiData => setPlatforms(apiData as Platform[]))
+			.then(apiData => setPlatforms(apiData as Platform[]))
 		apiMiddleware?.getAll('tags', {})
-					 .then(apiData => setTags(apiData as Tag[]))
+			.then(apiData => setTags(apiData as Tag[]))
 		apiMiddleware?.getAll('genres', {})
-					 .then(apiData => setGenres(apiData as Genre[]))
+			.then(apiData => setGenres(apiData as Genre[]))
 
 		if (games) {
 			return
 		}
 
 		apiMiddleware?.getAll('games', { pageSize: 100, metacritic: '80,100' })
-					 .then(apiData => setGames(apiData as Game[]))
+			.then(apiData => setGames(apiData as Game[]))
 	}, [])
 
 	return (
@@ -51,11 +47,11 @@ function Search() {
 
 			{(genres && publishers && platforms && tags)
 			 && <SearchFilter
-                 publishers={publishers}
-                 platforms={platforms}
-                 genres={genres}
-                 tags={tags}
-             />}
+				 publishers={publishers}
+				 platforms={platforms}
+				 genres={genres}
+				 tags={tags}
+			 />}
 
 			{games && <GamePageList games={games}/>}
 		</main>
