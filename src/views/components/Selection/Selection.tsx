@@ -1,9 +1,9 @@
 import { Genre } from '@data/types'
-import { ISelection } from '@views/components/Selection/ISelection.tsx'
+import { ISelection } from './ISelection'
 import style from './Selection.module.scss'
 import * as React from 'react'
 import { ComponentProps, useState } from 'react'
-import { GamePageList } from '@views/components/GamePageList'
+import { GamePageList } from '@views/components'
 
 
 export function Selection({ games, genres }: ISelection) {

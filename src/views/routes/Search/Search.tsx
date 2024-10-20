@@ -1,9 +1,8 @@
 import { RootContext } from '@data/context'
 import { Game, Genre, Platform, Publisher, Tag } from '@data/types'
-import { SearchFilter } from '@views/components/SearchFilter'
+import { GamePageList, SearchFilter } from '@views/components'
 import { useContext, useEffect } from 'react'
 import style from './Search.module.scss'
-import { GamePageList } from '@views/components/GamePageList'
 
 
 export { Search }
