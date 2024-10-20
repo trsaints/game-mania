@@ -1,4 +1,4 @@
-import { ErrorPage } from '@views/pages'
+import { ErrorPage, GamePage, SearchPage } from '@views/pages'
 import { Root, Search } from '@views/routes'
 import { Home } from '@views/routes/Home'
 import { StrictMode } from 'react'
@@ -17,16 +17,27 @@ const mainRouter = createBrowserRouter(
 			errorElement: <ErrorPage/>,
 			children    : [
 				{
-					path   : '/',
+					index: true,
 					element: <Home/>
 				},
 				{
-					path   : 'search',
-					element: <Search/>
+					path    : 'search',
+					element : <Search/>,
+					children: [
+						{
+							index: true,
+							element: <SearchPage/>
+						},
+						{
+							path   : ':id',
+							element: <GamePage/>
+						}
+					]
 				}
 			]
 		}
 	])
+
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>

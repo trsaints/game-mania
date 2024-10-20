@@ -1,8 +1,8 @@
 import { RootContext } from '@data/context'
 import { Game, Genre, Platform, Publisher, Tag } from '@data/types'
-import { GamePageList, SearchFilter } from '@views/components'
 import { useContext, useEffect } from 'react'
 import style from './Search.module.scss'
+import { Outlet } from 'react-router-dom'
 
 
 export { Search }
@@ -10,11 +10,7 @@ export { Search }
 function Search() {
 	const {
 			  games,
-			  genres,
-			  platforms,
-			  publishers,
 			  apiMiddleware,
-			  tags,
 			  setGenres,
 			  setGames,
 			  setPlatforms,
@@ -44,15 +40,7 @@ function Search() {
 		<main className={style.Search}>
 			<h2 id="search-header">Search your next favorite game</h2>
 
-			{(genres && publishers && platforms && tags)
-			 && <SearchFilter
-				 publishers={publishers}
-				 platforms={platforms}
-				 genres={genres}
-				 tags={tags}
-			 />}
-
-			{games && <GamePageList games={games}/>}
+			<Outlet/>
 		</main>
 	)
 }
