@@ -1,5 +1,5 @@
-import axios           from 'axios'
-import { IApiService } from '@services/interfaces/IApiService.ts'
+import axios from 'axios'
+import { IApiService } from '@services/interfaces'
 
 
 const gameApi = axios.create({

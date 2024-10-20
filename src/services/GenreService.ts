@@ -1,6 +1,6 @@
-import { DataRequestParams } from 'src/data/request-parameters'
+import { DataRequestParams } from '@data/request-parameters'
 import { Genre } from '@data/types'
-import { ApiService, IDataService } from '@services/index.ts'
+import { ApiService, IDataService } from '@src/services'
 import { ParserUtils } from '@src/utils'
 
 

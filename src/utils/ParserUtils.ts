@@ -1,4 +1,5 @@
-import { IParserUtils } from '@utils/interfaces/IParserUtils.ts'
+import { IParserUtils } from '@utils/interfaces'
+
 
 export const ParserUtils: IParserUtils = {
 	mapToCamelCase,
@@ -9,7 +10,7 @@ export const ParserUtils: IParserUtils = {
 
 function mapToCamelCase(data: never): unknown {
 	const mappedData: Record<string, unknown> = {}
-	const dataEntries   = Object.entries(data)
+	const dataEntries                         = Object.entries(data)
 
 	dataEntries.forEach(([key, value]) => {
 		const parsedKey = key.includes('_')
@@ -24,7 +25,7 @@ function mapToCamelCase(data: never): unknown {
 
 function mapToSnakeCase(data: never): unknown {
 	const mappedData: Record<string, unknown> = {}
-	const dataEntries   = Object.entries(data)
+	const dataEntries                         = Object.entries(data)
 
 	dataEntries.forEach(([key, value]) => {
 		const parsedKey = key.match(/[A-Z]/) !== null

@@ -1,5 +1,5 @@
 import { Game, Screenshots } from '@data/types'
-import { ComponentProps }    from 'react'
+import { ComponentProps } from 'react'
 
 
 export interface IGamePanel extends ComponentProps<'article'> {

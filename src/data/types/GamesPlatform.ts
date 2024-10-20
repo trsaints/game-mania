@@ -1,4 +1,4 @@
-import { Platform } from '@data/types/Platform.ts'
+import { Platform } from '@data/types'
 
 
 export type GamesPlatform = {

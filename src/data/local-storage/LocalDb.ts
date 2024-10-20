@@ -8,13 +8,12 @@ import {
 	Publisher,
 	Tag
 } from '@data/types'
-import { LocalDbUtils } from '@utils/LocalDbUtils.ts'
+import { LocalDbUtils } from '@src/utils'
 
 
 export type ApiData = Game | Platform | Publisher | Genre | Tag
 
-export class LocalDb
-	implements ILocalDb<ApiData> {
+export class LocalDb implements ILocalDb<ApiData> {
 	private readonly _name: string
 	private readonly _version: number
 	private readonly _loadKey: string

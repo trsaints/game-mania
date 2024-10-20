@@ -1,7 +1,7 @@
-import { DataRequestParams } from 'src/data/request-parameters'
-import { Platform }          from '@data/types'
-import { ApiService, IDataService } from '@services/index.ts'
-import { ParserUtils }              from '@src/utils'
+import { DataRequestParams } from '@data/request-parameters'
+import { Platform } from '@data/types'
+import { ApiService, IDataService } from '@src/services'
+import { ParserUtils } from '@src/utils'
 
 
 export const PlatformService: IDataService<Platform> = {

@@ -1,7 +1,6 @@
-import { ApiData }           from '@data/local-storage'
-import { DataRequestParams } from 'src/data/request-parameters'
-import { Recommended }       from '@data/types'
-import { DataServiceDictionary } from '@data/types/DataServiceDictionary.ts'
+import { ApiData } from '@data/local-storage'
+import { DataRequestParams } from '@data/request-parameters'
+import { DataServiceDictionary, Recommended } from '@data/types'
 
 
 export interface IApiMiddleware {
@@ -10,6 +9,6 @@ export interface IApiMiddleware {
 	): Promise<ApiData[]>
 
 	getById(route: keyof DataServiceDictionary, id: number): Promise<ApiData>
-	
+
 	getRecommendations(): Promise<Recommended>
 }

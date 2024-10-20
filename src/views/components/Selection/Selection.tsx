@@ -1,11 +1,9 @@
-import { Genre }                    from '@data/types'
-import {
-	ISelection
-}                                   from '@views/components/Selection/ISelection.tsx'
-import style                        from './Selection.module.scss'
-import * as React                   from 'react'
+import { Genre } from '@data/types'
+import { ISelection } from './ISelection'
+import style from './Selection.module.scss'
+import * as React from 'react'
 import { ComponentProps, useState } from 'react'
-import { GamePageList }             from '@views/components/GamePageList'
+import { GamePageList } from '@views/components'
 
 
 export function Selection({ games, genres }: ISelection) {
@@ -18,7 +16,7 @@ export function Selection({ games, genres }: ISelection) {
 
 	const filterByGenre = (e: React.MouseEvent) => {
 
-		const target = e.target as HTMLElement
+		const target   = e.target as HTMLElement
 		const listItem = target.closest('[data-slug]') as HTMLLIElement
 
 		if (! listItem) {

@@ -1,5 +1,5 @@
 import { Game, Screenshots } from '@data/types'
-import { IDataService }      from '@services/interfaces'
+import { IDataService } from '@services/interfaces'
 
 
 export interface IGameService extends IDataService<Game> {

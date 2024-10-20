@@ -1,4 +1,5 @@
-import { StoreIndex } from './StoreIndex'
+import { StoreIndex } from '@data/types'
+
 
 export type LocalDbStore<T> = {
 	name: string

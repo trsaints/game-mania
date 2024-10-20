@@ -1,5 +1,5 @@
 import { IImageCard } from './IImageCard'
-import style          from './ImageCard.module.scss'
+import style from './ImageCard.module.scss'
 
 
 function ImageCard({ img, alt }: IImageCard) {

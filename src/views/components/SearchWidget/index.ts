@@ -1,1 +1,1 @@
-export * from './SearchWidget.tsx'
+export * from './SearchWidget.ts'

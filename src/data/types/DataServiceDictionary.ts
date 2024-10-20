@@ -1,7 +1,4 @@
-import { Genre }                      from '@data/types/Genre.ts'
-import { Platform }                   from '@data/types/Platform.ts'
-import { Publisher }                  from '@data/types/Publisher.ts'
-import { Tag }                        from '@data/types/Tag.ts'
+import { Genre, Platform, Publisher, Tag } from '@data/types'
 import { IDataService, IGameService } from '@src/services'
 
 

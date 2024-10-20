@@ -1,9 +1,9 @@
-import { RootContext }                     from '@data/context'
-import { Game, Genre, Recommended }        from '@data/types'
-import { StylingUtils }                    from '@utils/StylingUtils.ts'
-import { Gallery, GamePanel, Selection }   from '@views/components'
+import { RootContext } from '@data/context'
+import { Game, Genre, Recommended } from '@data/types'
+import { StylingUtils } from '@src/utils'
+import { Gallery, GamePanel, Selection } from '@views/components'
 import { useContext, useEffect, useState } from 'react'
-import style                               from './Home.module.scss'
+import style from './Home.module.scss'
 
 
 export function Home() {
@@ -19,11 +19,11 @@ export function Home() {
 
 	useEffect(() => {
 		apiMiddleware?.getAll('games')
-					 .then(gameData => setGames(gameData as Game[]))
+			.then(gameData => setGames(gameData as Game[]))
 		apiMiddleware?.getAll('genres', { pageSize: 10 })
-					 .then(genreData => setGenres(genreData as Genre[]))
+			.then(genreData => setGenres(genreData as Genre[]))
 		apiMiddleware?.getRecommendations()
-					 .then(recommendedData => setRecommended(recommendedData))
+			.then(recommendedData => setRecommended(recommendedData))
 	}, [])
 
 	return (
@@ -69,8 +69,8 @@ function RecentPanel({ recommended }: IRecommendedPanel) {
 		((recommended?.recent)
 		&& (recommended?.recentScreenshots))
 		&& <GamePanel game={recommended?.recent}
-                      screenshots={recommended?.recentScreenshots}
-        />
+					  screenshots={recommended?.recentScreenshots}
+		/>
 	)
 }
 
@@ -79,7 +79,7 @@ function DailyPanel({ recommended }: IRecommendedPanel) {
 		((recommended?.daily)
 		&& (recommended?.dailyScreenshots))
 		&& <GamePanel game={recommended?.daily}
-                      screenshots={recommended?.dailyScreenshots}
-        />
+					  screenshots={recommended?.dailyScreenshots}
+		/>
 	)
 }

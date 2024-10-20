@@ -1,4 +1,4 @@
-import { IRootContext }  from '@data/context'
+import { IRootContext } from '@data/context'
 import { createContext } from 'react'
 
 

@@ -1,10 +1,9 @@
-import { Game, Screenshots }                           from '@data/types'
-import { ImageCard }                                   from '@views/components'
-import * as React                                      from 'react'
+import { Game, Screenshots } from '@data/types'
+import { ImageCard } from '@views/components'
+import * as React from 'react'
 import { ComponentProps, PropsWithChildren, useState } from 'react'
-import style
-													   from './GamePanel.module.scss'
-import { IGamePanel }                                  from './IGamePanel'
+import style from './GamePanel.module.scss'
+import { IGamePanel } from './IGamePanel'
 
 
 function GamePanel({ game, screenshots }: IGamePanel) {
@@ -22,12 +21,12 @@ interface IHeader extends PropsWithChildren {
 
 function Header({ game }: IHeader) {
 	const gameGenres = game.genres
-						   .slice(0, 3)
-						   .map(g =>
-									<li className={style.GenreTag}
-										key={`t-${g.id}`}
-									>{g.name}</li>
-						   )
+		.slice(0, 3)
+		.map(g =>
+				 <li className={style.GenreTag}
+					 key={`t-${g.id}`}
+				 >{g.name}</li>
+		)
 
 	return (
 		<header className={style.Header}>
@@ -60,7 +59,7 @@ function Banner({ name, screenshots }: IBanner) {
 		const target   = e.target as HTMLElement
 		const listItem = target.closest('[data-index]') as HTMLLIElement
 
-		if (!listItem) return
+		if (! listItem) return
 
 		const parsedIndex = listItem.dataset['index'] as unknown
 		setCurrentIndex(parsedIndex as number)

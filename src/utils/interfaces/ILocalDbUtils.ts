@@ -1,5 +1,6 @@
-import { ApiData }           from '@data/local-storage'
+import { ApiData } from '@data/local-storage'
 import { DataRequestParams } from '@data/request-parameters'
+
 
 export interface ILocalDbUtils {
 	filterObjects(idbCursorRequest: IDBRequest,
