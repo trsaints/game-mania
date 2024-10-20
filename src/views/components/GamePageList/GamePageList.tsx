@@ -10,6 +10,7 @@ import React, {
 	useState
 } from 'react'
 
+
 export { GamePageList }
 
 function GamePageList({ games }: IGamePageList) {

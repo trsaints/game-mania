@@ -1,5 +1,6 @@
 import { IParserUtils } from '@utils/interfaces'
 
+
 export const ParserUtils: IParserUtils = {
 	mapToCamelCase,
 	mapToSnakeCase,

@@ -1,5 +1,6 @@
 import { Game, GamesPlatform, Store } from '@data/types'
 
+
 export interface ITypeUtils {
 	mapToGame(data: never): Game
 

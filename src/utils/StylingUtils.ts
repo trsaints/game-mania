@@ -1,6 +1,7 @@
 import { Game, InlineBannerStyle } from '@data/types'
 import { IStylingUtils } from '@utils/interfaces'
 
+
 export const StylingUtils: IStylingUtils = {
 	getInlineBanner
 }
