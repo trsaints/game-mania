@@ -17,7 +17,7 @@ const mainRouter = createBrowserRouter(
 			errorElement: <ErrorPage/>,
 			children    : [
 				{
-					index: true,
+					index  : true,
 					element: <Home/>
 				},
 				{
@@ -25,12 +25,13 @@ const mainRouter = createBrowserRouter(
 					element : <Search/>,
 					children: [
 						{
-							index: true,
+							index  : true,
 							element: <SearchPage/>
 						},
 						{
 							path   : ':id',
-							element: <GamePage/>
+							element: <GamePage/>,
+							loader : ({ params }) => ({ id: params['id'] })
 						}
 					]
 				}
