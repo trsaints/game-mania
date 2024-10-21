@@ -5,6 +5,7 @@ import {
 	LocalDbStore,
 	Platform,
 	Publisher,
+	Screenshots,
 	Tag
 } from '@data/types'
 import { IStartupUtils } from '@utils/interfaces/IStartupUtils.ts'
@@ -50,11 +51,19 @@ function initializeDb(db: LocalDb) {
 		indices      : []
 	}
 
+	const screenshotsSchema: LocalDbStore<Screenshots> = {
+		name         : 'screenshots',
+		keyPath      : 'id',
+		autoIncrement: false,
+		indices      : []
+	}
+
 	db.create([
 				  gameSchema,
 				  platformSchema,
 				  genreSchema,
 				  tagSchema,
-				  publisherSchema
+				  publisherSchema,
+				  screenshotsSchema
 			  ])
 }

@@ -31,7 +31,10 @@ async function getScreenshots(id: number): Promise<Screenshots> {
 	const routeUrl = ApiService.createRouteUrl(`games/${id}/screenshots`)
 	const response = await ApiService.gameApi.get(routeUrl)
 
-	return response.data as Screenshots
+	return {
+		id,
+		...response.data
+	}
 }
 
 

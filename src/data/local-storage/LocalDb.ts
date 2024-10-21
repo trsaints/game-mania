@@ -5,13 +5,13 @@ import {
 	Genre,
 	LocalDbStore,
 	Platform,
-	Publisher,
+	Publisher, Screenshots,
 	Tag
 } from '@data/types'
 import { LocalDbUtils } from '@src/utils'
 
 
-export type ApiData = Game | Platform | Publisher | Genre | Tag
+export type ApiData = Game | Platform | Publisher | Genre | Tag | Screenshots
 
 export class LocalDb implements ILocalDb<ApiData> {
 	private readonly _name: string
