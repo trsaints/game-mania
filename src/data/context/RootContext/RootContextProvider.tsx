@@ -25,7 +25,6 @@ function RootContextProvider({ children }: PropsWithChildren) {
 	const [genres, setGenres]             = useState<Genre[]>()
 	const [platforms, setPlatforms]       = useState<Platform[]>()
 	const [publishers, setPublishers]     = useState<Publisher[]>()
-	const [selectedGame, setSelectedGame] = useState<Game>()
 	const [tags, setTags]                 = useState<Tag[]>()
 
 	const dataServiceDictionary: DataServiceDictionary = {
@@ -43,12 +42,10 @@ function RootContextProvider({ children }: PropsWithChildren) {
 		genres,
 		platforms,
 		publishers,
-		selectedGame,
 		setGames,
 		setGenres,
 		setPlatforms,
 		setPublishers,
-		setSelectedGame,
 		setTags,
 		tags,
 		apiMiddleware: new ApiMiddleware(dataServiceDictionary, localDb)
