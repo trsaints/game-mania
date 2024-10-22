@@ -1,41 +1,19 @@
 import { IRootContext, RootContext } from '@data/context'
-import { LocalDb } from '@data/local-storage'
+import { Game, Genre, Platform, Publisher, Tag } from '@data/types'
+import { useState } from 'react'
 import {
-	DataServiceDictionary,
-	Game,
-	Genre,
-	Platform,
-	Publisher,
-	Tag
-} from '@data/types'
-import { ApiMiddleware } from '@src/middlewares'
-import {
-	GameService,
-	GenreService,
-	PlatformService,
-	PublisherService,
-	TagService
-} from '@src/services'
-import { StartupUtils } from '@src/utils'
-import { PropsWithChildren, useState } from 'react'
+	IRootContextProvider
+} from '@data/context/RootContext/IRootContextProvider.ts'
 
 
-function RootContextProvider({ children }: PropsWithChildren) {
-	const [games, setGames]               = useState<Game[]>()
-	const [genres, setGenres]             = useState<Genre[]>()
-	const [platforms, setPlatforms]       = useState<Platform[]>()
-	const [publishers, setPublishers]     = useState<Publisher[]>()
-	const [tags, setTags]                 = useState<Tag[]>()
+function RootContextProvider(props: IRootContextProvider) {
+	const { children, apiMiddleware } = props
 
-	const dataServiceDictionary: DataServiceDictionary = {
-		games     : GameService,
-		genres    : GenreService,
-		platforms : PlatformService,
-		publishers: PublisherService,
-		tags      : TagService
-	}
-
-	const localDb = new LocalDb('game-mania', 1)
+	const [games, setGames]           = useState<Game[]>()
+	const [genres, setGenres]         = useState<Genre[]>()
+	const [platforms, setPlatforms]   = useState<Platform[]>()
+	const [publishers, setPublishers] = useState<Publisher[]>()
+	const [tags, setTags]             = useState<Tag[]>()
 
 	const context: IRootContext = {
 		games,
@@ -48,10 +26,8 @@ function RootContextProvider({ children }: PropsWithChildren) {
 		setPublishers,
 		setTags,
 		tags,
-		apiMiddleware: new ApiMiddleware(dataServiceDictionary, localDb)
+		apiMiddleware
 	}
-
-	StartupUtils.initializeDb(localDb)
 
 	return (
 		<RootContext.Provider value={context}>

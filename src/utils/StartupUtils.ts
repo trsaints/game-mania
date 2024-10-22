@@ -1,4 +1,4 @@
-import { LocalDb } from '@data/local-storage'
+import { ApiData, ILocalDb } from '@data/local-storage'
 import {
 	Game,
 	Genre,
@@ -14,7 +14,7 @@ export const StartupUtils: IStartupUtils = {
 	initializeDb
 }
 
-function initializeDb(db: LocalDb) {
+function initializeDb(db: ILocalDb<ApiData>) {
 	const gameSchema: LocalDbStore<Game> = {
 		name         : 'games',
 		keyPath      : 'id',

@@ -1,6 +1,6 @@
-import { LocalDb } from '@data/local-storage'
+import { ApiData, ILocalDb } from '@data/local-storage'
 
 
 export interface IStartupUtils {
-	initializeDb(db: LocalDb): void
+	initializeDb(db: ILocalDb<ApiData>): void
 }
