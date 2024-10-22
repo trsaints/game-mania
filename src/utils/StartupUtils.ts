@@ -56,5 +56,5 @@ function initializeDb(db: LocalDb) {
 				  genreSchema,
 				  tagSchema,
 				  publisherSchema
-			  ])
+			  ]).finally(() => console.warn('Database initialized'))
 }

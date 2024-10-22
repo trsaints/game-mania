@@ -47,26 +47,34 @@ export class LocalDb implements ILocalDb<ApiData> {
 		})
 	}
 
-	create<T extends ApiData[]>(storages: { [K in keyof T]: LocalDbStore<T[K]> }): void {
-		if (this.isCreated()) return
+	create<T extends ApiData[]>(storages: { [K in keyof T]: LocalDbStore<T[K]> })
+		: Promise<boolean> {
+		return new Promise((resolve, reject) => {
+			if (this.isCreated()) reject('database already created')
 
-		const openRequest = this.openRequest()
+			const openRequest = this.openRequest()
 
-		openRequest?.addEventListener('upgradeneeded', () => {
-			const { result } = openRequest
+			openRequest?.addEventListener('upgradeneeded', () => {
+				const { result } = openRequest
 
-			storages.forEach(s => {
-				const objectStore = result.createObjectStore(s.name, s)
+				storages.forEach(store => {
+					const objectStore = result.createObjectStore(store.name,
+																 store
+					)
 
-				if (objectStore === undefined) return
+					if (objectStore === undefined)
+						reject('failed to open object store')
 
-				s.indices.forEach(i => objectStore.createIndex(i.index,
-															   i.index,
-															   i.options
-				))
+					store.indices.forEach(i => objectStore.createIndex(i.index,
+																	   i.index,
+																	   i.options
+					))
+				})
+
+				localStorage.setItem(this._loadKey, 'true')
+
+				resolve(true)
 			})
-
-			localStorage.setItem(this._loadKey, 'true')
 		})
 	}
 

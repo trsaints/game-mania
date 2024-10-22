@@ -8,7 +8,7 @@ export interface ILocalDb<T> {
 					mode: IDBTransactionMode
 	): Promise<IDBObjectStore>
 
-	create<T extends ApiData[]>(storages: { [K in keyof T]: LocalDbStore<T[K]> }): void
+	create<T extends ApiData[]>(storages: { [K in keyof T]: LocalDbStore<T[K]> }): Promise<boolean>
 
 	getObjectById(storageName: string, key: number): Promise<T>
 
