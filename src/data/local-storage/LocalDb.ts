@@ -144,24 +144,42 @@ export class LocalDb implements ILocalDb<ApiData> {
 			if (! this.isCreated() || objects.length < 1) reject(false)
 
 			const addedObjects: ApiData[] = []
+			let completed                 = 0
 
-			this.openObjectStore(storageName, 'readwrite')
-				.then(objectStore => {
-					for (const object of objects) {
+			objects.forEach(object => {
+				this.openObjectStore(storageName, 'readwrite')
+					.then(objectStore => {
 						const idbAddRequest = objectStore.add(object)
 
-						idbAddRequest.addEventListener('success',
-													   () => addedObjects.push(
-														   object)
-						)
+						idbAddRequest.addEventListener('success', () => {
+							addedObjects.push(object)
+							completed++
 
-						idbAddRequest.addEventListener('error',
-													   () => console.log(`failed to add entry ${object.id}`)
-						)
-					}
+							if (completed === objects.length) {
+								resolve(addedObjects)
+							}
+						})
 
-					resolve(addedObjects)
-				})
+						idbAddRequest.addEventListener('error', (event) => {
+							const error = (event.target as IDBRequest).error
+
+							console.log(`Failed to add entry ${object.id}: ${error?.message}`)
+							completed++
+
+							if (completed === objects.length) {
+								resolve(addedObjects)
+							}
+						})
+					})
+					.catch(error => {
+						console.log(`Failed to open object store: ${error}`)
+						completed++
+						
+						if (completed === objects.length) {
+							resolve(addedObjects)
+						}
+					})
+			})
 		})
 	}
 
