@@ -26,7 +26,7 @@ const localDb       = new LocalDb('game-mania', 1)
 const apiMiddleware = new ApiMiddleware(dataServiceDictionary, localDb)
 
 if (! localDb.isCreated()) {
-	StartupUtils.initializeDb(localDb)
+	await StartupUtils.initializeDb(localDb)
 }
 
 function Root() {
