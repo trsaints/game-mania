@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react'
 import { RootContext } from '@data/context'
 import { useLoaderData } from 'react-router-dom'
 import { Game } from '@data/types'
+import { GamePanel } from '@views/components'
 
 
 function GamePage() {
@@ -21,9 +22,20 @@ function GamePage() {
 		})
 	}, [])
 
+	const imagesToLoad = selectedGame?.shortScreenshots
+						 ?? selectedGame?.screenshots?.results
+						 ?? []
+
 	return (
 		<article className={style.GamePage}>
-			<h1>{selectedGame?.name}</h1>
+			{
+				selectedGame ? (
+								 <>
+									 <GamePanel game={selectedGame} images={imagesToLoad}/>
+								 </>
+							 )
+							 : <h2>loading...</h2>
+			}
 		</article>
 	)
 }
