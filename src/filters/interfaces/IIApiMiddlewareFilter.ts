@@ -8,4 +8,9 @@ export interface IIApiMiddlewareFilter {
 						  gameService: IGameService,
 						  database: ILocalDb<ApiData>
 	): Promise<Game>
+
+	mapGameDetails(game: Game,
+				   gameService: IGameService,
+				   database: ILocalDb<ApiData>
+	): Promise<Game>
 }
