@@ -1,6 +1,5 @@
 import { RootContext } from '@data/context'
 import { Game, Genre, Recommended } from '@data/types'
-import { StylingUtils } from '@src/utils'
 import { Gallery, GamePanel, Selection } from '@views/components'
 import { useContext, useEffect, useState } from 'react'
 import style from './Home.module.scss'
@@ -28,24 +27,13 @@ export function Home() {
 
 	return (
 		<main className={style.Home}>
-			<h2>Welcome</h2>
+			<h2>Get ready for the next level</h2>
 
-			<article className={style.Banner}
-					 style={StylingUtils.getInlineBanner(recommended?.recent)}
-			>
-				<h3>Popular</h3>
-
-				<RecentPanel recommended={recommended}/>
-			</article>
+			<RecentPanel recommended={recommended}/>
 
 			{(games && genres) && <Selection games={games} genres={genres}/>}
 
-			<article className={style.Banner}
-					 style={StylingUtils.getInlineBanner(recommended?.daily)}
-			>
-				<h3>Daily Suggestion</h3>
-				<DailyPanel recommended={recommended}/>
-			</article>
+			<DailyPanel recommended={recommended}/>
 
 			<article className={style.Gallery}>
 				<h3>gallery</h3>

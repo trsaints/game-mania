@@ -4,13 +4,19 @@ import * as React from 'react'
 import { ComponentProps, PropsWithChildren, useState } from 'react'
 import style from './GamePanel.module.scss'
 import { IGamePanel } from './IGamePanel'
+import { StylingUtils } from '@src/utils'
 
 
 function GamePanel({ game, images }: IGamePanel) {
 	return (
-		<article className={style.GamePanel}>
-			<Header game={game}/>
-			<Banner name={game.name} images={images}/>
+
+		<article className={style.PanelBanner}
+				 style={StylingUtils.getInlineBanner(game)}
+		>
+			<article className={style.GamePanel}>
+				<Header game={game}/>
+				<Banner name={game.name} images={images}/>
+			</article>
 		</article>
 	)
 }
@@ -32,9 +38,9 @@ function Header({ game }: IHeader) {
 		<header className={style.Header}>
 			<h3>{game.name}</h3>
 
-			<p className={style.Released}>Released at: {' '}
+			<p className={style.Released}>Released at:
 				<time dateTime={game.released}>
-					{new Date(game.released).getFullYear()}
+					{' ' + new Date(game.released).getFullYear()}
 				</time>
 			</p>
 
