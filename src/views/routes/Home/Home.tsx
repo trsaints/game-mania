@@ -69,7 +69,7 @@ function RecentPanel({ recommended }: IRecommendedPanel) {
 		((recommended?.recent)
 		&& (recommended?.recentScreenshots))
 		&& <GamePanel game={recommended?.recent}
-					  screenshots={recommended?.recentScreenshots}
+					  images={recommended?.recentScreenshots.results}
 		/>
 	)
 }
@@ -79,7 +79,7 @@ function DailyPanel({ recommended }: IRecommendedPanel) {
 		((recommended?.daily)
 		&& (recommended?.dailyScreenshots))
 		&& <GamePanel game={recommended?.daily}
-					  screenshots={recommended?.dailyScreenshots}
+					  images={recommended?.dailyScreenshots.results}
 		/>
 	)
 }

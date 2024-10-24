@@ -1,4 +1,4 @@
-import { Game, Screenshots } from '@data/types'
+import { Game, ImageCommons } from '@data/types'
 import { ImageCard } from '@views/components'
 import * as React from 'react'
 import { ComponentProps, PropsWithChildren, useState } from 'react'
@@ -6,11 +6,11 @@ import style from './GamePanel.module.scss'
 import { IGamePanel } from './IGamePanel'
 
 
-function GamePanel({ game, screenshots }: IGamePanel) {
+function GamePanel({ game, images }: IGamePanel) {
 	return (
 		<article className={style.GamePanel}>
 			<Header game={game}/>
-			<Banner name={game.name} screenshots={screenshots}/>
+			<Banner name={game.name} images={images}/>
 		</article>
 	)
 }
@@ -49,10 +49,12 @@ function Header({ game }: IHeader) {
 
 interface IBanner extends ComponentProps<'article'> {
 	name: string
-	screenshots: Screenshots
+	images: ImageCommons[]
 }
 
-function Banner({ name, screenshots }: IBanner) {
+function Banner(props: IBanner) {
+	const { name, images } = props
+
 	const [currentIndex, setCurrentIndex] = useState<number>(0)
 
 	const selectImage = (e: React.MouseEvent<HTMLElement>) => {
@@ -69,20 +71,20 @@ function Banner({ name, screenshots }: IBanner) {
 		<article className={style.Banner}>
 			<figure className={style.Main}>
 				<img
-					src={screenshots?.results[currentIndex]?.image ?? ''}
+					src={images[currentIndex]?.image ?? ''}
 					alt={`main banner for the "${name}" game`}
 				/>
 			</figure>
 
 			<menu className={style.Screenshots} onClick={selectImage}>
-				<ScreenshotsList name={name} screenshots={screenshots}/>
+				<ScreenshotsList {...props} />
 			</menu>
 		</article>
 	)
 }
 
-function ScreenshotsList({ screenshots, name }: IBanner) {
-	return screenshots.results.map((img, i) => {
+function ScreenshotsList({ images, name }: IBanner) {
+	return images.map((img, i) => {
 		return (
 			<li key={`${img.id}-${typeof (img)}`} data-index={i}>
 				<ImageCard img={img}

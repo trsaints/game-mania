@@ -3,7 +3,7 @@ import {
 	GameCommons,
 	Publisher,
 	Screenshots,
-	ShortScreenshot
+	ImageCommons
 } from '@data/types'
 
 
@@ -33,7 +33,7 @@ export type Game = GameCommons & {
 	developers: Developer[]
 	publishers: Publisher[]
 	descriptionRaw: string
-	shortScreenshots?: ShortScreenshot[]
+	shortScreenshots?: ImageCommons[]
 	screenshots?: Screenshots
 }
 
