@@ -1,8 +1,8 @@
-import { Image } from '@data/types'
+import { ImageCommons } from '@data/types'
 import { ComponentProps } from 'react'
 
 
 export interface IImageCard extends ComponentProps<'p'> {
-	img: Image
+	img: ImageCommons
 	alt: string
 }
