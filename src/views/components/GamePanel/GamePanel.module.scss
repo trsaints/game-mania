@@ -1,58 +1,65 @@
 @use "src/palette";
 @use "sass:color";
 
-.GamePanel {
-	background-color : color.scale(palette.$black-d5, $alpha : -20%);
-	border-radius    : 16px;
-	padding          : 2.5vh 5vw;
 
-	.Header {
-		margin-bottom : 10vh;
+.PanelBanner {
+	padding       : 10vh 5vw;
+	margin-bottom : 10vh;
 
-		.Released, .Publisher, .Description {
-			margin-bottom : 2.5vh;
-		}
+	.GamePanel {
+		background-color : color.scale(palette.$black-d5, $alpha : -20%);
+		border-radius    : 16px;
+		padding          : 2.5vh 5vw;
 
-		.Released, .Publisher {
-			font-size   : 1.2rem;
-			font-weight : bold;
-		}
+		.Header {
+			margin-bottom : 10vh;
 
-		.Tags {
-			color       : palette.$black-d2;
-			display     : flex;
-			flex-wrap   : wrap;
-			font-weight : bold;
-			gap         : 2vw;
-
-			.GenreTag {
-				background-color : palette.$white-d6;
-				border-radius    : 16px;
-				padding          : 1vh 2.5vw;
-				width            : fit-content;
+			.Released, .Publisher, .Description {
+				margin-bottom : 2.5vh;
 			}
-		}
-	}
 
-	.Banner {
-		display : grid;
-		gap     : 10vh;
+			.Released, .Publisher {
+				font-size   : 1.2rem;
+				font-weight : bold;
+			}
 
-		.Main {
-			border-radius : 8px;
-			overflow      : hidden;
+			.Tags {
+				color       : palette.$black-d2;
+				display     : flex;
+				flex-wrap   : wrap;
+				font-weight : bold;
+				gap         : 2vw;
 
-			img {
-				height     : 25vh;
-				object-fit : cover;
-				width      : 100%;
+				.GenreTag {
+					background-color : palette.$white-d6;
+					border-radius    : 16px;
+					padding          : 1vh 2.5vw;
+					width            : fit-content;
+				}
 			}
 		}
 
-		.Screenshots {
-			display   : flex;
-			flex-wrap : wrap;
-			gap       : 5vw;
+		.Banner {
+			display : grid;
+			gap     : 10vh;
+
+			.Main {
+				border-radius : 8px;
+				overflow      : hidden;
+
+				img {
+					height     : 25vh;
+					object-fit : cover;
+					width      : 100%;
+				}
+			}
+
+			.Screenshots {
+				display   : flex;
+				flex-wrap : wrap;
+				gap       : 5vw;
+			}
 		}
 	}
 }
+

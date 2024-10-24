@@ -9,6 +9,7 @@ import React, {
 	SetStateAction,
 	useState
 } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 
 export { GamePageList }
@@ -21,18 +22,28 @@ function GamePageList({ games }: IGamePageList) {
 									 itemCount + (currentPage * itemCount)
 	)
 
+	const navigator = useNavigate()
+
+	const openGamePage = (e: React.MouseEvent) => {
+		const target       = e.target as HTMLElement
+		const selectedCard = target.closest('[data-id]') as HTMLElement
+
+		if (! selectedCard) return
+
+		navigator(`search/${selectedCard.dataset['id']}`)
+	}
+
 	const changeItemCount = (e: FormEvent) => {
 		e.preventDefault()
 
 		const targetData = new FormData(e.target as HTMLFormElement)
 		const newCount   = Number(targetData.get('item-count'))
 
-		if (! newCount) {
-			return
-		}
+		if (! newCount) return
 
 		setItemCount(newCount)
 	}
+
 
 	return (
 		<section className={style.GamePageList}>
@@ -40,7 +51,7 @@ function GamePageList({ games }: IGamePageList) {
 
 			<CountFilter onHandleSubmit={changeItemCount}/>
 
-			<ul className={style.GameList}>
+			<ul className={style.GameList} onClick={openGamePage}>
 				{currentGames.map(game => (
 					<li key={`game-${game.id}`}>
 						<GameCard game={game}/>

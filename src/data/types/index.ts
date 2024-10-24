@@ -1,6 +1,6 @@
 export * from './Rating'
 export * from './Tag'
-export * from './ShortScreenshot'
+export * from './ImageCommons.ts'
 export * from './ParentPlatform'
 export * from './Genre'
 export * from './Developer'

@@ -1,2 +1,3 @@
 export * from './ErrorPage'
 export * from './GamePage'
+export * from './SearchPage'
