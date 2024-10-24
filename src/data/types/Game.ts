@@ -1,4 +1,10 @@
-import { Developer, GameCommons, Publisher, ShortScreenshot } from '@data/types'
+import {
+	Developer,
+	GameCommons,
+	Publisher,
+	Screenshots,
+	ShortScreenshot
+} from '@data/types'
 
 
 export type Game = GameCommons & {
@@ -28,6 +34,7 @@ export type Game = GameCommons & {
 	publishers: Publisher[]
 	descriptionRaw: string
 	shortScreenshots?: ShortScreenshot[]
+	screenshots?: Screenshots
 }
 
 
