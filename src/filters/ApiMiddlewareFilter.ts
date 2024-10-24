@@ -17,7 +17,7 @@ async function mapMissingScreenshots(game: Game,
 	if (game.shortScreenshots) return Promise.resolve(game)
 
 	const screenshots      = await gameService.getScreenshots(game.id)
-	const successfulUpdate = await database.updateObject('games', game.id, {
+	const successfulUpdate = await database.updateObject('games', {
 		...game,
 		screenshots
 	})

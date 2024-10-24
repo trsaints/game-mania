@@ -49,15 +49,29 @@ export class ApiMiddleware implements IApiMiddleware {
 	): Promise<ApiData> {
 		let data = await this._localDb.getObjectById(route, id)
 
-		if (data) return data
+		if (data && route !== 'games') return data
+
+		if (data && route === 'games') {
+			const parsedGame = data as Game
+
+			return await this._filter.mapMissingScreenshots(parsedGame,
+															this._dataServiceDictionary.games,
+															this._localDb
+			)
+		}
 
 		data = await this._dataServiceDictionary[route].getById(id)
 
-		// noinspection ES6MissingAwait
+		const successfulAddition = await this._localDb.addObject(route, data)
 
-		this._localDb.addObject(route, data)
+		if (successfulAddition && route !== 'games') return data
 
-		return data
+		const parsedGame = data as Game
+
+		return await this._filter.mapMissingScreenshots(parsedGame,
+														this._dataServiceDictionary.games,
+														this._localDb
+		)
 	}
 
 	async getRecommendations(): Promise<Recommended> {
