@@ -199,7 +199,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 		})
 	}
 
-	removeObject(storageName: string, key: keyof ApiData): Promise<boolean> {
+	removeObject(storageName: string, key: number): Promise<boolean> {
 		return new Promise<boolean>((resolve, reject) => {
 			if (! this.isCreated()) reject(false)
 
@@ -224,7 +224,6 @@ export class LocalDb implements ILocalDb<ApiData> {
 	}
 
 	updateObject(storageName: string,
-				 key: keyof ApiData,
 				 newObject: ApiData
 	): Promise<boolean> {
 		return new Promise<boolean>((resolve, reject) => {
@@ -232,14 +231,14 @@ export class LocalDb implements ILocalDb<ApiData> {
 
 			this.openObjectStore(storageName, 'readwrite')
 				.then(objectStore => {
-					const idbPutRequest = objectStore.put(newObject, key)
+					const idbPutRequest = objectStore.put(newObject)
 
 					idbPutRequest.addEventListener('success',
 												   () => resolve(true)
 					)
 					idbPutRequest.addEventListener('error', (event) => {
 						const error = (event.target as IDBRequest).error
-						console.log(`Failed to update entry ${key}: ${error?.message}`)
+						console.log(`Failed to update entry ${newObject.id}: ${error?.message}`)
 						reject(error)
 					})
 				})
