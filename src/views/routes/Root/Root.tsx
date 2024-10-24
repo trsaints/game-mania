@@ -12,6 +12,7 @@ import {
 import { LocalDb } from '@data/local-storage'
 import { ApiMiddleware } from '@src/middlewares'
 import { StartupUtils } from '@src/utils'
+import { ApiMiddlewareFilter } from '@src/filters'
 
 
 const dataServiceDictionary: DataServiceDictionary = {
@@ -23,7 +24,10 @@ const dataServiceDictionary: DataServiceDictionary = {
 }
 
 const localDb       = new LocalDb('game-mania', 1)
-const apiMiddleware = new ApiMiddleware(dataServiceDictionary, localDb)
+const apiMiddleware = new ApiMiddleware(dataServiceDictionary,
+										localDb,
+										ApiMiddlewareFilter
+)
 
 if (! localDb.isCreated()) {
 	await StartupUtils.initializeDb(localDb)
