@@ -30,7 +30,11 @@ function GamePageList({ games }: IGamePageList) {
 
 		if (! selectedCard) return
 
-		navigator(`search/${selectedCard.dataset['id']}`)
+		navigator(`/search/${selectedCard.dataset['id']}`)
+
+		setTimeout(() => {
+			window.location.hash = '#game-page'
+		}, 200)
 	}
 
 	const changeItemCount = (e: FormEvent) => {
