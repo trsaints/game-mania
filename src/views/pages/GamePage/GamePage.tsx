@@ -43,11 +43,13 @@ function GamePage() {
 						<GamePanel game={selectedGame} images={imagesToLoad}/>
 
 						<aside>
-							<h3>More {gameGenre} games</h3>
+							<h3 className={style.SuggestionsHeader}>More {gameGenre} games</h3>
 
 							<GamePageList games={games.slice(0, 20)}/>
-							<Link to="/search" relative="path">
-								See all {gameGenre} games
+							<Link className={style.SuggestionsLink}
+								  to="/search"
+								  relative="path">
+								See all "{gameGenre}" games
 							</Link>
 						</aside>
 
