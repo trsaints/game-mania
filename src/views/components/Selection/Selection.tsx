@@ -1,33 +1,25 @@
 import { Genre } from '@data/types'
 import { ISelection } from './ISelection'
 import style from './Selection.module.scss'
-import * as React from 'react'
 import { ComponentProps, useState } from 'react'
 import { GamePageList } from '@views/components'
+import { SelectionViewModel } from '@src/view-models/SelectionViewModel.ts'
 
+
+const viewModel = new SelectionViewModel()
 
 export function Selection({ games, genres }: ISelection) {
 	const [selectedGenre, setSelectedGenre] = useState<string>('action')
 
-	const filteredGames = games.filter(g =>
-										   g.genres.findIndex(t => t.slug
-																   === selectedGenre)
-										   !== -1)
-
-	const filterByGenre = (e: React.MouseEvent) => {
-
-		const target   = e.target as HTMLElement
-		const listItem = target.closest('[data-slug]') as HTMLLIElement
-
-		if (! listItem) {
-			return
-		}
-
-		setSelectedGenre(listItem.dataset['slug'] ?? '')
-	}
+	const filteredGames = games.filter(g => {
+		return g.genres.findIndex(t => t.slug
+									   === selectedGenre)
+			   !== -1
+	})
 
 	return (
-		<article className={style.Selection} onClick={filterByGenre}>
+		<article className={style.Selection}
+				 onClick={(e) => viewModel.filterByGenre(e, setSelectedGenre)}>
 			<h3 className={style.MainHeader}>Navigate by genre</h3>
 
 			<GenreFilter genres={genres}/>
