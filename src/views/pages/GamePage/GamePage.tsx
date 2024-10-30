@@ -14,17 +14,17 @@ function GamePage() {
 		id: string
 	}
 
-	const gameId     = useLoaderData() as GameId
-	const gameGenres = selectedGame?.genres.join(',')
+	const searchParams = useLoaderData() as GameId
+	const gameGenres   = selectedGame?.genres.join(',')
 
 	useEffect(() => {
-		apiMiddleware?.getById('games', Number(gameId.id)).then(game => {
+		apiMiddleware?.getById('games', Number(searchParams.id)).then(game => {
 			setSelectedGame(game as Game)
 		})
 		apiMiddleware?.getAll('games', { genres: gameGenres }).then(games => {
 			setGames(games as Game[])
 		})
-	}, [gameId])
+	}, [searchParams])
 
 	const imagesToLoad = selectedGame?.shortScreenshots
 						 ?? selectedGame?.screenshots?.results
@@ -33,7 +33,9 @@ function GamePage() {
 	const gameGenre = selectedGame?.genres[0].name
 
 	return (
-		<article className={style.GamePage}>
+		<article className={style.GamePage}
+				 id="game-page"
+		>
 			{
 				selectedGame
 				&& games ? (
