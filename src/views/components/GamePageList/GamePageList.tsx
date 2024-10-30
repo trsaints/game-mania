@@ -1,18 +1,22 @@
 import { IGamePageList } from './IGamePageList.ts'
 import style from './GamePageList.module.scss'
 import { GameCard } from '@views/components'
-import React, {
+import {
 	ComponentProps,
 	Dispatch,
-	FormEvent,
 	FormEventHandler,
 	SetStateAction,
 	useState
 } from 'react'
 import { useNavigate } from 'react-router-dom'
+import {
+	GamePageListViewModel
+} from '@src/view-models/GamePageListViewModel.ts'
 
 
 export { GamePageList }
+
+const viewModel = new GamePageListViewModel()
 
 function GamePageList({ games }: IGamePageList) {
 	const [itemCount, setItemCount]     = useState(10)
@@ -24,38 +28,16 @@ function GamePageList({ games }: IGamePageList) {
 
 	const navigator = useNavigate()
 
-	const openGamePage = (e: React.MouseEvent) => {
-		const target       = e.target as HTMLElement
-		const selectedCard = target.closest('[data-id]') as HTMLElement
-
-		if (! selectedCard) return
-
-		navigator(`/search/${selectedCard.dataset['id']}`)
-
-		setTimeout(() => {
-			window.location.hash = '#game-page'
-		}, 200)
-	}
-
-	const changeItemCount = (e: FormEvent) => {
-		e.preventDefault()
-
-		const targetData = new FormData(e.target as HTMLFormElement)
-		const newCount   = Number(targetData.get('item-count'))
-
-		if (! newCount) return
-
-		setItemCount(newCount)
-	}
-
-
 	return (
 		<section className={style.GamePageList}>
 			<h3>{games.length} games found</h3>
 
-			<CountFilter onHandleSubmit={changeItemCount}/>
+			<CountFilter onHandleSubmit={(e) => viewModel.changeItemCount(e,
+																		  setItemCount
+			)}/>
 
-			<ul className={style.GameList} onClick={openGamePage}>
+			<ul className={style.GameList}
+				onClick={(e) => viewModel.openGamePage(e, navigator)}>
 				{currentGames.map(game => (
 					<li key={`game-${game.id}`}>
 						<GameCard game={game}/>
@@ -112,19 +94,10 @@ function PageSelection({
 		)
 	)
 
-	const changePage = (e: React.MouseEvent<HTMLMenuElement>) => {
-		const target        = e.target as HTMLMenuElement
-		const pressedButton = target.closest('[data-page]') as HTMLButtonElement
-
-		if (! pressedButton) {
-			return
-		}
-
-		setCurrentPage(Number(pressedButton.dataset['page']))
-	}
-
 	return (
 		<menu className={style.PageSelection}
-			  onClick={changePage}>{pageButtons}</menu>
+			  onClick={(e) => viewModel.changePage(e,
+												   setCurrentPage
+			  )}>{pageButtons}</menu>
 	)
 }
