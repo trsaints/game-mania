@@ -24,7 +24,7 @@ function GamePage() {
 		apiMiddleware?.getAll('games', { genres: gameGenres }).then(games => {
 			setGames(games as Game[])
 		})
-	}, [])
+	}, [gameId])
 
 	const imagesToLoad = selectedGame?.shortScreenshots
 						 ?? selectedGame?.screenshots?.results
@@ -44,7 +44,7 @@ function GamePage() {
 							<h3>More {gameGenre} games</h3>
 
 							<GamePageList games={games.slice(0, 20)}/>
-							<Link to="/search">
+							<Link to="/search" relative="path">
 								See all {gameGenre} games
 							</Link>
 						</aside>
