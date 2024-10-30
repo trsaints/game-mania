@@ -13,18 +13,10 @@ export type Game = GameCommons & {
 	metacriticPlatforms: unknown[]
 	backgroundImageAdditional: string
 	website: string
-	screenshotsCount: number
 	moviesCount: number
 	creatorsCount: number
 	achievementsCount: number
 	parentAchievementsCount: number
-	redditUrl: string
-	redditName: string
-	redditDescription: string
-	redditLogo: string
-	redditCount: number
-	twitchCount: number
-	youtubeCount: number
 	alternativeNames: string[]
 	metacriticUrl: string
 	parentsCount: number

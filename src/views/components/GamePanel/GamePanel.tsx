@@ -44,7 +44,8 @@ function Header({ game }: IHeader) {
 				</time>
 			</p>
 
-			<p className={style.Publisher}>Publisher: {game?.publishers[0]?.name}</p>
+			<p className={style.Publisher}>Publisher: {game?.publishers[0]?.name
+													   ?? 'NA'}</p>
 
 			<p className={style.Description}>{game.descriptionRaw}</p>
 
