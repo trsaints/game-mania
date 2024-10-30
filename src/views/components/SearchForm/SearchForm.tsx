@@ -1,36 +1,26 @@
-import * as React from 'react'
 import { useContext } from 'react'
 import { RootContext } from '@data/context'
 import { Form, useNavigate } from 'react-router-dom'
-import { Game } from '@data/types'
 import style from '@views/components/SearchWidget/SearchWidget.module.scss'
+import { SearchFormViewModel } from '@src/view-models/SearchFormViewModel.ts'
 
+
+const viewModel = new SearchFormViewModel()
 
 export function SearchForm() {
 	const { apiMiddleware, setGames } = useContext(RootContext)
 
 	const navigator = useNavigate()
 
-	const search = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault()
-
-		const data      = new FormData(e.target as HTMLFormElement)
-		const newSearch = data.get('search_content') as string
-
-		if (! newSearch) return
-
-		apiMiddleware?.getAll('games', { search: newSearch })
-			.then(apiData => setGames(apiData as Game[]))
-		navigator('/search')
-
-		setTimeout(() => window.location.assign('#search-header'), 200)
-	}
-
 	return (
 		<Form method="get"
 			  className={style.SearchForm}
 			  action="/search"
-			  onSubmit={search}
+			  onSubmit={(e) => viewModel.search(e,
+												apiMiddleware,
+												navigator,
+												setGames
+			  )}
 		>
 			<label className={style.Label}
 				   htmlFor="search_content"
