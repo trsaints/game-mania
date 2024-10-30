@@ -31,11 +31,14 @@ export class ApiMiddleware implements IApiMiddleware {
 			const parsedGames = data as Game[]
 
 			return await Promise.all(
-				parsedGames.map(game =>
-									this._filter.mapMissingScreenshots(game,
-																	   this._dataServiceDictionary.games,
-																	   this._localDb
-									))
+				parsedGames.map(game => {
+					return game.screenshots
+						   ? game
+						   : this._filter.mapMissingScreenshots(game,
+																this._dataServiceDictionary.games,
+																this._localDb
+						)
+				})
 			)
 		}
 
