@@ -12,6 +12,7 @@ function GamePanel({ game, images }: IGamePanel) {
 
 		<article className={style.PanelBanner}
 				 style={StylingUtils.getInlineBanner(game)}
+				 id="game-page"
 		>
 			<article className={style.GamePanel}>
 				<Header game={game}/>
