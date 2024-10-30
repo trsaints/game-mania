@@ -24,23 +24,7 @@ export class ApiMiddleware implements IApiMiddleware {
 	): Promise<ApiData[]> {
 		let data = await this._localDb.getAll(route, params)
 
-		if (data.length > 0 && route !== 'games')
-			return data
-
-		if (data.length > 0 && route === 'games') {
-			const parsedGames = data as Game[]
-
-			return await Promise.all(
-				parsedGames.map(game => {
-					return game.screenshots
-						   ? game
-						   : this._filter.mapMissingScreenshots(game,
-																this._dataServiceDictionary.games,
-																this._localDb
-						)
-				})
-			)
-		}
+		if (data.length > 0) return data
 
 		data = await this._dataServiceDictionary[route].getAll(params)
 
