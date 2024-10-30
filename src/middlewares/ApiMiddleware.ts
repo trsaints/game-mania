@@ -2,17 +2,21 @@ import { ApiData, ILocalDb } from '@data/local-storage'
 import { DataRequestParams } from '@data/request-parameters'
 import { DataServiceDictionary, Game, Recommended } from '@data/types'
 import { IApiMiddleware } from '@src/middlewares'
+import { IIApiMiddlewareFilter } from '@src/filters'
 
 
 export class ApiMiddleware implements IApiMiddleware {
 	private readonly _dataServiceDictionary: DataServiceDictionary
 	private readonly _localDb: ILocalDb<ApiData>
+	private readonly _filter: IIApiMiddlewareFilter
 
 	constructor(dataServiceDictionary: DataServiceDictionary,
-				localDb: ILocalDb<ApiData>
+				localDb: ILocalDb<ApiData>,
+				filter: IIApiMiddlewareFilter
 	) {
 		this._dataServiceDictionary = dataServiceDictionary
 		this._localDb               = localDb
+		this._filter                = filter
 	}
 
 	async getAll(route: keyof DataServiceDictionary,
@@ -20,7 +24,20 @@ export class ApiMiddleware implements IApiMiddleware {
 	): Promise<ApiData[]> {
 		let data = await this._localDb.getAll(route, params)
 
-		if (data.length > 0) return data
+		if (data.length > 0 && route !== 'games')
+			return data
+
+		if (data.length > 0 && route === 'games') {
+			const parsedGames = data as Game[]
+
+			return await Promise.all(
+				parsedGames.map(game =>
+									this._filter.mapMissingScreenshots(game,
+																	   this._dataServiceDictionary.games,
+																	   this._localDb
+									))
+			)
+		}
 
 		data = await this._dataServiceDictionary[route].getAll(params)
 
@@ -32,15 +49,41 @@ export class ApiMiddleware implements IApiMiddleware {
 	): Promise<ApiData> {
 		let data = await this._localDb.getObjectById(route, id)
 
-		if (data) return data
+		if (data && route !== 'games') return data
+
+		if (data && route === 'games') {
+			let parsedGame = data as Game
+
+			if (! parsedGame.shortScreenshots) {
+				parsedGame =
+					await this._filter.mapMissingScreenshots(parsedGame,
+															 this._dataServiceDictionary.games,
+															 this._localDb
+					)
+			}
+
+			if (! parsedGame.publishers) {
+				parsedGame = await this._filter.mapGameDetails(parsedGame,
+															   this._dataServiceDictionary.games,
+															   this._localDb
+				)
+			}
+
+			return parsedGame
+		}
 
 		data = await this._dataServiceDictionary[route].getById(id)
 
-		// noinspection ES6MissingAwait
+		const successfulAddition = await this._localDb.addObject(route, data)
 
-		this._localDb.addObject(route, data)
+		if (successfulAddition && route !== 'games') return data
 
-		return data
+		const parsedGame = data as Game
+
+		return await this._filter.mapMissingScreenshots(parsedGame,
+														this._dataServiceDictionary.games,
+														this._localDb
+		)
 	}
 
 	async getRecommendations(): Promise<Recommended> {

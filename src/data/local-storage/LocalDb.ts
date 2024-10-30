@@ -36,8 +36,8 @@ export class LocalDb implements ILocalDb<ApiData> {
 
 			openRequest.addEventListener('success', () => {
 				const transaction = openRequest.result.transaction(storageName,
-																   mode
-				)
+																   mode)
+
 				resolve(transaction.objectStore(storageName))
 			})
 
@@ -47,26 +47,34 @@ export class LocalDb implements ILocalDb<ApiData> {
 		})
 	}
 
-	create<T extends ApiData[]>(storages: { [K in keyof T]: LocalDbStore<T[K]> }): void {
-		if (this.isCreated()) return
+	create<T extends ApiData[]>(storages: { [K in keyof T]: LocalDbStore<T[K]> }): Promise<boolean> {
+		return new Promise((resolve, reject) => {
+			if (this.isCreated()) {
+				return reject('database already created')
+			}
 
-		const openRequest = this.openRequest()
+			const openRequest = this.openRequest()
 
-		openRequest?.addEventListener('upgradeneeded', () => {
-			const { result } = openRequest
+			openRequest.addEventListener('upgradeneeded', () => {
+				const { result } = openRequest
 
-			storages.forEach(s => {
-				const objectStore = result.createObjectStore(s.name, s)
-
-				if (objectStore === undefined) return
-
-				s.indices.forEach(i => objectStore.createIndex(i.index,
-															   i.index,
-															   i.options
-				))
+				try {
+					storages.forEach(store => result.createObjectStore(store.name,
+																	   store
+					))
+				} catch (error) {
+					return reject(`failed to create object stores: ${error}`)
+				}
 			})
 
-			localStorage.setItem(this._loadKey, 'true')
+			openRequest.addEventListener('success', () => {
+				localStorage.setItem(this._loadKey, 'true')
+				resolve(true)
+			})
+
+			openRequest.addEventListener('error', () => {
+				reject(openRequest.error)
+			})
 		})
 	}
 
@@ -79,10 +87,15 @@ export class LocalDb implements ILocalDb<ApiData> {
 					idbGetRequest.addEventListener('success',
 												   () => resolve(idbGetRequest.result)
 					)
-					idbGetRequest.addEventListener('error',
-												   () => reject(
-													   'operation failed')
-					)
+					idbGetRequest.addEventListener('error', (event) => {
+						const error = (event.target as IDBRequest).error
+						console.log(`Failed to get entry ${key}: ${error?.message}`)
+						reject(error)
+					})
+				})
+				.catch(error => {
+					console.log(`Failed to open object store: ${error}`)
+					reject(error)
 				})
 		})
 	}
@@ -95,10 +108,11 @@ export class LocalDb implements ILocalDb<ApiData> {
 				.then(objectStore => {
 					const idbCursorRequest = objectStore.openCursor()
 
-					idbCursorRequest.addEventListener('error',
-													  () => reject(
-														  idbCursorRequest.error)
-					)
+					idbCursorRequest.addEventListener('error', (event) => {
+						const error = (event.target as IDBRequest).error
+						console.log(`Failed to open cursor: ${error?.message}`)
+						reject(error)
+					})
 
 					const results: ApiData[] = []
 
@@ -109,6 +123,10 @@ export class LocalDb implements ILocalDb<ApiData> {
 												   params
 						)
 					})
+				})
+				.catch(error => {
+					console.log(`Failed to open object store: ${error}`)
+					reject(error)
 				})
 		})
 	}
@@ -124,9 +142,15 @@ export class LocalDb implements ILocalDb<ApiData> {
 					idbAddRequest.addEventListener('success',
 												   () => resolve(true)
 					)
-					idbAddRequest.addEventListener('error',
-												   () => reject(idbAddRequest.error)
-					)
+					idbAddRequest.addEventListener('error', (event) => {
+						const error = (event.target as IDBRequest).error
+						console.log(`Failed to add entry: ${error?.message}`)
+						reject(error)
+					})
+				})
+				.catch(error => {
+					console.log(`Failed to open object store: ${error}`)
+					reject(error)
 				})
 		})
 	}
@@ -136,28 +160,46 @@ export class LocalDb implements ILocalDb<ApiData> {
 			if (! this.isCreated() || objects.length < 1) reject(false)
 
 			const addedObjects: ApiData[] = []
+			let completed                 = 0
 
-			this.openObjectStore(storageName, 'readwrite')
-				.then(objectStore => {
-					for (const object of objects) {
+			objects.forEach(object => {
+				this.openObjectStore(storageName, 'readwrite')
+					.then(objectStore => {
 						const idbAddRequest = objectStore.add(object)
 
-						idbAddRequest.addEventListener('success',
-													   () => addedObjects.push(
-														   object)
-						)
+						idbAddRequest.addEventListener('success', () => {
+							addedObjects.push(object)
+							completed++
 
-						idbAddRequest.addEventListener('error',
-													   () => console.log(`failed to add entry ${object.id}`)
-						)
-					}
+							if (completed === objects.length) {
+								resolve(addedObjects)
+							}
+						})
 
-					resolve(addedObjects)
-				})
+						idbAddRequest.addEventListener('error', (event) => {
+							const error = (event.target as IDBRequest).error
+
+							console.log(`Failed to add entry ${object.id}: ${error?.message}`)
+							completed++
+
+							if (completed === objects.length) {
+								resolve(addedObjects)
+							}
+						})
+					})
+					.catch(error => {
+						console.log(`Failed to open object store: ${error}`)
+						completed++
+
+						if (completed === objects.length) {
+							resolve(addedObjects)
+						}
+					})
+			})
 		})
 	}
 
-	removeObject(storageName: string, key: keyof ApiData): Promise<boolean> {
+	removeObject(storageName: string, key: number): Promise<boolean> {
 		return new Promise<boolean>((resolve, reject) => {
 			if (! this.isCreated()) reject(false)
 
@@ -168,16 +210,20 @@ export class LocalDb implements ILocalDb<ApiData> {
 					idbDeleteRequest.addEventListener('success',
 													  () => resolve(true)
 					)
-					idbDeleteRequest.addEventListener('error',
-													  () => reject(
-														  idbDeleteRequest.error)
-					)
+					idbDeleteRequest.addEventListener('error', (event) => {
+						const error = (event.target as IDBRequest).error
+						console.log(`Failed to delete entry ${key}: ${error?.message}`)
+						reject(error)
+					})
+				})
+				.catch(error => {
+					console.log(`Failed to open object store: ${error}`)
+					reject(error)
 				})
 		})
 	}
 
 	updateObject(storageName: string,
-				 key: keyof ApiData,
 				 newObject: ApiData
 	): Promise<boolean> {
 		return new Promise<boolean>((resolve, reject) => {
@@ -185,14 +231,20 @@ export class LocalDb implements ILocalDb<ApiData> {
 
 			this.openObjectStore(storageName, 'readwrite')
 				.then(objectStore => {
-					const idbPutRequest = objectStore.put(newObject, key)
+					const idbPutRequest = objectStore.put(newObject)
 
 					idbPutRequest.addEventListener('success',
 												   () => resolve(true)
 					)
-					idbPutRequest.addEventListener('error',
-												   () => reject(idbPutRequest.error)
-					)
+					idbPutRequest.addEventListener('error', (event) => {
+						const error = (event.target as IDBRequest).error
+						console.log(`Failed to update entry ${newObject.id}: ${error?.message}`)
+						reject(error)
+					})
+				})
+				.catch(error => {
+					console.log(`Failed to open object store: ${error}`)
+					reject(error)
 				})
 		})
 	}

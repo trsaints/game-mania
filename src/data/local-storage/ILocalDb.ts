@@ -8,7 +8,7 @@ export interface ILocalDb<T> {
 					mode: IDBTransactionMode
 	): Promise<IDBObjectStore>
 
-	create<T extends ApiData[]>(storages: { [K in keyof T]: LocalDbStore<T[K]> }): void
+	create<T extends ApiData[]>(storages: { [K in keyof T]: LocalDbStore<T[K]> }): Promise<boolean>
 
 	getObjectById(storageName: string, key: number): Promise<T>
 
@@ -18,10 +18,9 @@ export interface ILocalDb<T> {
 
 	addBulk(storageName: string, objects: T[]): Promise<ApiData[]>
 
-	removeObject(storageName: string, key: keyof T): Promise<boolean>
+	removeObject(storageName: string, key: number): Promise<boolean>
 
 	updateObject(storageName: string,
-				 key: keyof T,
 				 newObject: T
 	): Promise<boolean>
 

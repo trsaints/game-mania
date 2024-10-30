@@ -1,4 +1,4 @@
-import { LocalDb } from '@data/local-storage'
+import { ApiData, ILocalDb } from '@data/local-storage'
 import {
 	Game,
 	Genre,
@@ -14,7 +14,7 @@ export const StartupUtils: IStartupUtils = {
 	initializeDb
 }
 
-function initializeDb(db: LocalDb) {
+async function initializeDb(db: ILocalDb<ApiData>) {
 	const gameSchema: LocalDbStore<Game> = {
 		name         : 'games',
 		keyPath      : 'id',
@@ -50,11 +50,15 @@ function initializeDb(db: LocalDb) {
 		indices      : []
 	}
 
-	db.create([
-				  gameSchema,
-				  platformSchema,
-				  genreSchema,
-				  tagSchema,
-				  publisherSchema
-			  ])
+	const isCreated = await db.create([
+										  gameSchema,
+										  platformSchema,
+										  genreSchema,
+										  tagSchema,
+										  publisherSchema
+									  ])
+
+	if (isCreated) {
+		console.warn('database created')
+	}
 }

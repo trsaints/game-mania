@@ -5,7 +5,6 @@ import { createContext } from 'react'
 const RootContext = createContext<IRootContext>({
 													setGenres      : () => {},
 													setGames       : () => {},
-													setSelectedGame: () => {},
 													setPlatforms   : () => {},
 													setPublishers  : () => {},
 													setTags        : () => {}

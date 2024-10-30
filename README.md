@@ -515,7 +515,7 @@ type Game = GameCommons & {
 	developers: Developer[]
 	publishers: Publisher[]
 	descriptionRaw: string
-	shortScreenshots?: ShortScreenshot[]
+	shortScreenshots?: ImageCommons[]
 }
 ```
 
@@ -730,11 +730,11 @@ type Screenshots = {
 
 ##### Short Screenshot
 
-The `ShortScreenshot` type defines the structure of the `short_screenshots`
+The `ImageCommons` type defines the structure of the `short_screenshots`
 property from `games/{id}` endpoint responses.
 
 ```typescript
-type ShortScreenshot = {
+type ImageCommons = {
 	id: number
 	image: string
 }
