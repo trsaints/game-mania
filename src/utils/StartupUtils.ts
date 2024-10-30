@@ -14,7 +14,7 @@ export const StartupUtils: IStartupUtils = {
 	initializeDb
 }
 
-async function initializeDb(db: ILocalDb<ApiData>) {
+async function initializeDb(db: ILocalDb<ApiData>): Promise<boolean> {
 	const gameSchema: LocalDbStore<Game> = {
 		name         : 'games',
 		keyPath      : 'id',
@@ -58,7 +58,5 @@ async function initializeDb(db: ILocalDb<ApiData>) {
 										  publisherSchema
 									  ])
 
-	if (isCreated) {
-		console.warn('database created')
-	}
+	return Promise.resolve(isCreated)
 }
