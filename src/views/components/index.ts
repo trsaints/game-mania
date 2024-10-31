@@ -15,3 +15,4 @@ export {
 export {
 	ScreenshotsList
 } from '@views/components/ScreenshotsList/ScreenshotsList.tsx'
+export { Banner } from '@views/components/PanelBanner/PanelBanner.tsx'
