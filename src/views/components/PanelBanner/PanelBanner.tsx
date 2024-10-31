@@ -1,14 +1,9 @@
 import * as React from 'react'
-import { ComponentProps, useState } from 'react'
+import { useState } from 'react'
 import style from '@views/components/GamePanel/GamePanel.module.scss'
 import { ScreenshotsList } from '@views/components'
-import { ImageCommons } from '@data/types'
+import { IBanner } from '@views/components/PanelBanner/IBanner.ts'
 
-
-interface IBanner extends ComponentProps<'article'> {
-	name: string
-	images: ImageCommons[]
-}
 
 export function PanelBanner(props: IBanner) {
 	const { name, images } = props
