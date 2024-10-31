@@ -13,18 +13,18 @@ function GamePanel({ game, images }: IGamePanel) {
 				 style={StylingUtils.getInlineBanner(game)}
 		>
 			<article className={style.GamePanel}>
-				<Header game={game}/>
+				<PanelHeader game={game}/>
 				<PanelBanner name={game.name} images={images}/>
 			</article>
 		</article>
 	)
 }
 
-interface IHeader extends PropsWithChildren {
+interface IPanelHeader extends PropsWithChildren {
 	game: Game
 }
 
-function Header({ game }: IHeader) {
+function PanelHeader({ game }: IPanelHeader) {
 	const gameGenres = game.genres
 						   .slice(0, 3)
 						   .map(g =>
