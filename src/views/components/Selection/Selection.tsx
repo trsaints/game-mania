@@ -11,15 +11,11 @@ const viewModel = new SelectionViewModel()
 export function Selection({ games, genres }: ISelection) {
 	const [selectedGenre, setSelectedGenre] = useState<string>('action')
 
-	const filteredGames = games.filter(g => {
-		return g.genres.findIndex(t => t.slug
-									   === selectedGenre)
-			   !== -1
-	})
+	const filteredGames = viewModel.filterByGenre(games, selectedGenre)
 
 	return (
 		<article className={style.Selection}
-				 onClick={(e) => viewModel.filterByGenre(e, setSelectedGenre)}>
+				 onClick={(e) => viewModel.displayByGenre(e, setSelectedGenre)}>
 			<h3 className={style.MainHeader}>Navigate by genre</h3>
 
 			<GenreFilter genres={genres}/>
