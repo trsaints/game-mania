@@ -5,7 +5,7 @@ import { SearchForm } from '@views/components/SearchForm/SearchForm.tsx'
 import { SearchNavbar } from '@views/components/SearchNavbar/SearchNavbar.tsx'
 import { ISearchNavbar } from '@views/components/SearchNavbar/ISearchNavbar.tsx'
 import { RootContext } from '@data/context'
-import { useSearchFilters } from '@src/hooks/useSearchFilters.ts'
+import { useSearchSuggestions } from '@src/hooks/useSearchSuggestions.ts'
 
 
 export { SearchWidget }
@@ -23,7 +23,7 @@ function SearchWidget() {
 
 	const { apiMiddleware } = useContext(RootContext)
 
-	useSearchFilters(apiMiddleware, { setGenres, setTags, setPublishers })
+	useSearchSuggestions(apiMiddleware, { setGenres, setTags, setPublishers })
 
 	return (
 		<aside className={style.SearchWidget}>

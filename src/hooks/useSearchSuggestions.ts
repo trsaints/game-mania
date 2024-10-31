@@ -9,8 +9,8 @@ export type SearchStates = {
 	setPublishers: Dispatch<SetStateAction<Publisher[]>>
 }
 
-export function useSearchFilters(apiMiddleware: IApiMiddleware | undefined,
-								 searchStates: SearchStates
+export function useSearchSuggestions(apiMiddleware: IApiMiddleware | undefined,
+									 searchStates: SearchStates
 ) {
 	const { setGenres, setTags, setPublishers } = searchStates
 
