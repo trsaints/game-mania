@@ -1,24 +1,16 @@
-import * as React from 'react'
 import { useState } from 'react'
 import style from '@views/components/GamePanel/GamePanel.module.scss'
 import { ScreenshotsList } from '@views/components'
 import { IBanner } from '@views/components/PanelBanner/IBanner.ts'
+import { PanelBannerViewModel } from '@src/view-models/PanelBannerViewModel.ts'
 
+
+const viewModel = new PanelBannerViewModel()
 
 export function PanelBanner(props: IBanner) {
 	const { name, images } = props
 
 	const [currentIndex, setCurrentIndex] = useState<number>(0)
-
-	const selectImage = (e: React.MouseEvent<HTMLElement>) => {
-		const target   = e.target as HTMLElement
-		const listItem = target.closest('[data-index]') as HTMLLIElement
-
-		if (! listItem) return
-
-		const parsedIndex = listItem.dataset['index'] as unknown
-		setCurrentIndex(parsedIndex as number)
-	}
 
 	return (
 		<article className={style.Banner}>
@@ -29,7 +21,8 @@ export function PanelBanner(props: IBanner) {
 				/>
 			</figure>
 
-			<menu className={style.Screenshots} onClick={selectImage}>
+			<menu className={style.Screenshots}
+				  onClick={(e) => viewModel.selectImage(e, setCurrentIndex)}>
 				<ScreenshotsList {...props} />
 			</menu>
 		</article>
