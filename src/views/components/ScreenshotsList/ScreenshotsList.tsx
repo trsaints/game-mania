@@ -1,9 +1,8 @@
 import { ImageCard } from '@views/components'
-import { ComponentProps } from 'react'
 import { ImageCommons } from '@data/types'
 
 
-interface IScreenshotsList extends ComponentProps<'article'> {
+interface IScreenshotsList {
 	name: string
 	images: ImageCommons[]
 }
