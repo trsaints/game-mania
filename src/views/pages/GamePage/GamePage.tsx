@@ -1,30 +1,24 @@
 import style from './GamePage.module.scss'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { RootContext } from '@data/context'
 import { Link, useLoaderData } from 'react-router-dom'
 import { Game } from '@data/types'
 import { GamePageList, GamePanel } from '@views/components'
+import { useGamePage } from '@src/hooks/useGamePage.ts'
 
+
+export type GameId = { id: string }
 
 function GamePage() {
-	const [selectedGame, setSelectedGame]    = useState<Game>()
-	const { apiMiddleware, games, setGames } = useContext(RootContext)
-
-	type GameId = {
-		id: string
-	}
+	const rootContext = useContext(RootContext)
+	const { games }   = rootContext
 
 	const searchParams = useLoaderData() as GameId
-	const gameGenres   = selectedGame?.genres.join(',')
 
-	useEffect(() => {
-		apiMiddleware?.getById('games', Number(searchParams.id)).then(game => {
-			setSelectedGame(game as Game)
-		})
-		apiMiddleware?.getAll('games', { genres: gameGenres }).then(games => {
-			setGames(games as Game[])
-		})
-	}, [searchParams])
+	const [selectedGame, setSelectedGame] = useState<Game>()
+	const gameGenres                      = selectedGame?.genres.join(',')
+
+	useGamePage(rootContext, searchParams, setSelectedGame, gameGenres)
 
 	const imagesToLoad = selectedGame?.shortScreenshots
 						 ?? selectedGame?.screenshots?.results
