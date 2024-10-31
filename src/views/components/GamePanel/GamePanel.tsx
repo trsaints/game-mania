@@ -1,5 +1,5 @@
 import { Game, ImageCommons } from '@data/types'
-import { ImageCard } from '@views/components'
+import { ScreenshotsList } from '@views/components'
 import * as React from 'react'
 import { ComponentProps, PropsWithChildren, useState } from 'react'
 import style from './GamePanel.module.scss'
@@ -27,12 +27,12 @@ interface IHeader extends PropsWithChildren {
 
 function Header({ game }: IHeader) {
 	const gameGenres = game.genres
-		.slice(0, 3)
-		.map(g =>
-				 <li className={style.GenreTag}
-					 key={`t-${g.id}`}
-				 >{g.name}</li>
-		)
+						   .slice(0, 3)
+						   .map(g =>
+									<li className={style.GenreTag}
+										key={`t-${g.id}`}
+									>{g.name}</li>
+						   )
 
 	return (
 		<header className={style.Header}>
@@ -88,19 +88,6 @@ function Banner(props: IBanner) {
 			</menu>
 		</article>
 	)
-}
-
-function ScreenshotsList({ images, name }: IBanner) {
-	return images.map((img, i) => {
-		return (
-			<li key={`${img.id}-${typeof (img)}`} data-index={i}>
-				<ImageCard img={img}
-						   alt={`screenshot number 
-						   		${i + 1} of the "${name}" game`}
-				/>
-			</li>
-		)
-	})
 }
 
 export { GamePanel }

@@ -12,3 +12,6 @@ export { GenreFilter } from '@views/components/GenreFilter/GenreFilter.tsx'
 export {
 	FilterOptions
 } from '@views/components/FilterOptions/FilterOptions.tsx'
+export {
+	ScreenshotsList
+} from '@views/components/ScreenshotsList/ScreenshotsList.tsx'
