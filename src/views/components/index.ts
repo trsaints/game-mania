@@ -9,3 +9,6 @@ export * from './Selection/Selection'
 export * from './SearchFilter/SearchFilter'
 export * from './GamePageList/GamePageList'
 export { GenreFilter } from '@views/components/GenreFilter/GenreFilter.tsx'
+export {
+	FilterOptions
+} from '@views/components/FilterOptions/FilterOptions.tsx'

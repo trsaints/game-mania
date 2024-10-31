@@ -1,6 +1,6 @@
-import { Genre, Platform, Publisher, Tag } from '@data/types'
 import { ISearchFilter } from './ISearchFilter'
 import style from './SearchFilter.module.scss'
+import { FilterOptions } from '@views/components'
 
 
 function SearchFilter(props: ISearchFilter) {
@@ -65,36 +65,6 @@ function SearchFilter(props: ISearchFilter) {
 				</details>
 			</li>
 		</menu>
-	)
-}
-
-interface IFilterOptions {
-	options: Publisher[] | Genre[] | Tag[] | Platform[]
-	typeName: string
-}
-
-function FilterOptions({ options, typeName }: IFilterOptions) {
-	const optionsList = options.map(p => {
-		return (
-			<p className={style.SearchOption} key={p.id}>
-				<input type="checkbox" id={p.name} name={p.name}/>
-				<label htmlFor={p.name}>{p.name}</label>
-			</p>
-		)
-	})
-
-	return (
-		<>
-			{optionsList}
-
-			<p>
-				<label htmlFor={`search_${typeName}`}>{typeName}: </label>
-				<input type="search"
-					   id={`search_${typeName}`}
-					   name={typeName}
-				/>
-			</p>
-		</>
 	)
 }
 
