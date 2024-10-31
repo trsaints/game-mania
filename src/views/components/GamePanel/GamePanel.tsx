@@ -1,6 +1,5 @@
 import { Game } from '@data/types'
-import { Banner } from '@views/components'
-import * as React from 'react'
+import { PanelBanner } from '@views/components'
 import { PropsWithChildren } from 'react'
 import style from './GamePanel.module.scss'
 import { IGamePanel } from './IGamePanel'
@@ -15,7 +14,7 @@ function GamePanel({ game, images }: IGamePanel) {
 		>
 			<article className={style.GamePanel}>
 				<Header game={game}/>
-				<Banner name={game.name} images={images}/>
+				<PanelBanner name={game.name} images={images}/>
 			</article>
 		</article>
 	)

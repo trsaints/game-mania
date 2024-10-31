@@ -10,7 +10,7 @@ interface IBanner extends ComponentProps<'article'> {
 	images: ImageCommons[]
 }
 
-export function Banner(props: IBanner) {
+export function PanelBanner(props: IBanner) {
 	const { name, images } = props
 
 	const [currentIndex, setCurrentIndex] = useState<number>(0)
