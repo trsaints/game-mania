@@ -1,6 +1,6 @@
 import {
 	IGamePageListViewModel
-} from '@src/view-models/IGamePageListViewModel.ts'
+} from '@src/view-models/interfaces/IGamePageListViewModel.ts'
 import React, { Dispatch, FormEvent, SetStateAction } from 'react'
 import { NavigateFunction } from 'react-router-dom'
 

@@ -1,6 +1,6 @@
 import {
 	IPanelBannerViewModel
-} from '@src/view-models/IPanelBannerViewModel.ts'
+} from '@src/view-models/interfaces/IPanelBannerViewModel.ts'
 import React, { Dispatch, SetStateAction } from 'react'
 
 

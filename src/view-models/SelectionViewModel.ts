@@ -1,5 +1,5 @@
 import { Game } from '@src/data/types'
-import { ISelectionViewModel } from '@src/view-models/ISelectionViewModel.ts'
+import { ISelectionViewModel } from '@src/view-models/interfaces/ISelectionViewModel.ts'
 import React, { Dispatch, SetStateAction } from 'react'
 
 

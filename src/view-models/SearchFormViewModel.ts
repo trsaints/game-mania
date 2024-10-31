@@ -1,4 +1,4 @@
-import { ISearchFormViewModel } from '@src/view-models/ISearchFormViewModel.ts'
+import { ISearchFormViewModel } from '@src/view-models/interfaces/ISearchFormViewModel.ts'
 import { Game } from '@data/types'
 import React, { Dispatch, SetStateAction } from 'react'
 import { IApiMiddleware } from '@src/middlewares'
