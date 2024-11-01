@@ -20,9 +20,12 @@ export function PageSelection(props: IPageSelection) {
 			  viewModel
 		  }           = props
 	const pageCount   = gamesCount / itemCount
+	const isEqualCount = gamesCount % itemCount === 0
 	const pageButtons = Array.from({
 									   length: pageCount > 1
-											   ? pageCount + 1
+											   ? isEqualCount
+												 ? pageCount
+												 : pageCount + 1
 											   : 1
 								   },
 								   (_, i) => i
