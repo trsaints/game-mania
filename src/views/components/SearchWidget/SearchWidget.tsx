@@ -3,7 +3,7 @@ import { useContext, useState } from 'react'
 import style from './SearchWidget.module.scss'
 import { SearchForm } from '@views/components/SearchForm/SearchForm.tsx'
 import { SearchNavbar } from '@views/components/SearchNavbar/SearchNavbar.tsx'
-import { ISearchNavbar } from '@views/components/SearchNavbar/ISearchNavbar.tsx'
+import { ISearchNavbar } from '@views/components/SearchNavbar/ISearchNavbar.ts'
 import { RootContext } from '@data/context'
 import { useSearchSuggestions } from '@src/hooks/useSearchSuggestions.ts'
 

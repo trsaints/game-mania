@@ -1,7 +1,7 @@
 import { Genre, Publisher, Tag } from '@data/types'
 import { Link } from 'react-router-dom'
 import style from '@views/components/SearchWidget/SearchWidget.module.scss'
-import { ISearchNavbar } from '@views/components/SearchNavbar/ISearchNavbar.tsx'
+import { ISearchNavbar } from '@views/components/SearchNavbar/ISearchNavbar.ts'
 
 
 export function SearchNavbar(props: ISearchNavbar) {
