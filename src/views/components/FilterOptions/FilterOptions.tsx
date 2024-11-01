@@ -1,7 +1,7 @@
 import style from '@views/components/SearchFilter/SearchFilter.module.scss'
 import {
 	IFilterOptions
-} from '@views/components/FilterOptions/IFilterOptions.tsx'
+} from '@views/components/FilterOptions/IFilterOptions.ts'
 
 
 export function FilterOptions({ options, typeName }: IFilterOptions) {
