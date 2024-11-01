@@ -20,3 +20,4 @@ export { PanelHeader } from '@views/components/PanelHeader/PanelHeader.tsx'
 export {
 	PageSelection
 } from '@views/components/PageSelection/PageSelection.tsx'
+export { CountFilter } from '@views/components/CountFilter/CountFilter.tsx'

@@ -1,7 +1,7 @@
 import { IGamePageList } from './IGamePageList.ts'
 import style from './GamePageList.module.scss'
-import { GameCard, PageSelection } from '@views/components'
-import { ComponentProps, FormEventHandler, useState } from 'react'
+import { CountFilter, GameCard, PageSelection } from '@views/components'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
 	GamePageListViewModel
@@ -47,18 +47,3 @@ function GamePageList({ games }: IGamePageList) {
 		</section>
 	)
 }
-
-interface ICountFilter extends ComponentProps<'form'> {
-	onHandleSubmit: FormEventHandler
-}
-
-function CountFilter({ onHandleSubmit }: ICountFilter) {
-	return (
-		<form className={style.CountFilter} onSubmit={onHandleSubmit}>
-			<label htmlFor="item-count">Items per page:</label>
-			<input type="search" name="item-count" id="item-count"/>
-			<button className="primary" type="submit">save</button>
-		</form>
-	)
-}
-
