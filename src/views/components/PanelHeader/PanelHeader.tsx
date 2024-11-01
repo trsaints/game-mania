@@ -1,11 +1,6 @@
 import style from '@views/components/GamePanel/GamePanel.module.scss'
-import { PropsWithChildren } from 'react'
-import { Game } from '@data/types'
+import { IPanelHeader } from '@views/components/PanelHeader/IPanelHeader.ts'
 
-
-interface IPanelHeader extends PropsWithChildren {
-	game: Game
-}
 
 export function PanelHeader({ game }: IPanelHeader) {
 	const gameGenres = game.genres
