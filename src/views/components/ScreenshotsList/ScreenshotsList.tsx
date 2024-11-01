@@ -1,11 +1,8 @@
 import { ImageCard } from '@views/components'
-import { ImageCommons } from '@data/types'
+import {
+	IScreenshotsList
+} from '@views/components/ScreenshotsList/IScreenshotsList.tsx'
 
-
-interface IScreenshotsList {
-	name: string
-	images: ImageCommons[]
-}
 
 export function ScreenshotsList({ images, name }: IScreenshotsList) {
 	return images.map((img, i) => {
