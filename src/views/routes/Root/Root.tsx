@@ -1,41 +1,14 @@
 import { RootContextProvider } from '@data/context'
 import { Footer, Header, SearchWidget } from '@views/components'
 import { Outlet } from 'react-router-dom'
-import { DataServiceDictionary } from '@data/types'
-import {
-	GameService,
-	GenreService,
-	PlatformService,
-	PublisherService,
-	TagService
-} from '@src/services'
-import { LocalDb } from '@data/local-storage'
-import { ApiMiddleware } from '@src/middlewares'
-import { StartupUtils } from '@src/utils'
-import { ApiMiddlewareFilter } from '@src/filters'
+import { RootViewModel } from '@src/view-models/RootViewModel.ts'
 
 
-const dataServiceDictionary: DataServiceDictionary = {
-	games     : GameService,
-	genres    : GenreService,
-	platforms : PlatformService,
-	publishers: PublisherService,
-	tags      : TagService
-}
-
-const localDb       = new LocalDb('game-mania', 1)
-const apiMiddleware = new ApiMiddleware(dataServiceDictionary,
-										localDb,
-										ApiMiddlewareFilter
-)
-
-if (! localDb.isCreated()) {
-	await StartupUtils.initializeDb(localDb)
-}
+const viewModel = new RootViewModel()
 
 function Root() {
 	return (
-		<RootContextProvider apiMiddleware={apiMiddleware}>
+		<RootContextProvider {...viewModel}>
 			<Header/>
 			<SearchWidget/>
 			<Outlet/>

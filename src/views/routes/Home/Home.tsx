@@ -1,29 +1,17 @@
 import { RootContext } from '@data/context'
-import { Game, Genre, Recommended } from '@data/types'
+import { Recommended } from '@data/types'
 import { Gallery, GamePanel, Selection } from '@views/components'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import style from './Home.module.scss'
+import { useHomePage } from '@src/hooks/useHomePage.ts'
 
 
 export function Home() {
 	const [recommended, setRecommended] = useState<Recommended>()
+	const rootContext                   = useContext(RootContext)
+	const { games, genres }             = rootContext
 
-	const {
-			  games,
-			  genres,
-			  apiMiddleware,
-			  setGames,
-			  setGenres
-		  } = useContext(RootContext)
-
-	useEffect(() => {
-		apiMiddleware?.getAll('games')
-			.then(gameData => setGames(gameData as Game[]))
-		apiMiddleware?.getAll('genres', { pageSize: 10 })
-			.then(genreData => setGenres(genreData as Genre[]))
-		apiMiddleware?.getRecommendations()
-			.then(recommendedData => setRecommended(recommendedData))
-	}, [])
+	useHomePage(rootContext, setRecommended)
 
 	return (
 		<main className={style.Home}>

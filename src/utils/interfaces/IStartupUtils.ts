@@ -2,5 +2,5 @@ import { ApiData, ILocalDb } from '@data/local-storage'
 
 
 export interface IStartupUtils {
-	initializeDb(db: ILocalDb<ApiData>): Promise<void>
+	initializeDb(db: ILocalDb<ApiData>): Promise<boolean>
 }
