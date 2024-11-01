@@ -7,12 +7,13 @@ export { PageSelectionViewModel }
 
 class PageSelectionViewModel implements IPageSelectionViewModel {
 	getPageIndices(gamesCount: number, itemCount: number): number[] {
+		const pageCount    = gamesCount / itemCount
 		const isEqualCount = gamesCount % itemCount === 0
 		return Array.from({
-							  length: gamesCount > 1
+							  length: pageCount > 1
 									  ? isEqualCount
-										? gamesCount
-										: gamesCount + 1
+										? pageCount
+										: pageCount + 1
 									  : 1
 						  },
 						  (_, i) => i

@@ -15,8 +15,7 @@ export function PageSelection(props: IPageSelection) {
 			  setCurrentPage,
 			  viewModel
 		  }            = props
-	const pageCount    = gamesCount / itemCount
-	const pageButtons  = pageSelectionViewModel.getPageIndices(pageCount, itemCount).map(
+	const pageButtons  = pageSelectionViewModel.getPageIndices(gamesCount, itemCount).map(
 		pageIndex => (
 			<li key={`page-${pageIndex}`}>
 				<button data-page={pageIndex} type="button">{pageIndex
