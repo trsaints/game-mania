@@ -1,13 +1,7 @@
 import { IGamePageList } from './IGamePageList.ts'
 import style from './GamePageList.module.scss'
-import { GameCard } from '@views/components'
-import {
-	ComponentProps,
-	Dispatch,
-	FormEventHandler,
-	SetStateAction,
-	useState
-} from 'react'
+import { GameCard, PageSelection } from '@views/components'
+import { ComponentProps, FormEventHandler, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
 	GamePageListViewModel
@@ -48,7 +42,8 @@ function GamePageList({ games }: IGamePageList) {
 
 			<PageSelection gamesCount={games.length}
 						   itemCount={itemCount}
-						   setCurrentPage={setCurrentPage}/>
+						   setCurrentPage={setCurrentPage}
+						   viewModel={viewModel}/>
 		</section>
 	)
 }
@@ -67,37 +62,3 @@ function CountFilter({ onHandleSubmit }: ICountFilter) {
 	)
 }
 
-interface IPageSelection extends ComponentProps<'menu'> {
-	gamesCount: number
-	itemCount: number
-	setCurrentPage: Dispatch<SetStateAction<number>>
-}
-
-function PageSelection({
-						   gamesCount,
-						   itemCount,
-						   setCurrentPage
-					   }: IPageSelection) {
-	const pageCount   = gamesCount / itemCount
-	const pageButtons = Array.from({
-									   length: pageCount > 1
-											   ? pageCount + 1
-											   : 1
-								   },
-								   (_, i) => i
-	).map(
-		pageIndex => (
-			<li key={`page-${pageIndex}`}>
-				<button data-page={pageIndex} type="button">{pageIndex
-															 + 1}</button>
-			</li>
-		)
-	)
-
-	return (
-		<menu className={style.PageSelection}
-			  onClick={(e) => viewModel.changePage(e,
-												   setCurrentPage
-			  )}>{pageButtons}</menu>
-	)
-}

@@ -17,3 +17,6 @@ export {
 } from '@views/components/ScreenshotsList/ScreenshotsList.tsx'
 export { PanelBanner } from '@views/components/PanelBanner/PanelBanner.tsx'
 export { PanelHeader } from '@views/components/PanelHeader/PanelHeader.tsx'
+export {
+	PageSelection
+} from '@views/components/PageSelection/PageSelection.tsx'
