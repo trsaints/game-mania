@@ -6,6 +6,7 @@ import {
 	PageSelectionViewModel
 } from '@src/view-models/PageSelectionViewModel.ts'
 
+
 const pageSelectionViewModel = new PageSelectionViewModel()
 
 export function PageSelection(props: IPageSelection) {
@@ -14,8 +15,11 @@ export function PageSelection(props: IPageSelection) {
 			  itemCount,
 			  setCurrentPage,
 			  viewModel
-		  }            = props
-	const pageButtons  = pageSelectionViewModel.getPageIndices(gamesCount, itemCount).map(
+		  } = props
+
+	const pageButtons = pageSelectionViewModel.getPageIndices(gamesCount,
+															  itemCount
+	).map(
 		pageIndex => (
 			<li key={`page-${pageIndex}`}>
 				<button data-page={pageIndex} type="button">{pageIndex

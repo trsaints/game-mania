@@ -17,7 +17,7 @@ class SearchFormViewModel implements ISearchFormViewModel {
 	): void {
 		e.preventDefault()
 
-		const data = new FormData(e.target as HTMLFormElement)
+		const data      = new FormData(e.target as HTMLFormElement)
 		const newSearch = data.get('search_content') as string
 
 		if (! newSearch) return
