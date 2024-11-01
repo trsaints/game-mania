@@ -1,9 +1,9 @@
 import {
 	Developer,
 	GameCommons,
+	ImageCommons,
 	Publisher,
-	Screenshots,
-	ImageCommons
+	Screenshots
 } from '@data/types'
 
 

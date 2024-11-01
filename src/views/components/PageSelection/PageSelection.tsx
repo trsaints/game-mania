@@ -18,17 +18,17 @@ export function PageSelection(props: IPageSelection) {
 			  itemCount,
 			  setCurrentPage,
 			  viewModel
-		  }           = props
-	const pageCount   = gamesCount / itemCount
+		  }            = props
+	const pageCount    = gamesCount / itemCount
 	const isEqualCount = gamesCount % itemCount === 0
-	const pageButtons = Array.from({
-									   length: pageCount > 1
-											   ? isEqualCount
-												 ? pageCount
-												 : pageCount + 1
-											   : 1
-								   },
-								   (_, i) => i
+	const pageButtons  = Array.from({
+										length: pageCount > 1
+												? isEqualCount
+												  ? pageCount
+												  : pageCount + 1
+												: 1
+									},
+									(_, i) => i
 	).map(
 		pageIndex => (
 			<li key={`page-${pageIndex}`}>

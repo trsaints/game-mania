@@ -33,8 +33,8 @@ function filterObjects(idbCursorRequest: IDBRequest,
 							   && results.length === params.pageSize
 	const hasSearchMatch     = params.search
 							   && `${value.id}${value.slug}${value.name}`.toLowerCase()
-								   .includes(
-									   params.search.toLowerCase())
+																		 .includes(
+																			 params.search.toLowerCase())
 
 	if (! hasReachedPageSize && ! params.search) {
 		results.push(value)

@@ -36,7 +36,8 @@ export class LocalDb implements ILocalDb<ApiData> {
 
 			openRequest.addEventListener('success', () => {
 				const transaction = openRequest.result.transaction(storageName,
-																   mode)
+																   mode
+				)
 
 				resolve(transaction.objectStore(storageName))
 			})

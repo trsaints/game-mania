@@ -6,6 +6,7 @@ import { GameCard } from '@views/components'
 
 interface IGamesList extends ComponentProps<'ul'> {
 	currentGames: Game[]
+
 	onHandleClick(e: React.MouseEvent): void
 }
 
