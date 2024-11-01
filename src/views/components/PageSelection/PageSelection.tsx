@@ -7,18 +7,18 @@ import {
 } from '@src/view-models/PageSelectionViewModel.ts'
 
 
-const pageSelectionViewModel = new PageSelectionViewModel()
+const viewModel = new PageSelectionViewModel()
 
 export function PageSelection(props: IPageSelection) {
 	const {
 			  gamesCount,
 			  itemCount,
 			  setCurrentPage,
-			  viewModel
+			  parentViewModel
 		  } = props
 
-	const pageButtons = pageSelectionViewModel.getPageIndices(gamesCount,
-															  itemCount
+	const pageButtons = viewModel.getPageIndices(gamesCount,
+												 itemCount
 	).map(
 		pageIndex => (
 			<li key={`page-${pageIndex}`}>
@@ -30,7 +30,7 @@ export function PageSelection(props: IPageSelection) {
 
 	return (
 		<menu className={style.PageSelection}
-			  onClick={(e) => viewModel.changePage(e, setCurrentPage)}>
+			  onClick={(e) => parentViewModel.changePage(e, setCurrentPage)}>
 			{pageButtons}
 		</menu>
 	)

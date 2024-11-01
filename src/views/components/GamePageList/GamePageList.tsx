@@ -39,7 +39,7 @@ function GamePageList({ games }: IGamePageList) {
 			<PageSelection gamesCount={games.length}
 						   itemCount={itemCount}
 						   setCurrentPage={setCurrentPage}
-						   viewModel={viewModel}/>
+						   parentViewModel={viewModel}/>
 		</section>
 	)
 }

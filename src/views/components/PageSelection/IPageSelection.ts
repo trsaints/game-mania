@@ -8,5 +8,5 @@ export interface IPageSelection extends ComponentProps<'menu'> {
 	gamesCount: number
 	itemCount: number
 	setCurrentPage: Dispatch<SetStateAction<number>>
-	viewModel: GamePageListViewModel
+	parentViewModel: GamePageListViewModel
 }
