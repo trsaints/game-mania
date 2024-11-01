@@ -1,11 +1,12 @@
 import { IGamePageList } from './IGamePageList.ts'
 import style from './GamePageList.module.scss'
 import { CountFilter, GameCard, PageSelection } from '@views/components'
-import { useState } from 'react'
+import React, { ComponentProps, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
 	GamePageListViewModel
 } from '@src/view-models/GamePageListViewModel.ts'
+import { Game } from '@data/types'
 
 
 export { GamePageList }
@@ -30,20 +31,34 @@ function GamePageList({ games }: IGamePageList) {
 																		  setItemCount
 			)}/>
 
-			<ul className={style.GameList}
-				onClick={(e) => viewModel.openGamePage(e, navigator)}>
-				{currentGames.map(game => (
-					<li key={`game-${game.id}`}>
-						<GameCard game={game}/>
-					</li>
-				))
-				}
-			</ul>
+			<GamesList currentGames={currentGames}
+					   onHandleClick={(e) => viewModel.openGamePage(e,
+																	navigator
+					   )}
+			/>
 
 			<PageSelection gamesCount={games.length}
 						   itemCount={itemCount}
 						   setCurrentPage={setCurrentPage}
 						   viewModel={viewModel}/>
 		</section>
+	)
+}
+
+interface IGamesList extends ComponentProps<'ul'> {
+	currentGames: Game[]
+	onHandleClick(e: React.MouseEvent): void
+}
+
+function GamesList({ currentGames, onHandleClick }: IGamesList) {
+	return (
+		<ul className={style.GameList} onClick={onHandleClick}>
+			{currentGames.map(game => (
+				<li key={`game-${game.id}`}>
+					<GameCard game={game}/>
+				</li>
+			))
+			}
+		</ul>
 	)
 }
