@@ -1,16 +1,8 @@
-import { ComponentProps, Dispatch, SetStateAction } from 'react'
 import style from '@views/components/GamePageList/GamePageList.module.scss'
 import {
-	GamePageListViewModel
-} from '@src/view-models/GamePageListViewModel.ts'
+	IPageSelection
+} from '@views/components/PageSelection/IPageSelection.ts'
 
-
-interface IPageSelection extends ComponentProps<'menu'> {
-	gamesCount: number
-	itemCount: number
-	setCurrentPage: Dispatch<SetStateAction<number>>
-	viewModel: GamePageListViewModel
-}
 
 export function PageSelection(props: IPageSelection) {
 	const {
