@@ -1,10 +1,8 @@
-import { Game } from '@data/types'
 import style from '@views/components/GamePanel/GamePanel.module.scss'
+import {
+	IGameGenreTags
+} from '@views/components/GameGenreTags/IGameGenreTags.ts'
 
-
-interface IGameGenreTags {
-	game: Game
-}
 
 export function GameGenreTags({ game }: IGameGenreTags) {
 	const gameGenres = game.genres
