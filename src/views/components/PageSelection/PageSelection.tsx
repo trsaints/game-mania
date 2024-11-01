@@ -2,7 +2,11 @@ import style from '@views/components/GamePageList/GamePageList.module.scss'
 import {
 	IPageSelection
 } from '@views/components/PageSelection/IPageSelection.ts'
+import {
+	PageSelectionViewModel
+} from '@src/view-models/PageSelectionViewModel.ts'
 
+const pageSelectionViewModel = new PageSelectionViewModel()
 
 export function PageSelection(props: IPageSelection) {
 	const {
@@ -12,16 +16,7 @@ export function PageSelection(props: IPageSelection) {
 			  viewModel
 		  }            = props
 	const pageCount    = gamesCount / itemCount
-	const isEqualCount = gamesCount % itemCount === 0
-	const pageButtons  = Array.from({
-										length: pageCount > 1
-												? isEqualCount
-												  ? pageCount
-												  : pageCount + 1
-												: 1
-									},
-									(_, i) => i
-	).map(
+	const pageButtons  = pageSelectionViewModel.getPageIndices(pageCount, itemCount).map(
 		pageIndex => (
 			<li key={`page-${pageIndex}`}>
 				<button data-page={pageIndex} type="button">{pageIndex
