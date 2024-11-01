@@ -1,7 +1,7 @@
 import { ImageCard } from '@views/components'
 import {
 	IScreenshotsList
-} from '@views/components/ScreenshotsList/IScreenshotsList.tsx'
+} from '@views/components/ScreenshotsList/IScreenshotsList.ts'
 
 
 export function ScreenshotsList({ images, name }: IScreenshotsList) {
