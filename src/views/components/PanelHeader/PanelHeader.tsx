@@ -1,6 +1,8 @@
 import style from '@views/components/GamePanel/GamePanel.module.scss'
 import { IPanelHeader } from '@views/components/PanelHeader/IPanelHeader.ts'
-import { Game } from '@data/types'
+import {
+	GameGenreTags
+} from '@views/components/GameGenreTags/GameGenreTags.tsx'
 
 
 export function PanelHeader({ game }: IPanelHeader) {
@@ -24,18 +26,3 @@ export function PanelHeader({ game }: IPanelHeader) {
 	)
 }
 
-interface IGameGenreTags {
-	game: Game
-}
-
-function GameGenreTags({ game }: IGameGenreTags) {
-	const gameGenres = game.genres
-						   .slice(0, 3)
-						   .map(g =>
-									<li className={style.GenreTag}
-										key={`t-${g.id}`}
-									>{g.name}</li>
-						   )
-
-	return <ul className={style.Tags}>{gameGenres}</ul>
-}
