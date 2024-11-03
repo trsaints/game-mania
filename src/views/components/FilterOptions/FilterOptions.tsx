@@ -7,16 +7,20 @@ import {
 export function FilterOptions({ options, typeName }: IFilterOptions) {
 	const optionsList = options.map(p => {
 		return (
-			<p className={style.SearchOption} key={p.id}>
-				<input type="checkbox" id={p.name} name={p.name}/>
-				<label htmlFor={p.name}>{p.name}</label>
-			</p>
+			<li key={p.id}>
+				<p className={style.SearchOption}>
+					<input type="checkbox" id={p.name} name={p.name}/>
+					<label htmlFor={p.name}>{p.name}</label>
+				</p>
+			</li>
 		)
 	})
 
 	return (
 		<>
-			{optionsList}
+			<ul className={style.SearchOptions}>
+				{optionsList}
+			</ul>
 
 			<p>
 				<label htmlFor={`search_${typeName}`}>{typeName}: </label>
