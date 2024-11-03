@@ -2,7 +2,11 @@
 
 .Search {
 	h2, .GameList {
-		margin-block   : 10vh;
 		padding-inline : 5vw;
+	}
+
+	h2 {
+		margin-top    : 5rem;
+		margin-bottom : 10rem;
 	}
 }

@@ -1,15 +1,15 @@
 @use "src/palette";
 
 .SearchFilter {
-	background-image : linear-gradient(to bottom, palette.$black, palette.$black-d2);
+	background-color : palette.$black-d1;
 	border-radius    : 8px;
-	box-shadow       : 0 0 8px palette.$black-d5;
+	box-shadow       : 0 0 4px palette.$black-d5;
 	display          : grid;
 	gap              : 2vh;
-	margin           : 10vh 5vw;
+	margin           : 10vmax 5vw;
 	margin-block     : 10vh;
-	padding          : 5vw;
-	padding-inline   : 5vw;
+	padding          : 5vmin;
+	max-width        : clamp(300px, 100%, 30vw);
 
 	label, summary, select {
 		color          : palette.$cyan;
@@ -24,15 +24,13 @@
 
 	input {
 		background-color : palette.$white-d6;
-		border           : 1px solid palette.$black;
-		border-radius    : 4px;
 		padding          : 1vh;
 
 		&[type="checkbox"] {
 			display      : inline-block;
-			height       : 8vw;
+			height       : 1rem;
+			width        : 1rem;
 			margin-right : 2vw;
-			width        : 8vw;
 
 			&:checked {
 				background-color : palette.$cyan;
@@ -45,9 +43,13 @@
 		background-color : palette.$black-d2;
 		background-image : linear-gradient(to bottom, palette.$black, palette.$black-d2);
 		border-radius    : 8px;
-		box-shadow       : 0 0 8px palette.$black-d5;
+		box-shadow       : 0 0 4px palette.$black-d5;
 		margin-left      : 4vw;
 		padding          : 1vh 4vw;
+
+		option {
+			font-family : "Redhat Display", sans-serif;
+		}
 	}
 
 	.SearchOption {
