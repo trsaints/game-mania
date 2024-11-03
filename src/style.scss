@@ -22,7 +22,7 @@ h1, h2, h3 {
 }
 
 h2 {
-	font-size : 3.2rem;
+	font-size : 3rem;
 }
 
 h3 {
@@ -30,23 +30,22 @@ h3 {
 }
 
 a {
-	color       : palette.$cyan;
-	font-weight : bold;
+	color : palette.$cyan;
 }
 
 button {
 	white-space   : nowrap;
 	border-radius : 8px;
 	font-weight   : bold;
-	padding       : 2vmax 5vmin;
+	padding       : 1rem 2rem;
 }
 
 button.primary {
-	background-image : linear-gradient(to bottom, palette.$cyan, palette.$cyan-d5);
+	background-color : palette.$cyan;
 }
 
 button.secondary {
-	background-image : linear-gradient(to bottom, palette.$white, palette.$white-d6);
+	background-color : palette.$white;
 }
 
 .sr-only {
