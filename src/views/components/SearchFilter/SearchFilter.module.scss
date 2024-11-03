@@ -34,14 +34,12 @@
 
 			&:checked {
 				background-color : palette.$cyan;
-				box-shadow       : 0 0 4px palette.$cyan;
 			}
 		}
 	}
 
 	select {
-		background-color : palette.$black-d2;
-		background-image : linear-gradient(to bottom, palette.$black, palette.$black-d2);
+		background-color : palette.$black-d;
 		border-radius    : 8px;
 		box-shadow       : 0 0 4px palette.$black-d5;
 		margin-left      : 4vw;
@@ -52,10 +50,16 @@
 		}
 	}
 
-	.SearchOption {
-		align-items           : center;
-		display               : grid;
-		grid-template-columns : auto 1fr;
-		margin-bottom         : 2vh;
+	.SearchOptions {
+		max-height    : 20vmax;
+		margin-bottom : 1rem;
+		overflow-y    : auto;
+
+		.SearchOption {
+			align-items           : center;
+			display               : grid;
+			grid-template-columns : auto 1fr;
+			margin-bottom         : 2vh;
+		}
 	}
 }
