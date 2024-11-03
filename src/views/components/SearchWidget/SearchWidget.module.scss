@@ -1,13 +1,12 @@
 @use "src/palette";
 
 .SearchWidget {
-	background-image : linear-gradient(to bottom, palette.$black, palette.$black-d2);
-	border-radius    : 8px;
-	box-shadow       : 0 0 8px palette.$black-d5;
-	display          : grid;
-	gap              : 8vh;
-	margin           : 10vh 5vw;
-	padding          : 5vw;
+	display       : grid;
+	gap           : 5vmax;
+	padding       : 10vmax 5vmin;
+	max-width     : 500px;
+	margin-inline : auto;
+	position      : relative;
 
 	.SearchForm {
 		display             : grid;
@@ -15,41 +14,63 @@
 			"label  blank " 
 			"search submit";
 
+		.Label, .Search, .Submit {
+			padding-inline : clamp(1rem, 2vmin, 2vh);
+			padding-block  : clamp(0.5rem, 1vmin, 1vh);
+		}
+
 		.Label {
-			background-image        : linear-gradient(to bottom, palette.$cyan, palette.$cyan-d5);
+			background-color        : palette.$cyan;
+			border                  : 2px solid palette.$cyan;
+			border-bottom           : none;
 			border-top-left-radius  : 8px;
 			border-top-right-radius : 8px;
-			color                   : palette.$black-d5;
+			color                   : palette.$black;
 			font-weight             : bold;
 			grid-area               : label;
-			margin-left             : 8px;
-			padding                 : 1vh 2.5vw 1vh 2.5vw;
 			width                   : fit-content;
 		}
 
 		.Search {
+			border                    : 2px solid palette.$cyan;
+			background-color          : transparent;
 			border-bottom-left-radius : 8px;
-			border-top-left-radius    : 8px;
 			grid-area                 : search;
-			padding                   : 2vh 5vw;
-			width                     : calc(100% + 2.5vw);
+			display                   : block;
+			width                     : 100%;
+			color                     : palette.$white;
+
+			&:focus {
+				background-color : palette.$white;
+				color            : palette.$black;
+			}
 		}
 
 		.Submit {
-			grid-area : submit;
+			border-bottom-left-radius : 0;
+			border-top-left-radius    : 0;
+			grid-area                 : submit;
+			color                     : palette.$black;
 		}
 	}
 
+	.SearchMenuHeader {
+		font-size     : 1.5rem;
+		margin-bottom : 2rem;
+		text-align    : center;
+	}
+
 	.SearchMenu {
-		color           : palette.$cyan;
-		display         : grid;
-		font-variant    : small-caps;
-		gap             : 2vh;
-		justify-content : center;
-		text-shadow     : 0 0 8px palette.$cyan;
+		color          : palette.$cyan;
+		display        : grid;
+		text-transform : uppercase;
+		gap            : 2vh;
+		text-shadow    : 0 0 8px palette.$cyan;
 
 		.SearchOptions {
-			padding-left : 5vw;
+			padding-left : 5vmin;
+			padding-top  : 1rem;
+			line-height  : 150%;
 		}
 	}
 }
