@@ -31,12 +31,17 @@ function Header() {
 				</li>
 
 				<li>
-					<nav className={style.RouteOptions}
-						 style={routeOptionsStyles}
-					>
-						<Link to="/">home</Link>
-						<Link to="/search">search</Link>
-					</nav>
+					<dialog data-dialog="main-menu"
+							onKeyDown={(e) => viewModel.closeOnEscape(e,
+																	  setIsMenuOpen
+							)}>
+						<nav className={style.RouteOptions}
+							 style={routeOptionsStyles}
+						>
+							<Link to="/">home</Link>
+							<Link to="/search">search</Link>
+						</nav>
+					</dialog>
 				</li>
 			</menu>
 		</header>

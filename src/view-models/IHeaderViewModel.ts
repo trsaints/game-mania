@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 
 
 export interface IHeaderViewModel {
@@ -7,4 +7,9 @@ export interface IHeaderViewModel {
 	): void
 
 	toggleButtonText(isMenuOpen: boolean): string
+
+	closeOnEscape(
+		e: React.KeyboardEvent<HTMLDialogElement>,
+		setIsMenuOpen: Dispatch<SetStateAction<boolean>>
+	): void
 }
