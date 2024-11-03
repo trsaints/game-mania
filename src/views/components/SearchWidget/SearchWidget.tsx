@@ -28,7 +28,11 @@ function SearchWidget() {
 	return (
 		<aside className={style.SearchWidget}>
 			<SearchForm/>
-			<SearchNavbar {...searchNavbarProps} />
+
+			<section>
+				<h2 className={style.SearchMenuHeader}>search by</h2>
+				<SearchNavbar {...searchNavbarProps} />
+			</section>
 		</aside>
 	)
 }
