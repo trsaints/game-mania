@@ -8,9 +8,6 @@ const viewModel = new HeaderViewModel()
 
 function Header() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
-	const routeOptionsStyles          = {
-		display: isMenuOpen ? 'flex' : 'none'
-	}
 
 	return (
 		<header className={style.Header}>
@@ -31,13 +28,12 @@ function Header() {
 				</li>
 
 				<li>
-					<dialog data-dialog="main-menu"
+					<dialog className={style.MainMenu}
+							data-dialog="main-menu"
 							onKeyDown={(e) => viewModel.closeOnEscape(e,
 																	  setIsMenuOpen
 							)}>
-						<nav className={style.RouteOptions}
-							 style={routeOptionsStyles}
-						>
+						<nav className={style.RouteOptions}>
 							<Link to="/">home</Link>
 							<Link to="/search">search</Link>
 						</nav>

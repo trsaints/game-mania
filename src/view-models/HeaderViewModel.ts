@@ -8,9 +8,7 @@ class HeaderViewModel implements IHeaderViewModel {
 	closeOnEscape(e: React.KeyboardEvent<HTMLDialogElement>,
 				  setIsMenuOpen: Dispatch<SetStateAction<boolean>>
 	): void {
-		const target = e.target as HTMLDialogElement
-
-		if (e.key !== 'Escape' || ! target.open) return
+		if (e.key !== 'Escape') return
 
 		setIsMenuOpen(false)
 	}
