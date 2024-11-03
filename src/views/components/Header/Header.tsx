@@ -8,6 +8,9 @@ const viewModel = new HeaderViewModel()
 
 function Header() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
+	const routeOptionsStyles          = {
+		display: isMenuOpen ? 'flex' : 'none'
+	}
 
 	return (
 		<header className={style.Header}>
@@ -28,10 +31,12 @@ function Header() {
 				</li>
 
 				<li>
-					<ul>
-						<li><Link to="/">Home</Link></li>
-						<li><Link to="/search">Search</Link></li>
-					</ul>
+					<nav className={style.RouteOptions}
+						 style={routeOptionsStyles}
+					>
+						<Link to="/">home</Link>
+						<Link to="/search">search</Link>
+					</nav>
 				</li>
 			</menu>
 		</header>

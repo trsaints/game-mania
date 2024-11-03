@@ -8,6 +8,7 @@ class HeaderViewModel implements IHeaderViewModel {
     toggleButtonText(isMenuOpen: boolean): string {
         return isMenuOpen ? 'Close Menu' : 'Open Menu'
     }
+
 	toggleMenu(isMenuOpen: boolean,
 			   setIsMenuOpen: Dispatch<SetStateAction<boolean>>
 	): void {
