@@ -4,14 +4,19 @@
 .Header {
 	background-image : linear-gradient(to bottom, palette.$black-d2, palette.$black-d4);
 	box-shadow       : 0 0 8px palette.$black-d5;
-	display          : grid;
+	display          : flex;
+	flex-wrap        : wrap;
 	padding          : 5vw;
 	place-items      : center;
 	text-align       : center;
 	position         : relative;
 
+	.Banner, .Links {
+		flex : 0 0 200px;
+	}
+
 	.Banner {
-		height : 10vh;
+		max-width : 200px;
 	}
 
 	.Links {
