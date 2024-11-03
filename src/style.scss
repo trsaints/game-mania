@@ -40,6 +40,10 @@ button {
 	padding       : 1rem 2rem;
 }
 
+input, label, summary, button, a, select, option, textarea, datalist {
+	cursor : pointer;
+}
+
 button.primary {
 	background-color : palette.$cyan;
 }
