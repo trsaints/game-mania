@@ -33,9 +33,13 @@ function Header() {
 							onKeyDown={(e) => viewModel.closeOnEscape(e,
 																	  setIsMenuOpen
 							)}>
-						<nav className={style.RouteOptions}>
-							<Link to="/">home</Link>
-							<Link to="/search">search</Link>
+						<nav className={style.RouteOptions}
+							 onClick={(e) => viewModel.closeOnClick(e,
+																	setIsMenuOpen
+							 )}
+						>
+							<Link data-link="route" to="/">home</Link>
+							<Link data-link="route" to="/search">search</Link>
 						</nav>
 					</dialog>
 				</li>
