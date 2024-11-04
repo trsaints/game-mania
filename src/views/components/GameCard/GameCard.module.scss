@@ -1,47 +1,45 @@
 @use "src/palette";
 
 .GameCard {
-	background-image : linear-gradient(to bottom, palette.$black-d2, palette.$black-d4);
+	$base-width      : clamp(150px, 25vw, 250px);
+	$base-height     : calc($base-width * 2);
+	background-color : palette.$black-d2;
 	border-radius    : 16px;
 	box-shadow       : 0 0 8px palette.$black-d5;
 	font-weight      : bold;
-	height           : 80vh;
-	width            : 90vw;
+	width            : $base-width;
+	height           : 100%;
+	display          : grid;
 
 	.Banner {
-		/* Banner height should be 70% of the GameCard height, 
-		   but 2vh of margin must be subtracted */
 		border-top-left-radius  : 16px;
 		border-top-right-radius : 16px;
-		height                  : 54vh;
+		height                  : calc($base-height * 0.6);
 		object-fit              : cover;
 		width                   : 100%;
 	}
 
 	.Name {
 		font-size      : 1.2rem;
-		margin-block   : 2vh;
-		padding-inline : 5vw;
+		margin-block   : 5vmin;
+		padding-inline : 2.5vmin;
 		width          : 100%;
 	}
 
-	.Details {
-		font-size : 0.7rem;
-		margin    : 0 5vw 2vh 5vw;
+	.Tags {
+		color          : palette.$white-d4;
+		font-size      : 0.7rem;
+		padding-inline : 2.5vmin;
 	}
 
 	.Genres {
-		@extend .Details;
-
+		font-size        : 0.8rem;
+		margin           : 2.5vmin;
 		background-color : palette.$white-d6;
 		border-radius    : 16px;
 		color            : palette.$black-d2;
-		padding          : 1vh 2.5vw;
+		padding          : 1.25vmin 2.5vmin;
 		width            : fit-content;
-	}
-
-	.Tags {
-		@extend .Details;
-		color : palette.$white-d6;
+		align-self       : flex-end;
 	}
 }
