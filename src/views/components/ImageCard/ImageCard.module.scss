@@ -7,7 +7,7 @@
 	isolation     : isolate;
 	overflow      : hidden;
 	position      : relative;
-	width         : 25vmin;
+	width         : clamp(100px, 150px, 25vmax);
 
 	button {
 		background-color : color.scale(palette.$black, $alpha : -50%);
