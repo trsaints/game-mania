@@ -2,8 +2,7 @@
 @use "sass:color";
 
 .Header {
-	background-image : linear-gradient(to bottom, palette.$black-d2, palette.$black-d4);
-	box-shadow       : 0 0 8px palette.$black-d5;
+	background-color : palette.$black-d4;
 	display          : flex;
 	flex-wrap        : wrap;
 	padding          : 2.5vmin 5vw;
@@ -23,7 +22,7 @@
 	}
 
 	.Banner {
-		max-width : 150px;
+		max-width : clamp(25px, 20vw, 50px);
 	}
 
 	.Links {

@@ -13,7 +13,7 @@ function Header() {
 		<header className={style.Header}>
 			<h1 className="sr-only">Game Mania</h1>
 
-			<img className={style.Banner} src="/LOGO.svg"
+			<img className={style.Banner} src="/logo_solo.svg"
 				 alt='Website logo, with the following slogan: "Game Mania: the next level awaits"'
 			/>
 
