@@ -13,7 +13,7 @@
 
 	@media screen and (min-width : 40rem) {
 		& {
-			max-width : 50vw;
+			max-width : calc(50vw - 10vmin);
 		}
 	}
 
