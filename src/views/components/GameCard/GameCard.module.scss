@@ -7,10 +7,15 @@
 	border-radius    : 16px;
 	box-shadow       : 0 0 8px palette.$black-d5;
 	font-weight      : bold;
-	//max-width        : $base-width;
 	height           : 100%;
 	display          : grid;
 	cursor           : pointer;
+
+	@media screen and (min-width : 40rem) {
+		& {
+			max-width : 50vw;
+		}
+	}
 
 	.Banner {
 		border-top-left-radius  : 16px;
