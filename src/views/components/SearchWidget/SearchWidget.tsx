@@ -1,4 +1,4 @@
-import { Genre, Publisher, Tag } from '@data/types'
+import { Genre, InlineBannerStyle, Publisher, Tag } from '@data/types'
 import { useContext, useState } from 'react'
 import style from './SearchWidget.module.scss'
 import { SearchForm } from '@views/components/SearchForm/SearchForm.tsx'
@@ -11,9 +11,10 @@ import { useSearchSuggestions } from '@src/hooks/useSearchSuggestions.ts'
 export { SearchWidget }
 
 function SearchWidget() {
-	const [genres, setGenres]         = useState<Genre[]>([])
-	const [tags, setTags]             = useState<Tag[]>([])
-	const [publishers, setPublishers] = useState<Publisher[]>([])
+	const [genres, setGenres]               = useState<Genre[]>([])
+	const [tags, setTags]                   = useState<Tag[]>([])
+	const [publishers, setPublishers]       = useState<Publisher[]>([])
+	const [currentBanner, setCurrentBanner] = useState<InlineBannerStyle>({ background: 'none' })
 
 	const searchNavbarProps: ISearchNavbar = {
 		genres,
@@ -23,10 +24,12 @@ function SearchWidget() {
 
 	const { apiMiddleware } = useContext(RootContext)
 
-	useSearchSuggestions(apiMiddleware, { setGenres, setTags, setPublishers })
+	useSearchSuggestions(apiMiddleware,
+						 { setGenres, setTags, setPublishers, setCurrentBanner }
+	)
 
 	return (
-		<aside className={style.SearchWidget}>
+		<aside className={style.SearchWidget} style={currentBanner}>
 			<SearchForm/>
 
 			<section>

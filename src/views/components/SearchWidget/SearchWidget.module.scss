@@ -1,12 +1,15 @@
 @use "src/palette";
 
 .SearchWidget {
-	display       : grid;
-	gap           : 5vmax;
-	padding       : 10vmax 5vmin;
-	max-width     : 500px;
-	margin-inline : auto;
-	position      : relative;
+	display  : grid;
+	gap      : 5vmax;
+	padding  : 10vmax 5vmin;
+	position : relative;
+
+	.SearchForm, .SearchMenu {
+		max-width     : 500px;
+		margin-inline : auto;
+	}
 
 	.SearchForm {
 		display             : grid;
