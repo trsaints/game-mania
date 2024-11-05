@@ -34,12 +34,13 @@
 	}
 
 	.GameList {
-		display         : flex;
-		gap             : 5vmin;
-		margin-inside   : auto;
-		flex-wrap       : wrap;
-		margin-bottom   : 10vmax;
-		justify-content : center;
+		display               : grid;
+		grid-template-columns : repeat(auto-fit, minmax(clamp(150px, 25vw, 250px), 1fr));
+		gap                   : 5vmin;
+		margin-inside         : auto;
+		flex-wrap             : wrap;
+		margin-bottom         : 10vmax;
+		justify-content       : center;
 
 		@media screen and (min-width : 40rem) {
 			& {
