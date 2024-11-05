@@ -1,10 +1,11 @@
 @use "src/palette";
 
 .SearchWidget {
-	display  : grid;
-	gap      : 5vmax;
-	padding  : 10vmax 5vmin;
-	position : relative;
+	display    : grid;
+	gap        : 5vmax;
+	padding    : 10vmin 5vw;
+	position   : relative;
+	box-shadow : inset 0 0 4px palette.$black-d5;
 
 	.SearchForm, .SearchMenu {
 		max-width     : 500px;
