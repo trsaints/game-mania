@@ -64,16 +64,29 @@
 	}
 
 	.SearchMenu {
-		color          : palette.$cyan;
-		display        : grid;
-		text-transform : uppercase;
-		gap            : 2vh;
-		text-shadow    : 0 0 8px palette.$cyan;
+		color            : palette.$cyan;
+		display          : grid;
+		text-transform   : uppercase;
+		gap              : 2vh;
+		text-shadow      : 0 0 8px palette.$cyan;
+		background-color : palette.$black-d1;
+		border-radius    : 8px;
+		box-shadow       : 0 0 4px palette.$black-d5;
+		padding          : 5vmin;
 
-		.SearchOptions {
-			padding-left : 5vmin;
-			padding-top  : 1rem;
-			line-height  : 150%;
+		.SearchSection {
+			&[open] .SearchOptions {
+				position : absolute;
+			}
+
+			.SearchOptions {
+				margin-top       : 1rem;
+				padding          : 2vmin 5vmin;
+				line-height      : 200%;
+				background-color : palette.$black-d1;
+				border-radius    : 8px;
+				box-shadow       : 0 0 4px palette.$black-d5;
+			}
 		}
 	}
 }
