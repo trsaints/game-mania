@@ -10,23 +10,21 @@ function GameCard({ game }: IGameCard) {
 			<header>
 				<figure>
 					<img className={style.Banner}
-						 src={game.backgroundImage}
+						 src={game.backgroundImage
+							  ?? '/gamecard_placeholder.svg'}
 						 alt={`Promotional banner for the "${game.name}" game`}
 					/>
 					<figcaption className={style.Name}>{game.name}</figcaption>
 				</figure>
 			</header>
 
-			<p className={style.Details}>
-				Rating: {game.rating}/{game.ratingTop}
+			<p className={style.Tags}>
+				<span className="sr-only">Tags:</span> {gameTags}
 			</p>
 
 			<p className={style.Genres}>
-				Genre: {game.genres[0]?.name ?? 'Not listed'}
-			</p>
-
-			<p className={style.Tags}>
-				Tags: {gameTags}
+				<span className="sr-only">Genre:</span> {game.genres[0]?.name
+														 ?? 'Not listed'}
 			</p>
 		</article>
 	)

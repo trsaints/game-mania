@@ -29,9 +29,15 @@ export function PageSelection(props: IPageSelection) {
 	)
 
 	return (
-		<menu className={style.PageSelection}
-			  onClick={(e) => parentViewModel.changePage(e, setCurrentPage)}>
-			{pageButtons}
-		</menu>
+		<aside>
+			<h3>navigate by page</h3>
+
+			<menu className={style.PageSelection}
+				  onClick={(e) => parentViewModel.changePage(e,
+															 setCurrentPage
+				  )}>
+				{pageButtons}
+			</menu>
+		</aside>
 	)
 }

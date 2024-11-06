@@ -1,20 +1,28 @@
 import { Dispatch, SetStateAction, useEffect } from 'react'
-import { Genre, Publisher, Tag } from '@data/types'
+import { Game, Genre, InlineBannerStyle, Publisher, Tag } from '@data/types'
 import { IApiMiddleware } from '@src/middlewares'
+import { StylingUtils } from '@src/utils'
 
 
 export type SearchStates = {
 	setGenres: Dispatch<SetStateAction<Genre[]>>
 	setTags: Dispatch<SetStateAction<Tag[]>>
 	setPublishers: Dispatch<SetStateAction<Publisher[]>>
+	setCurrentBanner: Dispatch<SetStateAction<InlineBannerStyle>>
 }
 
 export function useSearchSuggestions(apiMiddleware: IApiMiddleware | undefined,
 									 searchStates: SearchStates
 ) {
-	const { setGenres, setTags, setPublishers } = searchStates
+	const { setGenres, setTags, setPublishers, setCurrentBanner } = searchStates
 
 	useEffect(() => {
+		const randomId = Math.floor(Math.random() * 1000)
+
+		apiMiddleware?.getById('games', randomId).then(game => {
+			setCurrentBanner(StylingUtils.getInlineBanner(game as Game))
+		})
+
 		apiMiddleware?.getAll('genres', { pageSize: 5 })
 					 .then(g => setGenres(g as Genre[]))
 

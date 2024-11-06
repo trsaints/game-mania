@@ -6,7 +6,7 @@ function Footer() {
 
 	return (
 		<footer className={style.Footer}>
-			<p>Feito por {' '}
+			<header>Feito por {' '}
 				<a href="https://github.com/trsaints"
 				   target="_blank"
 				   rel="noreferrer noopener"
@@ -15,13 +15,17 @@ function Footer() {
 				<time dateTime={currentDate.getFullYear().toString()}>
 					{currentDate.getFullYear()}
 				</time>
-			</p>
+			</header>
 
-			<nav className={style.Navbar}>
-				<a href="#genres">genres</a>
-				<a href="#tags">tags</a>
-				<a href="#publishers">publishers</a>
-			</nav>
+			<details className={style.Navigation}>
+				<summary>navigate by</summary>
+
+				<nav >
+					<a href="#genres">genres</a>
+					<a href="#tags">tags</a>
+					<a href="#publishers">publishers</a>
+				</nav>
+			</details>
 
 			<img className={style.Banner} src="/LOGO.svg"
 				 alt='Website logo, with the following slogan: "Game Mania: the next level awaits"'

@@ -1,17 +1,19 @@
 @use "src/palette";
 
 .GamePageList {
-	padding : 10vh 5vw;
+	padding : 10vmax 5vw;
+
+	.ResultsCount {
+		margin-bottom: 5vmax;
+	}
 
 	.CountFilter {
-		display             : grid;
-		align-items         : center;
-		grid-template-areas :
-		"label  count submit ";
-		margin-bottom       : 10vh;
+		display       : flex;
+		align-items   : center;
+		margin-bottom : 5vmax;
+		width         : clamp(300px, 350px, 50vw);
 
 		label {
-			grid-area      : label;
 			text-transform : uppercase;
 			color          : palette.$cyan;
 			text-shadow    : 0 0 8px palette.$cyan;
@@ -20,37 +22,60 @@
 		}
 
 		input {
-			grid-area                 : count;
 			border-bottom-left-radius : 8px;
 			border-top-left-radius    : 8px;
-			padding                   : 2vh 5vw;
-			width                     : calc(100% + 2.5vw);
+			padding                   : 0.75rem 1.5rem;
+			max-width                 : 100px;
+			height                    : 2.5rem;
 		}
 
 		button {
-			grid-area      : submit;
-			text-transform : capitalize;
-			height         : 100%;
+			border-bottom-left-radius : 0;
+			border-top-left-radius    : 0;
+			text-transform            : capitalize;
+			justify-self              : flex-start;
 		}
 	}
 
 	.GameList {
-		display       : grid;
-		gap           : 4.4vh;
-		margin-bottom : 5vh;
+		display               : grid;
+		grid-template-columns : repeat(auto-fit, minmax(clamp(150px, 25vw, 250px), 1fr));
+		gap                   : 5vmin;
+		margin-bottom         : 10vmax;
 	}
 
-	.PageSelection {
-		display         : flex;
-		flex-wrap       : wrap;
-		justify-content : center;
-		gap             : 2vw;
+	aside {
+		h3 {
+			font-size     : 1.25rem;
+			margin-bottom : 2.5vmax;
 
-		button {
-			border-radius : 100%;
-			width         : 3em;
-			height        : 3em;
-			text-align    : center;
+			@media screen and (min-width : 40rem) {
+				& {
+					font-size  : 1.5rem;
+					text-align : center;
+				}
+			}
+		}
+
+		.PageSelection {
+			display    : flex;
+			flex-wrap  : nowrap;
+			gap        : 2vmin;
+			overflow-x : auto;
+
+			button {
+				padding       : 1rem;
+				border-radius : 100%;
+				width         : 3rem;
+				height        : 3rem;
+				text-align    : center;
+			}
+
+			@media screen and (min-width : 40rem) {
+				& {
+					justify-content : center;
+				}
+			}
 		}
 	}
 }

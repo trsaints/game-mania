@@ -1,25 +1,58 @@
 @use "src/palette";
+@use "sass:color";
 
 .Header {
-	background-image : linear-gradient(to bottom, palette.$black-d2, palette.$black-d4);
-	box-shadow       : 0 0 8px palette.$black-d5;
-	display          : grid;
-	padding          : 5vw;
-	place-items      : center;
+	background-color : palette.$black-d4;
+	display          : flex;
+	flex-wrap        : wrap;
+	padding          : 2.5vmin 5vw;
 	text-align       : center;
+	justify-content  : center;
+	gap              : 5vmin;
+	align-items      : center;
+	position         : relative;
+
+	@media screen and (min-width : 40rem) {
+		justify-content : space-between;
+		gap             : 0;
+	}
+
+	.Banner, .Links {
+		flex : 0 0 150px;
+	}
 
 	.Banner {
-		height : 10vh;
+		max-width : clamp(25px, 20vw, 50px);
 	}
 
 	.Links {
 		display : grid;
-		gap     : 2vh;
-	}
 
-	.MenuButton {
-		background-color : transparent;
-		background-image : none;
-		color            : palette.$white;
+		.MenuButton {
+			background-color : transparent;
+			background-image : none;
+			color            : palette.$cyan;
+			border           : 2px solid palette.$cyan;
+			font-size        : 0.8rem;
+		}
+
+		.MainMenu {
+			background-color : palette.$black-d3;
+			border-radius    : 16px;
+			margin           : auto;
+			padding          : 5vmin;
+
+			&::backdrop {
+				background-color : color.scale(palette.$black-d3, $alpha : -50%);
+				max-width        : 100vw;
+			}
+
+			.RouteOptions {
+				text-transform : capitalize;
+				gap            : 1rem;
+				display        : flex;
+				flex-direction : column;
+			}
+		}
 	}
 }
