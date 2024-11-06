@@ -1,7 +1,44 @@
 import { IParserUtils } from '@utils/interfaces'
+import { Game } from '@data/types'
 
 
 export const ParserUtils: IParserUtils = {
+	concatGameData(data: Game): string {
+		const values = Object.entries(data)
+		const fields = values.map(value => {
+			const [k, v] = value
+
+			if (typeof v === 'string') {
+				return value
+			}
+
+			if (Array.isArray(v)) {
+				let names: string[] = []
+
+				if (k === 'genres') {
+					names = v.map(g => g.name)
+				} else if (k === 'platforms') {
+					names = v.map(p => p.platform.name)
+				} else if (k === 'tags') {
+					names = v.map(t => t.name)
+				} else if (k === 'developers') {
+					names = v.map(d => d.name)
+				} else if (k === 'publishers') {
+					names = v.map(p => p.name)
+				}
+
+				return names.join()
+			}
+
+			if (typeof v === 'number') {
+				return value.toString()
+			}
+
+			return ''
+		})
+
+		return fields.join().trim().toLowerCase()
+	},
 	mapToCamelCase,
 	mapToSnakeCase,
 	toCamelCase,
