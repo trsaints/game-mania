@@ -2,6 +2,7 @@ import { ApiData } from '@data/local-storage'
 import { DataRequestParams } from '@data/request-parameters'
 import { ILocalDbUtils } from '@utils/interfaces'
 import { DataServiceDictionary, Game } from '@data/types'
+import { ParserUtils } from '@utils/ParserUtils.ts'
 
 
 export const LocalDbUtils: ILocalDbUtils = {
@@ -12,24 +13,7 @@ export const LocalDbUtils: ILocalDbUtils = {
 			return `${data.id}${data.slug}${data.name}`.toLowerCase()
 		}
 
-		const values = Object.values(data as Game)
-		const fields = values.map(value => {
-			if (typeof value === 'string') {
-				return value
-			}
-
-			if (Array.isArray(value)) {
-				return value.join('')
-			}
-
-			if (typeof value === 'number') {
-				return value.toString()
-			}
-
-			return ''
-		})
-
-		return fields.join().trim().toLowerCase()
+		return ParserUtils.concatGameData(data as Game)
 	},
 
 	filterObjects(storageName: keyof DataServiceDictionary,
@@ -58,7 +42,9 @@ export const LocalDbUtils: ILocalDbUtils = {
 		const hasReachedPageSize = params.pageSize
 								   && results.length === params.pageSize
 		const hasSearchMatch     = params.search
-								   && LocalDbUtils.concatFields(value, storageName)
+								   && LocalDbUtils.concatFields(value,
+																storageName
+												  )
 												  .includes(params.search.trim()
 																  .toLowerCase())
 
