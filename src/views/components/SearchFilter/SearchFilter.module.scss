@@ -37,8 +37,9 @@
 		}
 
 		&[type="search"] {
-			margin-left   : 2vw;
-			border-radius : 8px;
+			margin-left    : 2vw;
+			border-radius  : 8px;
+			padding-inline : 1rem;
 		}
 	}
 
@@ -47,7 +48,7 @@
 		border-radius    : 8px;
 		box-shadow       : 0 0 4px palette.$black-d5;
 		margin-left      : 2vw;
-		padding          : 1vh 4vw;
+		padding          : 0.5rem 1rem;
 
 		option {
 			font-family : "Redhat Display", sans-serif;
@@ -63,7 +64,7 @@
 			align-items           : center;
 			display               : grid;
 			grid-template-columns : auto 1fr;
-			margin-bottom         : 2vh;
+			margin-bottom         : 1rem;
 		}
 	}
 }
