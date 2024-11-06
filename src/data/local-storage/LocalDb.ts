@@ -1,5 +1,4 @@
 import { ILocalDb } from '@data/local-storage/'
-import { DataRequestParams } from 'src/data/request-parameters'
 import {
 	Game,
 	Genre,
@@ -100,9 +99,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 		})
 	}
 
-	getAll(storageName: string,
-		   params?: DataRequestParams
-	): Promise<ApiData[]> {
+	getAll(storageName: string): Promise<ApiData[]> {
 		return new Promise<ApiData[]>((resolve, reject) => {
 			this.openObjectStore(storageName, 'readonly')
 				.then(objectStore => {
