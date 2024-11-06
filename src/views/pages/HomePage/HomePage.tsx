@@ -2,11 +2,11 @@ import { RootContext } from '@data/context'
 import { Recommended } from '@data/types'
 import { Gallery, GamePanel, Selection } from '@views/components'
 import { useContext, useState } from 'react'
-import style from './Home.module.scss'
+import style from './HomePage.module.scss'
 import { useHomePage } from '@src/hooks/useHomePage.ts'
 
 
-export function Home() {
+export function HomePage() {
 	const [recommended, setRecommended] = useState<Recommended>()
 	const rootContext                   = useContext(RootContext)
 	const { games, genres }             = rootContext
