@@ -7,7 +7,6 @@ export function useSearchOptions(context: IRootContext
 ) {
 	const {
 			  apiMiddleware,
-			  games,
 			  setPublishers,
 			  setPlatforms,
 			  setTags,
@@ -27,10 +26,6 @@ export function useSearchOptions(context: IRootContext
 
 		apiMiddleware?.getAll('genres', {})
 					 .then(apiData => setGenres(apiData as Genre[]))
-
-		if (games && games.length > 0) {
-			return
-		}
 
 		apiMiddleware?.getAll('games', { pageSize: 100, metacritic: '80,100' })
 					 .then((apiData) => setGames(apiData as Game[]))
