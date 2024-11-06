@@ -27,7 +27,7 @@ export function useSearchPage(context: IRootContext
 		apiMiddleware?.getAll('genres', {})
 					 .then(apiData => setGenres(apiData as Genre[]))
 
-		apiMiddleware?.getAll('games', { pageSize: 100, metacritic: '80,100' })
+		apiMiddleware?.getAll('games', { metacritic: '80,100' })
 					 .then((apiData) => setGames(apiData as Game[]))
 	}, [])
 }
