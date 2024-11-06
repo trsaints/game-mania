@@ -3,7 +3,7 @@ import { Game, Genre, Platform, Publisher, Tag } from '@data/types'
 import { IRootContext } from '@data/context'
 
 
-export function useSearchOptions(context: IRootContext
+export function useSearchPage(context: IRootContext
 ) {
 	const {
 			  apiMiddleware,
