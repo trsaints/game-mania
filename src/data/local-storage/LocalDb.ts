@@ -1,6 +1,7 @@
 import { ILocalDb } from '@data/local-storage/'
 import { DataRequestParams } from 'src/data/request-parameters'
 import {
+	DataServiceDictionary,
 	Game,
 	Genre,
 	LocalDbStore,
@@ -118,7 +119,8 @@ export class LocalDb implements ILocalDb<ApiData> {
 					const results: ApiData[] = []
 
 					idbCursorRequest.addEventListener('success', () => {
-						LocalDbUtils.filterObjects(idbCursorRequest,
+						LocalDbUtils.filterObjects(storageName as keyof DataServiceDictionary,
+												   idbCursorRequest,
 												   resolve,
 												   results,
 												   params
