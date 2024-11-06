@@ -1,7 +1,6 @@
 import { ILocalDb } from '@data/local-storage/'
 import { DataRequestParams } from 'src/data/request-parameters'
 import {
-	DataServiceDictionary,
 	Game,
 	Genre,
 	LocalDbStore,
@@ -9,7 +8,6 @@ import {
 	Publisher,
 	Tag
 } from '@data/types'
-import { LocalDbUtils } from '@src/utils'
 
 
 export type ApiData = Game | Platform | Publisher | Genre | Tag
@@ -119,12 +117,14 @@ export class LocalDb implements ILocalDb<ApiData> {
 					const results: ApiData[] = []
 
 					idbCursorRequest.addEventListener('success', () => {
-						LocalDbUtils.filterObjects(storageName as keyof DataServiceDictionary,
-												   idbCursorRequest,
-												   resolve,
-												   results,
-												   params
-						)
+						const cursor = idbCursorRequest.result
+
+						if (cursor) {
+							results.push(cursor.value)
+							cursor.continue()
+						} else {
+							resolve(results)
+						}
 					})
 				})
 				.catch(error => {
