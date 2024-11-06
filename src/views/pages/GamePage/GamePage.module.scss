@@ -1,11 +1,12 @@
 .GamePage {
-
 	.SuggestionsHeader {
 		padding-inline : 5vw;
-	}
+		display        : flex;
+		align-items    : center;
+		gap            : 5vw;
 
-	.SuggestionsLink {
-		display        : block;
-		padding-inline : 5vw;
+		.SuggestionsTitle {
+			margin-bottom : 0;
+		}
 	}
 }
