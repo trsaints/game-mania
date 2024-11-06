@@ -32,48 +32,47 @@ export const LocalDbUtils: ILocalDbUtils = {
 		return fields.join().trim().toLowerCase()
 	},
 
-	filterObjects
-}
+	filterObjects(storageName: keyof DataServiceDictionary,
+				  idbCursorRequest: IDBRequest,
+				  resolve: (value: (ApiData[] | PromiseLike<ApiData[]>)) => void,
+				  results: ApiData[],
+				  params?: DataRequestParams
+	): void {
+		const cursor = idbCursorRequest.result
 
-function filterObjects(storageName: keyof DataServiceDictionary,
-					   idbCursorRequest: IDBRequest,
-					   resolve: (value: (ApiData[] | PromiseLike<ApiData[]>)) => void,
-					   results: ApiData[],
-					   params?: DataRequestParams
-): void {
-	const cursor = idbCursorRequest.result
+		if (! cursor) {
+			resolve(results)
 
-	if (! cursor) {
-		resolve(results)
+			return
+		}
 
-		return
-	}
+		const value = cursor.value as ApiData
 
-	const value = cursor.value as ApiData
+		if (! params) {
+			results.push(value)
+			cursor.continue()
 
-	if (! params) {
-		results.push(value)
+			return
+		}
+
+		const hasReachedPageSize = params.pageSize
+								   && results.length === params.pageSize
+		const hasSearchMatch     = params.search
+								   && LocalDbUtils.concatFields(value, storageName)
+												  .includes(params.search.trim()
+																  .toLowerCase())
+
+		if (! hasReachedPageSize && ! params.search) {
+			results.push(value)
+		} else if (! hasReachedPageSize && hasSearchMatch) {
+			results.push(value)
+		} else if (hasReachedPageSize) {
+			resolve(results)
+
+			return
+		}
+
 		cursor.continue()
-
-		return
 	}
-
-	const hasReachedPageSize = params.pageSize
-							   && results.length === params.pageSize
-	const hasSearchMatch     = params.search
-							   && LocalDbUtils.concatFields(value, storageName)
-											  .includes(params.search.trim()
-															  .toLowerCase())
-
-	if (! hasReachedPageSize && ! params.search) {
-		results.push(value)
-	} else if (! hasReachedPageSize && hasSearchMatch) {
-		results.push(value)
-	} else if (hasReachedPageSize) {
-		resolve(results)
-
-		return
-	}
-
-	cursor.continue()
 }
+
