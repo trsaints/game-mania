@@ -3,6 +3,10 @@
 .GamePageList {
 	padding : 10vmax 5vw;
 
+	.ResultsCount {
+		margin-bottom: 5vmax;
+	}
+
 	.CountFilter {
 		display       : flex;
 		align-items   : center;

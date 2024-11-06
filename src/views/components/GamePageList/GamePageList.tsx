@@ -24,7 +24,7 @@ function GamePageList({ games }: IGamePageList) {
 
 	return (
 		<section className={style.GamePageList}>
-			<h3>{games.length} games found</h3>
+			<h3 className={style.ResultsCount}>{games.length} games found</h3>
 
 			<CountFilter onHandleSubmit={(e) => viewModel.changeItemCount(e,
 																		  setItemCount

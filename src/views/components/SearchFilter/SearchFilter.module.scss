@@ -5,9 +5,8 @@
 	border-radius    : 8px;
 	box-shadow       : 0 0 4px palette.$black-d5;
 	display          : grid;
-	gap              : 2vh;
-	margin           : 10vmax 5vw;
-	margin-block     : 10vh;
+	gap              : 1rem;
+	margin-left      : 5vw;
 	padding          : 5vmin;
 	max-width        : clamp(300px, 100%, 30vw);
 
@@ -18,13 +17,13 @@
 
 	details[open] {
 		summary {
-			margin-bottom : 2vh;
+			margin-bottom : 2vmax;
 		}
 	}
 
 	input {
 		background-color : palette.$white-d6;
-		padding          : 1vh;
+		padding          : 0.5rem;
 
 		&[type="checkbox"] {
 			display      : inline-block;
@@ -36,13 +35,18 @@
 				background-color : palette.$cyan;
 			}
 		}
+
+		&[type="search"] {
+			margin-left   : 2vw;
+			border-radius : 8px;
+		}
 	}
 
 	select {
 		background-color : palette.$black-d;
 		border-radius    : 8px;
 		box-shadow       : 0 0 4px palette.$black-d5;
-		margin-left      : 4vw;
+		margin-left      : 2vw;
 		padding          : 1vh 4vw;
 
 		option {
