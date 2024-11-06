@@ -1,10 +1,10 @@
 .Gallery {
-	margin-block : 10vh;
+	margin-block : 10vmax;
 
 	.Screenshots {
 		display       : flex;
 		flex-wrap     : wrap;
-		gap           : 5vw;
-		margin-bottom : 5vh;
+		gap           : 5vmin;
+		margin-bottom : 5vmin;
 	}
 }

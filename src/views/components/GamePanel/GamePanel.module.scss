@@ -3,8 +3,8 @@
 
 
 .PanelBanner {
-	padding       : 10vh 5vw;
-	margin-bottom : 10vh;
+	padding       : 10vmax 5vw;
+	margin-bottom : 10vmax;
 
 	.GamePanel {
 		background-color : color.scale(palette.$black-d5, $alpha : -20%);
