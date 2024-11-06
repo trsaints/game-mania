@@ -1,15 +1,7 @@
-import { Dispatch, SetStateAction, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Game, Genre, Platform, Publisher, Tag } from '@data/types'
 import { IRootContext } from '@data/context'
 
-
-export type SearchOptionsStates = {
-	setPublishers: Dispatch<SetStateAction<Publisher[] | undefined>>
-	setPlatforms: Dispatch<SetStateAction<Platform[] | undefined>>
-	setTags: Dispatch<SetStateAction<Tag[] | undefined>>
-	setGenres: Dispatch<SetStateAction<Genre[] | undefined>>
-	setGames: Dispatch<SetStateAction<Game[] | undefined>>
-}
 
 export function useSearchOptions(context: IRootContext
 ) {
@@ -36,12 +28,11 @@ export function useSearchOptions(context: IRootContext
 		apiMiddleware?.getAll('genres', {})
 					 .then(apiData => setGenres(apiData as Genre[]))
 
-		if (games) {
+		if (games && games.length > 0) {
 			return
 		}
 
 		apiMiddleware?.getAll('games', { pageSize: 100, metacritic: '80,100' })
-					 .then(apiData => setGames(apiData as Game[]))
+					 .then((apiData) => setGames(apiData as Game[]))
 	}, [])
-
 }
