@@ -31,4 +31,8 @@ export interface ILocalDb<T> {
 	isCreated(): boolean
 
 	reset(): void
+
+	rejectFailedEvent(event: Event,
+					  reject: (reason?: DOMException | null) => void
+	): void
 }
