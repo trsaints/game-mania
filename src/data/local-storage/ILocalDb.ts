@@ -9,6 +9,11 @@ export interface ILocalDb<T> {
 
 	create<T extends ApiData[]>(storages: { [K in keyof T]: LocalDbStore<T[K]> }): Promise<boolean>
 
+	createStores<T extends ApiData[]>(openRequest: IDBOpenDBRequest,
+									  storages: { [K in keyof T]: LocalDbStore<T[K]> },
+									  reject: (reason?: string) => void
+	): void
+
 	getObjectById(storageName: string, key: number): Promise<T>
 
 	getAll(storageName: string): Promise<T[]>

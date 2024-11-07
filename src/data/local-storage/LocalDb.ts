@@ -55,15 +55,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 			const openRequest = this.openRequest()
 
 			openRequest.addEventListener('upgradeneeded', () => {
-				const { result } = openRequest
-
-				try {
-					storages.forEach(store => result.createObjectStore(store.name,
-																	   store
-					))
-				} catch (error) {
-					return reject(`failed to create object stores: ${error}`)
-				}
+				return this.createStores(openRequest, storages, reject)
 			})
 
 			openRequest.addEventListener('success', () => {
@@ -75,6 +67,19 @@ export class LocalDb implements ILocalDb<ApiData> {
 				reject(openRequest.error)
 			})
 		})
+	}
+
+	createStores<T extends ApiData[]>(openRequest: IDBOpenDBRequest,
+									  storages: { [K in keyof T]: LocalDbStore<T[K]> },
+									  reject: (reason?: string) => void
+	): void {
+		const { result } = openRequest
+
+		try {
+			storages.forEach(store => result.createObjectStore(store.name, store))
+		} catch (error) {
+			return reject(`failed to create object stores: ${error}`)
+		}
 	}
 
 	getObjectById(storageName: string, key: number): Promise<ApiData> {
