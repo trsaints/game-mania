@@ -20,6 +20,12 @@ export interface ILocalDb<T> {
 
 	addObject(storageName: string, object: T): Promise<boolean>
 
+	handleAddObject(objectStore: IDBObjectStore,
+					object: ApiData,
+					resolve: (value: (PromiseLike<boolean> | boolean)) => void,
+					reject: (reason?: DOMException | null) => void
+	): void
+
 	addBulk(storageName: string, objects: T[]): Promise<ApiData[]>
 
 	removeObject(storageName: string, key: number): Promise<boolean>

@@ -148,19 +148,31 @@ export class LocalDb implements ILocalDb<ApiData> {
 
 			this.openObjectStore(storageName, 'readwrite')
 				.then(objectStore => {
-					const idbAddRequest = objectStore.add(object)
-
-					idbAddRequest.addEventListener('success',
-												   () => resolve(true)
+					return this.handleAddObject(objectStore,
+												object,
+												resolve,
+												reject
 					)
-					idbAddRequest.addEventListener('error', (event) => {
-						return this.rejectFailedEvent(event, reject)
-					})
 				})
 				.catch(error => {
 					console.log(`Failed to open object store: ${error}`)
 					reject(error)
 				})
+		})
+	}
+
+	handleAddObject(objectStore: IDBObjectStore,
+					object: ApiData,
+					resolve: (value: (PromiseLike<boolean> | boolean)) => void,
+					reject: (reason?: DOMException | null) => void
+	): void {
+		const idbAddRequest = objectStore.add(object)
+
+		idbAddRequest.addEventListener('success',
+									   () => resolve(true)
+		)
+		idbAddRequest.addEventListener('error', (event) => {
+			return this.rejectFailedEvent(event, reject)
 		})
 	}
 
