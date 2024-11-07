@@ -76,7 +76,9 @@ export class LocalDb implements ILocalDb<ApiData> {
 		const { result } = openRequest
 
 		try {
-			storages.forEach(store => result.createObjectStore(store.name, store))
+			storages.forEach(store => result.createObjectStore(store.name,
+															   store
+			))
 		} catch (error) {
 			return reject(`failed to create object stores: ${error}`)
 		}
@@ -92,9 +94,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 												   () => resolve(idbGetRequest.result)
 					)
 					idbGetRequest.addEventListener('error', (event) => {
-						const error = (event.target as IDBRequest).error
-						console.log(`Failed to get entry ${key}: ${error?.message}`)
-						reject(error)
+						return this.rejectFailedEvent(event, reject)
 					})
 				})
 				.catch(error => {
@@ -104,6 +104,14 @@ export class LocalDb implements ILocalDb<ApiData> {
 		})
 	}
 
+	rejectFailedEvent(event: Event,
+					  reject: (reason?: DOMException | null) => void
+	): void {
+		const error = (event.target as IDBRequest).error
+		console.log(`Failed to perform operation: ${error?.message}`)
+		reject(error)
+	}
+
 	getAll(storageName: string): Promise<ApiData[]> {
 		return new Promise<ApiData[]>((resolve, reject) => {
 			this.openObjectStore(storageName, 'readonly')
@@ -111,9 +119,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 					const idbCursorRequest = objectStore.openCursor()
 
 					idbCursorRequest.addEventListener('error', (event) => {
-						const error = (event.target as IDBRequest).error
-						console.log(`Failed to open cursor: ${error?.message}`)
-						reject(error)
+						return this.rejectFailedEvent(event, reject)
 					})
 
 					const results: ApiData[] = []
@@ -148,9 +154,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 												   () => resolve(true)
 					)
 					idbAddRequest.addEventListener('error', (event) => {
-						const error = (event.target as IDBRequest).error
-						console.log(`Failed to add entry: ${error?.message}`)
-						reject(error)
+						return this.rejectFailedEvent(event, reject)
 					})
 				})
 				.catch(error => {
@@ -216,9 +220,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 													  () => resolve(true)
 					)
 					idbDeleteRequest.addEventListener('error', (event) => {
-						const error = (event.target as IDBRequest).error
-						console.log(`Failed to delete entry ${key}: ${error?.message}`)
-						reject(error)
+						return this.rejectFailedEvent(event, reject)
 					})
 				})
 				.catch(error => {
@@ -242,9 +244,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 												   () => resolve(true)
 					)
 					idbPutRequest.addEventListener('error', (event) => {
-						const error = (event.target as IDBRequest).error
-						console.log(`Failed to update entry ${newObject.id}: ${error?.message}`)
-						reject(error)
+						return this.rejectFailedEvent(event, reject)
 					})
 				})
 				.catch(error => {
