@@ -8,10 +8,13 @@ import {
 	Tag
 } from '@data/types'
 import { IStartupUtils } from '@utils/interfaces/IStartupUtils.ts'
+import { IGameService } from '@src/services'
 
 
 export const StartupUtils: IStartupUtils = {
-	async initializeDb(db: ILocalDb<ApiData>): Promise<boolean> {
+	async initializeDb(db: ILocalDb<ApiData>,
+					   gameService: IGameService
+	): Promise<boolean> {
 		const gameSchema: LocalDbStore<Game> = {
 			name         : 'games',
 			keyPath      : 'id',
@@ -54,6 +57,19 @@ export const StartupUtils: IStartupUtils = {
 											  tagSchema,
 											  publisherSchema
 										  ])
+
+		if (isCreated) {
+			const gameData = await gameService.getAll({
+														  pageSize  : 40,
+														  metacritic: '80,100'
+													  })
+
+			if (gameData.length < 1) return Promise.resolve(false)
+
+			const savedResults = await db.addBulk('games', gameData)
+
+			return Promise.resolve(savedResults.length < 1)
+		}
 
 		return Promise.resolve(isCreated)
 	}
