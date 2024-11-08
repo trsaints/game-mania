@@ -30,10 +30,12 @@ class RootViewModel {
 	)
 
 	constructor() {
-		if (! this.localDb.isCreated()) {
-			StartupUtils.initializeDb(this.localDb).then(isCreated => {
-				console.log('database created: ', isCreated)
-			})
-		}
+		if (this.localDb.isCreated()) return
+
+		StartupUtils.initializeDb(this.localDb,
+								  this.dataServiceDictionary.games
+		).then(isCreated => {
+			console.log('database created: ', isCreated)
+		})
 	}
 }
