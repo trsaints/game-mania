@@ -22,7 +22,7 @@ export class ApiMiddleware implements IApiMiddleware {
 	async getAll(route: keyof DataServiceDictionary,
 				 params: DataRequestParams
 	): Promise<ApiData[]> {
-		let data = await this._localDb.getAll(route, params)
+		let data = await this._localDb.getAll(route)
 
 		if (data.length > 0) return data
 
