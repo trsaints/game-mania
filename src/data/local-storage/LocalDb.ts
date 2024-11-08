@@ -267,7 +267,11 @@ export class LocalDb implements ILocalDb<ApiData> {
 	}
 
 	isCreated(): boolean {
-		return localStorage.getItem(this._loadKey) !== null
+		const isCreated = localStorage.getItem(this._loadKey)
+
+		if (! isCreated) return false
+
+		return Boolean(isCreated)
 	}
 
 	reset(): void {
