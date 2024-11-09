@@ -37,7 +37,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 																   mode
 				)
 
-				resolve(transaction.objectStore(storageName))
+				return resolve(transaction.objectStore(storageName))
 			})
 
 			openRequest.addEventListener('error',
@@ -60,11 +60,11 @@ export class LocalDb implements ILocalDb<ApiData> {
 
 			openRequest.addEventListener('success', () => {
 				localStorage.setItem(this._loadKey, 'true')
-				resolve(true)
+				return resolve(true)
 			})
 
 			openRequest.addEventListener('error', () => {
-				reject(openRequest.error)
+				return reject(openRequest.error)
 			})
 		})
 	}
@@ -131,7 +131,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 							results.push(cursor.value)
 							cursor.continue()
 						} else {
-							resolve(results)
+							return resolve(results)
 						}
 					})
 				})
@@ -193,7 +193,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 							completed++
 
 							if (completed === objects.length) {
-								resolve(addedObjects)
+								return resolve(addedObjects)
 							}
 						})
 
@@ -204,7 +204,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 							completed++
 
 							if (completed === objects.length) {
-								resolve(addedObjects)
+								return resolve(addedObjects)
 							}
 						})
 					})
@@ -213,7 +213,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 						completed++
 
 						if (completed === objects.length) {
-							resolve(addedObjects)
+							return resolve(addedObjects)
 						}
 					})
 			})
