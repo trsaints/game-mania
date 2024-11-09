@@ -5,33 +5,31 @@ import { IGameService } from '@services/interfaces'
 import { ParserUtils, TypeUtils } from '@src/utils'
 
 
-export const GameService: IGameService = {
-	getAll,
-	getById,
-	getScreenshots
+export class GameService implements IGameService {
+	async getAll(params?: DataRequestParams): Promise<Game[]> {
+		const baseUrl  = ApiService.createRouteUrl('games')
+		const response = await ApiService.gameApi.get(baseUrl, {
+			params: params ? ParserUtils.mapToSnakeCase(params as never) : {}
+		})
+
+		return response.data?.results.map(TypeUtils.mapToGame) ?? []
+	}
+
+	async getById(id: number): Promise<Game> {
+		const gameUrl  = ApiService.createRouteUrl(`games/${id}`)
+		const response = await ApiService.gameApi.get(gameUrl)
+
+		return TypeUtils.mapToGame(response.data as never)
+	}
+
+	async getScreenshots(id: number): Promise<Screenshots> {
+		const routeUrl = ApiService.createRouteUrl(`games/${id}/screenshots`)
+		const response = await ApiService.gameApi.get(routeUrl)
+
+		return response.data as Screenshots
+	}
 }
 
-async function getAll(params?: DataRequestParams): Promise<Game[]> {
-	const baseUrl  = ApiService.createRouteUrl('games')
-	const response = await ApiService.gameApi.get(baseUrl, {
-		params: params ? ParserUtils.mapToSnakeCase(params as never) : {}
-	})
 
-	return response.data?.results.map(TypeUtils.mapToGame) ?? []
-}
-
-async function getById(id: number): Promise<Game> {
-	const gameUrl  = ApiService.createRouteUrl(`games/${id}`)
-	const response = await ApiService.gameApi.get(gameUrl)
-
-	return TypeUtils.mapToGame(response.data as never)
-}
-
-async function getScreenshots(id: number): Promise<Screenshots> {
-	const routeUrl = ApiService.createRouteUrl(`games/${id}/screenshots`)
-	const response = await ApiService.gameApi.get(routeUrl)
-
-	return response.data as Screenshots
-}
 
 

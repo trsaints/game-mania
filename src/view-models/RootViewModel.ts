@@ -15,7 +15,7 @@ import { IRootViewModel } from '@src/view-models/interfaces/IRootViewModel.ts'
 
 class RootViewModel implements IRootViewModel {
 	dataServiceDictionary: DataServiceDictionary = {
-		games     : GameService,
+		games     : new GameService(),
 		genres    : GenreService,
 		platforms : PlatformService,
 		publishers: PublisherService,
