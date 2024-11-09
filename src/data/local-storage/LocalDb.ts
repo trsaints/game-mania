@@ -201,7 +201,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 						idbAddRequest.addEventListener('error', (event) => {
 							const error = (event.target as IDBRequest).error
 
-							console.log(`Failed to add entry ${object.id}: ${error?.message}`)
+							console.log(`Failed to add entry ${object.id} to "${storageName}": ${error?.message}`)
 							completed++
 
 							if (completed === objects.length) {
