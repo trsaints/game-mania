@@ -11,6 +11,7 @@ import { ApiMiddleware } from '@src/middlewares'
 import { ApiMiddlewareFilter } from '@src/filters'
 import { StartupUtils } from '@src/utils'
 import { IRootViewModel } from '@src/view-models/interfaces/IRootViewModel.ts'
+import { ApiService } from '@services/ApiService.ts'
 
 
 class RootViewModel implements IRootViewModel {
@@ -22,8 +23,10 @@ class RootViewModel implements IRootViewModel {
 		tags      : TagService
 	}
 
+	apiService    = new ApiService()
 	localDb       = new LocalDb('game-mania', 1)
 	apiMiddleware = new ApiMiddleware(this.dataServiceDictionary,
+									  this.apiService,
 									  this.localDb,
 									  ApiMiddlewareFilter
 	)
@@ -36,7 +39,8 @@ class RootViewModel implements IRootViewModel {
 		if (this.localDb.isCreated()) return Promise.resolve()
 
 		await StartupUtils.initializeDb(this.localDb,
-										this.dataServiceDictionary.games
+										this.dataServiceDictionary.games,
+										this.apiService
 		).then(isCreated => {
 			console.log('database created: ', isCreated)
 			return Promise.resolve()

@@ -3,18 +3,22 @@ import { DataRequestParams } from '@data/request-parameters'
 import { DataServiceDictionary, Game, Recommended } from '@data/types'
 import { IApiMiddleware } from '@src/middlewares'
 import { IIApiMiddlewareFilter } from '@src/filters'
+import { IApiService } from '@src/services'
 
 
 export class ApiMiddleware implements IApiMiddleware {
 	private readonly _dataServiceDictionary: DataServiceDictionary
+	private readonly _apiService: IApiService
 	private readonly _localDb: ILocalDb<ApiData>
 	private readonly _filter: IIApiMiddlewareFilter
 
 	constructor(dataServiceDictionary: DataServiceDictionary,
+				apiService: IApiService,
 				localDb: ILocalDb<ApiData>,
 				filter: IIApiMiddlewareFilter
 	) {
 		this._dataServiceDictionary = dataServiceDictionary
+		this._apiService            = apiService
 		this._localDb               = localDb
 		this._filter                = filter
 	}
@@ -26,7 +30,10 @@ export class ApiMiddleware implements IApiMiddleware {
 
 		if (data.length > 0) return data
 
-		data = await this._dataServiceDictionary[route].getAll(params)
+		data =
+			await this._dataServiceDictionary[route].getAll(params,
+															this._apiService
+			)
 
 		return await this._localDb.addBulk(route, data)
 	}
@@ -45,6 +52,7 @@ export class ApiMiddleware implements IApiMiddleware {
 				parsedGame =
 					await this._filter.mapMissingScreenshots(parsedGame,
 															 this._dataServiceDictionary.games,
+															 this._apiService,
 															 this._localDb
 					)
 			}
@@ -52,6 +60,7 @@ export class ApiMiddleware implements IApiMiddleware {
 			if (! parsedGame.publishers) {
 				parsedGame = await this._filter.mapGameDetails(parsedGame,
 															   this._dataServiceDictionary.games,
+															   this._apiService,
 															   this._localDb
 				)
 			}
@@ -59,7 +68,10 @@ export class ApiMiddleware implements IApiMiddleware {
 			return parsedGame
 		}
 
-		data = await this._dataServiceDictionary[route].getById(id)
+		data =
+			await this._dataServiceDictionary[route].getById(id,
+															 this._apiService
+			)
 
 		const successfulAddition = await this._localDb.addObject(route, data)
 
@@ -69,6 +81,7 @@ export class ApiMiddleware implements IApiMiddleware {
 
 		return await this._filter.mapMissingScreenshots(parsedGame,
 														this._dataServiceDictionary.games,
+														this._apiService,
 														this._localDb
 		)
 	}
@@ -81,9 +94,9 @@ export class ApiMiddleware implements IApiMiddleware {
 			daily            : await this.getById('games', dailyId) as Game,
 			recent           : await this.getById('games', recentId) as Game,
 			recentScreenshots: await this._dataServiceDictionary.games.getScreenshots(
-				recentId),
+				recentId, this._apiService),
 			dailyScreenshots : await this._dataServiceDictionary.games.getScreenshots(
-				dailyId)
+				dailyId, this._apiService)
 		}
 	}
 }

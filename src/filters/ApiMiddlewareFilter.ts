@@ -3,7 +3,7 @@ import {
 } from '@src/filters/interfaces/IIApiMiddlewareFilter.ts'
 import { Game } from '@data/types'
 import { ApiData, ILocalDb } from '@data/local-storage'
-import { IGameService } from '@src/services'
+import { IApiService, IGameService } from '@src/services'
 
 
 export const ApiMiddlewareFilter: IIApiMiddlewareFilter = {
@@ -13,9 +13,12 @@ export const ApiMiddlewareFilter: IIApiMiddlewareFilter = {
 
 async function mapMissingScreenshots(game: Game,
 									 gameService: IGameService,
+									 apiService: IApiService,
 									 database: ILocalDb<ApiData>
 ): Promise<Game> {
-	const screenshots      = await gameService.getScreenshots(game.id)
+	const screenshots      = await gameService.getScreenshots(game.id,
+															  apiService
+	)
 	const successfulUpdate = await database.updateObject('games', {
 		...game,
 		screenshots
@@ -30,9 +33,10 @@ async function mapMissingScreenshots(game: Game,
 
 async function mapGameDetails(game: Game,
 							  gameService: IGameService,
+							  apiService: IApiService,
 							  database: ILocalDb<ApiData>
 ): Promise<Game> {
-	const gameDetails      = await gameService.getById(game.id)
+	const gameDetails      = await gameService.getById(game.id, apiService)
 	const successfulUpdate = await database.updateObject('games', {
 		...game,
 		...gameDetails
