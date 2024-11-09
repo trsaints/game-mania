@@ -9,6 +9,7 @@ import {
 } from '@data/types'
 import { IStartupUtils } from '@utils/interfaces/IStartupUtils.ts'
 import { IGameService } from '@src/services'
+import { DbSchema } from '@data/types/DbSchema.ts'
 
 
 export const StartupUtils: IStartupUtils = {
@@ -17,6 +18,13 @@ export const StartupUtils: IStartupUtils = {
 	): Promise<boolean> {
 		console.log('initializing database')
 
+		const isCreated = await db.create(this.getDbSchema())
+
+		await this.seedDb(isCreated, db, gameService)
+
+		return Promise.resolve(isCreated)
+	},
+	getDbSchema(): DbSchema {
 		const gameSchema: LocalDbStore<Game> = {
 			name         : 'games',
 			keyPath      : 'id',
@@ -52,18 +60,15 @@ export const StartupUtils: IStartupUtils = {
 			indices      : []
 		}
 
-		const isCreated = await db.create([
-											  gameSchema,
-											  platformSchema,
-											  genreSchema,
-											  tagSchema,
-											  publisherSchema
-										  ])
-
-		await this.seedDb(isCreated, db, gameService)
-
-		return Promise.resolve(isCreated)
-	},
+		return [
+			gameSchema,
+			platformSchema,
+			genreSchema,
+			tagSchema,
+			publisherSchema
+		]
+	}
+	,
 	async seedDb(isCreated: boolean,
 				 db: ILocalDb<ApiData>,
 				 gameService: IGameService
