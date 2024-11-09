@@ -10,11 +10,10 @@ import { LocalDb } from '@data/local-storage'
 import { ApiMiddleware } from '@src/middlewares'
 import { ApiMiddlewareFilter } from '@src/filters'
 import { StartupUtils } from '@src/utils'
+import { IRootViewModel } from '@src/view-models/interfaces/IRootViewModel.ts'
 
 
-export { RootViewModel }
-
-class RootViewModel {
+class RootViewModel implements IRootViewModel {
 	dataServiceDictionary: DataServiceDictionary = {
 		games     : GameService,
 		genres    : GenreService,
@@ -30,12 +29,19 @@ class RootViewModel {
 	)
 
 	constructor() {
-		if (this.localDb.isCreated()) return
+		// Initialization moved to initializeDb method
+	}
 
-		StartupUtils.initializeDb(this.localDb,
-								  this.dataServiceDictionary.games
+	async initializeDb(): Promise<void> {
+		if (this.localDb.isCreated()) return Promise.resolve()
+
+		await StartupUtils.initializeDb(this.localDb,
+										this.dataServiceDictionary.games
 		).then(isCreated => {
 			console.log('database created: ', isCreated)
+			return Promise.resolve()
 		})
 	}
 }
+
+export { RootViewModel }
