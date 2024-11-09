@@ -7,6 +7,7 @@ import {
 	Publisher,
 	Tag
 } from '@data/types'
+import { DbSchema } from '@data/types/DbSchema.ts'
 
 
 export type ApiData = Game | Platform | Publisher | Genre | Tag
@@ -46,7 +47,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 		})
 	}
 
-	create<T extends ApiData[]>(storages: { [K in keyof T]: LocalDbStore<T[K]> }): Promise<boolean> {
+	create(schema: DbSchema): Promise<boolean> {
 		return new Promise((resolve, reject) => {
 			if (this.isCreated()) {
 				return reject('database already created')
@@ -55,7 +56,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 			const openRequest = this.openRequest()
 
 			openRequest.addEventListener('upgradeneeded', () => {
-				return this.createStores(openRequest, storages, reject)
+				return this.createStores(openRequest, schema, reject)
 			})
 
 			openRequest.addEventListener('success', () => {

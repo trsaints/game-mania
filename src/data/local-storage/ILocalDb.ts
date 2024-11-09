@@ -1,5 +1,6 @@
 import { ApiData } from '@data/local-storage'
 import { LocalDbStore } from '@data/types'
+import { DbSchema } from '@data/types/DbSchema.ts'
 
 
 export interface ILocalDb<T> {
@@ -7,7 +8,7 @@ export interface ILocalDb<T> {
 					mode: IDBTransactionMode
 	): Promise<IDBObjectStore>
 
-	create<T extends ApiData[]>(storages: { [K in keyof T]: LocalDbStore<T[K]> }): Promise<boolean>
+	create(schema: DbSchema): Promise<boolean>
 
 	createStores<T extends ApiData[]>(openRequest: IDBOpenDBRequest,
 									  storages: { [K in keyof T]: LocalDbStore<T[K]> },
