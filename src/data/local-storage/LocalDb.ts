@@ -12,6 +12,16 @@ import { DbSchema } from '@data/types/DbSchema.ts'
 
 export type ApiData = Game | Platform | Publisher | Genre | Tag
 
+type BulkErrorHandler = {
+	idbAddRequest: IDBRequest,
+	object: ApiData,
+	storageName: string,
+	addedObjects: ApiData[],
+	completed: number,
+	objects: ApiData[],
+	resolve: (value: (PromiseLike<ApiData[]> | ApiData[])) => void
+}
+
 export class LocalDb implements ILocalDb<ApiData> {
 	private readonly _name: string
 	private readonly _version: number
@@ -211,16 +221,17 @@ export class LocalDb implements ILocalDb<ApiData> {
 								}
 							})
 
-							idbAddRequest.addEventListener('error', (event) => {
-								const error = (event.target as IDBRequest).error
+							const errorHandler: BulkErrorHandler = {
+								idbAddRequest,
+								object,
+								storageName,
+								addedObjects,
+								completed,
+								objects,
+								resolve
+							}
 
-								console.log(`Failed to add entry ${object.id} to "${storageName}": ${error?.message}`)
-								completed++
-
-								if (completed === objects.length) {
-									return resolve(addedObjects)
-								}
-							})
+							this.handleBulkError(errorHandler)
 						})
 					})
 					.catch(error => {
@@ -231,6 +242,31 @@ export class LocalDb implements ILocalDb<ApiData> {
 							return resolve(addedObjects)
 						}
 					})
+			}
+		})
+	}
+
+	handleBulkError(handler: BulkErrorHandler) {
+		const {
+				  idbAddRequest,
+				  object,
+				  storageName,
+				  addedObjects,
+				  completed,
+				  objects,
+				  resolve
+			  } = handler
+
+		let currentCompleted = completed
+
+		idbAddRequest.addEventListener('error', (event) => {
+			const error = (event.target as IDBRequest).error
+
+			console.log(`Failed to add entry ${object.id} to "${storageName}": ${error?.message}`)
+			currentCompleted++
+
+			if (currentCompleted === objects.length) {
+				return resolve(addedObjects)
 			}
 		})
 	}
