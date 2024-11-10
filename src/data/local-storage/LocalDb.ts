@@ -10,18 +10,6 @@ import {
 import { DbSchema } from '@data/types/DbSchema.ts'
 
 
-export type ApiData = Game | Platform | Publisher | Genre | Tag
-
-type BulkErrorHandler = {
-	idbAddRequest: IDBRequest,
-	object: ApiData,
-	storageName: string,
-	addedObjects: ApiData[],
-	completed: number,
-	objects: ApiData[],
-	resolve: (value: (PromiseLike<ApiData[]> | ApiData[])) => void
-}
-
 export class LocalDb implements ILocalDb<ApiData> {
 	private readonly _name: string
 	private readonly _version: number
@@ -199,16 +187,17 @@ export class LocalDb implements ILocalDb<ApiData> {
 					.then(objectStore => {
 						const idbGetRequest = objectStore.get(object.id)
 
+						const existingHandler: BulkExistingHandler = {
+							idbGetRequest,
+							addedObjects,
+							object,
+							completed,
+							objects,
+							resolve
+						}
+
 						idbGetRequest.addEventListener('success', () => {
-							if (idbGetRequest.result) {
-								addedObjects.push(object)
-								completed++
-
-								if (completed === objects.length) resolve(
-									addedObjects)
-
-								return
-							}
+							if (this.handleBulkExisting(existingHandler)) return
 
 							const idbAddRequest = objectStore.add(object)
 
@@ -244,6 +233,31 @@ export class LocalDb implements ILocalDb<ApiData> {
 					})
 			}
 		})
+	}
+
+	handleBulkExisting(handler: BulkExistingHandler): boolean {
+		const {
+				  idbGetRequest,
+				  addedObjects,
+				  object,
+				  completed,
+				  objects,
+				  resolve
+			  } = handler
+
+		let currentCompleted = completed
+
+		if (idbGetRequest.result) {
+			addedObjects.push(object)
+			currentCompleted++
+
+			if (currentCompleted === objects.length) resolve(
+				addedObjects)
+
+			return true
+		}
+
+		return false
 	}
 
 	handleBulkError(handler: BulkErrorHandler) {
@@ -331,3 +345,23 @@ export class LocalDb implements ILocalDb<ApiData> {
 	}
 }
 
+export type ApiData = Game | Platform | Publisher | Genre | Tag
+
+type BulkExistingHandler = {
+	idbGetRequest: IDBRequest,
+	addedObjects: ApiData[],
+	object: ApiData,
+	completed: number,
+	objects: ApiData[],
+	resolve: (value: (PromiseLike<ApiData[]> | ApiData[])) => void
+}
+
+type BulkErrorHandler = {
+	idbAddRequest: IDBRequest,
+	object: ApiData,
+	storageName: string,
+	addedObjects: ApiData[],
+	completed: number,
+	objects: ApiData[],
+	resolve: (value: (PromiseLike<ApiData[]> | ApiData[])) => void
+}
