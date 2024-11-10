@@ -197,19 +197,11 @@ export class LocalDb implements ILocalDb<ApiData> {
 							resolve
 						}
 
-						idbGetRequest.addEventListener('success', () => {
-							if (this.handleBulkExisting(bulkGetHandler)) return
-
-							const idbAddRequest = objectStore.add(object)
-
-							const bulkAddHandler: BulkEventHandler = {
-								...bulkGetHandler,
-								idbRequest: idbAddRequest
-							}
-
-							this.handleBulkAdd(bulkAddHandler)
-							this.handleBulkError(bulkAddHandler)
-						})
+						this.handleBulkOperations(idbGetRequest,
+												  bulkGetHandler,
+												  objectStore,
+												  object
+						)
 					})
 					.catch(error => {
 						console.log(`Failed to open object store: ${error}`)
@@ -223,7 +215,27 @@ export class LocalDb implements ILocalDb<ApiData> {
 		})
 	}
 
-	private handleBulkAdd(handler: BulkEventHandler): void {
+	handleBulkOperations(idbGetRequest: IDBRequest,
+						 bulkGetHandler: BulkEventHandler,
+						 objectStore: IDBObjectStore,
+						 object: ApiData
+	): void {
+		idbGetRequest.addEventListener('success', () => {
+			if (this.handleBulkExisting(bulkGetHandler)) return
+
+			const idbAddRequest = objectStore.add(object)
+
+			const bulkAddHandler: BulkEventHandler = {
+				...bulkGetHandler,
+				idbRequest: idbAddRequest
+			}
+
+			this.handleBulkAdd(bulkAddHandler)
+			this.handleBulkError(bulkAddHandler)
+		})
+	}
+
+	handleBulkAdd(handler: BulkEventHandler): void {
 		const {
 				  idbRequest,
 				  addedObjects,
