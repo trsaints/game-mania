@@ -187,17 +187,18 @@ export class LocalDb implements ILocalDb<ApiData> {
 					.then(objectStore => {
 						const idbGetRequest = objectStore.get(object.id)
 
-						const existingHandler: BulkExistingHandler = {
-							idbGetRequest,
+						const bulkEventHandler: BulkEventHandler = {
+							idbRequest: idbGetRequest,
 							addedObjects,
 							object,
+							storageName,
 							completed,
 							objects,
 							resolve
 						}
 
 						idbGetRequest.addEventListener('success', () => {
-							if (this.handleBulkExisting(existingHandler)) return
+							if (this.handleBulkExisting(bulkEventHandler)) return
 
 							const idbAddRequest = objectStore.add(object)
 
@@ -209,14 +210,10 @@ export class LocalDb implements ILocalDb<ApiData> {
 											   resolve
 							)
 
-							const errorHandler: BulkErrorHandler = {
-								idbAddRequest,
-								object,
-								storageName,
-								addedObjects,
-								completed,
-								objects,
-								resolve
+
+							const errorHandler: BulkEventHandler = {
+								...bulkEventHandler,
+								idbRequest: idbAddRequest
 							}
 
 							this.handleBulkError(errorHandler)
@@ -251,9 +248,9 @@ export class LocalDb implements ILocalDb<ApiData> {
 		})
 	}
 
-	handleBulkExisting(handler: BulkExistingHandler): boolean {
+	handleBulkExisting(handler: BulkEventHandler): boolean {
 		const {
-				  idbGetRequest,
+				  idbRequest,
 				  addedObjects,
 				  object,
 				  completed,
@@ -261,7 +258,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 				  resolve
 			  } = handler
 
-		if (idbGetRequest.result) {
+		if (idbRequest.result) {
 			addedObjects.push(object)
 			completed.count++
 
@@ -273,9 +270,9 @@ export class LocalDb implements ILocalDb<ApiData> {
 		return false
 	}
 
-	handleBulkError(handler: BulkErrorHandler) {
+	handleBulkError(handler: BulkEventHandler) {
 		const {
-				  idbAddRequest,
+				  idbRequest,
 				  object,
 				  storageName,
 				  addedObjects,
@@ -284,7 +281,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 				  resolve
 			  } = handler
 
-		idbAddRequest.addEventListener('error', (event) => {
+		idbRequest.addEventListener('error', (event) => {
 			const error = (event.target as IDBRequest).error
 
 			console.log(`Failed to add entry ${object.id} to "${storageName}": ${error?.message}`)
@@ -358,17 +355,8 @@ export class LocalDb implements ILocalDb<ApiData> {
 
 export type ApiData = Game | Platform | Publisher | Genre | Tag
 
-type BulkExistingHandler = {
-	idbGetRequest: IDBRequest,
-	addedObjects: ApiData[],
-	object: ApiData,
-	completed: { count: number },
-	objects: ApiData[],
-	resolve: (value: (PromiseLike<ApiData[]> | ApiData[])) => void
-}
-
-type BulkErrorHandler = {
-	idbAddRequest: IDBRequest,
+type BulkEventHandler = {
+	idbRequest: IDBRequest,
 	object: ApiData,
 	storageName: string,
 	addedObjects: ApiData[],
