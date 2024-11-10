@@ -180,7 +180,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 			if (! this.isCreated() || objects.length < 1) reject(false)
 
 			const addedObjects: ApiData[] = []
-			let completed                 = 0
+			const completed               = { count: 0 }
 
 			for (const object of objects) {
 				this.openObjectStore(storageName, 'readwrite')
@@ -201,14 +201,13 @@ export class LocalDb implements ILocalDb<ApiData> {
 
 							const idbAddRequest = objectStore.add(object)
 
-							idbAddRequest.addEventListener('success', () => {
-								addedObjects.push(object)
-								completed++
-
-								if (completed === objects.length) {
-									return resolve(addedObjects)
-								}
-							})
+							this.handleBulkAdd(idbAddRequest,
+											   addedObjects,
+											   object,
+											   completed,
+											   objects,
+											   resolve
+							)
 
 							const errorHandler: BulkErrorHandler = {
 								idbAddRequest,
@@ -225,12 +224,29 @@ export class LocalDb implements ILocalDb<ApiData> {
 					})
 					.catch(error => {
 						console.log(`Failed to open object store: ${error}`)
-						completed++
+						completed.count++
 
-						if (completed === objects.length) {
+						if (completed.count === objects.length) {
 							return resolve(addedObjects)
 						}
 					})
+			}
+		})
+	}
+
+	private handleBulkAdd(idbAddRequest: IDBRequest<IDBValidKey>,
+						  addedObjects: ApiData[],
+						  object: ApiData,
+						  completed: { count: number },
+						  objects: ApiData[],
+						  resolve: (value: (PromiseLike<ApiData[]> | ApiData[])) => void
+	): void {
+		idbAddRequest.addEventListener('success', () => {
+			addedObjects.push(object)
+			completed.count++
+
+			if (completed.count === objects.length) {
+				return resolve(addedObjects)
 			}
 		})
 	}
@@ -245,14 +261,11 @@ export class LocalDb implements ILocalDb<ApiData> {
 				  resolve
 			  } = handler
 
-		let currentCompleted = completed
-
 		if (idbGetRequest.result) {
 			addedObjects.push(object)
-			currentCompleted++
+			completed.count++
 
-			if (currentCompleted === objects.length) resolve(
-				addedObjects)
+			if (completed.count === objects.length) resolve(addedObjects)
 
 			return true
 		}
@@ -271,15 +284,13 @@ export class LocalDb implements ILocalDb<ApiData> {
 				  resolve
 			  } = handler
 
-		let currentCompleted = completed
-
 		idbAddRequest.addEventListener('error', (event) => {
 			const error = (event.target as IDBRequest).error
 
 			console.log(`Failed to add entry ${object.id} to "${storageName}": ${error?.message}`)
-			currentCompleted++
+			completed.count++
 
-			if (currentCompleted === objects.length) {
+			if (completed.count === objects.length) {
 				return resolve(addedObjects)
 			}
 		})
@@ -351,7 +362,7 @@ type BulkExistingHandler = {
 	idbGetRequest: IDBRequest,
 	addedObjects: ApiData[],
 	object: ApiData,
-	completed: number,
+	completed: { count: number },
 	objects: ApiData[],
 	resolve: (value: (PromiseLike<ApiData[]> | ApiData[])) => void
 }
@@ -361,7 +372,7 @@ type BulkErrorHandler = {
 	object: ApiData,
 	storageName: string,
 	addedObjects: ApiData[],
-	completed: number,
+	completed: { count: number },
 	objects: ApiData[],
 	resolve: (value: (PromiseLike<ApiData[]> | ApiData[])) => void
 }
