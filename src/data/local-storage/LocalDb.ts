@@ -184,7 +184,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 			const addedObjects: ApiData[] = []
 			let completed                 = 0
 
-			objects.forEach(object => {
+			for (const object of objects) {
 				this.openObjectStore(storageName, 'readwrite')
 					.then(objectStore => {
 						const idbAddRequest = objectStore.add(object)
@@ -217,7 +217,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 							return resolve(addedObjects)
 						}
 					})
-			})
+			}
 		})
 	}
 
