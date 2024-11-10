@@ -187,26 +187,40 @@ export class LocalDb implements ILocalDb<ApiData> {
 			for (const object of objects) {
 				this.openObjectStore(storageName, 'readwrite')
 					.then(objectStore => {
-						const idbAddRequest = objectStore.add(object)
+						const idbGetRequest = objectStore.get(object.id)
 
-						idbAddRequest.addEventListener('success', () => {
-							addedObjects.push(object)
-							completed++
+						idbGetRequest.addEventListener('success', () => {
+							if (idbGetRequest.result) {
+								addedObjects.push(object)
+								completed++
 
-							if (completed === objects.length) {
-								return resolve(addedObjects)
+								if (completed === objects.length) resolve(
+									addedObjects)
+
+								return
 							}
-						})
 
-						idbAddRequest.addEventListener('error', (event) => {
-							const error = (event.target as IDBRequest).error
+							const idbAddRequest = objectStore.add(object)
 
-							console.log(`Failed to add entry ${object.id} to "${storageName}": ${error?.message}`)
-							completed++
+							idbAddRequest.addEventListener('success', () => {
+								addedObjects.push(object)
+								completed++
 
-							if (completed === objects.length) {
-								return resolve(addedObjects)
-							}
+								if (completed === objects.length) {
+									return resolve(addedObjects)
+								}
+							})
+
+							idbAddRequest.addEventListener('error', (event) => {
+								const error = (event.target as IDBRequest).error
+
+								console.log(`Failed to add entry ${object.id} to "${storageName}": ${error?.message}`)
+								completed++
+
+								if (completed === objects.length) {
+									return resolve(addedObjects)
+								}
+							})
 						})
 					})
 					.catch(error => {
