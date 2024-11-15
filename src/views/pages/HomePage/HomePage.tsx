@@ -41,21 +41,9 @@ interface IRecommendedPanel {
 }
 
 function RecentPanel({ recommended }: IRecommendedPanel) {
-	return (
-		((recommended?.recent)
-		&& (recommended?.recent.screenshots?.results))
-		&& <GamePanel game={recommended?.recent}
-					  images={recommended?.recent.screenshots.results}
-		/>
-	)
+	return ((recommended?.recent) && <GamePanel game={recommended?.recent}/>)
 }
 
 function DailyPanel({ recommended }: IRecommendedPanel) {
-	return (
-		((recommended?.daily)
-		&& (recommended?.daily.screenshots?.results))
-		&& <GamePanel game={recommended?.daily}
-					  images={recommended?.daily.screenshots.results}
-		/>
-	)
+	return ((recommended?.daily) && <GamePanel game={recommended?.daily}/>)
 }
