@@ -53,21 +53,17 @@ export class ApiMiddleware implements IApiMiddleware {
 			)
 		}
 
-		data =
-			await this._dataServiceDictionary[route].getById(id,
-															 this._apiService
-			)
+		data = await this._dataServiceDictionary[route]
+			.getById(id, this._apiService)
 
 		const successfulAddition = await this._localDb.addObject(route, data)
 
 		if (successfulAddition && route !== 'games') return data
 
-		const parsedGame = data as Game
-
-		return await this._filter.mapMissingScreenshots(parsedGame,
-														this._dataServiceDictionary.games,
-														this._apiService,
-														this._localDb
+		return this._filter.mapGameData(data,
+										this._dataServiceDictionary.games,
+										this._apiService,
+										this._localDb
 		)
 	}
 
