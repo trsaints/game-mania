@@ -33,7 +33,7 @@ export interface ILocalDb<T> {
 
 	updateObject(storageName: string,
 				 newObject: T
-	): Promise<boolean>
+	): Promise<T>
 
 	isCreated(): boolean
 

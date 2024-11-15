@@ -324,8 +324,8 @@ export class LocalDb implements ILocalDb<ApiData> {
 
 	updateObject(storageName: string,
 				 newObject: ApiData
-	): Promise<boolean> {
-		return new Promise<boolean>((resolve, reject) => {
+	): Promise<ApiData> {
+		return new Promise<ApiData>((resolve, reject) => {
 			if (! this.isCreated() || ! newObject) reject(false)
 
 			this.openObjectStore(storageName, 'readwrite')
@@ -333,7 +333,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 					const idbPutRequest = objectStore.put(newObject)
 
 					idbPutRequest.addEventListener('success',
-												   () => resolve(true)
+												   () => resolve(newObject)
 					)
 					idbPutRequest.addEventListener('error', (event) => {
 						return this.rejectFailedEvent(event, reject)
