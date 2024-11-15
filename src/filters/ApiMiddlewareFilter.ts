@@ -28,7 +28,7 @@ async function mapMissingScreenshots(game: Game,
 		return Promise.reject('Failed to update game with missing screenshots')
 	}
 
-	return Promise.resolve(game)
+	return Promise.resolve(successfulUpdate as Game)
 }
 
 async function mapGameDetails(game: Game,
@@ -46,5 +46,5 @@ async function mapGameDetails(game: Game,
 		return Promise.reject('Failed to update game with missing details')
 	}
 
-	return Promise.resolve(game)
+	return Promise.resolve(successfulUpdate as Game)
 }
