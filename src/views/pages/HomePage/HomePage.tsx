@@ -26,11 +26,11 @@ export function HomePage() {
 			<article className={style.Gallery}>
 				<h3>gallery</h3>
 
-				{recommended?.recentScreenshots
-				 && <Gallery screenshots={recommended?.recentScreenshots}/>}
+				{(recommended?.recent.screenshots)
+				 && <Gallery screenshots={recommended.recent.screenshots}/>}
 
-				{recommended?.dailyScreenshots
-				 && <Gallery screenshots={recommended?.dailyScreenshots}/>}
+				{(recommended?.daily.screenshots)
+				 && <Gallery screenshots={recommended.daily.screenshots}/>}
 			</article>
 		</main>
 	)
@@ -43,9 +43,9 @@ interface IRecommendedPanel {
 function RecentPanel({ recommended }: IRecommendedPanel) {
 	return (
 		((recommended?.recent)
-		&& (recommended?.recentScreenshots))
+		&& (recommended?.recent.screenshots?.results))
 		&& <GamePanel game={recommended?.recent}
-					  images={recommended?.recentScreenshots.results}
+					  images={recommended?.recent.screenshots.results}
 		/>
 	)
 }
@@ -53,9 +53,9 @@ function RecentPanel({ recommended }: IRecommendedPanel) {
 function DailyPanel({ recommended }: IRecommendedPanel) {
 	return (
 		((recommended?.daily)
-		&& (recommended?.dailyScreenshots))
+		&& (recommended?.daily.screenshots?.results))
 		&& <GamePanel game={recommended?.daily}
-					  images={recommended?.dailyScreenshots.results}
+					  images={recommended?.daily.screenshots.results}
 		/>
 	)
 }
