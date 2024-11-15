@@ -73,11 +73,7 @@ export class ApiMiddleware implements IApiMiddleware {
 
 		return {
 			daily            : await this.getById('games', dailyId) as Game,
-			recent           : await this.getById('games', recentId) as Game,
-			recentScreenshots: await this._dataServiceDictionary.games.getScreenshots(
-				recentId, this._apiService),
-			dailyScreenshots : await this._dataServiceDictionary.games.getScreenshots(
-				dailyId, this._apiService)
+			recent           : await this.getById('games', recentId) as Game
 		}
 	}
 }
