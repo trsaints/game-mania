@@ -8,7 +8,8 @@ import { IApiService, IGameService } from '@src/services'
 
 export const ApiMiddlewareFilter: IIApiMiddlewareFilter = {
 	mapMissingScreenshots,
-	mapGameDetails
+	mapGameDetails,
+	mapGameData
 }
 
 async function mapMissingScreenshots(game: Game,
@@ -47,4 +48,31 @@ async function mapGameDetails(game: Game,
 	}
 
 	return Promise.resolve(successfulUpdate as Game)
+}
+
+async function mapGameData(data: ApiData,
+						   gameService: IGameService,
+						   apiService: IApiService,
+						   database: ILocalDb<ApiData>
+): Promise<Game> {
+	let parsedGame = data as Game
+
+	if (! parsedGame.shortScreenshots) {
+		parsedGame =
+			await mapMissingScreenshots(parsedGame,
+										gameService,
+										apiService,
+										database
+			)
+	}
+
+	if (! parsedGame.publishers) {
+		parsedGame = await mapGameDetails(parsedGame,
+										  gameService,
+										  apiService,
+										  database
+		)
+	}
+
+	return parsedGame
 }

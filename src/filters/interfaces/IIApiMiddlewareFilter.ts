@@ -15,4 +15,10 @@ export interface IIApiMiddlewareFilter {
 				   apiService: IApiService,
 				   database: ILocalDb<ApiData>
 	): Promise<Game>
+
+	mapGameData(data: ApiData,
+				gameService: IGameService,
+				apiService: IApiService,
+				database: ILocalDb<ApiData>
+	): Promise<Game>
 }

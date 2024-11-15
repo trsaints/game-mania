@@ -46,26 +46,11 @@ export class ApiMiddleware implements IApiMiddleware {
 		if (data && route !== 'games') return data
 
 		if (data && route === 'games') {
-			let parsedGame = data as Game
-
-			if (! parsedGame.shortScreenshots) {
-				parsedGame =
-					await this._filter.mapMissingScreenshots(parsedGame,
-															 this._dataServiceDictionary.games,
-															 this._apiService,
-															 this._localDb
-					)
-			}
-
-			if (! parsedGame.publishers) {
-				parsedGame = await this._filter.mapGameDetails(parsedGame,
-															   this._dataServiceDictionary.games,
-															   this._apiService,
-															   this._localDb
-				)
-			}
-
-			return parsedGame
+			return this._filter.mapGameData(data,
+											this._dataServiceDictionary.games,
+											this._apiService,
+											this._localDb
+			)
 		}
 
 		data =
