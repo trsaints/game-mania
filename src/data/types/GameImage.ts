@@ -1,4 +1,4 @@
-export type Image = {
+export type GameImage = {
 	id: number
 	image: string
 	hidden: boolean
