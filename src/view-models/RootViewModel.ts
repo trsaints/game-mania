@@ -27,12 +27,14 @@ class RootViewModel implements IRootViewModel {
 		tags      : new TagService(this._parserUtils)
 	}
 
+	private readonly _apiMiddlewareFilter = new ApiMiddlewareFilter()
+
 	public readonly apiService    = new ApiService()
 	public readonly localDb       = new LocalDb('game-mania', 1)
 	public readonly apiMiddleware = new ApiMiddleware(this._dataServiceDictionary,
 													  this.apiService,
 													  this.localDb,
-													  ApiMiddlewareFilter
+													  this._apiMiddlewareFilter
 	)
 
 	async initializeDb(): Promise<void> {
