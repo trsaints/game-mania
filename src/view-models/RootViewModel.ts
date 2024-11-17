@@ -1,11 +1,4 @@
 import { DataServiceDictionary } from '@data/types'
-import {
-	GameService,
-	GenreService,
-	PlatformService,
-	PublisherService,
-	TagService
-} from '@src/services'
 import { LocalDb } from '@data/local-storage'
 import { ApiMiddleware } from '@src/middlewares'
 import { ApiMiddlewareFilter } from '@src/filters'
@@ -19,13 +12,9 @@ class RootViewModel implements IRootViewModel {
 	private readonly _typeUtils    = new TypeUtils(this._parserUtils)
 	private readonly _startupUtils = new StartupUtils()
 
-	private readonly _dataServiceDictionary: DataServiceDictionary = {
-		games     : new GameService(this._parserUtils, this._typeUtils),
-		genres    : new GenreService(this._parserUtils),
-		platforms : new PlatformService(this._parserUtils),
-		publishers: new PublisherService(this._parserUtils),
-		tags      : new TagService(this._parserUtils)
-	}
+	private readonly _dataServiceDictionary = new DataServiceDictionary(this._parserUtils,
+																		this._typeUtils
+	)
 
 	private readonly _apiMiddlewareFilter = new ApiMiddlewareFilter()
 
