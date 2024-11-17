@@ -1,11 +1,16 @@
 import { ApiData } from '@data/local-storage'
 import { DataRequestParams } from '@data/request-parameters'
-import { ILocalDbUtils } from '@utils/interfaces'
+import { ILocalDbUtils, IParserUtils } from '@utils/interfaces'
 import { DataServiceDictionary, Game } from '@data/types'
-import { ParserUtils } from '@utils/ParserUtils.ts'
 
 
 export class LocalDbUtils implements ILocalDbUtils {
+	constructor(parserUtils: IParserUtils) {
+		this._parserUtils = parserUtils
+	}
+
+	private readonly _parserUtils: IParserUtils
+
 	concatFields(data: ApiData,
 				 dataType: keyof DataServiceDictionary
 	): string {
@@ -13,7 +18,7 @@ export class LocalDbUtils implements ILocalDbUtils {
 			return `${data.id}${data.slug}${data.name}`.toLowerCase()
 		}
 
-		return ParserUtils.concatGameData(data as Game)
+		return this._parserUtils.concatGameData(data as Game)
 	}
 
 	filterObjects(storageName: keyof DataServiceDictionary,
