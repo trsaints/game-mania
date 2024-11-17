@@ -12,12 +12,8 @@ function Root() {
 
 	useEffect(() => {
 		async function initializeDatabase() {
-			try {
-				await viewModel.initializeDb()
-				setIsDbInitialized(true)
-			} catch (error) {
-				console.error('Failed to initialize database:', error)
-			}
+			await viewModel.initializeDb()
+			setIsDbInitialized(true)
 		}
 
 		initializeDatabase()
