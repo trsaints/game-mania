@@ -3,7 +3,7 @@ import { ApiData, ILocalDb } from '@data/local-storage'
 import { IApiService, IGameService } from '@src/services'
 
 
-export interface IIApiMiddlewareFilter {
+export interface IApiMiddlewareFilter {
 	mapMissingScreenshots(game: Game,
 						  gameService: IGameService,
 						  apiService: IApiService,

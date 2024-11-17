@@ -1,12 +1,12 @@
 import {
-	IIApiMiddlewareFilter
-} from '@src/filters/interfaces/IIApiMiddlewareFilter.ts'
+	IApiMiddlewareFilter
+} from '@src/filters/interfaces/IApiMiddlewareFilter.ts'
 import { Game } from '@data/types'
 import { ApiData, ILocalDb } from '@data/local-storage'
 import { IApiService, IGameService } from '@src/services'
 
 
-export class ApiMiddlewareFilter implements IIApiMiddlewareFilter {
+export class ApiMiddlewareFilter implements IApiMiddlewareFilter {
 	async mapMissingScreenshots(game: Game,
 								gameService: IGameService,
 								apiService: IApiService,
