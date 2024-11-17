@@ -1,30 +1,47 @@
 import { DataServiceDictionary } from '@data/types'
-import { LocalDb } from '@data/local-storage'
-import { ApiMiddleware } from '@src/middlewares'
-import { ApiMiddlewareFilter } from '@src/filters'
-import { ParserUtils, StartupUtils, TypeUtils } from '@src/utils'
+import { ApiData, ILocalDb, LocalDb } from '@data/local-storage'
+import { ApiMiddleware, IApiMiddleware } from '@src/middlewares'
+import { ApiMiddlewareFilter, IApiMiddlewareFilter } from '@src/filters'
+import {
+	IParserUtils,
+	IStartupUtils,
+	ITypeUtils,
+	ParserUtils,
+	StartupUtils,
+	TypeUtils
+} from '@src/utils'
 import { IRootViewModel } from '@src/view-models/interfaces/IRootViewModel.ts'
-import { ApiService } from '@services/ApiService.ts'
+import { ApiService, IApiService } from '@src/services'
 
 
 class RootViewModel implements IRootViewModel {
-	private readonly _parserUtils  = new ParserUtils()
-	private readonly _typeUtils    = new TypeUtils(this._parserUtils)
-	private readonly _startupUtils = new StartupUtils()
+	constructor() {
+		this._parserUtils         = new ParserUtils()
+		this._typeUtils           = new TypeUtils(this._parserUtils)
+		this._startupUtils        = new StartupUtils()
+		this._apiMiddlewareFilter = new ApiMiddlewareFilter()
 
-	private readonly _dataServiceDictionary = new DataServiceDictionary(this._parserUtils,
-																		this._typeUtils
-	)
+		this._dataServiceDictionary =
+			new DataServiceDictionary(this._parserUtils, this._typeUtils)
 
-	private readonly _apiMiddlewareFilter = new ApiMiddlewareFilter()
+		this.localDb       = new LocalDb('game-mania', 1)
+		this.apiService    = new ApiService()
+		this.apiMiddleware = new ApiMiddleware(this._dataServiceDictionary,
+											   this.apiService,
+											   this.localDb,
+											   this._apiMiddlewareFilter
+		)
+	}
 
-	public readonly apiService    = new ApiService()
-	public readonly localDb       = new LocalDb('game-mania', 1)
-	public readonly apiMiddleware = new ApiMiddleware(this._dataServiceDictionary,
-													  this.apiService,
-													  this.localDb,
-													  this._apiMiddlewareFilter
-	)
+	private readonly _typeUtils: ITypeUtils
+	private readonly _parserUtils: IParserUtils
+	private readonly _startupUtils: IStartupUtils
+	private readonly _dataServiceDictionary: DataServiceDictionary
+	private readonly _apiMiddlewareFilter: IApiMiddlewareFilter
+
+	public readonly apiMiddleware: IApiMiddleware
+	public readonly localDb: ILocalDb<ApiData>
+	public readonly apiService: IApiService
 
 	async initializeDb(): Promise<void> {
 		if (this.localDb.isCreated()) return Promise.resolve()
