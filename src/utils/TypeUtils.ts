@@ -8,66 +8,72 @@ import {
 	Store,
 	Tag
 } from '@data/types'
-import { ParserUtils } from '@src/utils'
+import { IParserUtils } from '@src/utils'
 import { ITypeUtils } from '@utils/interfaces'
 
 
-export const TypeUtils: ITypeUtils = {
-	mapToGame,
-	mapToGamesPlatforms,
-	mapToStores
+export class TypeUtils implements ITypeUtils {
+	constructor(parserUtils: IParserUtils) {
+		this._parserUtils = parserUtils
+	}
+
+	private readonly _parserUtils: IParserUtils
+
+	mapToGame(data: never): Game {
+		const mappedData = this._parserUtils.mapToCamelCase(data) as Game
+
+		if (mappedData.platforms !== undefined) {
+			mappedData.platforms
+				= this.mapToGamesPlatforms(mappedData.platforms)
+		}
+
+		if (mappedData.developers) {
+			mappedData.developers =
+				mappedData.developers.map((d) => this._parserUtils.mapToCamelCase(
+					d as never) as Developer)
+		}
+
+		if (mappedData.publishers) {
+			mappedData.publishers =
+				mappedData.publishers.map(p => this._parserUtils.mapToCamelCase(
+					p as never) as Publisher)
+		}
+
+		if (mappedData.tags) {
+			mappedData.tags =
+				mappedData.tags.map(t => this._parserUtils.mapToCamelCase(t as never) as Tag)
+		}
+
+		if (mappedData.genres) {
+			mappedData.genres =
+				mappedData.genres.map(g => this._parserUtils.mapToCamelCase(g as never) as Genre)
+		}
+
+		if (mappedData.stores) {
+			mappedData.stores = this.mapToStores(mappedData.stores)
+		}
+
+		return mappedData
+	}
+
+	mapToStores(stores: Store[]): Store[] {
+		return stores.map(store => {
+			store.store
+				=
+				this._parserUtils.mapToCamelCase(store.store as never) as typeof store.store
+
+			return store
+		})
+	}
+
+	mapToGamesPlatforms(platforms: GamesPlatform[]): GamesPlatform[] {
+		return platforms.map(mainPlatform => {
+			mainPlatform.platform =
+				this._parserUtils.mapToCamelCase(mainPlatform.platform as never) as Platform
+
+			return this._parserUtils.mapToCamelCase(mainPlatform as never) as GamesPlatform
+		})
+	}
 }
 
-function mapToGame(data: never): Game {
-	const mappedData = ParserUtils.mapToCamelCase(data) as Game
 
-	if (mappedData.platforms !== undefined) {
-		mappedData.platforms
-			= mapToGamesPlatforms(mappedData.platforms)
-	}
-
-	if (mappedData.developers) {
-		mappedData.developers = mappedData.developers.map((d) => ParserUtils
-			.mapToCamelCase(d as never) as Developer)
-	}
-
-	if (mappedData.publishers) {
-		mappedData.publishers = mappedData.publishers.map(p => ParserUtils
-			.mapToCamelCase(p as never) as Publisher)
-	}
-
-	if (mappedData.tags) {
-		mappedData.tags = mappedData.tags.map(t => ParserUtils
-			.mapToCamelCase(t as never) as Tag)
-	}
-
-	if (mappedData.genres) {
-		mappedData.genres = mappedData.genres.map(g => ParserUtils
-			.mapToCamelCase(g as never) as Genre)
-	}
-
-	if (mappedData.stores) {
-		mappedData.stores = mapToStores(mappedData.stores)
-	}
-
-	return mappedData
-}
-
-function mapToStores(stores: Store[]): Store[] {
-	return stores.map(store => {
-		store.store
-			=
-			ParserUtils.mapToCamelCase(store.store as never) as typeof store.store
-
-		return store
-	})
-}
-
-function mapToGamesPlatforms(platforms: GamesPlatform[]): GamesPlatform[] {
-	return platforms.map(mainPlatform => {
-		mainPlatform.platform = ParserUtils
-			.mapToCamelCase(mainPlatform.platform as never) as Platform
-
-		return ParserUtils.mapToCamelCase(mainPlatform as never) as GamesPlatform
-	})
-}
