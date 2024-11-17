@@ -3,7 +3,7 @@ import { DataRequestParams } from '@data/request-parameters'
 import { DataServiceDictionary } from '@data/types'
 
 
-export interface ILocalDbUtils {
+export interface ILocalDbFilter {
 	filterObjects(storageName: keyof DataServiceDictionary,
 				  idbCursorRequest: IDBRequest,
 				  resolve: (value: (ApiData[] | PromiseLike<ApiData[]>)) => void,

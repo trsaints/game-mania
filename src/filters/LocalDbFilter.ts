@@ -1,10 +1,11 @@
 import { ApiData } from '@data/local-storage'
 import { DataRequestParams } from '@data/request-parameters'
-import { ILocalDbUtils, IParserUtils } from '@utils/interfaces'
+import { IParserUtils } from '@utils/interfaces'
 import { DataServiceDictionary, Game } from '@data/types'
+import { ILocalDbFilter } from '@src/filters/interfaces/ILocalDbFilter.ts'
 
 
-export class LocalDbUtils implements ILocalDbUtils {
+export class LocalDbFilter implements ILocalDbFilter {
 	constructor(parserUtils: IParserUtils) {
 		this._parserUtils = parserUtils
 	}
