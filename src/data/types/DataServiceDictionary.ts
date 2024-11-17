@@ -1,23 +1,20 @@
 import { Genre, Platform, Publisher, Tag } from '@data/types'
-import {
-	GameService,
-	GenreService,
-	IDataService,
-	IGameService,
-	PlatformService,
-	PublisherService,
-	TagService
-} from '@src/services'
-import { IParserUtils, ITypeUtils } from '@src/utils'
+import { IDataService, IGameService } from '@src/services'
 
 
 export class DataServiceDictionary {
-	constructor(parserUtils: IParserUtils, typeUtils: ITypeUtils) {
-		this.games      = new GameService(parserUtils, typeUtils)
-		this.genres     = new GenreService(parserUtils)
-		this.platforms  = new PlatformService(parserUtils)
-		this.publishers = new PublisherService(parserUtils)
-		this.tags       = new TagService(parserUtils)
+	constructor(
+		gameService: IGameService,
+		genreService: IDataService<Genre>,
+		platformService: IDataService<Platform>,
+		publisherService: IDataService<Publisher>,
+		tagService: IDataService<Tag>
+	) {
+		this.games      = gameService
+		this.genres     = genreService
+		this.platforms  = platformService
+		this.publishers = publisherService
+		this.tags       = tagService
 	}
 
 	public readonly games: IGameService

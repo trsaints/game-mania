@@ -1,4 +1,10 @@
-import { DataServiceDictionary } from '@data/types'
+import {
+	DataServiceDictionary,
+	Genre,
+	Platform,
+	Publisher,
+	Tag
+} from '@data/types'
 import { ApiData, ILocalDb, LocalDb } from '@data/local-storage'
 import { ApiMiddleware, IApiMiddleware } from '@src/middlewares'
 import { ApiMiddlewareFilter, IApiMiddlewareFilter } from '@src/filters'
@@ -11,18 +17,40 @@ import {
 	TypeUtils
 } from '@src/utils'
 import { IRootViewModel } from '@src/view-models/interfaces/IRootViewModel.ts'
-import { ApiService, IApiService } from '@src/services'
+import {
+	ApiService,
+	GameService,
+	GenreService,
+	IApiService,
+	IDataService,
+	IGameService,
+	PlatformService,
+	PublisherService,
+	TagService
+} from '@src/services'
 
 
 class RootViewModel implements IRootViewModel {
 	constructor() {
 		this._parserUtils         = new ParserUtils()
-		this._typeUtils           = new TypeUtils(this._parserUtils)
+		this._typeUtils           = new TypeUtils()
 		this._startupUtils        = new StartupUtils()
 		this._apiMiddlewareFilter = new ApiMiddlewareFilter()
 
+		this._gameService      =
+			new GameService(this._parserUtils, this._typeUtils)
+		this._genreService     = new GenreService(this._parserUtils)
+		this._platformService  = new PlatformService(this._parserUtils)
+		this._publisherService = new PublisherService(this._parserUtils)
+		this._tagService       = new TagService(this._parserUtils)
+
 		this._dataServiceDictionary =
-			new DataServiceDictionary(this._parserUtils, this._typeUtils)
+			new DataServiceDictionary(this._gameService,
+									  this._genreService,
+									  this._platformService,
+									  this._publisherService,
+									  this._tagService
+			)
 
 		this.localDb       = new LocalDb('game-mania', 1)
 		this.apiService    = new ApiService()
@@ -39,6 +67,12 @@ class RootViewModel implements IRootViewModel {
 	private readonly _dataServiceDictionary: DataServiceDictionary
 	private readonly _apiMiddlewareFilter: IApiMiddlewareFilter
 
+	private readonly _gameService: IGameService
+	private readonly _genreService: IDataService<Genre>
+	private readonly _platformService: IDataService<Platform>
+	private readonly _publisherService: IDataService<Publisher>
+	private readonly _tagService: IDataService<Tag>
+
 	public readonly apiMiddleware: IApiMiddleware
 	public readonly localDb: ILocalDb<ApiData>
 	public readonly apiService: IApiService
@@ -47,7 +81,7 @@ class RootViewModel implements IRootViewModel {
 		if (this.localDb.isCreated()) return Promise.resolve()
 
 		await this._startupUtils.initializeDb(this.localDb,
-											  this._dataServiceDictionary.games,
+											  this._gameService,
 											  this.apiService
 		).then(isCreated => {
 			console.log('database created: ', isCreated)
