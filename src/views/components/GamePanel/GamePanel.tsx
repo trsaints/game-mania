@@ -1,9 +1,11 @@
 import { PanelBanner, PanelHeader } from '@views/components'
 import style from './GamePanel.module.scss'
 import { IGamePanel } from './IGamePanel'
-import { StylingUtils } from '@src/utils'
 import { ImageCommons } from '@data/types'
+import { GamePanelViewModel } from '@src/view-models/GamePanelViewModel.ts'
 
+
+const viewModel = new GamePanelViewModel()
 
 function GamePanel({ game }: IGamePanel) {
 	const imagesToLoad = game.shortScreenshots
@@ -12,7 +14,7 @@ function GamePanel({ game }: IGamePanel) {
 
 	return (
 		<article className={style.PanelBanner}
-				 style={StylingUtils.getInlineBanner(game)}
+				 style={viewModel.stylingUtils.getInlineBanner(game)}
 		>
 			<article className={style.GamePanel}>
 				<PanelHeader game={game}/>
