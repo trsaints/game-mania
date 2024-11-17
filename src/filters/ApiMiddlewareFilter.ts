@@ -6,73 +6,72 @@ import { ApiData, ILocalDb } from '@data/local-storage'
 import { IApiService, IGameService } from '@src/services'
 
 
-export const ApiMiddlewareFilter: IIApiMiddlewareFilter = {
-	mapMissingScreenshots,
-	mapGameDetails,
-	mapGameData
-}
+export class ApiMiddlewareFilter implements IIApiMiddlewareFilter {
+	async mapMissingScreenshots(game: Game,
+								gameService: IGameService,
+								apiService: IApiService,
+								database: ILocalDb<ApiData>
+	): Promise<Game> {
+		const screenshots = await gameService.getScreenshots(game.id, apiService)
 
-async function mapMissingScreenshots(game: Game,
-									 gameService: IGameService,
-									 apiService: IApiService,
-									 database: ILocalDb<ApiData>
-): Promise<Game> {
-	const screenshots      = await gameService.getScreenshots(game.id,
-															  apiService
-	)
-	const successfulUpdate = await database.updateObject('games', {
-		...game,
-		screenshots
-	})
+		const successfulUpdate = await database.updateObject('games', {
+			...game,
+			screenshots
+		})
 
-	if (! successfulUpdate) {
-		return Promise.reject('Failed to update game with missing screenshots')
+		if (! successfulUpdate) {
+			return Promise.reject(
+				'Failed to update game with missing screenshots')
+		}
+
+		return Promise.resolve(successfulUpdate as Game)
 	}
 
-	return Promise.resolve(successfulUpdate as Game)
-}
+	async mapGameDetails(game: Game,
+						 gameService: IGameService,
+						 apiService: IApiService,
+						 database: ILocalDb<ApiData>
+	): Promise<Game> {
+		const gameDetails      = await gameService.getById(game.id, apiService)
+		const successfulUpdate = await database.updateObject('games', {
+			...game,
+			...gameDetails
+		})
 
-async function mapGameDetails(game: Game,
-							  gameService: IGameService,
-							  apiService: IApiService,
-							  database: ILocalDb<ApiData>
-): Promise<Game> {
-	const gameDetails      = await gameService.getById(game.id, apiService)
-	const successfulUpdate = await database.updateObject('games', {
-		...game,
-		...gameDetails
-	})
+		if (! successfulUpdate) {
+			return Promise.reject('Failed to update game with missing details')
+		}
 
-	if (! successfulUpdate) {
-		return Promise.reject('Failed to update game with missing details')
+		return Promise.resolve(successfulUpdate as Game)
 	}
 
-	return Promise.resolve(successfulUpdate as Game)
-}
+	async mapGameData(data: ApiData,
+					  gameService: IGameService,
+					  apiService: IApiService,
+					  database: ILocalDb<ApiData>
+	): Promise<Game> {
+		let parsedGame = data as Game
 
-async function mapGameData(data: ApiData,
-						   gameService: IGameService,
-						   apiService: IApiService,
-						   database: ILocalDb<ApiData>
-): Promise<Game> {
-	let parsedGame = data as Game
+		if (! parsedGame.shortScreenshots) {
+			parsedGame =
+				await this.mapMissingScreenshots(parsedGame,
+												 gameService,
+												 apiService,
+												 database
+				)
+		}
 
-	if (! parsedGame.shortScreenshots) {
-		parsedGame =
-			await mapMissingScreenshots(parsedGame,
-										gameService,
-										apiService,
-										database
+		if (! parsedGame.publishers) {
+			parsedGame = await this.mapGameDetails(parsedGame,
+												   gameService,
+												   apiService,
+												   database
 			)
-	}
+		}
 
-	if (! parsedGame.publishers) {
-		parsedGame = await mapGameDetails(parsedGame,
-										  gameService,
-										  apiService,
-										  database
-		)
+		return parsedGame
 	}
-
-	return parsedGame
 }
+
+
+
