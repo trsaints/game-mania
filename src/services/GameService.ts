@@ -24,14 +24,18 @@ export class GameService implements IGameService {
 					: {}
 		})
 
-		return response.data?.results.map(this._typeUtils.mapToGame) ?? []
+		return response.data?.results.map((game: never) => {
+			return this._typeUtils.mapToGame(game, this._parserUtils)
+		}) ?? []
 	}
 
 	async getById(id: number, apiService: IApiService): Promise<Game> {
 		const gameUrl  = apiService.createRouteUrl(`games/${id}`)
 		const response = await apiService.gameApi.get(gameUrl)
 
-		return this._typeUtils.mapToGame(response.data as never)
+		return this._typeUtils.mapToGame(response.data as never,
+										 this._parserUtils
+		)
 	}
 
 	async getScreenshots(id: number,
