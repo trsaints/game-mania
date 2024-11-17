@@ -8,70 +8,65 @@ import {
 	Store,
 	Tag
 } from '@data/types'
-import { IParserUtils } from '@src/utils'
-import { ITypeUtils } from '@utils/interfaces'
+import { IParserUtils, ITypeUtils } from '@utils/interfaces'
 
 
 export class TypeUtils implements ITypeUtils {
-	constructor(parserUtils: IParserUtils) {
-		this._parserUtils = parserUtils
-	}
-
-	private readonly _parserUtils: IParserUtils
-
-	mapToGame(data: never): Game {
-		const mappedData = this._parserUtils.mapToCamelCase(data) as Game
+	mapToGame(data: never, parserUtils: IParserUtils): Game {
+		const mappedData = parserUtils.mapToCamelCase(data) as Game
 
 		if (mappedData.platforms !== undefined) {
 			mappedData.platforms
-				= this.mapToGamesPlatforms(mappedData.platforms)
+				= this.mapToGamesPlatforms(mappedData.platforms, parserUtils)
 		}
 
 		if (mappedData.developers) {
 			mappedData.developers =
-				mappedData.developers.map((d) => this._parserUtils.mapToCamelCase(
+				mappedData.developers.map((d) => parserUtils.mapToCamelCase(
 					d as never) as Developer)
 		}
 
 		if (mappedData.publishers) {
 			mappedData.publishers =
-				mappedData.publishers.map(p => this._parserUtils.mapToCamelCase(
+				mappedData.publishers.map(p => parserUtils.mapToCamelCase(
 					p as never) as Publisher)
 		}
 
 		if (mappedData.tags) {
 			mappedData.tags =
-				mappedData.tags.map(t => this._parserUtils.mapToCamelCase(t as never) as Tag)
+				mappedData.tags.map(t => parserUtils.mapToCamelCase(t as never) as Tag)
 		}
 
 		if (mappedData.genres) {
 			mappedData.genres =
-				mappedData.genres.map(g => this._parserUtils.mapToCamelCase(g as never) as Genre)
+				mappedData.genres.map(g => parserUtils.mapToCamelCase(g as never) as Genre)
 		}
 
 		if (mappedData.stores) {
-			mappedData.stores = this.mapToStores(mappedData.stores)
+			mappedData.stores = this.mapToStores(mappedData.stores, parserUtils)
 		}
 
 		return mappedData
 	}
 
-	mapToStores(stores: Store[]): Store[] {
+	private mapToStores(stores: Store[], parserUtils: IParserUtils): Store[] {
 		return stores.map(store => {
 			store.store
 				=
-				this._parserUtils.mapToCamelCase(store.store as never) as typeof store.store
+				parserUtils.mapToCamelCase(store.store as never) as typeof store.store
 
 			return store
 		})
 	}
 
-	mapToGamesPlatforms(platforms: GamesPlatform[]): GamesPlatform[] {
+	private mapToGamesPlatforms(platforms: GamesPlatform[],
+						parserUtils: IParserUtils
+	): GamesPlatform[] {
 		return platforms.map(mainPlatform => {
 			mainPlatform.platform =
-				this._parserUtils.mapToCamelCase(mainPlatform.platform as never) as Platform
+				parserUtils.mapToCamelCase(mainPlatform.platform as never) as Platform
 
-			return this._parserUtils.mapToCamelCase(mainPlatform as never) as GamesPlatform
+			return parserUtils.mapToCamelCase(mainPlatform as never) as GamesPlatform
 		})
 	}
 }
