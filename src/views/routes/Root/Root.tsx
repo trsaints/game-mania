@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom'
 import { RootViewModel } from '@src/view-models/RootViewModel.ts'
 import { useEffect, useState } from 'react'
 
+
 const viewModel = new RootViewModel()
 
 function Root() {
@@ -22,7 +23,7 @@ function Root() {
 		initializeDatabase()
 	}, [])
 
-	if (!isDbInitialized) {
+	if (! isDbInitialized) {
 		return <div>Loading...</div>
 	}
 

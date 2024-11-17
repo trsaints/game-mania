@@ -12,7 +12,9 @@ export class ApiMiddlewareFilter implements IIApiMiddlewareFilter {
 								apiService: IApiService,
 								database: ILocalDb<ApiData>
 	): Promise<Game> {
-		const screenshots = await gameService.getScreenshots(game.id, apiService)
+		const screenshots = await gameService.getScreenshots(game.id,
+															 apiService
+		)
 
 		const successfulUpdate = await database.updateObject('games', {
 			...game,

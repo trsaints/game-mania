@@ -30,7 +30,7 @@ function GamePage() {
 				selectedGame
 				&& games ? (
 					<>
-						<GamePanel game={selectedGame} />
+						<GamePanel game={selectedGame}/>
 
 						<aside>
 							<header className={style.SuggestionsHeader}>

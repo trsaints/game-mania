@@ -72,8 +72,8 @@ export class ApiMiddleware implements IApiMiddleware {
 		const dailyId  = Math.floor(Math.random() * 1000)
 
 		return {
-			daily            : await this.getById('games', dailyId) as Game,
-			recent           : await this.getById('games', recentId) as Game
+			daily : await this.getById('games', dailyId) as Game,
+			recent: await this.getById('games', recentId) as Game
 		}
 	}
 }

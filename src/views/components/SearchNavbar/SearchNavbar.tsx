@@ -14,7 +14,7 @@ export function SearchNavbar(props: ISearchNavbar) {
 	const getSection = (key: keyof ISearchNavbar) => {
 		return (
 			<li>
-				<details className={style.SearchSection} >
+				<details className={style.SearchSection}>
 					<summary>{key}</summary>
 
 					<ul className={style.SearchOptions}>
