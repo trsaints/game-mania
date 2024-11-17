@@ -5,7 +5,7 @@ import { DataServiceDictionary, Game } from '@data/types'
 import { ParserUtils } from '@utils/ParserUtils.ts'
 
 
-export const LocalDbUtils: ILocalDbUtils = {
+export class LocalDbUtils implements ILocalDbUtils {
 	concatFields(data: ApiData,
 				 dataType: keyof DataServiceDictionary
 	): string {
@@ -14,7 +14,7 @@ export const LocalDbUtils: ILocalDbUtils = {
 		}
 
 		return ParserUtils.concatGameData(data as Game)
-	},
+	}
 
 	filterObjects(storageName: keyof DataServiceDictionary,
 				  idbCursorRequest: IDBRequest,
@@ -42,11 +42,11 @@ export const LocalDbUtils: ILocalDbUtils = {
 		const hasReachedPageSize = params.pageSize
 								   && results.length === params.pageSize
 		const hasSearchMatch     = params.search
-								   && LocalDbUtils.concatFields(value,
-																storageName
-												  )
-												  .includes(params.search.trim()
-																  .toLowerCase())
+								   && this.concatFields(value,
+														storageName
+										  )
+										  .includes(params.search.trim()
+														  .toLowerCase())
 
 		if (! hasReachedPageSize && ! params.search) {
 			results.push(value)
