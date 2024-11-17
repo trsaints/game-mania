@@ -10,7 +10,7 @@ export class ApiMiddleware implements IApiMiddleware {
 	private readonly _dataServiceDictionary: DataServiceDictionary
 	private readonly _apiService: IApiService
 	private readonly _localDb: ILocalDb<ApiData>
-	private readonly _filter: IApiMiddlewareFilter
+	private readonly _apiMiddlewareFilter: IApiMiddlewareFilter
 
 	constructor(dataServiceDictionary: DataServiceDictionary,
 				apiService: IApiService,
@@ -20,7 +20,7 @@ export class ApiMiddleware implements IApiMiddleware {
 		this._dataServiceDictionary = dataServiceDictionary
 		this._apiService            = apiService
 		this._localDb               = localDb
-		this._filter                = filter
+		this._apiMiddlewareFilter                = filter
 	}
 
 	async getAll(route: keyof DataServiceDictionary,
@@ -46,7 +46,7 @@ export class ApiMiddleware implements IApiMiddleware {
 		if (data && route !== 'games') return data
 
 		if (data && route === 'games') {
-			return this._filter.mapGameData(data,
+			return this._apiMiddlewareFilter.mapGameData(data,
 											this._dataServiceDictionary.games,
 											this._apiService,
 											this._localDb
@@ -60,7 +60,7 @@ export class ApiMiddleware implements IApiMiddleware {
 
 		if (successfulAddition && route !== 'games') return data
 
-		return this._filter.mapGameData(data,
+		return this._apiMiddlewareFilter.mapGameData(data,
 										this._dataServiceDictionary.games,
 										this._apiService,
 										this._localDb
