@@ -7,11 +7,6 @@ import { IApiService } from '@src/services'
 
 
 export class ApiMiddleware implements IApiMiddleware {
-	private readonly _dataServiceDictionary: DataServiceDictionary
-	private readonly _apiService: IApiService
-	private readonly _localDb: ILocalDb<ApiData>
-	private readonly _apiMiddlewareFilter: IApiMiddlewareFilter
-
 	constructor(dataServiceDictionary: DataServiceDictionary,
 				apiService: IApiService,
 				localDb: ILocalDb<ApiData>,
@@ -22,6 +17,11 @@ export class ApiMiddleware implements IApiMiddleware {
 		this._localDb               = localDb
 		this._apiMiddlewareFilter                = filter
 	}
+
+	private readonly _dataServiceDictionary: DataServiceDictionary
+	private readonly _apiService: IApiService
+	private readonly _localDb: ILocalDb<ApiData>
+	private readonly _apiMiddlewareFilter: IApiMiddlewareFilter
 
 	async getAll(route: keyof DataServiceDictionary,
 				 params: DataRequestParams
