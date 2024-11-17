@@ -12,7 +12,7 @@ import { IApiService, IGameService } from '@src/services'
 import { DbSchema } from '@data/types/DbSchema.ts'
 
 
-export const StartupUtils: IStartupUtils = {
+export class StartupUtils implements IStartupUtils {
 	async initializeDb(db: ILocalDb<ApiData>,
 					   gameService: IGameService,
 					   apiService: IApiService
@@ -24,7 +24,8 @@ export const StartupUtils: IStartupUtils = {
 		await this.seedDb(isCreated, db, gameService, apiService)
 
 		return Promise.resolve(isCreated)
-	},
+	}
+
 	getDbSchema(): DbSchema {
 		const gameSchema: LocalDbStore<Game> = {
 			name         : 'games',
@@ -69,7 +70,7 @@ export const StartupUtils: IStartupUtils = {
 			publisherSchema
 		]
 	}
-	,
+
 	async seedDb(isCreated: boolean,
 				 db: ILocalDb<ApiData>,
 				 gameService: IGameService,

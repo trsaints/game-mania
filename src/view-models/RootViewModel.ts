@@ -15,10 +15,11 @@ import { ApiService } from '@services/ApiService.ts'
 
 
 class RootViewModel implements IRootViewModel {
-	private readonly _parserUtils = new ParserUtils()
-	private readonly _typeUtils   = new TypeUtils(this._parserUtils)
+	private readonly _parserUtils  = new ParserUtils()
+	private readonly _typeUtils    = new TypeUtils(this._parserUtils)
+	private readonly _startupUtils = new StartupUtils()
 
-	dataServiceDictionary: DataServiceDictionary = {
+	private readonly _dataServiceDictionary: DataServiceDictionary = {
 		games     : new GameService(this._parserUtils, this._typeUtils),
 		genres    : new GenreService(this._parserUtils),
 		platforms : new PlatformService(this._parserUtils),
@@ -28,7 +29,7 @@ class RootViewModel implements IRootViewModel {
 
 	public readonly apiService    = new ApiService()
 	public readonly localDb       = new LocalDb('game-mania', 1)
-	public readonly apiMiddleware = new ApiMiddleware(this.dataServiceDictionary,
+	public readonly apiMiddleware = new ApiMiddleware(this._dataServiceDictionary,
 													  this.apiService,
 													  this.localDb,
 													  ApiMiddlewareFilter
@@ -37,9 +38,9 @@ class RootViewModel implements IRootViewModel {
 	async initializeDb(): Promise<void> {
 		if (this.localDb.isCreated()) return Promise.resolve()
 
-		await StartupUtils.initializeDb(this.localDb,
-										this.dataServiceDictionary.games,
-										this.apiService
+		await this._startupUtils.initializeDb(this.localDb,
+											  this._dataServiceDictionary.games,
+											  this.apiService
 		).then(isCreated => {
 			console.log('database created: ', isCreated)
 			return Promise.resolve()
