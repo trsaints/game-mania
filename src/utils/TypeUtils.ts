@@ -60,8 +60,10 @@ export class TypeUtils implements ITypeUtils {
 	}
 
 	private mapToGamesPlatforms(platforms: GamesPlatform[],
-						parserUtils: IParserUtils
+								parserUtils: IParserUtils
 	): GamesPlatform[] {
+		if (platforms === null) return []
+
 		return platforms.map(mainPlatform => {
 			mainPlatform.platform =
 				parserUtils.mapToCamelCase(mainPlatform.platform as never) as Platform
