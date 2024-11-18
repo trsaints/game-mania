@@ -1,11 +1,9 @@
-import { Genre, Platform, Publisher, Tag } from '@data/types'
 import React from 'react'
 import { FilterOptions } from '@views/components'
+import {
+	IMetadataFilters
+} from '@views/components/MetadataFilters/IMetadataFilters.tsx'
 
-
-interface IMetadataFilters {
-	metadataList: Map<string, Tag[] | Genre[] | Platform[] | Publisher[]>
-}
 
 export function MetadataFilters({ metadataList }: IMetadataFilters) {
 	const metadataFilters: React.ReactNode[] = []
