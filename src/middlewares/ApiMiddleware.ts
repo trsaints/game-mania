@@ -4,31 +4,39 @@ import { DataServiceDictionary, Game, Recommended } from '@data/types'
 import { IApiMiddleware } from '@src/middlewares'
 import { IApiMiddlewareFilter } from '@src/filters'
 import { IApiService } from '@src/services'
+import { ILocalDbFilter } from '@src/filters/interfaces/ILocalDbFilter.ts'
 
 
 export class ApiMiddleware implements IApiMiddleware {
 	constructor(dataServiceDictionary: DataServiceDictionary,
 				apiService: IApiService,
 				localDb: ILocalDb<ApiData>,
-				filter: IApiMiddlewareFilter
+				apiMiddlewareFilter: IApiMiddlewareFilter,
+				localDbFilter: ILocalDbFilter
 	) {
 		this._dataServiceDictionary = dataServiceDictionary
 		this._apiService            = apiService
 		this._localDb               = localDb
-		this._apiMiddlewareFilter                = filter
+		this._apiMiddlewareFilter   = apiMiddlewareFilter
+		this._localDbFilter         = localDbFilter
 	}
 
 	private readonly _dataServiceDictionary: DataServiceDictionary
 	private readonly _apiService: IApiService
 	private readonly _localDb: ILocalDb<ApiData>
 	private readonly _apiMiddlewareFilter: IApiMiddlewareFilter
+	private readonly _localDbFilter: ILocalDbFilter
 
 	async getAll(route: keyof DataServiceDictionary,
 				 params: DataRequestParams
 	): Promise<ApiData[]> {
-		let data = await this._localDb.getAll(route)
+		let data           = await this._localDb.getAll(route)
+		const filteredData = this._localDbFilter.filterObjects(route,
+															   data,
+															   params
+		)
 
-		if (data.length > 0) return data
+		if (filteredData.length > 0) return filteredData
 
 		data =
 			await this._dataServiceDictionary[route].getAll(params,
@@ -47,9 +55,9 @@ export class ApiMiddleware implements IApiMiddleware {
 
 		if (data && route === 'games') {
 			return this._apiMiddlewareFilter.mapGameData(data,
-											this._dataServiceDictionary.games,
-											this._apiService,
-											this._localDb
+														 this._dataServiceDictionary.games,
+														 this._apiService,
+														 this._localDb
 			)
 		}
 
@@ -61,9 +69,9 @@ export class ApiMiddleware implements IApiMiddleware {
 		if (successfulAddition && route !== 'games') return data
 
 		return this._apiMiddlewareFilter.mapGameData(data,
-										this._dataServiceDictionary.games,
-										this._apiService,
-										this._localDb
+													 this._dataServiceDictionary.games,
+													 this._apiService,
+													 this._localDb
 		)
 	}
 

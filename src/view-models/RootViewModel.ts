@@ -28,6 +28,8 @@ import {
 	PublisherService,
 	TagService
 } from '@src/services'
+import { ILocalDbFilter } from '@src/filters/interfaces/ILocalDbFilter.ts'
+import { LocalDbFilter } from '@src/filters/LocalDbFilter.ts'
 
 
 class RootViewModel implements IRootViewModel {
@@ -36,6 +38,7 @@ class RootViewModel implements IRootViewModel {
 		this._typeUtils           = new TypeUtils()
 		this._startupUtils        = new StartupUtils()
 		this._apiMiddlewareFilter = new ApiMiddlewareFilter()
+		this._localDbFilter       = new LocalDbFilter(this._parserUtils)
 
 		this._gameService      =
 			new GameService(this._parserUtils, this._typeUtils)
@@ -57,7 +60,8 @@ class RootViewModel implements IRootViewModel {
 		this.apiMiddleware = new ApiMiddleware(this._dataServiceDictionary,
 											   this.apiService,
 											   this.localDb,
-											   this._apiMiddlewareFilter
+											   this._apiMiddlewareFilter,
+											   this._localDbFilter
 		)
 	}
 
@@ -66,6 +70,7 @@ class RootViewModel implements IRootViewModel {
 	private readonly _startupUtils: IStartupUtils
 	private readonly _dataServiceDictionary: DataServiceDictionary
 	private readonly _apiMiddlewareFilter: IApiMiddlewareFilter
+	private readonly _localDbFilter: ILocalDbFilter
 
 	private readonly _gameService: IGameService
 	private readonly _genreService: IDataService<Genre>
