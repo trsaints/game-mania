@@ -1,6 +1,7 @@
 import { ISearchFilter } from './ISearchFilter'
 import style from './SearchFilter.module.scss'
 import { FilterOptions } from '@views/components'
+import React from 'react'
 
 
 function SearchFilter(props: ISearchFilter) {
@@ -14,10 +15,37 @@ function SearchFilter(props: ISearchFilter) {
 		'metacritic'
 	]
 
-	const orderingOptions = ordering.map(o =>
-											 (<option key={o}
-													  value={o}
-											 >{o}</option>))
+	const orderingOptions = ordering.map(o => {
+		return (
+			<option key={o}
+					value={o}>
+				{o}
+			</option>
+		)
+	})
+
+	const metadataList = new Map([
+									 ['tags', props.tags],
+									 ['genres', props.genres],
+									 ['platforms', props.platforms],
+									 ['publishers', props.publishers]
+								 ])
+
+	const metadataFilters: React.ReactNode[] = []
+
+	metadataList.forEach((metadata, key) => {
+		metadataFilters.push(
+			<li key={key}>
+				<details>
+					<summary>{key}:</summary>
+
+					<FilterOptions options={metadata}
+								   typeName={key}
+					/>
+				</details>
+			</li>
+		)
+	})
 
 	return (
 		<menu className={style.SearchFilter}>
@@ -30,40 +58,7 @@ function SearchFilter(props: ISearchFilter) {
 				</p>
 			</li>
 
-			<li>
-				<details>
-					<summary>publishers:</summary>
-
-					<FilterOptions options={props.publishers}
-								   typeName="publisher"
-					/>
-				</details>
-			</li>
-
-			<li>
-				<details>
-					<summary>tags:</summary>
-
-					<FilterOptions options={props.tags} typeName="tag"/>
-				</details>
-			</li>
-
-			<li>
-				<details>
-					<summary>genres:</summary>
-
-					<FilterOptions options={props.genres} typeName="genre"/>
-				</details>
-			</li>
-			<li>
-				<details>
-					<summary>platforms:</summary>
-
-					<FilterOptions options={props.platforms}
-								   typeName="platform"
-					/>
-				</details>
-			</li>
+			{metadataFilters}
 		</menu>
 	)
 }
