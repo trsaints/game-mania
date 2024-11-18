@@ -1,8 +1,6 @@
 import { ISearchFilter } from './ISearchFilter'
 import style from './SearchFilter.module.scss'
-import { FilterOptions } from '@views/components'
-import React from 'react'
-import { Genre, Platform, Publisher, Tag } from '@data/types'
+import { MetadataFilters } from '@views/components'
 
 
 function SearchFilter(props: ISearchFilter) {
@@ -46,30 +44,6 @@ function SearchFilter(props: ISearchFilter) {
 			<MetadataFilters metadataList={metadataList}/>
 		</menu>
 	)
-}
-
-interface IMetadataFilters {
-	metadataList: Map<string, Tag[] | Genre[] | Platform[] | Publisher[]>
-}
-
-function MetadataFilters({ metadataList }: IMetadataFilters) {
-	const metadataFilters: React.ReactNode[] = []
-
-	metadataList.forEach((metadata, key) => {
-		metadataFilters.push(
-			<li key={key}>
-				<details>
-					<summary>{key}:</summary>
-
-					<FilterOptions options={metadata}
-								   typeName={key}
-					/>
-				</details>
-			</li>
-		)
-	})
-
-	return metadataFilters
 }
 
 export { SearchFilter }
