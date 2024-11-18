@@ -1,11 +1,6 @@
 import { ILocalDb } from '@data/local-storage/'
 import {
-	Game,
-	Genre,
-	LocalDbStore,
-	Platform,
-	Publisher,
-	Tag
+	Game, Genre, LocalDbStore, Platform, Publisher, Tag
 } from '@data/types'
 import { DbSchema } from '@data/types/DbSchema.ts'
 

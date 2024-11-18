@@ -1,12 +1,5 @@
 import {
-	Developer,
-	Game,
-	GamesPlatform,
-	Genre,
-	Platform,
-	Publisher,
-	Store,
-	Tag
+	Developer, Game, GamesPlatform, Genre, Platform, Publisher, Store, Tag
 } from '@data/types'
 import { IParserUtils, ITypeUtils } from '@utils/interfaces'
 

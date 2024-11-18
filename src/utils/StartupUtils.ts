@@ -1,11 +1,6 @@
 import { ApiData, ILocalDb } from '@data/local-storage'
 import {
-	Game,
-	Genre,
-	LocalDbStore,
-	Platform,
-	Publisher,
-	Tag
+	Game, Genre, LocalDbStore, Platform, Publisher, Tag
 } from '@data/types'
 import { IStartupUtils } from '@utils/interfaces/IStartupUtils.ts'
 import { IApiService, IGameService } from '@src/services'
