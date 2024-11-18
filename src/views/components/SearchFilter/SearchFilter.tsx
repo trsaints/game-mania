@@ -2,6 +2,7 @@ import { ISearchFilter } from './ISearchFilter'
 import style from './SearchFilter.module.scss'
 import { FilterOptions } from '@views/components'
 import React from 'react'
+import { Genre, Platform, Publisher, Tag } from '@data/types'
 
 
 function SearchFilter(props: ISearchFilter) {
@@ -31,6 +32,27 @@ function SearchFilter(props: ISearchFilter) {
 									 ['publishers', props.publishers]
 								 ])
 
+	return (
+		<menu className={style.SearchFilter}>
+			<li>
+				<p>
+					<label htmlFor="ordering">order by</label>
+					<select name="result_order" id="ordering">
+						{orderingOptions}
+					</select>
+				</p>
+			</li>
+
+			<MetadataFilters metadataList={metadataList}/>
+		</menu>
+	)
+}
+
+interface IMetadataFilters {
+	metadataList: Map<string, Tag[] | Genre[] | Platform[] | Publisher[]>
+}
+
+function MetadataFilters({ metadataList }: IMetadataFilters) {
 	const metadataFilters: React.ReactNode[] = []
 
 	metadataList.forEach((metadata, key) => {
@@ -47,20 +69,7 @@ function SearchFilter(props: ISearchFilter) {
 		)
 	})
 
-	return (
-		<menu className={style.SearchFilter}>
-			<li>
-				<p>
-					<label htmlFor="ordering">order by</label>
-					<select name="result_order" id="ordering">
-						{orderingOptions}
-					</select>
-				</p>
-			</li>
-
-			{metadataFilters}
-		</menu>
-	)
+	return metadataFilters
 }
 
 export { SearchFilter }
