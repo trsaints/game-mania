@@ -5,11 +5,9 @@ import { DataServiceDictionary } from '@data/types'
 
 export interface ILocalDbFilter {
 	filterObjects(storageName: keyof DataServiceDictionary,
-				  idbCursorRequest: IDBRequest,
-				  resolve: (value: (ApiData[] | PromiseLike<ApiData[]>)) => void,
 				  results: ApiData[],
 				  params?: DataRequestParams
-	): void
+	): ApiData[]
 
 	concatFields(data: ApiData,
 				 dataType: keyof DataServiceDictionary

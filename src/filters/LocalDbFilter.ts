@@ -16,55 +16,87 @@ export class LocalDbFilter implements ILocalDbFilter {
 				 dataType: keyof DataServiceDictionary
 	): string {
 		if (dataType !== 'games') {
-			return `${data.id}${data.slug}${data.name}`.toLowerCase()
+			return `${data.id}${data.slug}${data.name}`.trim().toLowerCase()
 		}
 
 		return this._parserUtils.concatGameData(data as Game)
 	}
 
 	filterObjects(storageName: keyof DataServiceDictionary,
-				  idbCursorRequest: IDBRequest,
-				  resolve: (value: (ApiData[] | PromiseLike<ApiData[]>)) => void,
 				  results: ApiData[],
 				  params?: DataRequestParams
-	): void {
-		const cursor = idbCursorRequest.result
-
-		if (! cursor) {
-			resolve(results)
-
-			return
-		}
-
-		const value = cursor.value as ApiData
-
+	): ApiData[] {
 		if (! params) {
-			results.push(value)
-			cursor.continue()
-
-			return
+			return results
 		}
 
-		const hasReachedPageSize = params.pageSize
-								   && results.length === params.pageSize
-		const hasSearchMatch     = params.search
-								   && this.concatFields(value,
-														storageName
-										  )
-										  .includes(params.search.trim()
-														  .toLowerCase())
+		const filteredData: ApiData[] = []
 
-		if (! hasReachedPageSize && ! params.search) {
-			results.push(value)
-		} else if (! hasReachedPageSize && hasSearchMatch) {
-			results.push(value)
-		} else if (hasReachedPageSize) {
-			resolve(results)
+		for (const data of results as Game[]) {
+			if ((params.pageSize !== undefined) && (params.pageSize
+													=== filteredData.length)) {
+				break
+			}
 
-			return
+			let matches = true
+
+			if (params.search) {
+				const search   = params.search.trim().toLowerCase()
+				const dataMeta = this.concatFields(data, storageName)
+				matches        = matches && dataMeta.includes(search)
+			}
+
+			if (params.developers) {
+				matches = matches && data.developers.some(dev =>
+															  params.developers!.includes(
+																  String(dev.id))
+															  || params.developers!.includes(
+																  dev.slug)
+				)
+			}
+
+			if (params.publishers) {
+				matches = matches && data.publishers.some(pub =>
+															  params.publishers!.includes(
+																  String(pub.id))
+															  || params.publishers!.includes(
+																  pub.slug)
+				)
+			}
+
+			if (params.platforms) {
+				matches = matches && data.platforms.some(plat =>
+															 params.platforms!.includes(
+																 String(plat.platform.id))
+															 || params.platforms!.includes(
+																 plat.platform.slug)
+				)
+			}
+
+			if (params.genres) {
+				matches = matches && data.genres.some(gen =>
+														  params.genres!.includes(
+															  String(gen.id))
+														  || params.genres!.includes(
+															  gen.slug)
+				)
+			}
+
+			if (params.tags) {
+				matches = matches && data.tags.some(tag =>
+														params.tags!.includes(
+															String(tag.id))
+														|| params.tags!.includes(
+															tag.slug)
+				)
+			}
+
+			if (matches) {
+				filteredData.push(data)
+			}
 		}
 
-		cursor.continue()
+		return filteredData
 	}
 }
 
