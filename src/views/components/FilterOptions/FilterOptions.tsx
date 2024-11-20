@@ -7,7 +7,7 @@ import {
 export function FilterOptions({ options, typeName }: IFilterOptions) {
 	const optionsList = options.map(p => {
 		return (
-			<li key={p.id}>
+			<li key={p.id} data-meta={`${typeName}-${p.id}`}>
 				<p className={style.SearchOption}>
 					<input type="checkbox" id={p.name} name={p.name}/>
 					<label htmlFor={p.name}>{p.name}</label>
