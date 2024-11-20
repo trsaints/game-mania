@@ -1,20 +1,15 @@
 import { ISearchFilter } from './ISearchFilter'
 import style from './SearchFilter.module.scss'
 import { MetadataFilters } from '@views/components'
+import {
+	SearchFilterViewModel
+} from '@src/view-models/SearchFilterViewModel.ts'
 
 
 function SearchFilter(props: ISearchFilter) {
-	const ordering = [
-		'name',
-		'released',
-		'added',
-		'created',
-		'updated',
-		'rating',
-		'metacritic'
-	]
+	const viewModel = new SearchFilterViewModel(props)
 
-	const orderingOptions = ordering.map(o => {
+	const orderingOptions = viewModel.ordering.map(o => {
 		return (
 			<option key={o}
 					value={o}>
@@ -22,13 +17,6 @@ function SearchFilter(props: ISearchFilter) {
 			</option>
 		)
 	})
-
-	const metadataList = new Map([
-									 ['tags', props.tags],
-									 ['genres', props.genres],
-									 ['platforms', props.platforms],
-									 ['publishers', props.publishers]
-								 ])
 
 	return (
 		<menu className={style.SearchFilter}>
@@ -41,7 +29,7 @@ function SearchFilter(props: ISearchFilter) {
 				</p>
 			</li>
 
-			<MetadataFilters metadataList={metadataList}/>
+			<MetadataFilters {...viewModel}/>
 		</menu>
 	)
 }
