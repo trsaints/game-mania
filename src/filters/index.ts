@@ -1,2 +1,2 @@
 export * from './ApiMiddlewareFilter'
-export * from './interfaces/IIApiMiddlewareFilter'
+export * from './interfaces/IApiMiddlewareFilter.ts'

@@ -2,31 +2,46 @@ import { ApiData, ILocalDb } from '@data/local-storage'
 import { DataRequestParams } from '@data/request-parameters'
 import { DataServiceDictionary, Game, Recommended } from '@data/types'
 import { IApiMiddleware } from '@src/middlewares'
-import { IIApiMiddlewareFilter } from '@src/filters'
+import { IApiMiddlewareFilter } from '@src/filters'
+import { IApiService } from '@src/services'
+import { ILocalDbFilter } from '@src/filters/interfaces/ILocalDbFilter.ts'
 
 
 export class ApiMiddleware implements IApiMiddleware {
-	private readonly _dataServiceDictionary: DataServiceDictionary
-	private readonly _localDb: ILocalDb<ApiData>
-	private readonly _filter: IIApiMiddlewareFilter
-
 	constructor(dataServiceDictionary: DataServiceDictionary,
+				apiService: IApiService,
 				localDb: ILocalDb<ApiData>,
-				filter: IIApiMiddlewareFilter
+				apiMiddlewareFilter: IApiMiddlewareFilter,
+				localDbFilter: ILocalDbFilter
 	) {
 		this._dataServiceDictionary = dataServiceDictionary
+		this._apiService            = apiService
 		this._localDb               = localDb
-		this._filter                = filter
+		this._apiMiddlewareFilter   = apiMiddlewareFilter
+		this._localDbFilter         = localDbFilter
 	}
+
+	private readonly _dataServiceDictionary: DataServiceDictionary
+	private readonly _apiService: IApiService
+	private readonly _localDb: ILocalDb<ApiData>
+	private readonly _apiMiddlewareFilter: IApiMiddlewareFilter
+	private readonly _localDbFilter: ILocalDbFilter
 
 	async getAll(route: keyof DataServiceDictionary,
 				 params: DataRequestParams
 	): Promise<ApiData[]> {
-		let data = await this._localDb.getAll(route, params)
+		let data           = await this._localDb.getAll(route)
+		const filteredData = this._localDbFilter.filterObjects(route,
+															   data,
+															   params
+		)
 
-		if (data.length > 0) return data
+		if (filteredData.length > 0) return filteredData
 
-		data = await this._dataServiceDictionary[route].getAll(params)
+		data =
+			await this._dataServiceDictionary[route].getAll(params,
+															this._apiService
+			)
 
 		return await this._localDb.addBulk(route, data)
 	}
@@ -39,37 +54,24 @@ export class ApiMiddleware implements IApiMiddleware {
 		if (data && route !== 'games') return data
 
 		if (data && route === 'games') {
-			let parsedGame = data as Game
-
-			if (! parsedGame.shortScreenshots) {
-				parsedGame =
-					await this._filter.mapMissingScreenshots(parsedGame,
-															 this._dataServiceDictionary.games,
-															 this._localDb
-					)
-			}
-
-			if (! parsedGame.publishers) {
-				parsedGame = await this._filter.mapGameDetails(parsedGame,
-															   this._dataServiceDictionary.games,
-															   this._localDb
-				)
-			}
-
-			return parsedGame
+			return this._apiMiddlewareFilter.mapGameData(data,
+														 this._dataServiceDictionary.games,
+														 this._apiService,
+														 this._localDb
+			)
 		}
 
-		data = await this._dataServiceDictionary[route].getById(id)
+		data = await this._dataServiceDictionary[route]
+			.getById(id, this._apiService)
 
 		const successfulAddition = await this._localDb.addObject(route, data)
 
 		if (successfulAddition && route !== 'games') return data
 
-		const parsedGame = data as Game
-
-		return await this._filter.mapMissingScreenshots(parsedGame,
-														this._dataServiceDictionary.games,
-														this._localDb
+		return this._apiMiddlewareFilter.mapGameData(data,
+													 this._dataServiceDictionary.games,
+													 this._apiService,
+													 this._localDb
 		)
 	}
 
@@ -78,12 +80,8 @@ export class ApiMiddleware implements IApiMiddleware {
 		const dailyId  = Math.floor(Math.random() * 1000)
 
 		return {
-			daily            : await this.getById('games', dailyId) as Game,
-			recent           : await this.getById('games', recentId) as Game,
-			recentScreenshots: await this._dataServiceDictionary.games.getScreenshots(
-				recentId),
-			dailyScreenshots : await this._dataServiceDictionary.games.getScreenshots(
-				dailyId)
+			daily : await this.getById('games', dailyId) as Game,
+			recent: await this.getById('games', recentId) as Game
 		}
 	}
 }

@@ -1,4 +1,6 @@
-import { IHeaderViewModel } from '@src/view-models/IHeaderViewModel.ts'
+import {
+	IHeaderViewModel
+} from '@src/view-models/interfaces/IHeaderViewModel.ts'
 import React, { Dispatch, SetStateAction } from 'react'
 
 

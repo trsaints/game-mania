@@ -2,11 +2,11 @@ import { RootContext } from '@data/context'
 import { Recommended } from '@data/types'
 import { Gallery, GamePanel, Selection } from '@views/components'
 import { useContext, useState } from 'react'
-import style from './Home.module.scss'
+import style from './HomePage.module.scss'
 import { useHomePage } from '@src/hooks/useHomePage.ts'
 
 
-export function Home() {
+export function HomePage() {
 	const [recommended, setRecommended] = useState<Recommended>()
 	const rootContext                   = useContext(RootContext)
 	const { games, genres }             = rootContext
@@ -26,11 +26,11 @@ export function Home() {
 			<article className={style.Gallery}>
 				<h3>gallery</h3>
 
-				{recommended?.recentScreenshots
-				 && <Gallery screenshots={recommended?.recentScreenshots}/>}
+				{(recommended?.recent.screenshots)
+				 && <Gallery screenshots={recommended.recent.screenshots}/>}
 
-				{recommended?.dailyScreenshots
-				 && <Gallery screenshots={recommended?.dailyScreenshots}/>}
+				{(recommended?.daily.screenshots)
+				 && <Gallery screenshots={recommended.daily.screenshots}/>}
 			</article>
 		</main>
 	)
@@ -41,21 +41,9 @@ interface IRecommendedPanel {
 }
 
 function RecentPanel({ recommended }: IRecommendedPanel) {
-	return (
-		((recommended?.recent)
-		&& (recommended?.recentScreenshots))
-		&& <GamePanel game={recommended?.recent}
-					  images={recommended?.recentScreenshots.results}
-		/>
-	)
+	return ((recommended?.recent) && <GamePanel game={recommended?.recent}/>)
 }
 
 function DailyPanel({ recommended }: IRecommendedPanel) {
-	return (
-		((recommended?.daily)
-		&& (recommended?.dailyScreenshots))
-		&& <GamePanel game={recommended?.daily}
-					  images={recommended?.dailyScreenshots.results}
-		/>
-	)
+	return ((recommended?.daily) && <GamePanel game={recommended?.daily}/>)
 }

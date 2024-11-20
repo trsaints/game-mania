@@ -1,10 +1,7 @@
-import { Game, GamesPlatform, Store } from '@data/types'
+import { Game } from '@data/types'
+import { IParserUtils } from '@src/utils'
 
 
 export interface ITypeUtils {
-	mapToGame(data: never): Game
-
-	mapToStores(stores: Store[]): Store[]
-
-	mapToGamesPlatforms(platforms: GamesPlatform[]): GamesPlatform[]
+	mapToGame(data: never, parserUtils: IParserUtils): Game
 }

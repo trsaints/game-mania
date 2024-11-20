@@ -20,10 +20,6 @@ function GamePage() {
 
 	useGamePage(rootContext, searchParams, setSelectedGame, gameGenres)
 
-	const imagesToLoad = selectedGame?.shortScreenshots
-						 ?? selectedGame?.screenshots?.results
-						 ?? []
-
 	const gameGenre = selectedGame?.genres[0].name
 
 	return (
@@ -34,7 +30,7 @@ function GamePage() {
 				selectedGame
 				&& games ? (
 					<>
-						<GamePanel game={selectedGame} images={imagesToLoad}/>
+						<GamePanel game={selectedGame}/>
 
 						<aside>
 							<header className={style.SuggestionsHeader}>

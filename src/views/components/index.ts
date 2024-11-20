@@ -22,3 +22,6 @@ export {
 } from '@views/components/PageSelection/PageSelection.tsx'
 export { CountFilter } from '@views/components/CountFilter/CountFilter.tsx'
 export { GamesList } from '@views/components/GamesList/GamesList.tsx'
+export {
+	MetadataFilters
+} from '@views/components/MetadataFilters/MetadataFilters.tsx'

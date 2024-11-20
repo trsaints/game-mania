@@ -1,27 +1,37 @@
 import { DataRequestParams } from '@data/request-parameters'
 import { Tag } from '@data/types'
-import { ApiService, IDataService } from '@src/services'
-import { ParserUtils } from '@src/utils'
+import { IApiService, IDataService } from '@src/services'
+import { IParserUtils } from '@src/utils'
 
 
-export const TagService: IDataService<Tag> = {
-	getAll,
-	getById
+export class TagService implements IDataService<Tag> {
+	constructor(parserUtils: IParserUtils) {
+		this._parserUtils = parserUtils
+	}
+
+	private readonly _parserUtils: IParserUtils
+
+	async getAll(params: DataRequestParams,
+				 apiService: IApiService
+	): Promise<Tag[]> {
+		const baseUrl  = apiService.createRouteUrl('tags')
+		const response = await apiService.gameApi.get(baseUrl, {
+			params: params
+					? this._parserUtils.mapToSnakeCase(params as never)
+					: {}
+		})
+
+		return response.data?.results.map(
+			(r: never) => this._parserUtils.mapToCamelCase(r)) as Tag[] ?? []
+	}
+
+	async getById(id: number, apiService: IApiService): Promise<Tag> {
+		const baseUrl  = apiService.createRouteUrl(`tags/${id}`)
+		const response = await apiService.gameApi.get(baseUrl)
+
+		return this._parserUtils.mapToCamelCase(response?.data as never) as Tag
+	}
 }
 
-async function getAll(params: DataRequestParams): Promise<Tag[]> {
-	const baseUrl  = ApiService.createRouteUrl('tags')
-	const response = await ApiService.gameApi.get(baseUrl, {
-		params: params ? ParserUtils.mapToSnakeCase(params as never) : {}
-	})
 
-	return response.data?.results.map(
-		(r: never) => ParserUtils.mapToCamelCase(r)) as Tag[] ?? []
-}
 
-async function getById(id: number): Promise<Tag> {
-	const baseUrl  = ApiService.createRouteUrl(`tags/${id}`)
-	const response = await ApiService.gameApi.get(baseUrl)
-
-	return ParserUtils.mapToCamelCase(response?.data as never) as Tag
-}

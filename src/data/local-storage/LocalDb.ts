@@ -1,17 +1,9 @@
 import { ILocalDb } from '@data/local-storage/'
-import { DataRequestParams } from 'src/data/request-parameters'
 import {
-	Game,
-	Genre,
-	LocalDbStore,
-	Platform,
-	Publisher,
-	Tag
+	Game, Genre, LocalDbStore, Platform, Publisher, Tag
 } from '@data/types'
-import { LocalDbUtils } from '@src/utils'
+import { DbSchema } from '@data/types/DbSchema.ts'
 
-
-export type ApiData = Game | Platform | Publisher | Genre | Tag
 
 export class LocalDb implements ILocalDb<ApiData> {
 	private readonly _name: string
@@ -39,7 +31,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 																   mode
 				)
 
-				resolve(transaction.objectStore(storageName))
+				return resolve(transaction.objectStore(storageName))
 			})
 
 			openRequest.addEventListener('error',
@@ -48,7 +40,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 		})
 	}
 
-	create<T extends ApiData[]>(storages: { [K in keyof T]: LocalDbStore<T[K]> }): Promise<boolean> {
+	create(schema: DbSchema): Promise<boolean> {
 		return new Promise((resolve, reject) => {
 			if (this.isCreated()) {
 				return reject('database already created')
@@ -57,26 +49,33 @@ export class LocalDb implements ILocalDb<ApiData> {
 			const openRequest = this.openRequest()
 
 			openRequest.addEventListener('upgradeneeded', () => {
-				const { result } = openRequest
-
-				try {
-					storages.forEach(store => result.createObjectStore(store.name,
-																	   store
-					))
-				} catch (error) {
-					return reject(`failed to create object stores: ${error}`)
-				}
+				return this.createStores(openRequest, schema, reject)
 			})
 
 			openRequest.addEventListener('success', () => {
 				localStorage.setItem(this._loadKey, 'true')
-				resolve(true)
+				return resolve(true)
 			})
 
 			openRequest.addEventListener('error', () => {
-				reject(openRequest.error)
+				return reject(openRequest.error)
 			})
 		})
+	}
+
+	createStores<T extends ApiData[]>(openRequest: IDBOpenDBRequest,
+									  storages: { [K in keyof T]: LocalDbStore<T[K]> },
+									  reject: (reason?: string) => void
+	): void {
+		const { result } = openRequest
+
+		try {
+			storages.forEach(store => result.createObjectStore(store.name,
+															   store
+			))
+		} catch (error) {
+			return reject(`failed to create object stores: ${error}`)
+		}
 	}
 
 	getObjectById(storageName: string, key: number): Promise<ApiData> {
@@ -89,9 +88,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 												   () => resolve(idbGetRequest.result)
 					)
 					idbGetRequest.addEventListener('error', (event) => {
-						const error = (event.target as IDBRequest).error
-						console.log(`Failed to get entry ${key}: ${error?.message}`)
-						reject(error)
+						return this.rejectFailedEvent(event, reject)
 					})
 				})
 				.catch(error => {
@@ -101,28 +98,35 @@ export class LocalDb implements ILocalDb<ApiData> {
 		})
 	}
 
-	getAll(storageName: string,
-		   params?: DataRequestParams
-	): Promise<ApiData[]> {
+	rejectFailedEvent(event: Event,
+					  reject: (reason?: DOMException | null) => void
+	): void {
+		const error = (event.target as IDBRequest).error
+		console.log(`Failed to perform operation: ${error?.message}`)
+		reject(error)
+	}
+
+	getAll(storageName: string): Promise<ApiData[]> {
 		return new Promise<ApiData[]>((resolve, reject) => {
 			this.openObjectStore(storageName, 'readonly')
 				.then(objectStore => {
 					const idbCursorRequest = objectStore.openCursor()
 
 					idbCursorRequest.addEventListener('error', (event) => {
-						const error = (event.target as IDBRequest).error
-						console.log(`Failed to open cursor: ${error?.message}`)
-						reject(error)
+						return this.rejectFailedEvent(event, reject)
 					})
 
 					const results: ApiData[] = []
 
 					idbCursorRequest.addEventListener('success', () => {
-						LocalDbUtils.filterObjects(idbCursorRequest,
-												   resolve,
-												   results,
-												   params
-						)
+						const cursor = idbCursorRequest.result
+
+						if (cursor) {
+							results.push(cursor.value)
+							cursor.continue()
+						} else {
+							return resolve(results)
+						}
 					})
 				})
 				.catch(error => {
@@ -138,16 +142,11 @@ export class LocalDb implements ILocalDb<ApiData> {
 
 			this.openObjectStore(storageName, 'readwrite')
 				.then(objectStore => {
-					const idbAddRequest = objectStore.add(object)
-
-					idbAddRequest.addEventListener('success',
-												   () => resolve(true)
+					return this.handleAddObject(objectStore,
+												object,
+												resolve,
+												reject
 					)
-					idbAddRequest.addEventListener('error', (event) => {
-						const error = (event.target as IDBRequest).error
-						console.log(`Failed to add entry: ${error?.message}`)
-						reject(error)
-					})
 				})
 				.catch(error => {
 					console.log(`Failed to open object store: ${error}`)
@@ -156,47 +155,143 @@ export class LocalDb implements ILocalDb<ApiData> {
 		})
 	}
 
+	handleAddObject(objectStore: IDBObjectStore,
+					object: ApiData,
+					resolve: (value: (PromiseLike<boolean> | boolean)) => void,
+					reject: (reason?: DOMException | null) => void
+	): void {
+		const idbAddRequest = objectStore.add(object)
+
+		idbAddRequest.addEventListener('success',
+									   () => resolve(true)
+		)
+		idbAddRequest.addEventListener('error', (event) => {
+			return this.rejectFailedEvent(event, reject)
+		})
+	}
+
 	addBulk(storageName: string, objects: ApiData[]): Promise<ApiData[]> {
 		return new Promise<ApiData[]>((resolve, reject) => {
 			if (! this.isCreated() || objects.length < 1) reject(false)
 
 			const addedObjects: ApiData[] = []
-			let completed                 = 0
+			const completed               = { count: 0 }
 
-			objects.forEach(object => {
+			for (const object of objects) {
 				this.openObjectStore(storageName, 'readwrite')
 					.then(objectStore => {
-						const idbAddRequest = objectStore.add(object)
+						const idbGetRequest = objectStore.get(object.id)
 
-						idbAddRequest.addEventListener('success', () => {
-							addedObjects.push(object)
-							completed++
+						const bulkGetHandler: BulkEventHandler = {
+							idbRequest: idbGetRequest,
+							addedObjects,
+							object,
+							storageName,
+							completed,
+							objects,
+							resolve
+						}
 
-							if (completed === objects.length) {
-								resolve(addedObjects)
-							}
-						})
-
-						idbAddRequest.addEventListener('error', (event) => {
-							const error = (event.target as IDBRequest).error
-
-							console.log(`Failed to add entry ${object.id}: ${error?.message}`)
-							completed++
-
-							if (completed === objects.length) {
-								resolve(addedObjects)
-							}
-						})
+						this.handleBulkOperations(idbGetRequest,
+												  bulkGetHandler,
+												  objectStore,
+												  object
+						)
 					})
 					.catch(error => {
 						console.log(`Failed to open object store: ${error}`)
-						completed++
+						completed.count++
 
-						if (completed === objects.length) {
-							resolve(addedObjects)
+						if (completed.count === objects.length) {
+							return resolve(addedObjects)
 						}
 					})
-			})
+			}
+		})
+	}
+
+	handleBulkOperations(idbGetRequest: IDBRequest,
+						 bulkGetHandler: BulkEventHandler,
+						 objectStore: IDBObjectStore,
+						 object: ApiData
+	): void {
+		idbGetRequest.addEventListener('success', () => {
+			if (this.handleBulkExisting(bulkGetHandler)) return
+
+			const idbAddRequest = objectStore.add(object)
+
+			const bulkAddHandler: BulkEventHandler = {
+				...bulkGetHandler,
+				idbRequest: idbAddRequest
+			}
+
+			this.handleBulkAdd(bulkAddHandler)
+			this.handleBulkError(bulkAddHandler)
+		})
+	}
+
+	handleBulkAdd(handler: BulkEventHandler): void {
+		const {
+				  idbRequest,
+				  addedObjects,
+				  object,
+				  completed,
+				  objects,
+				  resolve
+			  } = handler
+
+		idbRequest.addEventListener('success', () => {
+			addedObjects.push(object)
+			completed.count++
+
+			if (completed.count === objects.length) {
+				return resolve(addedObjects)
+			}
+		})
+	}
+
+	handleBulkExisting(handler: BulkEventHandler): boolean {
+		const {
+				  idbRequest,
+				  addedObjects,
+				  object,
+				  completed,
+				  objects,
+				  resolve
+			  } = handler
+
+		if (idbRequest.result) {
+			addedObjects.push(object)
+			completed.count++
+
+			if (completed.count === objects.length) resolve(addedObjects)
+
+			return true
+		}
+
+		return false
+	}
+
+	handleBulkError(handler: BulkEventHandler) {
+		const {
+				  idbRequest,
+				  object,
+				  storageName,
+				  addedObjects,
+				  completed,
+				  objects,
+				  resolve
+			  } = handler
+
+		idbRequest.addEventListener('error', (event) => {
+			const error = (event.target as IDBRequest).error
+
+			console.log(`Failed to add entry ${object.id} to "${storageName}": ${error?.message}`)
+			completed.count++
+
+			if (completed.count === objects.length) {
+				return resolve(addedObjects)
+			}
 		})
 	}
 
@@ -212,9 +307,7 @@ export class LocalDb implements ILocalDb<ApiData> {
 													  () => resolve(true)
 					)
 					idbDeleteRequest.addEventListener('error', (event) => {
-						const error = (event.target as IDBRequest).error
-						console.log(`Failed to delete entry ${key}: ${error?.message}`)
-						reject(error)
+						return this.rejectFailedEvent(event, reject)
 					})
 				})
 				.catch(error => {
@@ -226,8 +319,8 @@ export class LocalDb implements ILocalDb<ApiData> {
 
 	updateObject(storageName: string,
 				 newObject: ApiData
-	): Promise<boolean> {
-		return new Promise<boolean>((resolve, reject) => {
+	): Promise<ApiData> {
+		return new Promise<ApiData>((resolve, reject) => {
 			if (! this.isCreated() || ! newObject) reject(false)
 
 			this.openObjectStore(storageName, 'readwrite')
@@ -235,12 +328,10 @@ export class LocalDb implements ILocalDb<ApiData> {
 					const idbPutRequest = objectStore.put(newObject)
 
 					idbPutRequest.addEventListener('success',
-												   () => resolve(true)
+												   () => resolve(newObject)
 					)
 					idbPutRequest.addEventListener('error', (event) => {
-						const error = (event.target as IDBRequest).error
-						console.log(`Failed to update entry ${newObject.id}: ${error?.message}`)
-						reject(error)
+						return this.rejectFailedEvent(event, reject)
 					})
 				})
 				.catch(error => {
@@ -251,7 +342,11 @@ export class LocalDb implements ILocalDb<ApiData> {
 	}
 
 	isCreated(): boolean {
-		return localStorage.getItem(this._loadKey) !== null
+		const isCreated = localStorage.getItem(this._loadKey)
+
+		if (! isCreated) return false
+
+		return Boolean(isCreated)
 	}
 
 	reset(): void {
@@ -260,3 +355,14 @@ export class LocalDb implements ILocalDb<ApiData> {
 	}
 }
 
+export type ApiData = Game | Platform | Publisher | Genre | Tag
+
+type BulkEventHandler = {
+	idbRequest: IDBRequest,
+	object: ApiData,
+	storageName: string,
+	addedObjects: ApiData[],
+	completed: { count: number },
+	objects: ApiData[],
+	resolve: (value: (PromiseLike<ApiData[]> | ApiData[])) => void
+}

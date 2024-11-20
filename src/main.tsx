@@ -1,6 +1,6 @@
 import { ErrorPage, GamePage, SearchPage } from '@views/pages'
 import { Root, Search } from '@views/routes'
-import { Home } from '@views/routes/Home'
+import { HomePage } from 'src/views/pages/HomePage'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
@@ -18,7 +18,7 @@ const mainRouter = createBrowserRouter(
 			children    : [
 				{
 					index  : true,
-					element: <Home/>
+					element: <HomePage/>
 				},
 				{
 					path    : 'search',

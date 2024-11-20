@@ -1,12 +1,6 @@
 import {
-	AddedByStatus,
-	EsrbRating,
-	GamesPlatform,
-	Genre,
-	ParentPlatform,
-	Rating,
-	Store,
-	Tag
+	AddedByStatus, EsrbRating, GamesPlatform, Genre, ParentPlatform, Rating,
+	Store, Tag
 } from '@data/types'
 
 

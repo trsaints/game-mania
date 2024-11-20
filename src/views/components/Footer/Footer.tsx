@@ -20,7 +20,7 @@ function Footer() {
 			<details className={style.Navigation}>
 				<summary>navigate by</summary>
 
-				<nav >
+				<nav>
 					<a href="#genres">genres</a>
 					<a href="#tags">tags</a>
 					<a href="#publishers">publishers</a>

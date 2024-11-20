@@ -73,7 +73,7 @@ to how actual game stores do.
             - [Error Page]
         - Routes
             - [Game]
-            - [Home]
+            - [HomePage]
             - [Root]
             - [Search]
 
@@ -1053,6 +1053,6 @@ The `@src/views/routes` module is responsible for providing components that repr
 
 The existing routes in the project are:
 * [Game](#game)
-* [Home](#home)
+* [HomePage](#home)
 * [Root](#root)
 * [Search](#search)

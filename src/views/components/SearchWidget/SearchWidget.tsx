@@ -6,6 +6,7 @@ import { SearchNavbar } from '@views/components/SearchNavbar/SearchNavbar.tsx'
 import { ISearchNavbar } from '@views/components/SearchNavbar/ISearchNavbar.ts'
 import { RootContext } from '@data/context'
 import { useSearchSuggestions } from '@src/hooks/useSearchSuggestions.ts'
+import { StylingUtils } from '@src/utils'
 
 
 export { SearchWidget }
@@ -25,7 +26,13 @@ function SearchWidget() {
 	const { apiMiddleware } = useContext(RootContext)
 
 	useSearchSuggestions(apiMiddleware,
-						 { setGenres, setTags, setPublishers, setCurrentBanner }
+						 {
+							 setGenres,
+							 setTags,
+							 setPublishers,
+							 setCurrentBanner
+						 },
+						 new StylingUtils()
 	)
 
 	return (
