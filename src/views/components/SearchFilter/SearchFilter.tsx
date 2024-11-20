@@ -4,14 +4,16 @@ import { MetadataFilters } from '@views/components'
 import {
 	SearchFilterViewModel
 } from '@src/view-models/SearchFilterViewModel.ts'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { DataRequestParams } from '@data/request-parameters'
+import { useSearchPage } from '@src/hooks/useSearchPage.ts'
+import { RootContext } from '@data/context'
 
 
 function SearchFilter(props: ISearchFilter) {
 	const [filters, setFilters] = useState<DataRequestParams>({})
 
-	console.log(filters)
+	useSearchPage(useContext(RootContext), filters)
 
 	const viewModel = new SearchFilterViewModel(props)
 
