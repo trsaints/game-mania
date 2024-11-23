@@ -1,27 +1,43 @@
 import style from '@views/components/GamePanel/GamePanel.module.scss'
 import { IPanelHeader } from '@views/components/PanelHeader/IPanelHeader.ts'
 import {
-	GameGenreTags
-} from '@views/components/GameGenreTags/GameGenreTags.tsx'
+	GameTags
+} from '@views/components/GameGenreTags/GameTags.tsx'
 
 
 export function PanelHeader({ game }: IPanelHeader) {
+	const shortDescriptionPattern = /^(([^.]+\.){1,4})/
+	const shortDescription = game.descriptionRaw.match(shortDescriptionPattern)?.[0]
+
 	return (
 		<header className={style.Header}>
 			<h3>{game.name}</h3>
 
-			<p className={style.Released}>Released at:
-				<time dateTime={game.released}>
-					{' ' + new Date(game.released).getFullYear()}
-				</time>
-			</p>
+			<dl className={style.MetaData}>
+				<dd className={style.Meta}>
+					<dt>release date:</dt>
 
-			<p className={style.Publisher}>Publisher: {game?.publishers[0]?.name
-													   ?? 'NA'}</p>
+					<time dateTime={game.released}>
+						{new Date(game.released).getFullYear()}
+					</time>
+				</dd>
 
-			<p className={style.Description}>{game.descriptionRaw}</p>
 
-			<GameGenreTags game={game}/>
+				<dd className={style.Meta}>
+					<dt>game publisher:</dt>
+					{game?.publishers[0]?.name ?? 'NA'}
+				</dd>
+
+
+				<dd className={style.Meta}>
+					<dt>game studio:</dt>
+					{game?.developers[0]?.name ?? 'NA'}
+				</dd>
+			</dl>
+
+			<p className={style.Description}>{shortDescription}</p>
+
+			<GameTags game={game}/>
 		</header>
 	)
 }
