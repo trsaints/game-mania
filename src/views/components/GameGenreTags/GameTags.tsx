@@ -22,7 +22,7 @@ export function GameTags({ game }: IGameTags) {
 
 	return (
 		<>
-			<dl>
+			<dl className={style.Meta}>
 				<dt className={style.TagsHeader}>genres:</dt>
 
 				<dd>
@@ -32,7 +32,7 @@ export function GameTags({ game }: IGameTags) {
 				</dd>
 			</dl>
 
-			<dl>
+			<dl className={style.Meta}>
 				<dt className={style.TagsHeader}>tags:</dt>
 
 				<dd>
