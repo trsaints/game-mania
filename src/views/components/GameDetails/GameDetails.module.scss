@@ -1,0 +1,13 @@
+.GameDetails {
+	padding-inline : 5vw;
+
+	h3 {
+		margin-bottom: 2rem;
+	}
+
+	.Description {
+		width: clamp(25vw, 50vw, 100%);
+		line-height: 150%;
+		margin-bottom: 2rem;
+	}
+}

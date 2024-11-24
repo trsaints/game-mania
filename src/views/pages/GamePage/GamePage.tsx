@@ -5,6 +5,7 @@ import { Link, useLoaderData } from 'react-router-dom'
 import { Game } from '@data/types'
 import { GamePageList, GamePanel } from '@views/components'
 import { useGamePage } from '@src/hooks/useGamePage.ts'
+import { GameDetails } from '@views/components/GameDetails'
 
 
 export type GameId = { id: string }
@@ -31,6 +32,8 @@ function GamePage() {
 				&& games ? (
 					<>
 						<GamePanel game={selectedGame}/>
+
+						<GameDetails game={selectedGame}/>
 
 						<aside>
 							<header className={style.SuggestionsHeader}>
