@@ -12,4 +12,9 @@ export interface IGamePageListViewModel {
 	changePage(e: React.MouseEvent,
 			   setCurrentPage: Dispatch<SetStateAction<number>>
 	): void
+
+	changeCustomPage(e: FormEvent,
+					 setCurrentPage: Dispatch<SetStateAction<number>>,
+					 pageCount: number
+	): void
 }

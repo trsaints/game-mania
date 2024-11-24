@@ -8,6 +8,19 @@ import { NavigateFunction } from 'react-router-dom'
 export { GamePageListViewModel }
 
 class GamePageListViewModel implements IGamePageListViewModel {
+	changeCustomPage(e: FormEvent,
+					 setCurrentPage: Dispatch<SetStateAction<number>>,
+					 pageCount: number): void {
+		e.preventDefault()
+
+		const targetData = new FormData(e.target as HTMLFormElement)
+		const newPage    = Number(targetData.get('custom-page'))
+
+		if (! newPage || newPage > pageCount || newPage < 1) return
+
+		setCurrentPage(newPage - 1)
+	}
+
 	openGamePage(e: React.MouseEvent, navigator: NavigateFunction): void {
 		const target       = e.target as HTMLElement
 		const selectedCard = target.closest('[data-id]') as HTMLElement

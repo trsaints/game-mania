@@ -17,9 +17,9 @@ export function PageSelection(props: IPageSelection) {
 			  parentViewModel
 		  } = props
 
-	const pageButtons = viewModel.getPageIndices(gamesCount,
-												 itemCount
-	).map(
+	const pageIndices = viewModel.getPageIndices(gamesCount, itemCount)
+
+	const pageButtons = pageIndices.map(
 		pageIndex => (
 			<li key={`page-${pageIndex}`}>
 				<button data-page={pageIndex} type="button">{pageIndex
@@ -39,10 +39,14 @@ export function PageSelection(props: IPageSelection) {
 				{pageButtons}
 			</menu>
 
-			<form className={style.CustomPageSelection}>
+			<form className={style.CustomPageSelection} onSubmit={(e) => {
+				parentViewModel.changeCustomPage(e,
+												 setCurrentPage,
+												 pageIndices.length)
+			}}>
 				<p>
-					<label htmlFor="custom-page-selection">enter page: </label>
-					<input type="tel" id="custom-page-selection"/>
+					<label htmlFor="custom-page">enter page: </label>
+					<input type="tel" name="custom-page" id="custom-page"/>
 				</p>
 
 				<button type="submit">save</button>

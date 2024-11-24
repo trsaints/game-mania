@@ -26,14 +26,14 @@ function GamePageList({ games }: IGamePageList) {
 		<section className={style.GamePageList}>
 			<h3 className={style.ResultsCount}>{games.length} games found</h3>
 
-			<CountFilter onHandleSubmit={(e) => viewModel.changeItemCount(e,
-																		  setItemCount
-			)}/>
+			<CountFilter onHandleSubmit={(e) => {
+				viewModel.changeItemCount(e, setItemCount)
+			}}/>
 
 			<GamesList currentGames={currentGames}
-					   onHandleClick={(e) => viewModel.openGamePage(e,
-																	navigator
-					   )}
+					   onHandleClick={(e) => {
+						   viewModel.openGamePage(e, navigator)
+					   }}
 			/>
 
 			<PageSelection gamesCount={games.length}
