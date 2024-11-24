@@ -37,7 +37,7 @@ export function PanelHeader({ game }: IPanelHeader) {
 
 			<p className={style.Description}>{shortDescription}</p>
 
-			<GameTags game={game}/>
+			<GameTags game={game} count={3}/>
 		</header>
 	)
 }
