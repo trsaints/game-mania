@@ -1,15 +1,6 @@
 import style from '@views/components/GamePageList/GamePageList.module.scss'
-import {
-	IGamePageListViewModel
-} from '@src/view-models/interfaces/IGamePageListViewModel.ts'
-import { Dispatch, SetStateAction } from 'react'
+import { IPageSwitch } from '@views/components/PageSwitch/IPageSwitch.ts'
 
-
-export interface IPageSwitch {
-	pageIndices: number[]
-	parentViewModel: IGamePageListViewModel
-	setCurrentPage: Dispatch<SetStateAction<number>>
-}
 
 export function PageSwitch(props: IPageSwitch) {
 	const { pageIndices, parentViewModel, setCurrentPage } = props
