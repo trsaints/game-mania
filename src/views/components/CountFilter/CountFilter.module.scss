@@ -1,0 +1,31 @@
+@use "src/palette";
+
+.CountFilter {
+	display       : flex;
+	align-items   : center;
+	margin-bottom : 5vmax;
+	width         : clamp(300px, 350px, 50vw);
+
+	label {
+		text-transform : uppercase;
+		color          : palette.$cyan;
+		text-shadow    : 0 0 8px palette.$cyan;
+		height         : fit-content;
+		margin-right   : 3vw;
+	}
+
+	input {
+		border-bottom-left-radius : 8px;
+		border-top-left-radius    : 8px;
+		padding                   : 0.75rem 1.5rem;
+		max-width                 : 100px;
+		height                    : 2.5rem;
+	}
+
+	button {
+		border-bottom-left-radius : 0;
+		border-top-left-radius    : 0;
+		text-transform            : capitalize;
+		justify-self              : flex-start;
+	}
+}
