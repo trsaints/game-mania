@@ -2,16 +2,16 @@ import { IGameTags } from '@views/components/GameTags/IGameTags.ts'
 import style from './GameTags.module.scss'
 
 
-export function GameTags({ game }: IGameTags) {
+export function GameTags({ game, count }: IGameTags) {
 	const gameGenres = game.genres
-						   .slice(0, 3)
+						   .slice(0, count)
 						   .map(g =>
 									<li className={style.GenreTag}
 										key={`t-${g.id}`}
 									>{g.name}</li>
 						   )
 
-	const gameTags = game.tags.slice(0, 3)
+	const gameTags = game.tags.slice(0, count)
 						 .map(t =>
 								  <li className={style.GenreTag}
 									  key={`t-${t.id}`}
