@@ -42,9 +42,8 @@ export function PageSelection(props: IPageSelection) {
 				{pageButtons}
 			</menu>
 
-			<CustomPageSelection parentViewModel={parentViewModel}
-								 setCurrentPage={setCurrentPage}
-								 pageIndices={pageIndices}/>
+			<CustomPageSelection setCurrentPage={setCurrentPage}
+								 pageCount={pageIndices.length}/>
 		</aside>
 	)
 }

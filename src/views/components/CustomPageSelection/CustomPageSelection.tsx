@@ -6,16 +6,15 @@ import {
 	CustomPageSelectionViewModel
 } from '@src/view-models/CustomPageSelectionViewModel.ts'
 
+
 const viewModel = new CustomPageSelectionViewModel()
 
 export function CustomPageSelection(props: ICustomPageSelection) {
-	const { setCurrentPage, pageIndices } = props
+	const { setCurrentPage, pageCount } = props
 
 	return (
 		<form className={style.CustomPageSelection} onSubmit={(e) => {
-			viewModel.changeCustomPage(e,
-											 setCurrentPage,
-											 pageIndices.length)
+			viewModel.changeCustomPage(e, setCurrentPage, pageCount)
 		}}>
 			<p>
 				<label htmlFor="custom-page">enter page: </label>
