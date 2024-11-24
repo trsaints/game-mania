@@ -1,6 +1,6 @@
 import React, { ComponentProps } from 'react'
 import { Game } from '@data/types'
-import style from '@views/components/GamePageList/GamePageList.module.scss'
+import style from './GamesList.module.scss'
 import { GameCard } from '@views/components'
 
 
