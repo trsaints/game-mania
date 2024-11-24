@@ -1,6 +1,6 @@
 import style from '@views/components/GamePanel/GamePanel.module.scss'
 import { IPanelHeader } from '@views/components/PanelHeader/IPanelHeader.ts'
-import { GameTags } from '@views/components/GameGenreTags/GameTags.tsx'
+import { GameTags } from '@views/components/GameTags/GameTags.tsx'
 
 
 export function PanelHeader({ game }: IPanelHeader) {
@@ -15,7 +15,6 @@ export function PanelHeader({ game }: IPanelHeader) {
 			<dl className={style.MetaData}>
 				<dt>release date:</dt>
 				<dd className={style.Meta}>
-
 					<time dateTime={game.released}>
 						{new Date(game.released).getFullYear()}
 					</time>

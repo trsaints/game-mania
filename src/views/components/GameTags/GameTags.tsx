@@ -1,7 +1,5 @@
-import style from '@views/components/GamePanel/GamePanel.module.scss'
-import {
-	IGameTags
-} from '@views/components/GameGenreTags/IGameTags.ts'
+import { IGameTags } from '@views/components/GameTags/IGameTags.ts'
+import style from './GameTags.module.scss'
 
 
 export function GameTags({ game }: IGameTags) {
