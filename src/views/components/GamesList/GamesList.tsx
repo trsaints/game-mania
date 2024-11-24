@@ -12,7 +12,7 @@ interface IGamesList extends ComponentProps<'ul'> {
 
 export function GamesList({ currentGames, onHandleClick }: IGamesList) {
 	return (
-		<ul className={style.GameList} onClick={onHandleClick}>
+		<ul className={style.GamesList} onClick={onHandleClick}>
 			{currentGames.map(game => (
 				<li key={`game-${game.id}`}>
 					<GameCard game={game}/>
