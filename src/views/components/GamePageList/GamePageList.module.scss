@@ -50,12 +50,42 @@
 		h3 {
 			font-size     : 1.25rem;
 			margin-bottom : 2.5vmax;
+			text-align    : center;
 
 			@media screen and (min-width : 40rem) {
 				& {
-					font-size  : 1.5rem;
-					text-align : center;
+					font-size : 1.5rem;
 				}
+			}
+		}
+
+		.CustomPageSelection {
+			margin-inline : auto;
+			width         : min-content;
+
+			p {
+				white-space   : nowrap;
+				margin-bottom : 1ch;
+
+
+				label {
+					margin-right   : 1ch;
+					text-transform : capitalize;
+					color          : palette.$cyan;
+					text-shadow    : 0 0 8px palette.$cyan;
+				}
+
+				input {
+					padding       : 0.5rem;
+					border-radius : 8px;
+					width         : 3rem;
+				}
+			}
+
+			button {
+				display        : block;
+				margin-inline  : auto;
+				text-transform : capitalize;
 			}
 		}
 
@@ -66,6 +96,7 @@
 			overflow-x    : auto;
 			margin-inline : auto;
 			width         : clamp(30vw, 100%, 50vw);
+			margin-bottom : 2rem;
 
 			&::-webkit-scrollbar {
 				display : none;

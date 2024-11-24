@@ -33,11 +33,20 @@ export function PageSelection(props: IPageSelection) {
 			<h3>navigate by page</h3>
 
 			<menu className={style.PageSelection}
-				  onClick={(e) => parentViewModel.changePage(e,
-															 setCurrentPage
-				  )}>
+				  onClick={(e) => {
+					  parentViewModel.changePage(e, setCurrentPage)
+				  }}>
 				{pageButtons}
 			</menu>
+
+			<form className={style.CustomPageSelection}>
+				<p>
+					<label htmlFor="custom-page-selection">enter page: </label>
+					<input type="tel" id="custom-page-selection"/>
+				</p>
+
+				<button type="submit">save</button>
+			</form>
 		</aside>
 	)
 }
