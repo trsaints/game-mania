@@ -2,14 +2,18 @@ import style from '@views/components/GamePageList/GamePageList.module.scss'
 import {
 	ICustomPageSelection
 } from '@views/components/CustomPageSelection/ICustomPageSelection.tsx'
+import {
+	CustomPageSelectionViewModel
+} from '@src/view-models/CustomPageSelectionViewModel.ts'
 
+const viewModel = new CustomPageSelectionViewModel()
 
 export function CustomPageSelection(props: ICustomPageSelection) {
-	const { parentViewModel, setCurrentPage, pageIndices } = props
+	const { setCurrentPage, pageIndices } = props
 
 	return (
 		<form className={style.CustomPageSelection} onSubmit={(e) => {
-			parentViewModel.changeCustomPage(e,
+			viewModel.changeCustomPage(e,
 											 setCurrentPage,
 											 pageIndices.length)
 		}}>
