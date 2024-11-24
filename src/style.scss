@@ -63,3 +63,13 @@ button.secondary {
 	white-space  : nowrap;
 	border-width : 0;
 }
+
+::-webkit-scrollbar {
+	background: none;
+	width: 1vmin;
+
+	&-thumb {
+		background-color: palette.$black-d5;
+		border-radius: 8px;
+	}
+}
