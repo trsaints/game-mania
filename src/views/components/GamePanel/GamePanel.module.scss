@@ -13,38 +13,6 @@
 		display          : flex;
 		flex-wrap        : wrap;
 		gap              : 10vmax;
-
-		.Header {
-			flex : 1 1 400px;
-
-			h3 {
-				margin-bottom : 2rem;
-			}
-
-			.MetaData {
-				text-transform : capitalize;
-				align-items: center;
-				display : flex;
-				gap     : 1ch;
-				margin-bottom: 0.5rem;
-
-				dt {
-					color          : palette.$white-d2;
-				}
-
-				.Meta {
-					font-weight : 500;
-					display     : flex;
-					gap         : 1ch;
-				}
-			}
-
-			.Description {
-				margin-block: 2rem;
-				line-height : 150%;
-				max-width   : 512px;
-			}
-		}
 	}
 }
 

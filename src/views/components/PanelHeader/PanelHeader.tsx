@@ -1,6 +1,6 @@
-import style from '@views/components/GamePanel/GamePanel.module.scss'
 import { IPanelHeader } from '@views/components/PanelHeader/IPanelHeader.ts'
 import { GameTags } from '@views/components/GameTags/GameTags.tsx'
+import style from './PanelHeader.module.scss'
 
 
 export function PanelHeader({ game }: IPanelHeader) {
@@ -9,7 +9,7 @@ export function PanelHeader({ game }: IPanelHeader) {
 		shortDescriptionPattern)?.[0]
 
 	return (
-		<header className={style.Header}>
+		<header className={style.PanelHeader}>
 			<h3>{game.name}</h3>
 
 			<dl className={style.MetaData}>
