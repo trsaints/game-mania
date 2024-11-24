@@ -1,12 +1,18 @@
 @use "src/palette";
 
 .GameDetails {
-	padding-inline        : 5vw;
-	display               : grid;
-	grid-template-areas   : "title title" "desc detail";
-	grid-template-columns : 3fr 2fr;
-	column-gap            : 1rem;
-	margin-bottom         : 5vmax;
+	padding-inline      : 5vw;
+	display             : grid;
+	grid-template-areas : "title" "desc" "detail";
+	gap                 : 1rem;
+	margin-bottom       : 10vmax;
+
+	@media screen and (min-width : 40rem) {
+		& {
+			grid-template-areas : "title title" "desc detail";
+			grid-template-columns: 3fr 2fr;
+		}
+	}
 
 	h3 {
 		grid-area     : title;
@@ -15,8 +21,12 @@
 
 	.Description {
 		grid-area   : desc;
-		width       : clamp(25vw, 50vw, 100%);
 		line-height : 150%;
+
+		.Banners {
+			display : grid;
+			gap     : 2rem;
+		}
 	}
 
 	.Details {
@@ -34,14 +44,14 @@
 		}
 
 		.Metadata {
-			text-transform: capitalize;
-			margin-bottom: 1rem;
-			line-height: 150%;
+			text-transform : capitalize;
+			margin-bottom  : 1rem;
+			line-height    : 150%;
 		}
 
 		.Requirements {
-			color : palette.$white-d4;
-			margin-bottom: 1rem;
+			color         : palette.$white-d4;
+			margin-bottom : 1rem;
 		}
 	}
 }
