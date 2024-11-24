@@ -28,7 +28,20 @@ function GameDetails({ game }: IGameDetails) {
 		<article className={style.GameDetails}>
 			<h3>About</h3>
 
-			<p className={style.Description}>{formattedParagraphs}</p>
+			<p className={style.Description}>
+				<p>{formattedParagraphs}</p>
+
+				<br/>
+
+				<p className={style.Banners}>
+					<img src={game.backgroundImage}
+						 alt={`main banner for the "${game.name}" game`}/>
+
+
+					<img src={game.backgroundImageAdditional}
+						 alt={`additional banner for the "${game.name}" game`}/>
+				</p>
+			</p>
 
 			<aside className={style.Details}>
 				<h4>details</h4>
