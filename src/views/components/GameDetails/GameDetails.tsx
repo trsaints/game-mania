@@ -1,5 +1,6 @@
 import { IGameDetails } from './IGameDetails.ts'
 import style from './GameDetails.module.scss'
+import { GameTags } from '@views/components/GameTags/GameTags.tsx'
 
 
 export { GameDetails }
@@ -21,11 +22,37 @@ function GameDetails({ game }: IGameDetails) {
 			   )
 	})
 
+	const pcPlatform = game.platforms.find(p => p.platform.name.toLowerCase()
+												=== 'pc')
 	return (
 		<article className={style.GameDetails}>
 			<h3>About</h3>
 
 			<p className={style.Description}>{formattedParagraphs}</p>
+
+			<aside className={style.Details}>
+				<h4>details</h4>
+
+				<p className={style.Released}>
+					release date: {new Date(game.released).toLocaleDateString()}
+				</p>
+
+				{pcPlatform && (
+					<>
+						<h4>system requirements</h4>
+
+						<p className={style.Requirements}>
+							<p>{pcPlatform.requirements.minimum} </p>
+
+							<br/>
+
+							<p>{pcPlatform.requirements.recommended}</p>
+						</p>
+					</>
+				)}
+
+				<GameTags game={game}/>
+			</aside>
 		</article>
 	)
 }
