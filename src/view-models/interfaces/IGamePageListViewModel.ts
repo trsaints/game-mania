@@ -8,10 +8,4 @@ export interface IGamePageListViewModel {
 	changeItemCount(e: FormEvent,
 					setItemCount: Dispatch<SetStateAction<number>>
 	): void
-
-	changePage(e: React.MouseEvent,
-			   setCurrentPage: Dispatch<SetStateAction<number>>
-	): void
-
-
 }
