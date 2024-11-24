@@ -1,15 +1,8 @@
-import {
-	GamePageListViewModel
-} from '@src/view-models/GamePageListViewModel.ts'
-import { Dispatch, SetStateAction } from 'react'
 import style from '@views/components/GamePageList/GamePageList.module.scss'
+import {
+	ICustomPageSelection
+} from '@views/components/CustomPageSelection/ICustomPageSelection.tsx'
 
-
-export interface ICustomPageSelection {
-	parentViewModel: GamePageListViewModel
-	setCurrentPage: Dispatch<SetStateAction<number>>
-	pageIndices: number[]
-}
 
 export function CustomPageSelection(props: ICustomPageSelection) {
 	const { parentViewModel, setCurrentPage, pageIndices } = props
