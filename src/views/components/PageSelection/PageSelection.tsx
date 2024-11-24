@@ -22,7 +22,9 @@ export function PageSelection(props: IPageSelection) {
 			<h3>navigate by page</h3>
 
 			<PageSwitch pageIndices={pageIndices} {...props} />
-			<CustomPageSelection {...props} pageCount={pageIndices.length}/>
+
+			{pageIndices.length > 1 &&
+			 <CustomPageSelection {...props} pageCount={pageIndices.length}/>}
 		</aside>
 	)
 }

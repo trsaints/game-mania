@@ -5,6 +5,7 @@
 	overflow-x    : auto;
 	margin-inline : auto;
 	width         : clamp(30vw, 100%, 50vw);
+	max-width     : fit-content;
 	margin-bottom : 2rem;
 
 	&::-webkit-scrollbar {
