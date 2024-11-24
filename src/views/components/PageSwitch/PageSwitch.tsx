@@ -1,9 +1,12 @@
 import style from '@views/components/GamePageList/GamePageList.module.scss'
 import { IPageSwitch } from '@views/components/PageSwitch/IPageSwitch.ts'
+import { PageSwitchViewModel } from '@src/view-models/PageSwitchViewModel.ts'
 
+
+const viewModel = new PageSwitchViewModel()
 
 export function PageSwitch(props: IPageSwitch) {
-	const { pageIndices, parentViewModel, setCurrentPage } = props
+	const { pageIndices, setCurrentPage } = props
 
 	const pageButtons = pageIndices.map(
 		pageIndex => (
@@ -16,9 +19,7 @@ export function PageSwitch(props: IPageSwitch) {
 
 	return (
 		<menu className={style.PageSelection}
-			  onClick={(e) => {
-				  parentViewModel.changePage(e, setCurrentPage)
-			  }}>
+			  onClick={(e) => viewModel.changePage(e, setCurrentPage)}>
 			{pageButtons}
 		</menu>
 	)
