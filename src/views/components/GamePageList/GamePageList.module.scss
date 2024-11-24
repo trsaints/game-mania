@@ -59,56 +59,6 @@
 			}
 		}
 
-		.CustomPageSelection {
-			margin-inline : auto;
-			width         : min-content;
 
-			p {
-				white-space   : nowrap;
-				margin-bottom : 1ch;
-
-
-				label {
-					margin-right   : 1ch;
-					text-transform : capitalize;
-					color          : palette.$cyan;
-					text-shadow    : 0 0 8px palette.$cyan;
-				}
-
-				input {
-					padding       : 0.5rem;
-					border-radius : 8px;
-					width         : 3rem;
-				}
-			}
-
-			button {
-				display        : block;
-				margin-inline  : auto;
-				text-transform : capitalize;
-			}
-		}
-
-		.PageSelection {
-			display       : flex;
-			flex-wrap     : nowrap;
-			gap           : 2vmin;
-			overflow-x    : auto;
-			margin-inline : auto;
-			width         : clamp(30vw, 100%, 50vw);
-			margin-bottom : 2rem;
-
-			&::-webkit-scrollbar {
-				display : none;
-			}
-
-			button {
-				padding       : 1rem;
-				border-radius : 100%;
-				width         : 3rem;
-				height        : 3rem;
-				text-align    : center;
-			}
-		}
 	}
 }

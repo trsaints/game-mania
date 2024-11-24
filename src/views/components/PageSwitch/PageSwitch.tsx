@@ -1,6 +1,6 @@
-import style from '@views/components/GamePageList/GamePageList.module.scss'
 import { IPageSwitch } from '@views/components/PageSwitch/IPageSwitch.ts'
 import { PageSwitchViewModel } from '@src/view-models/PageSwitchViewModel.ts'
+import style from './PageSwitch.module.scss'
 
 
 const viewModel = new PageSwitchViewModel()

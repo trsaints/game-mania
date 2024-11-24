@@ -1,10 +1,10 @@
-import style from '@views/components/GamePageList/GamePageList.module.scss'
 import {
 	ICustomPageSelection
-} from '@views/components/CustomPageSelection/ICustomPageSelection.tsx'
+} from '@views/components/CustomPageSelection/ICustomPageSelection.ts'
 import {
 	CustomPageSelectionViewModel
 } from '@src/view-models/CustomPageSelectionViewModel.ts'
+import style from './CustomPageSelection.module.scss'
 
 
 const viewModel = new CustomPageSelectionViewModel()

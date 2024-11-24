@@ -1,0 +1,31 @@
+@use "src/palette";
+
+.CustomPageSelection {
+	margin-inline : auto;
+	width         : min-content;
+
+	p {
+		white-space   : nowrap;
+		margin-bottom : 1ch;
+
+
+		label {
+			margin-right   : 1ch;
+			text-transform : capitalize;
+			color          : palette.$cyan;
+			text-shadow    : 0 0 8px palette.$cyan;
+		}
+
+		input {
+			padding       : 0.5rem;
+			border-radius : 8px;
+			width         : 3rem;
+		}
+	}
+
+	button {
+		display        : block;
+		margin-inline  : auto;
+		text-transform : capitalize;
+	}
+}
