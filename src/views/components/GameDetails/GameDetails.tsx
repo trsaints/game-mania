@@ -11,7 +11,7 @@ function GameDetails({ game }: IGameDetails) {
 	const formattedDescription = game.descriptionRaw.split(sentencePattern)
 
 	const formattedParagraphs = formattedDescription.map((sentence, index) => {
-		return index === (formattedDescription.length - 1) || (index === 0)
+		return (index === (formattedDescription.length - 1)) || (index === 0)
 			   ? <p>{sentence}</p>
 			   : (
 				   <>
