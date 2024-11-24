@@ -7,16 +7,12 @@
 	font-size        : 0.9rem;
 	display          : grid;
 	gap              : 1rem;
-	margin-left      : 5vw;
-	margin-bottom    : 10vmax;
 	padding          : 5vmin;
-	max-width        : clamp(250px, 100%, 25vw);
-	max-height       : clamp(250px, 25vh, 50vh);
+	width            : clamp(275px, 100%, 25vw);
+	height           : clamp(250px, 25vh, 50vh);
 	overflow-y       : auto;
 	overflow-x       : hidden;
-	position         : sticky;
 	white-space      : nowrap;
-	top              : 10vh;
 
 	label, summary, select {
 		color          : palette.$cyan;

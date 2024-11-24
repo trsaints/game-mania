@@ -1,2 +1,23 @@
 .SearchPage {
+	.SearchControls {
+		position      : fixed;
+		top           : 10vh;
+		margin-bottom : 5vmax;
+		display       : flex;
+		right         : 100vw;
+
+		&.filterVisible {
+			right: 0;
+			left : 5vw;
+		}
+
+		.Switch {
+			padding                   : 1rem;
+			position                  : absolute;
+			height                    : calc(100% - 10vh);
+			margin-block              : 5vh;
+			border-top-left-radius    : 0;
+			border-bottom-left-radius : 0;
+		}
+	}
 }
