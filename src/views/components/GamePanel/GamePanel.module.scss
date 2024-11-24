@@ -14,11 +14,9 @@
 		flex-wrap        : wrap;
 		gap              : 10vmax;
 
-		.Header, .Banner {
-			flex : 1 1 400px;
-		}
-
 		.Header {
+			flex : 1 1 400px;
+
 			h3 {
 				margin-bottom : 2rem;
 			}
@@ -45,31 +43,6 @@
 				margin-block: 2rem;
 				line-height : 150%;
 				max-width   : 512px;
-			}
-
-
-		}
-
-		.Banner {
-			display            : grid;
-			align-items        : flex-start;
-			grid-template-rows : min-content min-content;
-			gap                : 5vmin;
-
-			.Main {
-				img {
-					max-height    : 500px;
-					border-radius : 8px;
-					object-fit    : cover;
-					width         : 100%;
-				}
-			}
-
-			.Screenshots {
-				display    : flex;
-				gap        : 2.5vmin;
-				width      : 100%;
-				overflow-x : scroll;
 			}
 		}
 	}
