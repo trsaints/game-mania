@@ -2,11 +2,11 @@
 @use "sass:color";
 
 
-.PanelBanner {
+.GamePanel {
 	padding       : 10vmax 5vw;
 	margin-bottom : 10vmax;
 
-	.GamePanel {
+	.Content {
 		background-color : color.scale(palette.$black-d5, $alpha : -20%);
 		border-radius    : 16px;
 		padding          : 2.5vmax 5vmin;
