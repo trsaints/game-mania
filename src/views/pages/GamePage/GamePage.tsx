@@ -1,7 +1,7 @@
 import style from './GamePage.module.scss'
 import { useContext, useState } from 'react'
 import { RootContext } from '@data/context'
-import { Link, useLoaderData } from 'react-router-dom'
+import { useLoaderData } from 'react-router-dom'
 import { Game } from '@data/types'
 import { GamePageList, GamePanel } from '@views/components'
 import { useGamePage } from '@src/hooks/useGamePage.ts'
@@ -21,8 +21,6 @@ function GamePage() {
 
 	useGamePage(rootContext, searchParams, setSelectedGame, gameGenres)
 
-	const gameGenre = selectedGame?.genres[0].name
-
 	return (
 		<article className={style.GamePage}
 				 id="game-page"
@@ -35,20 +33,8 @@ function GamePage() {
 
 						<GameDetails game={selectedGame}/>
 
-						<aside>
-							<header className={style.SuggestionsHeader}>
-								<h3 className={style.SuggestionsTitle}>More {gameGenre} games</h3>
 
-								<Link className={style.SuggestionsLink}
-									  to="/search"
-									  relative="path">
-									See all "{gameGenre}" games
-								</Link>
-							</header>
-
-							<GamePageList games={games.slice(0, 20)}/>
-						</aside>
-
+						<GamePageList games={games.slice(0, 20)}/>
 					</>
 				)
 						 : <h2>loading...</h2>
