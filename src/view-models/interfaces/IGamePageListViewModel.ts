@@ -13,8 +13,5 @@ export interface IGamePageListViewModel {
 			   setCurrentPage: Dispatch<SetStateAction<number>>
 	): void
 
-	changeCustomPage(e: FormEvent,
-					 setCurrentPage: Dispatch<SetStateAction<number>>,
-					 pageCount: number
-	): void
+
 }
