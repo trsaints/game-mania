@@ -45,6 +45,8 @@
 	}
 
 	aside {
+		margin-bottom : 10vmax;
+
 		h3 {
 			font-size     : 1.25rem;
 			margin-bottom : 2.5vmax;
@@ -62,6 +64,7 @@
 			flex-wrap  : nowrap;
 			gap        : 2vmin;
 			overflow-x : auto;
+			margin-inline: auto;
 
 			button {
 				padding       : 1rem;
