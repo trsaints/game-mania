@@ -37,21 +37,52 @@
 		}
 
 		.MainMenu {
-			background-color : palette.$black-d3;
-			border-radius    : 16px;
+			$links-width     : clamp(200px, 100%, 20vw);
 			margin           : auto;
-			padding          : 5vmin;
+			background-color : transparent;
+			position         : fixed;
+			isolation        : isolate;
+			width            : calc($links-width + 16px);
+			height           : calc($links-width * 1.5);
 
 			&::backdrop {
-				background-color : color.scale(palette.$black-d3, $alpha : -50%);
+				background-color : color.scale(palette.$black-d3, $alpha : -20%);
 				max-width        : 100vw;
+				position         : inherit;
+			}
+
+			.MenuHeading {
+				font-size     : 1.25rem;
+				color         : palette.$white;
+				margin-top    : calc(5vmin + 1.5em + 0.5rem);
+				margin-bottom : 5vmin;
+			}
+
+			.CloseButton {
+				width            : 3em;
+				height           : 3em;
+				position         : absolute;
+				z-index          : 10;
+				top              : calc(5vmin + 1.5em);
+				right            : 0;
+				color            : red;
+				padding          : 0.5rem;
+				background-color : transparent;
+				border           : 4px solid;
 			}
 
 			.RouteOptions {
-				text-transform : capitalize;
-				gap            : 1rem;
-				display        : flex;
-				flex-direction : column;
+				box-shadow       : 0 0 8px palette.$black-d5;
+				border-radius    : 16px;
+				padding          : 5vmin;
+				background-color : palette.$black-d3;
+				text-transform   : uppercase;
+				text-shadow      : 0 0 8px palette.$cyan;
+				gap              : 1rem;
+				display          : flex;
+				flex-direction   : column;
+				width            : $links-width;
+				margin           : auto;
 			}
 		}
 	}
