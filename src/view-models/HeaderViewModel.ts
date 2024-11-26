@@ -7,8 +7,8 @@ import React, { Dispatch, SetStateAction } from 'react'
 export { HeaderViewModel }
 
 class HeaderViewModel implements IHeaderViewModel {
-	closeOnClick(e: React.MouseEvent<HTMLElement, MouseEvent>,
-				 setIsMenuOpen: Dispatch<SetStateAction<boolean>>
+	closeOnRouteChange(e: React.MouseEvent<HTMLElement, MouseEvent>,
+					   setIsMenuOpen: Dispatch<SetStateAction<boolean>>
 	): void {
 		const target    = e.target as HTMLElement
 		const routeLink = target.closest('[data-link="route"]')

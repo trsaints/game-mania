@@ -13,7 +13,7 @@ export interface IHeaderViewModel {
 		setIsMenuOpen: Dispatch<SetStateAction<boolean>>
 	): void
 
-	closeOnClick(
+	closeOnRouteChange(
 		e: React.MouseEvent<HTMLElement, MouseEvent>,
 		setIsMenuOpen: Dispatch<SetStateAction<boolean>>
 	): void
