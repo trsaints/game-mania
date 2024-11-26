@@ -35,7 +35,9 @@ function Header() {
 							)}>
 						<menu>
 							<li>
-								<button type="button">
+								<button type="button" onClick={() => {
+									viewModel.closeOnClick(setIsMenuOpen)
+								}}>
 									<span className="sr-only">close menu</span>
 									x
 								</button>

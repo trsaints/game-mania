@@ -7,6 +7,15 @@ import React, { Dispatch, SetStateAction } from 'react'
 export { HeaderViewModel }
 
 class HeaderViewModel implements IHeaderViewModel {
+	closeOnClick(setIsMenuOpen: Dispatch<SetStateAction<boolean>>): void {
+		const menu = document.querySelector('[data-dialog="main-menu"]') as HTMLDialogElement
+
+		if (! menu) return
+
+		menu.close()
+		setIsMenuOpen(false)
+	}
+
 	closeOnRouteChange(e: React.MouseEvent<HTMLElement, MouseEvent>,
 					   setIsMenuOpen: Dispatch<SetStateAction<boolean>>
 	): void {
