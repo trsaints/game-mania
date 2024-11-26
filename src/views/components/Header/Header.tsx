@@ -33,7 +33,7 @@ function Header() {
 							onKeyDown={(e) => {
 								viewModel.closeOnEscape(e, setIsMenuOpen)
 							}}>
-						<h2 className={style.MenuHeading}>main menu</h2>
+						<h2 className="sr-only">main menu</h2>
 
 						<menu>
 							<li>

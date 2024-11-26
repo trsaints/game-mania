@@ -51,19 +51,12 @@
 				position         : inherit;
 			}
 
-			.MenuHeading {
-				font-size     : 1.25rem;
-				color         : palette.$white;
-				margin-top    : calc(5vmin + 1.5em + 0.5rem);
-				margin-bottom : 5vmin;
-			}
-
 			.CloseButton {
 				width            : 3em;
 				height           : 3em;
 				position         : absolute;
 				z-index          : 10;
-				top              : calc(5vmin + 1.5em);
+				top              : 0;
 				right            : 8px;
 				color            : red;
 				padding          : 0.5rem;
@@ -82,7 +75,8 @@
 				display          : flex;
 				flex-direction   : column;
 				width            : $links-width;
-				margin           : auto;
+				margin-top: calc(3em + 5vmin);
+				margin-inline: auto;
 			}
 		}
 	}
