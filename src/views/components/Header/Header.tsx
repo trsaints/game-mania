@@ -30,14 +30,19 @@ function Header() {
 				<li>
 					<dialog className={style.MainMenu}
 							data-dialog="main-menu"
-							onKeyDown={(e) => viewModel.closeOnEscape(e,
-																	  setIsMenuOpen
-							)}>
+							onKeyDown={(e) => {
+								viewModel.closeOnEscape(e, setIsMenuOpen)
+							}}>
+						<h2 className={style.MenuHeading}>main menu</h2>
+
 						<menu>
 							<li>
-								<button type="button" onClick={() => {
-									viewModel.closeOnClick(setIsMenuOpen)
-								}}>
+								<button className={style.CloseButton}
+										type="button"
+										onClick={() => {
+											viewModel.closeOnClick(
+												setIsMenuOpen)
+										}}>
 									<span className="sr-only">close menu</span>
 									x
 								</button>
@@ -45,9 +50,9 @@ function Header() {
 						</menu>
 
 						<nav className={style.RouteOptions}
-							 onClick={(e) => viewModel.closeOnRouteChange(e,
-																		  setIsMenuOpen
-							 )}
+							 onClick={(e) => {
+								 viewModel.closeOnRouteChange(e, setIsMenuOpen)
+							 }}
 						>
 							<Link data-link="route" to="/">home</Link>
 							<Link data-link="route" to="/search">search</Link>
