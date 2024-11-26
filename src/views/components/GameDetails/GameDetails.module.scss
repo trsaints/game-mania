@@ -4,13 +4,14 @@
 	padding-inline      : 5vw;
 	display             : grid;
 	grid-template-areas : "title" "desc" "detail";
-	gap                 : 1rem;
+	gap                 : 5vmax;
 	margin-bottom       : 10vmax;
 
 	@media screen and (min-width : 40rem) {
 		& {
 			grid-template-areas : "title title" "desc detail";
 			grid-template-columns: 3fr 2fr;
+			gap: 2rem 5vmax;
 		}
 	}
 
