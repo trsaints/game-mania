@@ -3,6 +3,7 @@ import { Footer, Header, SearchWidget } from '@views/components'
 import { Outlet } from 'react-router-dom'
 import { RootViewModel } from '@src/view-models/RootViewModel.ts'
 import { useEffect, useState } from 'react'
+import { ScrollTop } from '@views/components/ScrollTop'
 
 
 const viewModel = new RootViewModel()
@@ -29,6 +30,7 @@ function Root() {
 			<SearchWidget/>
 			<Outlet/>
 			<Footer/>
+			<ScrollTop/>
 		</RootContextProvider>
 	)
 }
