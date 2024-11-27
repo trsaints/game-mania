@@ -1,6 +1,6 @@
 import { RootContext } from '@data/context'
-import { Recommended } from '@data/types'
-import { Gallery, GamePanel, Selection } from '@views/components'
+import { ImageCommons, Recommended } from '@data/types'
+import { GamePanel, PanelBanner, Selection } from '@views/components'
 import { useContext, useState } from 'react'
 import style from './HomePage.module.scss'
 import { useHomePage } from '@src/hooks/useHomePage.ts'
@@ -12,6 +12,14 @@ export function HomePage() {
 	const { games, genres }             = rootContext
 
 	useHomePage(rootContext, setRecommended)
+
+	const recentImages = recommended?.recent.shortScreenshots
+						 || recommended?.recent.screenshots?.results as ImageCommons[]
+						 || []
+
+	const dailyImages = recommended?.daily.shortScreenshots
+						|| recommended?.daily.screenshots?.results as ImageCommons[]
+						|| []
 
 	return (
 		<main className={style.Home}>
@@ -27,10 +35,12 @@ export function HomePage() {
 				<h3>gallery</h3>
 
 				{(recommended?.recent.screenshots)
-				 && <Gallery screenshots={recommended.recent.screenshots}/>}
+				 && <PanelBanner name={recommended.recent.name}
+								 images={recentImages}/>}
 
 				{(recommended?.daily.screenshots)
-				 && <Gallery screenshots={recommended.daily.screenshots}/>}
+				 && <PanelBanner name={recommended.daily.name}
+								 images={dailyImages}/>}
 			</article>
 		</main>
 	)
