@@ -56,12 +56,14 @@
 				height           : 3em;
 				position         : absolute;
 				z-index          : 10;
-				top              : 0;
+				top              : 8px;
 				right            : 8px;
 				color            : red;
 				padding          : 0.5rem;
 				background-color : transparent;
-				border           : 4px solid;
+				border           : 2px solid;
+				box-shadow       : 0 0 8px red;
+				text-shadow      : 0 0 8px red;
 			}
 
 			.RouteOptions {
@@ -75,8 +77,8 @@
 				display          : flex;
 				flex-direction   : column;
 				width            : $links-width;
-				margin-top: calc(3em + 5vmin);
-				margin-inline: auto;
+				margin-top       : calc(3em + 5vmin);
+				margin-inline    : auto;
 			}
 		}
 	}
