@@ -13,10 +13,10 @@ function GamePanel({ game }: IGamePanel) {
 						 ?? []
 
 	return (
-		<article className={style.PanelBanner}
+		<article className={style.GamePanel}
 				 style={viewModel.stylingUtils.getInlineBanner(game)}
 		>
-			<article className={style.GamePanel}>
+			<article className={style.Content}>
 				<PanelHeader game={game}/>
 				<PanelBanner name={game.name} images={imagesToLoad}/>
 			</article>

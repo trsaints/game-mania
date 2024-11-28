@@ -1,0 +1,58 @@
+@use "src/palette";
+
+.GameDetails {
+	padding-inline      : 5vw;
+	display             : grid;
+	grid-template-areas : "title" "desc" "detail";
+	gap                 : 5vmax;
+	margin-bottom       : 10vmax;
+
+	@media screen and (min-width : 40rem) {
+		& {
+			grid-template-areas : "title title" "desc detail";
+			grid-template-columns: 3fr 2fr;
+			gap: 2rem 5vmax;
+		}
+	}
+
+	h3 {
+		grid-area     : title;
+		margin-bottom : 2rem;
+	}
+
+	.Description {
+		grid-area   : desc;
+		line-height : 150%;
+
+		.Banners {
+			display : grid;
+			gap     : 2rem;
+		}
+	}
+
+	.Details {
+		grid-area : detail;
+
+		h4 {
+			text-transform : uppercase;
+			margin-bottom  : 1rem;
+			font-weight    : 500;
+		}
+
+		.Released {
+			text-transform : capitalize;
+			margin-bottom  : 1rem;
+		}
+
+		.Metadata {
+			text-transform : capitalize;
+			margin-bottom  : 1rem;
+			line-height    : 150%;
+		}
+
+		.Requirements {
+			color         : palette.$white-d4;
+			margin-bottom : 1rem;
+		}
+	}
+}

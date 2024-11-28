@@ -1,5 +1,5 @@
 import { ComponentProps, FormEventHandler } from 'react'
-import style from '@views/components/GamePageList/GamePageList.module.scss'
+import style from './CountFilter.module.scss'
 
 
 interface ICountFilter extends ComponentProps<'form'> {

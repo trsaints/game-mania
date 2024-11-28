@@ -1,0 +1,13 @@
+@use "src/palette";
+
+.ScrollTop {
+	width            : 3em;
+	height           : 3em;
+	background-color : palette.$cyan;
+	position         : fixed;
+	z-index          : 999;
+	bottom           : calc(5vmax - 3em);
+	right            : calc(5vw - 3em);
+	border-radius    : 8px;
+	box-shadow       : 0 0 8px palette.$cyan;
+}

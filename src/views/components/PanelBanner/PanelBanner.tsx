@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import style from '@views/components/GamePanel/GamePanel.module.scss'
+import style from './PanelBanner.module.scss'
 import { ScreenshotsList } from '@views/components'
 import { IBanner } from '@views/components/PanelBanner/IBanner.ts'
 import { PanelBannerViewModel } from '@src/view-models/PanelBannerViewModel.ts'
@@ -13,7 +13,7 @@ export function PanelBanner(props: IBanner) {
 	const [currentIndex, setCurrentIndex] = useState<number>(0)
 
 	return (
-		<article className={style.Banner}>
+		<article className={style.PanelBanner}>
 			<figure className={style.Main}>
 				<img
 					src={images[currentIndex]?.image ?? ''}

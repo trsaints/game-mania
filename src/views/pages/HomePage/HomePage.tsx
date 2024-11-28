@@ -27,10 +27,11 @@ export function HomePage() {
 				<h3>gallery</h3>
 
 				{(recommended?.recent.screenshots)
-				 && <Gallery screenshots={recommended.recent.screenshots}/>}
+				 && <Gallery game={recommended.recent}/>}
 
 				{(recommended?.daily.screenshots)
-				 && <Gallery screenshots={recommended.daily.screenshots}/>}
+				 && <Gallery game={recommended.daily}/>}
+
 			</article>
 		</main>
 	)

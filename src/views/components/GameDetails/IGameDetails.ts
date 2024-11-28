@@ -1,6 +1,6 @@
 import { Game } from '@data/types'
 
 
-export interface IGameGenreTags {
+export interface IGameDetails {
 	game: Game
 }

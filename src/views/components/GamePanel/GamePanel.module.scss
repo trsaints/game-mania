@@ -2,75 +2,17 @@
 @use "sass:color";
 
 
-.PanelBanner {
+.GamePanel {
 	padding       : 10vmax 5vw;
 	margin-bottom : 10vmax;
 
-	.GamePanel {
+	.Content {
 		background-color : color.scale(palette.$black-d5, $alpha : -20%);
 		border-radius    : 16px;
 		padding          : 2.5vmax 5vmin;
 		display          : flex;
 		flex-wrap        : wrap;
 		gap              : 10vmax;
-
-		.Header, .Banner {
-			flex : 1 1 400px;
-		}
-
-		.Header {
-			.Released, .Publisher, .Description {
-				margin-bottom : 2rem;
-			}
-
-			.Released, .Publisher {
-				font-size   : 1.2rem;
-				font-weight : bold;
-			}
-
-			.Description {
-				line-height : 150%;
-				max-width   : 512px;
-			}
-
-			.Tags {
-				color       : palette.$black-d2;
-				display     : flex;
-				flex-wrap   : wrap;
-				font-weight : bold;
-				gap         : 2vmin;
-
-				.GenreTag {
-					background-color : palette.$white-d6;
-					border-radius    : 64px;
-					padding          : 0.75rem 1.5rem;
-					width            : fit-content;
-				}
-			}
-		}
-
-		.Banner {
-			display            : grid;
-			align-items        : flex-start;
-			grid-template-rows : min-content min-content;
-			gap                : 10vmin;
-
-			.Main {
-				img {
-					max-height    : 500px;
-					border-radius : 8px;
-					object-fit    : cover;
-					width         : 100%;
-				}
-			}
-
-			.Screenshots {
-				display    : flex;
-				gap        : 5vmin;
-				width      : 100%;
-				overflow-x : scroll;
-			}
-		}
 	}
 }
 

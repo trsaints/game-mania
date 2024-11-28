@@ -1,0 +1,36 @@
+@use "src/palette";
+
+.GameTags {
+	text-transform : capitalize;
+	align-items    : center;
+	display        : flex;
+	gap            : 1ch;
+	margin-bottom  : 0.5rem;
+
+	dt {
+		color : palette.$white-d2;
+	}
+
+	.Meta {
+		font-weight : 500;
+		display     : flex;
+		gap         : 1ch;
+
+		.Tags {
+			color       : palette.$black-d2;
+			display     : flex;
+			flex-wrap   : wrap;
+			font-weight : bold;
+			gap         : 1ch;
+			font-size   : 0.9rem;
+
+			.GenreTag {
+				background-color : palette.$white-d6;
+				border-radius    : 64px;
+				padding          : 0.375rem .75rem;
+				width            : fit-content;
+			}
+		}
+	}
+}
+

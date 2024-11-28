@@ -1,0 +1,23 @@
+.PanelBanner {
+	display            : grid;
+	align-items        : flex-start;
+	grid-template-rows : min-content min-content;
+	gap                : 5vmin;
+	flex               : 1 1 400px;
+
+	.Main {
+		img {
+			max-height    : 500px;
+			border-radius : 8px;
+			object-fit    : cover;
+			width         : 100%;
+		}
+	}
+
+	.Screenshots {
+		display    : flex;
+		gap        : 2.5vmin;
+		width      : 100%;
+		overflow-x : scroll;
+	}
+}

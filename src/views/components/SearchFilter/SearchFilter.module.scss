@@ -4,11 +4,15 @@
 	background-color : palette.$black-d1;
 	border-radius    : 8px;
 	box-shadow       : 0 0 4px palette.$black-d5;
+	font-size        : 0.9rem;
 	display          : grid;
 	gap              : 1rem;
-	margin-left      : 5vw;
 	padding          : 5vmin;
-	max-width        : clamp(300px, 100%, 30vw);
+	width            : clamp(275px, 100%, 25vw);
+	height           : clamp(250px, 25vh, 50vh);
+	overflow-y       : auto;
+	overflow-x       : hidden;
+	white-space      : nowrap;
 
 	label, summary, select {
 		color          : palette.$cyan;
@@ -56,7 +60,7 @@
 	}
 
 	.SearchOptions {
-		max-height    : 20vmax;
+		max-height    : 10vmax;
 		margin-bottom : 1rem;
 		overflow-y    : auto;
 

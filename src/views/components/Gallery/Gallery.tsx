@@ -1,23 +1,23 @@
-import { ImageCard } from '@views/components'
-import { Link } from 'react-router-dom'
 import style from './Gallery.module.scss'
 import { IGallery } from './IGallery'
+import { PanelBanner } from '@views/components'
+import { ImageCommons } from '@data/types'
+import { Link } from 'react-router-dom'
 
 
 export { Gallery }
 
-function Gallery({ screenshots }: IGallery) {
-	const cards = screenshots.results.map(i => (
-		<li key={`${i.id}-${typeof (i)}`}>
-			<ImageCard img={i} alt={''}/>
-		</li>)
-	)
+function Gallery({ game }: IGallery) {
+	const imagesToLoad = game.shortScreenshots
+						 || game.screenshots?.results as ImageCommons[] || []
 
 	return (
 		<aside className={style.Gallery}>
-			<ul className={style.Screenshots}>{cards}</ul>
+			<h3>{game.name} - screenshots</h3>
 
-			<Link to="/search">see all</Link>
+			<PanelBanner name={game.name} images={imagesToLoad}/>
+
+			<Link to={`search/${game.id}`}>visit "{game.name}" game page</Link>
 		</aside>
 	)
 }

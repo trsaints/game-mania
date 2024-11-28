@@ -14,10 +14,12 @@
 		flex-wrap : wrap;
 		gap       : 2vmin;
 		max-width : clamp(350px, 100%, 50vw);
+		margin-bottom : 5vmax;
 
 		.Option {
 			text-transform : uppercase;
 			border-radius  : 64px;
+			font-size: 0.9rem;
 		}
 	}
 }
