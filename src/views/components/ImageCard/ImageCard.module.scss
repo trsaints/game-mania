@@ -22,7 +22,7 @@
 		z-index          : 2;
 		white-space      : nowrap;
 
-		&:hover {
+		&:hover, &:focus {
 			background-color : color.scale(palette.$black-d5, $alpha : -20%);
 			color: palette.$cyan;
 		}
