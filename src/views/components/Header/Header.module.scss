@@ -1,4 +1,5 @@
 @use "src/palette";
+@use "src/animations";
 @use "sass:color";
 
 .Header {
@@ -44,6 +45,7 @@
 			isolation        : isolate;
 			width            : calc($links-width + 16px);
 			height           : calc($links-width * 1.5);
+			animation        : slide-in 0.4s ease-out;
 
 			&::backdrop {
 				background-color : color.scale(palette.$black-d3, $alpha : -20%);
@@ -83,3 +85,4 @@
 		}
 	}
 }
+
