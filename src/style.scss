@@ -13,6 +13,10 @@
 body {
 	background-color : palette.$black-d2;
 	color            : palette.$white;
+
+	* {
+		transition: all 0.15s ease-in-out;
+	}
 }
 
 h1, h2, h3 {
