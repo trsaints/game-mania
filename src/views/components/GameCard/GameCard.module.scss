@@ -31,6 +31,14 @@
 
 	&:active {
 		transform: scale(1);
+
+		.Genres {
+			background-color: palette.$white-d6;
+		}
+
+		.Name {
+			color: palette.$white;
+		}
 	}
 
 	.Banner {
