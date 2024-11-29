@@ -6,15 +6,37 @@
 	margin-bottom : 5vmax;
 	width         : clamp(300px, 350px, 50vw);
 
+	&:focus-within {
+		input {
+			outline: none;
+			background-color: palette.$white;
+		}
+
+		input, button {
+			box-shadow: 0 0 8px palette.$cyan;
+		}
+	}
+
+	&:has(button:active) {
+		input, button {
+			box-shadow: none;
+		}
+	}
+
 	label {
 		text-transform : uppercase;
 		color          : palette.$cyan;
 		text-shadow    : 0 0 8px palette.$cyan;
 		height         : fit-content;
 		margin-right   : 3vw;
+
+		&:hover {
+			text-shadow : 0 0 12px palette.$cyan;
+		}
 	}
 
 	input {
+		background-color: palette.$white-d6;
 		border-bottom-left-radius : 8px;
 		border-top-left-radius    : 8px;
 		padding                   : 0.75rem 1.5rem;
