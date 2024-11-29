@@ -17,7 +17,11 @@ class GamePageListViewModel implements IGamePageListViewModel {
 		navigator(`/search/${selectedCard.dataset['id']}`)
 
 		setTimeout(() => {
-			window.location.hash = '#game-page'
+			const pageHeader = document.getElementById("game-page")
+
+			if (pageHeader) {
+				pageHeader.scrollIntoView({ behavior: 'smooth' })
+			}
 		}, 200)
 	}
 
