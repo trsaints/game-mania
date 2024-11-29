@@ -6,6 +6,7 @@ import { Game } from '@data/types'
 import { GamePageList, GamePanel } from '@views/components'
 import { useGamePage } from '@src/hooks/useGamePage.ts'
 import { GameDetails } from '@views/components/GameDetails'
+import { LoadingScreen } from '@views/components/LoadingScreen'
 
 
 export type GameId = { id: string }
@@ -37,7 +38,7 @@ function GamePage() {
 						<GamePageList games={games.slice(0, 20)}/>
 					</>
 				)
-						 : <h2>loading...</h2>
+						 : <LoadingScreen />
 			}
 		</article>
 	)

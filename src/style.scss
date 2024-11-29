@@ -1,4 +1,5 @@
 @use "palette";
+@use "animations";
 
 @font-face {
 	font-family : "Redhat Display";
@@ -10,9 +11,17 @@
 	font-family : "Redhat Display", serif;
 }
 
+html {
+	scroll-behavior: smooth !important;
+}
+
 body {
 	background-color : palette.$black-d2;
 	color            : palette.$white;
+
+	* {
+		transition: all 0.15s ease-in-out;
+	}
 }
 
 h1, h2, h3 {
@@ -31,6 +40,11 @@ h3 {
 
 a {
 	color : palette.$cyan;
+
+	&:hover {
+		text-decoration: none;
+		text-shadow: 0 0 4px palette.$cyan;
+	}
 }
 
 button {
@@ -71,5 +85,11 @@ button.secondary {
 	&-thumb {
 		background-color: palette.$black-d5;
 		border-radius: 8px;
+	}
+}
+
+@media (prefers-reduced-motion) {
+	body * {
+		animation: fade-in 0.2s ease-out;
 	}
 }

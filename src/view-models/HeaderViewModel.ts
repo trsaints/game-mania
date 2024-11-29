@@ -2,6 +2,7 @@ import {
 	IHeaderViewModel
 } from '@src/view-models/interfaces/IHeaderViewModel.ts'
 import React, { Dispatch, SetStateAction } from 'react'
+import styles from '@views/components/Header/Header.module.scss'
 
 
 export { HeaderViewModel }
@@ -12,8 +13,13 @@ class HeaderViewModel implements IHeaderViewModel {
 
 		if (! menu) return
 
-		menu.close()
-		setIsMenuOpen(false)
+		menu.classList.add(styles.dialogClose)
+
+		setTimeout(() => {
+			setIsMenuOpen(false)
+			menu.classList.remove(styles.dialogClose)
+			menu.close()
+		}, 150)
 	}
 
 	closeOnRouteChange(e: React.MouseEvent<HTMLElement, MouseEvent>,
@@ -28,8 +34,13 @@ class HeaderViewModel implements IHeaderViewModel {
 
 		if (! menu) return
 
-		menu.close()
-		setIsMenuOpen(false)
+		menu.classList.add(styles.dialogClose)
+
+		setTimeout(() => {
+			setIsMenuOpen(false)
+			menu.classList.remove(styles.dialogClose)
+			menu.close()
+		}, 150)
 	}
 
 
@@ -38,7 +49,16 @@ class HeaderViewModel implements IHeaderViewModel {
 	): void {
 		if (e.key !== 'Escape') return
 
-		setIsMenuOpen(false)
+		e.preventDefault()
+
+		const menu = document.querySelector('[data-dialog="main-menu"]') as HTMLDialogElement
+		menu.classList.add(styles.dialogClose)
+
+		setTimeout(() => {
+			setIsMenuOpen(false)
+			menu.classList.remove(styles.dialogClose)
+			menu.close()
+		}, 150)
 	}
 
 

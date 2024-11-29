@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom'
 import { RootViewModel } from '@src/view-models/RootViewModel.ts'
 import { useEffect, useState } from 'react'
 import { ScrollTop } from '@views/components/ScrollTop'
+import { LoadingScreen } from '@views/components/LoadingScreen'
 
 
 const viewModel = new RootViewModel()
@@ -21,7 +22,7 @@ function Root() {
 	}, [])
 
 	if (! isDbInitialized) {
-		return <div>Loading...</div>
+		return <LoadingScreen/>
 	}
 
 	return (
