@@ -14,7 +14,7 @@ export function PanelBanner(props: IBanner) {
 
 	return (
 		<article className={style.PanelBanner}>
-			<figure className={style.Main}>
+			<figure className={style.Main} data-banner="main">
 				<img
 					src={images[currentIndex]?.image ?? ''}
 					alt={`main banner for the "${name}" game`}
