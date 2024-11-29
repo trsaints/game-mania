@@ -8,6 +8,7 @@
 
 	.Content {
 		background-color : color.scale(palette.$black-d5, $alpha : -20%);
+		box-shadow: 0 0 4px palette.$black-d5;
 		border-radius    : 16px;
 		padding          : 2.5vmax 5vmin;
 		display          : flex;
