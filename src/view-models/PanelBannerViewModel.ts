@@ -12,7 +12,8 @@ class PanelBannerViewModel implements IPanelBannerViewModel {
 	): void {
 		const target    = e.target as HTMLElement
 		const listItem  = target.closest('[data-index]') as HTMLLIElement
-		const mainBanner = document.querySelector('[data-banner="main"]') as HTMLElement
+		const container = target.closest('[data-banner="container"]') as HTMLElement
+		const mainBanner = container.querySelector('[data-banner="main"]') as HTMLElement
 
 		if (! listItem || ! mainBanner) return
 

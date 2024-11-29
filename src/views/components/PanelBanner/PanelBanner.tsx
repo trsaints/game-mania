@@ -13,7 +13,7 @@ export function PanelBanner(props: IBanner) {
 	const [currentIndex, setCurrentIndex] = useState<number>(0)
 
 	return (
-		<article className={style.PanelBanner}>
+		<article className={style.PanelBanner} data-banner="container">
 			<figure className={style.Main} data-banner="main">
 				<img
 					src={images[currentIndex]?.image ?? ''}
