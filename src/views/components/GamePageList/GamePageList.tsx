@@ -24,7 +24,10 @@ function GamePageList({ games }: IGamePageList) {
 
 	return (
 		<section className={style.GamePageList}>
-			<h3 className={style.ResultsCount}>{games.length} games found</h3>
+			<h3 className={style.ResultsCount}
+				id="results-count">
+				{games.length} games found
+			</h3>
 
 			<CountFilter onHandleSubmit={(e) => {
 				viewModel.changeItemCount(e, setItemCount)
@@ -39,7 +42,8 @@ function GamePageList({ games }: IGamePageList) {
 				/> : (
 					<aside className={style.EmptyPlaceholder}>
 						<h3>oops!</h3>
-						<p>We couldn't find any results based on your filters. Maybe you should try to reset them</p>
+						<p>We couldn't find any results based on your filters.
+							Maybe you should try to reset them</p>
 					</aside>
 				)
 			}
