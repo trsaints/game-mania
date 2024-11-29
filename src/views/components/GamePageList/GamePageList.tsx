@@ -30,11 +30,19 @@ function GamePageList({ games }: IGamePageList) {
 				viewModel.changeItemCount(e, setItemCount)
 			}}/>
 
-			<GamesList currentGames={currentGames}
-					   onHandleClick={(e) => {
-						   viewModel.openGamePage(e, navigator)
-					   }}
-			/>
+			{
+				games.length > 0 ?
+				<GamesList currentGames={currentGames}
+						   onHandleClick={(e) => {
+							   viewModel.openGamePage(e, navigator)
+						   }}
+				/> : (
+					<aside className={style.EmptyPlaceholder}>
+						<h3>oops!</h3>
+						<p>We couldn't find any results based on your filters. Maybe you should try to reset them</p>
+					</aside>
+				)
+			}
 
 			<PageSelection gamesCount={games.length}
 						   itemCount={itemCount}

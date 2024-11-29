@@ -22,4 +22,18 @@
 			}
 		}
 	}
+
+	.EmptyPlaceholder {
+		text-align: center;
+		background-image: url("/empty_placeholder.svg");
+		background-repeat: no-repeat;
+		padding-bottom: calc(15vmax + 2rem);
+		background-size: 20rem;
+		background-position: 50% calc(10vmax - 2rem);
+
+		p {
+			margin-bottom: 2rem;
+			font-size: 1.2rem;
+		}
+	}
 }
