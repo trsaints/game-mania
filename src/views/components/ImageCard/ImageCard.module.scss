@@ -10,7 +10,9 @@
 	width         : clamp(100px, 150px, 25vmax);
 
 	button {
-		background-color : color.scale(palette.$black, $alpha : -50%);
+		text-transform: capitalize;
+		background-color : color.scale(palette.$black-d5, $alpha : -40%);
+		box-shadow: 0 0 4px palette.$black-d5;
 		color            : palette.$white;
 		font-weight      : bold;
 		height           : 100%;
@@ -18,6 +20,16 @@
 		width            : 100%;
 		z-index          : 2;
 		white-space      : nowrap;
+
+		&:hover {
+			background-color : color.scale(palette.$black-d5, $alpha : -20%);
+			color: palette.$cyan;
+		}
+
+		&:active {
+			background-color : color.scale(palette.$black, $alpha : -20%);
+			color: palette.$white;
+		}
 	}
 
 	img {
