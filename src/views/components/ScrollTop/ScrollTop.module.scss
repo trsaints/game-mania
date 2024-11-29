@@ -11,7 +11,7 @@
 	border-radius    : 8px;
 	box-shadow       : 0 0 8px palette.$black-d5;
 
-	&:hover {
+	&:hover, &:focus {
 		transform: scale(1.025);
 		box-shadow       : 0 0 8px palette.$cyan;
 	}
