@@ -13,8 +13,13 @@ class HeaderViewModel implements IHeaderViewModel {
 
 		if (! menu) return
 
-		menu.close()
-		setIsMenuOpen(false)
+		menu.classList.add(styles.dialogClose)
+
+		setTimeout(() => {
+			setIsMenuOpen(false)
+			menu.classList.remove(styles.dialogClose)
+			menu.close()
+		}, 150)
 	}
 
 	closeOnRouteChange(e: React.MouseEvent<HTMLElement, MouseEvent>,
