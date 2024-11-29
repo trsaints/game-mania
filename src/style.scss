@@ -40,6 +40,11 @@ h3 {
 
 a {
 	color : palette.$cyan;
+
+	&:hover {
+		text-decoration: none;
+		text-shadow: 0 0 4px palette.$cyan;
+	}
 }
 
 button {
