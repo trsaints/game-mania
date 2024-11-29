@@ -9,5 +9,15 @@
 	bottom           : calc(5vmax - 3em);
 	right            : calc(5vw - 3em);
 	border-radius    : 8px;
-	box-shadow       : 0 0 8px palette.$cyan;
+	box-shadow       : 0 0 8px palette.$black-d5;
+
+	&:hover {
+		transform: scale(1.025);
+		box-shadow       : 0 0 8px palette.$cyan;
+	}
+
+	&:active {
+		transform: scale(1);
+		box-shadow: none;
+	}
 }
