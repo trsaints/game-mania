@@ -48,45 +48,45 @@ export class LocalDbFilter implements ILocalDbFilter {
 
 			if (params.developers) {
 				matches = matches && data.developers.some(dev =>
-															  params.developers!.includes(
+															  params.developers?.includes(
 																  String(dev.id))
-															  || params.developers!.includes(
+															  || params.developers?.includes(
 																  dev.slug)
 				)
 			}
 
-			if (params.publishers) {
+			if (params.publishers && data.publishers) {
 				matches = matches && data.publishers.some(pub =>
-															  params.publishers!.includes(
+															  params.publishers?.includes(
 																  String(pub.id))
-															  || params.publishers!.includes(
+															  || params.publishers?.includes(
 																  pub.slug)
 				)
 			}
 
 			if (params.platforms) {
 				matches = matches && data.platforms.some(plat =>
-															 params.platforms!.includes(
+															 params.platforms?.includes(
 																 String(plat.platform.id))
-															 || params.platforms!.includes(
+															 || params.platforms?.includes(
 																 plat.platform.slug)
 				)
 			}
 
 			if (params.genres) {
 				matches = matches && data.genres.some(gen =>
-														  params.genres!.includes(
+														  params.genres?.includes(
 															  String(gen.id))
-														  || params.genres!.includes(
+														  || params.genres?.includes(
 															  gen.slug)
 				)
 			}
 
 			if (params.tags) {
 				matches = matches && data.tags.some(tag =>
-														params.tags!.includes(
+														params.tags?.includes(
 															String(tag.id))
-														|| params.tags!.includes(
+														|| params.tags?.includes(
 															tag.slug)
 				)
 			}
