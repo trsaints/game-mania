@@ -33,6 +33,10 @@
 			font-weight             : bold;
 			grid-area               : label;
 			width                   : fit-content;
+
+			&:hover {
+				box-shadow : 0 0 8px palette.$cyan;
+			}
 		}
 
 		.Search {
@@ -55,6 +59,20 @@
 			border-top-left-radius    : 0;
 			grid-area                 : submit;
 			color                     : palette.$black;
+
+			&:hover {
+				box-shadow : 0 0 8px palette.$cyan;
+			}
+		}
+
+		&:focus-within {
+			.Label, .Search, .Submit {
+				box-shadow : 0 0 8px palette.$cyan;
+			}
+
+			.Search {
+				outline: none;
+			}
 		}
 	}
 
