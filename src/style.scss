@@ -11,6 +11,10 @@
 	font-family : "Redhat Display", serif;
 }
 
+html {
+	scroll-behavior: smooth !important;
+}
+
 body {
 	background-color : palette.$black-d2;
 	color            : palette.$white;
