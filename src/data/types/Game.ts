@@ -19,7 +19,7 @@ export type Game = GameCommons & {
 	additionsCount: number
 	gameSeriesCount: number
 	developers: Developer[]
-	publishers: Publisher[]
+	publishers?: Publisher[]
 	descriptionRaw: string
 	shortScreenshots?: ImageCommons[]
 	screenshots?: Screenshots

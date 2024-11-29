@@ -24,7 +24,7 @@ export function PanelHeader({ game }: IPanelHeader) {
 			<dl className={style.MetaData}>
 				<dt>game publisher:</dt>
 				<dd className={style.Meta}>
-					{game?.publishers[0]?.name ?? 'NA'}
+					{game.publishers && (game.publishers[0]?.name ?? 'NA')}
 				</dd>
 			</dl>
 
