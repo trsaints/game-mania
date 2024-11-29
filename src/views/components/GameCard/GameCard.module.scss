@@ -17,6 +17,22 @@
 		}
 	}
 
+	&:hover, &:focus {
+		transform: scale(1.025);
+
+		.Genres {
+			background-color: palette.$cyan;
+		}
+
+		.Name {
+			color: palette.$cyan;
+		}
+	}
+
+	&:active {
+		transform: scale(1);
+	}
+
 	.Banner {
 		border-top-left-radius  : 16px;
 		border-top-right-radius : 16px;
