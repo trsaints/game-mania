@@ -12,9 +12,7 @@ export class LocalDbFilter implements ILocalDbFilter {
 
 	private readonly _parserUtils: IParserUtils
 
-	concatFields(data: ApiData,
-				 dataType: keyof DataServiceDictionary
-	): string {
+	concatFields(data: ApiData, dataType: keyof DataServiceDictionary): string {
 		if (dataType !== 'games') {
 			return `${data.id}${data.slug}${data.name}`.trim().toLowerCase()
 		}
@@ -22,9 +20,10 @@ export class LocalDbFilter implements ILocalDbFilter {
 		return this._parserUtils.concatGameData(data as Game)
 	}
 
-	filterObjects(storageName: keyof DataServiceDictionary,
-				  results: ApiData[],
-				  params?: DataRequestParams
+	filterObjects(
+		storageName: keyof DataServiceDictionary,
+		results: ApiData[],
+		params?: DataRequestParams
 	): ApiData[] {
 		if (! params) {
 			return results
@@ -32,12 +31,8 @@ export class LocalDbFilter implements ILocalDbFilter {
 
 		const filteredData: ApiData[] = []
 
-		for (const data of results as Game[]) {
-			if ((params.pageSize !== undefined) && (params.pageSize
-													=== filteredData.length)) {
-				break
-			}
-
+		for (let i = 0; i < results.length; i++) {
+			const data  = results[i] as Game
 			let matches = true
 
 			if (params.search) {
@@ -47,56 +42,66 @@ export class LocalDbFilter implements ILocalDbFilter {
 			}
 
 			if (params.developers) {
-				matches = matches && data.developers.some(dev =>
-															  params.developers?.includes(
-																  String(dev.id))
-															  || params.developers?.includes(
-																  dev.slug)
-				)
+				matches =
+					matches &&
+					data.developers?.some(
+						(dev) =>
+							params.developers?.includes(String(dev.id)) ||
+							params.developers?.includes(dev.slug)
+					)
 			}
 
-			if (params.publishers && data.publishers) {
-				matches = matches && data.publishers.some(pub =>
-															  params.publishers?.includes(
-																  String(pub.id))
-															  || params.publishers?.includes(
-																  pub.slug)
-				)
+			if (params.publishers) {
+				matches =
+					(matches &&
+					 data.publishers?.some(
+						 (pub) =>
+							 params.publishers?.includes(String(pub.id)) ||
+							 params.publishers?.includes(pub.slug)
+					 )) ?? false
 			}
 
 			if (params.platforms) {
-				matches = matches && data.platforms.some(plat =>
-															 params.platforms?.includes(
-																 String(plat.platform.id))
-															 || params.platforms?.includes(
-																 plat.platform.slug)
-				)
+				matches =
+					matches &&
+					data.platforms?.some(
+						(plat) =>
+							params.platforms?.includes(String(plat.platform.id))
+							||
+							params.platforms?.includes(plat.platform.slug)
+					)
 			}
 
 			if (params.genres) {
-				matches = matches && data.genres.some(gen =>
-														  params.genres?.includes(
-															  String(gen.id))
-														  || params.genres?.includes(
-															  gen.slug)
-				)
+				matches =
+					matches &&
+					data.genres?.some(
+						(gen) =>
+							params.genres?.includes(String(gen.id)) ||
+							params.genres?.includes(gen.slug)
+					)
 			}
 
 			if (params.tags) {
-				matches = matches && data.tags.some(tag =>
-														params.tags?.includes(
-															String(tag.id))
-														|| params.tags?.includes(
-															tag.slug)
-				)
+				matches =
+					matches &&
+					data.tags?.some(
+						(tag) =>
+							params.tags?.includes(String(tag.id)) ||
+							params.tags?.includes(tag.slug)
+					)
 			}
 
 			if (matches) {
 				filteredData.push(data)
+			}
+
+			if (params.pageSize !== undefined && params.pageSize
+				=== filteredData.length) {
+				break
 			}
 		}
 
 		return filteredData
 	}
 }
-
