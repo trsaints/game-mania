@@ -8,6 +8,12 @@
 		white-space   : nowrap;
 		margin-bottom : 1ch;
 
+		&:has(input:focus) {
+			input {
+				background-color: palette.$white;
+				box-shadow: 0 0 8px palette.$cyan;
+			}
+		}
 
 		label {
 			margin-right   : 1ch;
@@ -17,6 +23,7 @@
 		}
 
 		input {
+			background-color: palette.$white-d6;
 			padding       : 0.5rem;
 			border-radius : 8px;
 			width         : 3rem;
@@ -27,5 +34,10 @@
 		display        : block;
 		margin-inline  : auto;
 		text-transform : capitalize;
+
+		&:hover, &:focus {
+			background-color: palette.$cyan;
+			box-shadow: 0 0 8px palette.$cyan;
+		}
 	}
 }
