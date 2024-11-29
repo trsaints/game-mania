@@ -73,3 +73,18 @@ button.secondary {
 		border-radius: 8px;
 	}
 }
+
+@media (prefers-reduced-motion) {
+	body * {
+		animation: fade-in 0.2s ease-out;
+	}
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
