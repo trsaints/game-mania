@@ -1,14 +1,15 @@
 .SearchPage {
 	.SearchControls {
 		position      : fixed;
+		z-index       : 999;
 		top           : 10vh;
 		margin-bottom : 5vmax;
 		display       : flex;
-		right         : 100vw;
+		left          : 0;
+		transform     : translateX(-100%);
 
 		&.filterVisible {
-			right: 0;
-			left : 5vw;
+			transform : translateX(5vw);
 		}
 
 		.Switch {
