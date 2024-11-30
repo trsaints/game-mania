@@ -2,10 +2,10 @@
 
 .GameTags {
 	text-transform : capitalize;
-	align-items    : center;
+	align-items    : flex-start;
 	display        : flex;
 	gap            : 1ch;
-	margin-bottom  : 0.5rem;
+	margin-bottom  : 1rem;
 
 	dt {
 		color : palette.$white-d2;
@@ -31,7 +31,7 @@
 				width            : fit-content;
 
 				&:hover, &:active {
-					background-color: palette.$white;
+					background-color : palette.$white;
 				}
 			}
 		}

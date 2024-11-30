@@ -9,9 +9,9 @@
 
 	@media screen and (min-width : 40rem) {
 		& {
-			grid-template-areas : "title title" "desc detail";
-			grid-template-columns: 3fr 2fr;
-			gap: 2rem 5vmax;
+			grid-template-areas   : "title title" "desc detail";
+			grid-template-columns : 3fr 2fr;
+			gap                   : 2rem 5vmax;
 		}
 	}
 
@@ -34,14 +34,19 @@
 		grid-area : detail;
 
 		h4 {
+			font-size      : 1.25rem;
 			text-transform : uppercase;
 			margin-bottom  : 1rem;
 			font-weight    : 500;
 		}
 
-		.Released {
-			text-transform : capitalize;
-			margin-bottom  : 1rem;
+		header {
+			margin-bottom : 2rem;
+
+			.Released {
+				text-transform : capitalize;
+				margin-bottom  : 1rem;
+			}
 		}
 
 		.Metadata {
@@ -51,8 +56,11 @@
 		}
 
 		.Requirements {
-			color         : palette.$white-d4;
-			margin-bottom : 1rem;
+			margin-bottom : 2rem;
+
+			p {
+				color : palette.$white-d4;
+			}
 		}
 	}
 }
