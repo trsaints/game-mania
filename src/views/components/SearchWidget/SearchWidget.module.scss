@@ -101,6 +101,8 @@
 			}
 
 			.SearchOptions {
+				max-height: calc(((1ch + 1rem ) * 11) + 1rem);
+				overflow-y: auto;
 				margin-top       : 1rem;
 				padding          : 2vmin 5vmin;
 				line-height      : 200%;
