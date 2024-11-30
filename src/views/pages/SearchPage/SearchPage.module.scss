@@ -2,7 +2,7 @@
 	.SearchControls {
 		position      : fixed;
 		z-index       : 999;
-		top           : 10vh;
+		top           : 50vh;
 		margin-bottom : 5vmax;
 		display       : flex;
 		left          : 0;
@@ -15,8 +15,8 @@
 		.Switch {
 			padding                   : 1rem;
 			position                  : absolute;
-			height                    : calc(100% - 10vh);
-			margin-block              : 5vh;
+			height                    : 25%;
+			margin-top                : 5vmin;
 			border-top-left-radius    : 0;
 			border-bottom-left-radius : 0;
 		}
