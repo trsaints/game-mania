@@ -1,5 +1,5 @@
 @use "src/palette";
-@use "src/animations";
+@use "../../../animations.module";
 @use "sass:color";
 
 .Header {
