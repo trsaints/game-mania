@@ -6,8 +6,8 @@
 	background-color : palette.$cyan;
 	position         : fixed;
 	z-index          : 999;
-	bottom           : calc(5vmax - 3em);
-	right            : calc(5vw - 3em);
+	bottom           : 5vmin;
+	right            : 5vmin;
 	border-radius    : 8px;
 	box-shadow       : 0 0 8px palette.$black-d5;
 
