@@ -1,19 +1,35 @@
 @use "src/palette";
 @use "sass:color";
-
+@use "../../../animations.module";
 
 .GamePanel {
 	padding       : 10vmax 5vw;
 	margin-bottom : 10vmax;
+	position      : relative;
+	isolation     : isolate;
 
 	.Content {
 		background-color : color.scale(palette.$black-d5, $alpha : -20%);
-		box-shadow: 0 0 4px palette.$black-d5;
+		box-shadow       : 0 0 4px palette.$black-d5;
 		border-radius    : 16px;
 		padding          : 2.5vmax 5vmin;
 		display          : flex;
 		flex-wrap        : wrap;
 		gap              : 10vmax;
 	}
+}
+
+.SetPlaceholder::before {
+	position          : absolute;
+	display           : block;
+	z-index           : 2;
+	content           : "";
+	background-image  : url("/GamePanel_Skeleton.svg");
+	background-color  : palette.$black-d;
+	background-size   : 100%;
+	background-repeat : no-repeat;
+	width             : 100%;
+	height            : 100%;
+	animation         : fade-out 3s forwards;
 }
 
