@@ -44,24 +44,25 @@ function GameDetails({ game }: IGameDetails) {
 			</p>
 
 			<aside className={style.Details}>
-				<h4>details</h4>
+				<header>
+					<h4>details</h4>
 
-				<p className={style.Released}>
-					release date: {new Date(game.released).toLocaleDateString()}
-				</p>
+					<p className={style.Released}>
+						release
+						date: {new Date(game.released).toLocaleDateString()}
+					</p>
+				</header>
 
 				{pcPlatform && (
-					<>
+					<article className={style.Requirements}>
 						<h4>system requirements</h4>
 
-						<p className={style.Requirements}>
-							<p>{pcPlatform.requirements.minimum} </p>
+						<p>{pcPlatform.requirements.minimum} </p>
 
-							<br/>
+						<br/>
 
-							<p>{pcPlatform.requirements.recommended}</p>
-						</p>
-					</>
+						<p>{pcPlatform.requirements.recommended}</p>
+					</article>
 				)}
 
 				<GameTags game={game}/>
