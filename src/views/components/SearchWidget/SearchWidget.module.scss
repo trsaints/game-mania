@@ -3,12 +3,11 @@
 .SearchWidget {
 	display    : grid;
 	gap        : 5vmax;
-	padding    : 10vmax 5vw;
+	padding    : 5vmax 5vw;
 	position   : relative;
 	box-shadow : inset 0 0 4px palette.$black-d5;
 
 	.SearchForm, .SearchMenu {
-		max-width     : 500px;
 		margin-inline : auto;
 	}
 
@@ -71,7 +70,7 @@
 			}
 
 			.Search {
-				outline: none;
+				outline : none;
 			}
 		}
 	}
@@ -84,14 +83,17 @@
 
 	.SearchMenu {
 		color            : palette.$cyan;
-		display          : grid;
+		font-size: 0.9rem;
+		display          : flex;
+		width: fit-content;
+		justify-content  : center;
 		text-transform   : uppercase;
-		gap              : 2vh;
+		gap              : 2ch;
 		text-shadow      : 0 0 8px palette.$cyan;
 		background-color : palette.$black-d1;
 		border-radius    : 8px;
 		box-shadow       : 0 0 4px palette.$black-d5;
-		padding          : 5vmin;
+		padding          : 2.5vmin 5vmin;
 
 		.SearchSection {
 			&[open] .SearchOptions {
