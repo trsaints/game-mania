@@ -1,3 +1,5 @@
+@use "src/palette";
+
 @keyframes slide-in {
 	from {
 		transform : translateY(-100%);
@@ -26,3 +28,25 @@
 	}
 }
 
+.setPlaceholder {
+	position: relative;
+}
+
+.setPlaceholder::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  font-weight: bold;
+  width: 100%;
+  height: 100%;
+  background-color: palette.$black-d5;
+  content: "Loading...";
+  text-align: center;
+  border-radius: 8px;
+  animation: fade-in 0.2s ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
