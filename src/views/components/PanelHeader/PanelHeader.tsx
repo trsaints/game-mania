@@ -8,9 +8,30 @@ export function PanelHeader({ game }: IPanelHeader) {
 	const shortDescription        = game.descriptionRaw.match(
 		shortDescriptionPattern)?.[0]
 
+	let metacriticHighlightColor: string
+
+	if (game.metacritic >= 90) {
+		metacriticHighlightColor = '#52C539'
+	} else if (game.metacritic >= 70) {
+		metacriticHighlightColor = '#EAC324'
+	} else {
+		metacriticHighlightColor = '#EA2424'
+	}
+
+	const metatriticStyles = {
+		borderColor: metacriticHighlightColor,
+		color      : metacriticHighlightColor
+	}
+
 	return (
 		<header className={style.PanelHeader}>
 			<h3>{game.name}</h3>
+
+			<p className={style.MetaCritic}>
+				meta critic:
+
+				<span style={metatriticStyles}>{game.metacritic}</span>
+			</p>
 
 			<dl className={style.MetaData}>
 				<dt>release date:</dt>
@@ -37,7 +58,7 @@ export function PanelHeader({ game }: IPanelHeader) {
 
 			<p className={style.Description}>{shortDescription}</p>
 
-			<GameTags game={game} count={3}/>
+			<GameTags game={game} count={3} baseAlignment="center"/>
 		</header>
 	)
 }
