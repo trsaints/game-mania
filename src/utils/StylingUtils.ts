@@ -17,15 +17,7 @@ export class StylingUtils implements IStylingUtils {
 	}
 
 	getInlineScoreStyles(game: Game): InlineScoreStyles {
-		let metaCriticHighlightColor: string
-
-		if (game.metacritic >= 90) {
-			metaCriticHighlightColor = '#52C539'
-		} else if (game.metacritic >= 70) {
-			metaCriticHighlightColor = '#EAC324'
-		} else {
-			metaCriticHighlightColor = '#EA2424'
-		}
+		const metaCriticHighlightColor = this.getScoreHighlightColor(game)
 
 		return {
 			borderColor    : metaCriticHighlightColor,
@@ -40,6 +32,18 @@ export class StylingUtils implements IStylingUtils {
 			paddingInline  : '0.5rem',
 			paddingBlock   : '0.75rem'
 		}
+	}
+
+	getScoreHighlightColor(game: Game): string {
+		if (game.metacritic >= 90) {
+			return '#52C539'
+		}
+
+		if (game.metacritic >= 70) {
+			return '#EAC324'
+		}
+
+		return '#EA2424'
 	}
 }
 

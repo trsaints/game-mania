@@ -6,4 +6,6 @@ export interface IStylingUtils {
 	getInlineBanner(visibility: number, game?: Game): InlineBannerStyle
 
 	getInlineScoreStyles(game: Game): InlineScoreStyles
+
+	getScoreHighlightColor(game: Game): string
 }
