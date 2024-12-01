@@ -18,7 +18,7 @@ export type GameCommons = {
 	id: number
 	slug: string
 	name: string
-	metacritic: unknown
+	metacritic: number
 	reviewsTextCount: number
 	ratingsCount: number
 	suggestionsCount: number
