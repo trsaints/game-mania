@@ -1,6 +1,6 @@
 import style from './GameCard.module.scss'
 import { IGameCard } from './IGameCard'
-import { CardScore } from '@views/components'
+import { CardHeader, CardScore } from '@views/components'
 import { Game } from '@data/types'
 
 
@@ -13,27 +13,6 @@ function GameCard({ game, lazyLoad }: IGameCard) {
 			<CardScore game={game}/>
 			<CardMeta game={game}/>
 		</article>
-	)
-}
-
-interface ICardHeader {
-	game: Game
-	lazyLoad?: boolean
-}
-
-function CardHeader({ game, lazyLoad }: ICardHeader) {
-	return (
-		<header>
-			<figure>
-				<img className={style.Banner}
-					 src={game.backgroundImage
-						  ?? '/gamecard_placeholder.svg'}
-					 alt={`Promotional banner for the "${game.name}" game`}
-					 loading={lazyLoad ? 'lazy' : 'eager'}
-				/>
-				<figcaption className={style.Name}>{game.name}</figcaption>
-			</figure>
-		</header>
 	)
 }
 
