@@ -2,7 +2,7 @@ import style from './GameCard.module.scss'
 import { IGameCard } from './IGameCard'
 
 
-function GameCard({ game }: IGameCard) {
+function GameCard({ game, lazyLoad }: IGameCard) {
 	const gameTags = game.tags.map(t => t.name).slice(0, 3).join(', ')
 
 	return (
@@ -13,6 +13,7 @@ function GameCard({ game }: IGameCard) {
 						 src={game.backgroundImage
 							  ?? '/gamecard_placeholder.svg'}
 						 alt={`Promotional banner for the "${game.name}" game`}
+						 loading={lazyLoad ? 'lazy' : 'eager'}
 					/>
 					<figcaption className={style.Name}>{game.name}</figcaption>
 				</figure>
