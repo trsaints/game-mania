@@ -21,8 +21,6 @@ function GameCard({ game, lazyLoad }: IGameCard) {
 				</figure>
 			</header>
 
-			<CardScore game={game}/>
-
 			<p className={style.Tags}>
 				<span className="sr-only">Tags:</span> {gameTags}
 			</p>

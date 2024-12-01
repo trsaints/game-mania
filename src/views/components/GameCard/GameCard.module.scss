@@ -5,8 +5,7 @@
 	$base-width      : clamp(150px, 25vw, 250px);
 	$base-height     : calc($base-width * 2);
 	background-color : palette.$black-d2;
-	border-radius    : 16px;
-	box-shadow       : 0 0 8px palette.$black-d5;
+	border-radius    : 8px;
 	font-weight      : bold;
 	height           : 100%;
 	display          : grid;
@@ -20,8 +19,6 @@
 	}
 
 	&:hover, &:focus {
-		transform : scale(1.025);
-
 		.Genres {
 			background-color : palette.$cyan;
 		}
@@ -44,36 +41,10 @@
 	}
 
 	.Banner {
-		border-top-left-radius  : 16px;
-		border-top-right-radius : 16px;
-		height                  : calc($base-height * 0.6);
-		object-fit              : cover;
-		width                   : 100%;
-	}
-
-	.MetaCritic {
-		position : absolute;
-		right    : 2.5vmin;
-		top      : 2.5vmin;
-
-		span {
-			box-shadow: 0 0 8px palette.$black-d5;
-		}
-
-		span:first-child {
-			color                     : palette.$white;
-			border-top                : 2px solid;
-			border-left               : 2px solid;
-			border-bottom             : 2px solid;
-			font-weight               : normal;
-			text-transform            : capitalize;
-			display                   : inline-block;
-			background-color          : palette.$black-d5;
-			padding                   : 0.25rem 0.75rem 0.25rem 0.5rem;
-			border-top-left-radius    : 8px;
-			border-bottom-left-radius : 8px;
-			transform                 : translateX(calc(0.25rem + 2px));
-		}
+		border-radius : 16px;
+		height        : calc($base-height * 0.6);
+		object-fit    : cover;
+		width         : 100%;
 	}
 
 	.Name {
