@@ -2,26 +2,36 @@
 @use "src/palette";
 
 .MainMenu {
-	$links-width     : clamp(200px, 100%, 20vw);
-	margin           : auto;
+	$links-width     : clamp(200px, 100%, 10vw);
 	background-color : transparent;
-	isolation        : isolate;
-	width            : calc($links-width + 16px);
-	height           : calc($links-width * 1.5);
-	animation        : slide-in-top 0.4s ease-out;
+	position         : relative;
+
+	summary {
+		white-space    : nowrap;
+		text-align     : center;
+		color          : palette.$cyan;
+		width          : min-content;
+		padding        : 0.5rem 1rem;
+		border-radius  : 8px;
+		text-transform : uppercase;
+		border         : 2px solid;
+	}
 
 	.RouteOptions {
-		box-shadow       : 0 0 8px palette.$black-d5;
+		position         : absolute;
+		top              : 0;
+		right            : 0;
+		margin-inline    : auto;
+		z-index          : 10;
+		margin-top       : calc(5vmin + 1rem + 4px + 12px);
+		box-shadow       : 0 0 4px palette.$black-d5;
 		border-radius    : 16px;
 		padding          : 5vmin;
-		background-color : palette.$black-d3;
+		background-color : palette.$black;
 		text-transform   : uppercase;
 		text-shadow      : 0 0 8px palette.$cyan;
 		gap              : 1rem;
 		display          : flex;
 		flex-direction   : column;
-		width            : $links-width;
-		margin-top       : calc(3em + 5vmin);
-		margin-inline    : auto;
 	}
 }
