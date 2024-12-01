@@ -28,6 +28,21 @@
 	}
 }
 
+@keyframes fade-in-out {
+	0% {
+		opacity: 0;
+	}
+	10% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
 .SetPlaceholder {
 	position: relative;
 }
