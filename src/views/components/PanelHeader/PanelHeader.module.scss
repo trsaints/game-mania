@@ -11,18 +11,6 @@
 		text-transform: capitalize;
 		color: palette.$white-d2;
 		margin-bottom: 1rem;
-
-		span {
-			display: inline-block;
-			margin-left: 1ch;
-			width: 2.75em;
-			height: 2.75em;
-			border-radius: 100%;
-			background-color: palette.$black-d5;
-			border: 2px solid;
-			text-align: center;
-			padding: 0.75rem;
-		}
 	}
 
 	.MetaData {

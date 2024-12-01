@@ -28,8 +28,17 @@ export class StylingUtils implements IStylingUtils {
 		}
 
 		return {
-			borderColor: metaCriticHighlightColor,
-			color      : metaCriticHighlightColor
+			borderColor    : metaCriticHighlightColor,
+			color          : metaCriticHighlightColor,
+			display        : 'inline-block',
+			marginLeft     : '1ch',
+			width          : '2.75em',
+			height         : '2.75em',
+			borderRadius   : '100%',
+			backgroundColor: '#030303ff',
+			border         : '2px solid',
+			textAlign      : 'center',
+			padding        : '0.75rem'
 		}
 	}
 }
