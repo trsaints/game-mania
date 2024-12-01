@@ -26,3 +26,4 @@ export {
 	MetadataFilters
 } from '@views/components/MetadataFilters/MetadataFilters.tsx'
 export { MainMenu } from '@views/components/Header'
+export { CardScore } from '@views/components/CardScore/CardScore.tsx'

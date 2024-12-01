@@ -1,8 +1,9 @@
 import style from './GameCard.module.scss'
 import { IGameCard } from './IGameCard'
-import { StylingUtils } from '@src/utils'
-import { Game } from '@data/types'
+import { CardScore } from '@views/components'
 
+
+export { GameCard }
 
 function GameCard({ game, lazyLoad }: IGameCard) {
 	const gameTags = game.tags.map(t => t.name).slice(0, 3).join(', ')
@@ -34,19 +35,3 @@ function GameCard({ game, lazyLoad }: IGameCard) {
 		</article>
 	)
 }
-
-interface ICardScore {
-	game: Game
-}
-
-function CardScore({ game }: ICardScore) {
-	const highlightColor = new StylingUtils().getScoreHighlightColor(game)
-
-	return (
-		<p className={style.MetaCritic} style={{ color: highlightColor }}>
-			rating: {game.metacritic ?? '?'}/100
-		</p>
-	)
-}
-
-export { GameCard }
