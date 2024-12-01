@@ -15,7 +15,7 @@ function GamePanel({ game }: IGamePanel) {
 	return (
 		<article id="game-panel"
 				 className={style.GamePanel}
-				 style={viewModel.stylingUtils.getInlineBanner(game)}
+				 style={viewModel.stylingUtils.getInlineBanner(0.7, game)}
 		>
 			<article className={style.Content}>
 				<PanelHeader game={game}/>
