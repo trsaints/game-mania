@@ -11,11 +11,7 @@ function Header() {
 				 alt='Website logo, with the following slogan: "Game Mania: the next level awaits"'
 			/>
 
-			<menu className={style.Links}>
-				<li>
-					<MainMenu/>
-				</li>
-			</menu>
+			<MainMenu/>
 		</header>
 	)
 }
