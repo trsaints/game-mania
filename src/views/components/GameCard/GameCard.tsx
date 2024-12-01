@@ -1,6 +1,7 @@
 import style from './GameCard.module.scss'
 import { IGameCard } from './IGameCard'
 import { StylingUtils } from '@src/utils'
+import { Game } from '@data/types'
 
 
 function GameCard({ game, lazyLoad }: IGameCard) {
@@ -20,11 +21,7 @@ function GameCard({ game, lazyLoad }: IGameCard) {
 				</figure>
 			</header>
 
-			<p className={style.MetaCritic}>
-				<span>score: </span>
-				<span style={new StylingUtils().getInlineScoreStyles(game)}>
-					{game.metacritic ?? '?'}</span>
-			</p>
+			<CardScore game={game}/>
 
 			<p className={style.Tags}>
 				<span className="sr-only">Tags:</span> {gameTags}
@@ -35,6 +32,20 @@ function GameCard({ game, lazyLoad }: IGameCard) {
 														 ?? 'Not listed'}
 			</p>
 		</article>
+	)
+}
+
+interface ICardScore {
+	game: Game
+}
+
+function CardScore({ game }: ICardScore) {
+	return (
+		<p className={style.MetaCritic}>
+			<span>score: </span>
+			<span style={new StylingUtils().getInlineScoreStyles(game)}>
+					{game.metacritic ?? '?'}</span>
+		</p>
 	)
 }
 
