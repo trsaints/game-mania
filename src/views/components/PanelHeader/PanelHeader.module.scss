@@ -11,6 +11,10 @@
 		text-transform: capitalize;
 		color: palette.$white-d2;
 		margin-bottom: 1rem;
+
+		span {
+			margin-left: 1ch;
+		}
 	}
 
 	.MetaData {
