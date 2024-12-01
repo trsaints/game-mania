@@ -2,7 +2,6 @@
 @use "src/palette";
 
 .MainMenu {
-	$links-width     : clamp(200px, 100%, 10vw);
 	background-color : transparent;
 	position         : relative;
 
@@ -20,7 +19,7 @@
 	.RouteOptions {
 		position         : absolute;
 		top              : 0;
-		right            : 0;
+		left             : 0;
 		margin-inline    : auto;
 		z-index          : 10;
 		margin-top       : calc(5vmin + 1rem + 4px + 12px);
