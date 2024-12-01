@@ -14,6 +14,21 @@
 		border-radius  : 8px;
 		text-transform : uppercase;
 		border         : 2px solid;
+
+		&:hover, &:focus {
+			transform        : scale(1.025);
+			background-color : palette.$cyan;
+			color            : palette.$black-d5;
+			box-shadow       : 0 0 8px palette.$cyan;
+			border-color     : palette.$cyan;
+		}
+
+		&:active {
+			transform        : scale(1);
+			background-color : palette.$black-d5;
+			color : palette.$cyan;
+			box-shadow       : 0 0 8px palette.$black-d5;
+		}
 	}
 
 	.RouteOptions {
