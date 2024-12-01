@@ -1,6 +1,6 @@
-import style from '@views/components/Header/Header.module.scss'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import style from './MainMenu.module.scss'
 
 
 export function MainMenu() {
