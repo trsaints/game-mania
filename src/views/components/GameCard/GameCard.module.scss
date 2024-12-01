@@ -11,6 +11,7 @@
 	height           : 100%;
 	display          : grid;
 	cursor           : pointer;
+	position         : relative;
 
 	@media screen and (min-width : 40rem) {
 		& {
@@ -48,6 +49,12 @@
 		height                  : calc($base-height * 0.6);
 		object-fit              : cover;
 		width                   : 100%;
+	}
+
+	.MetaCritic {
+		position: absolute;
+		right: 2.5vmin;
+		top: 2.5vmin;
 	}
 
 	.Name {

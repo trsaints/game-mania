@@ -1,22 +1,25 @@
 import { IPanelHeader } from '@views/components/PanelHeader/IPanelHeader.ts'
 import { GameTags } from '@views/components/GameTags/GameTags.tsx'
 import style from './PanelHeader.module.scss'
+import { Game } from '@data/types'
 
+
+function getMetaCriticHighlightColor(game: Game): string {
+	if (game.metacritic >= 90) {
+		return '#52C539'
+	} else if (game.metacritic >= 70) {
+		return '#EAC324'
+	} else {
+		return '#EA2424'
+	}
+}
 
 export function PanelHeader({ game }: IPanelHeader) {
 	const shortDescriptionPattern = /^(([^.]+\.){1,4})/
 	const shortDescription        = game.descriptionRaw.match(
 		shortDescriptionPattern)?.[0]
 
-	let metacriticHighlightColor: string
-
-	if (game.metacritic >= 90) {
-		metacriticHighlightColor = '#52C539'
-	} else if (game.metacritic >= 70) {
-		metacriticHighlightColor = '#EAC324'
-	} else {
-		metacriticHighlightColor = '#EA2424'
-	}
+	const metacriticHighlightColor = getMetaCriticHighlightColor(game)
 
 	const metatriticStyles = {
 		borderColor: metacriticHighlightColor,
