@@ -1,5 +1,6 @@
 import style from './GameCard.module.scss'
 import { IGameCard } from './IGameCard'
+import { StylingUtils } from '@src/utils'
 
 
 function GameCard({ game, lazyLoad }: IGameCard) {
@@ -18,6 +19,12 @@ function GameCard({ game, lazyLoad }: IGameCard) {
 					<figcaption className={style.Name}>{game.name}</figcaption>
 				</figure>
 			</header>
+
+			<p className={style.MetaCritic}>
+				<span>score: </span>
+				<span style={new StylingUtils().getInlineScoreStyles(game)}>
+					{game.metacritic ?? '?'}</span>
+			</p>
 
 			<p className={style.Tags}>
 				<span className="sr-only">Tags:</span> {gameTags}

@@ -52,9 +52,28 @@
 	}
 
 	.MetaCritic {
-		position: absolute;
-		right: 2.5vmin;
-		top: 2.5vmin;
+		position : absolute;
+		right    : 2.5vmin;
+		top      : 2.5vmin;
+
+		span {
+			box-shadow: 0 0 8px palette.$black-d5;
+		}
+
+		span:first-child {
+			color                     : palette.$white;
+			border-top                : 2px solid;
+			border-left               : 2px solid;
+			border-bottom             : 2px solid;
+			font-weight               : normal;
+			text-transform            : capitalize;
+			display                   : inline-block;
+			background-color          : palette.$black-d5;
+			padding                   : 0.25rem 0.75rem 0.25rem 0.5rem;
+			border-top-left-radius    : 8px;
+			border-bottom-left-radius : 8px;
+			transform                 : translateX(calc(0.25rem + 2px));
+		}
 	}
 
 	.Name {
