@@ -25,3 +25,4 @@ export { GamesList } from '@views/components/GamesList/GamesList.tsx'
 export {
 	MetadataFilters
 } from '@views/components/MetadataFilters/MetadataFilters.tsx'
+export { MainMenu } from '@views/components/Header'

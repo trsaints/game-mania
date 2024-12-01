@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom'
 import style from './Header.module.scss'
-import { Dispatch, SetStateAction, useState } from 'react'
+import { useState } from 'react'
 import { HeaderViewModel } from '@src/view-models/HeaderViewModel.ts'
+import { MainMenu } from '@views/components/Header/MainMenu.tsx'
 
 
 const viewModel = new HeaderViewModel()
@@ -28,49 +28,11 @@ function Header() {
 				</li>
 
 				<li>
-					<MainMenu setIsMenuOpen={setIsMenuOpen}/>
+					<MainMenu setIsMenuOpen={setIsMenuOpen}
+							  parentViewModel={viewModel}/>
 				</li>
 			</menu>
 		</header>
-	)
-}
-
-interface IMainMenu {
-	setIsMenuOpen: Dispatch<SetStateAction<boolean>>
-}
-
-function MainMenu({ setIsMenuOpen }: IMainMenu) {
-	return (
-		<dialog className={style.MainMenu}
-				data-dialog="main-menu"
-				onKeyDown={(e) => {
-					viewModel.closeOnEscape(e, setIsMenuOpen)
-				}}>
-			<h2 className="sr-only">main menu</h2>
-
-			<menu>
-				<li>
-					<button className={style.CloseButton}
-							type="button"
-							onClick={() => {
-								viewModel.closeOnClick(
-									setIsMenuOpen)
-							}}>
-						<span className="sr-only">close menu</span>
-						x
-					</button>
-				</li>
-			</menu>
-
-			<nav className={style.RouteOptions}
-				 onClick={(e) => {
-					 viewModel.closeOnRouteChange(e, setIsMenuOpen)
-				 }}
-			>
-				<Link data-link="route" to="/">home</Link>
-				<Link data-link="route" to="/search">search</Link>
-			</nav>
-		</dialog>
 	)
 }
 
