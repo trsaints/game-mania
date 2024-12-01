@@ -35,6 +35,8 @@ export class StylingUtils implements IStylingUtils {
 	}
 
 	getScoreHighlightColor(game: Game): string {
+		if (! game.metacritic) return 'rgb(185, 180, 172)'
+
 		if (game.metacritic >= 90) {
 			return '#52C539'
 		}
