@@ -21,8 +21,10 @@ function GameCard({ game, lazyLoad }: IGameCard) {
 				</figure>
 			</header>
 
+			<CardScore game={game}/>
+
 			<p className={style.Tags}>
-				<span className="sr-only">Tags:</span> {gameTags}
+				tags: {gameTags}
 			</p>
 
 			<p className={style.Genres}>
@@ -38,11 +40,11 @@ interface ICardScore {
 }
 
 function CardScore({ game }: ICardScore) {
+	const highlightColor = new StylingUtils().getScoreHighlightColor(game)
+
 	return (
-		<p className={style.MetaCritic}>
-			<span>score: </span>
-			<span style={new StylingUtils().getInlineScoreStyles(game)}>
-					{game.metacritic ?? '?'}</span>
+		<p className={style.MetaCritic} style={{ color: highlightColor }}>
+			rating: {game.metacritic ?? '?'}/100
 		</p>
 	)
 }
