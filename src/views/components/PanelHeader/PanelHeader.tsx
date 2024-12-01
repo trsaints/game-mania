@@ -8,13 +8,8 @@ export function PanelHeader({ game, stylingUtils }: IPanelHeader) {
 	const shortDescription        = game.descriptionRaw.match(
 		shortDescriptionPattern)?.[0]
 
-	const metacriticHighlightColor = stylingUtils.getMetaCriticHighlightColor(
+	const inlineScoreStyles = stylingUtils.getMetaCriticHighlightColor(
 		game)
-
-	const metatriticStyles = {
-		borderColor: metacriticHighlightColor,
-		color      : metacriticHighlightColor
-	}
 
 	return (
 		<header className={style.PanelHeader}>
@@ -23,7 +18,7 @@ export function PanelHeader({ game, stylingUtils }: IPanelHeader) {
 			<p className={style.MetaCritic}>
 				meta critic:
 
-				<span style={metatriticStyles}>{game.metacritic}</span>
+				<span style={inlineScoreStyles}>{game.metacritic}</span>
 			</p>
 
 			<dl className={style.MetaData}>

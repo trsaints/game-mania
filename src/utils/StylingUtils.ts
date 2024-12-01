@@ -1,5 +1,6 @@
 import { Game, InlineBannerStyle } from '@data/types'
 import { IStylingUtils } from '@utils/interfaces'
+import { InlineScoreStyles } from '@data/types/InlineScoreStyles.ts'
 
 
 export class StylingUtils implements IStylingUtils {
@@ -15,13 +16,20 @@ export class StylingUtils implements IStylingUtils {
 		)
 	}
 
-	getMetaCriticHighlightColor(game: Game): string {
+	getMetaCriticHighlightColor(game: Game): InlineScoreStyles {
+		let metaCriticHighlightColor: string
+
 		if (game.metacritic >= 90) {
-			return '#52C539'
+			metaCriticHighlightColor = '#52C539'
 		} else if (game.metacritic >= 70) {
-			return '#EAC324'
+			metaCriticHighlightColor = '#EAC324'
 		} else {
-			return '#EA2424'
+			metaCriticHighlightColor = '#EA2424'
+		}
+
+		return {
+			borderColor: metaCriticHighlightColor,
+			color      : metaCriticHighlightColor
 		}
 	}
 }
