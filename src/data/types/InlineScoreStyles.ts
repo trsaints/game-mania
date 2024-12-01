@@ -12,5 +12,6 @@ export type InlineScoreStyles = {
 	backgroundColor: Property.BackgroundColor
 	border: Property.Border
 	textAlign: Property.TextAlign
-	padding: Property.Padding
+	paddingInline: Property.PaddingInline
+	paddingBlock: Property.PaddingBlock
 }

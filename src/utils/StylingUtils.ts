@@ -38,7 +38,8 @@ export class StylingUtils implements IStylingUtils {
 			backgroundColor: '#030303ff',
 			border         : '2px solid',
 			textAlign      : 'center',
-			padding        : '0.75rem'
+			paddingInline  : '0.5rem',
+			paddingBlock   : '0.75rem'
 		}
 	}
 }
