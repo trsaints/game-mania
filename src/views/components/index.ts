@@ -28,3 +28,4 @@ export {
 export { MainMenu } from '@views/components/Header'
 export { CardScore } from '@views/components/CardScore/CardScore.tsx'
 export { CardHeader } from '@views/components/CardHeader/CardHeader.tsx'
+export { CardMeta } from '@views/components/CardMeta/CardMeta.tsx'
