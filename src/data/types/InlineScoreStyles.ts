@@ -5,7 +5,6 @@ export type InlineScoreStyles = {
 	borderColor: Property.BorderColor
 	color: Property.Color
 	display: Property.Display
-	marginLeft: Property.MarginLeft
 	width: Property.Width
 	height: Property.Height
 	borderRadius: Property.BorderRadius

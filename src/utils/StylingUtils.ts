@@ -31,7 +31,6 @@ export class StylingUtils implements IStylingUtils {
 			borderColor    : metaCriticHighlightColor,
 			color          : metaCriticHighlightColor,
 			display        : 'inline-block',
-			marginLeft     : '1ch',
 			width          : '2.75em',
 			height         : '2.75em',
 			borderRadius   : '100%',
