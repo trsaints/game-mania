@@ -1,6 +1,6 @@
 @use "src/palette";
 @use "sass:color";
-@use "../../../animations.module";
+@use "src/animations.module";
 
 .GamePanel {
 	padding       : 10vmax 5vw;
@@ -24,12 +24,16 @@
 	display           : block;
 	z-index           : 2;
 	content           : "";
-	background-image  : url("/GamePanel_Skeleton.svg");
+	background-image  : url("/GamePanel_Skeleton-Mobile.svg");
 	background-color  : palette.$black-d;
 	background-size   : 100%;
 	background-repeat : no-repeat;
 	width             : 100%;
 	height            : 100%;
-	animation         : fade-out 3s forwards;
+	animation         : fade-in-out 2s forwards ease-out;
+
+	@media screen and (min-device-aspect-ratio: 1.8/1) {
+		background-image : url("/GamePanel_Skeleton-Desktop.svg");
+	}
 }
 
