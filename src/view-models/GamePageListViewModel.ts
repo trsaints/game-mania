@@ -3,7 +3,7 @@ import {
 } from '@src/view-models/interfaces/IGamePageListViewModel.ts'
 import React, { Dispatch, FormEvent, SetStateAction } from 'react'
 import { NavigateFunction } from 'react-router-dom'
-
+import style from '@views/components/GamePanel/GamePanel.module.scss'
 
 export { GamePageListViewModel }
 
@@ -20,9 +20,19 @@ class GamePageListViewModel implements IGamePageListViewModel {
 			const pageHeader = document.getElementById("game-page")
 
 			if (pageHeader) {
-				pageHeader.scrollIntoView({ behavior: 'smooth' })
+				pageHeader.scrollIntoView({ behavior: 'instant' })
 			}
 		}, 200)
+
+		const gamePanel = document.getElementById('game-panel')
+
+		if (!gamePanel) return
+
+		gamePanel.classList.add(style.SetPlaceholder)
+
+		setTimeout(() => {
+			gamePanel.classList.remove(style.SetPlaceholder)
+		}, 2000)
 	}
 
 	changeItemCount(e: FormEvent,
