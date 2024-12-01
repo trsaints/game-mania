@@ -8,7 +8,7 @@ export function PanelHeader({ game, stylingUtils }: IPanelHeader) {
 	const shortDescription        = game.descriptionRaw.match(
 		shortDescriptionPattern)?.[0]
 
-	const inlineScoreStyles = stylingUtils.getMetaCriticHighlightColor(
+	const inlineScoreStyles = stylingUtils.getInlineScoreStyles(
 		game)
 
 	return (

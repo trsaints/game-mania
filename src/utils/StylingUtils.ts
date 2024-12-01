@@ -16,7 +16,7 @@ export class StylingUtils implements IStylingUtils {
 		)
 	}
 
-	getMetaCriticHighlightColor(game: Game): InlineScoreStyles {
+	getInlineScoreStyles(game: Game): InlineScoreStyles {
 		let metaCriticHighlightColor: string
 
 		if (game.metacritic >= 90) {

@@ -5,5 +5,5 @@ import { InlineScoreStyles } from '@data/types/InlineScoreStyles.ts'
 export interface IStylingUtils {
 	getInlineBanner(visibility: number, game?: Game): InlineBannerStyle
 
-	getMetaCriticHighlightColor(game: Game): InlineScoreStyles
+	getInlineScoreStyles(game: Game): InlineScoreStyles
 }
