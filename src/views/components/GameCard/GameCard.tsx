@@ -6,7 +6,7 @@ function GameCard({ game, lazyLoad }: IGameCard) {
 	const gameTags = game.tags.map(t => t.name).slice(0, 3).join(', ')
 
 	return (
-		<article className={style.GameCard} data-id={game.id} tabIndex={0}>
+		<article className={style.GameCard} data-id={game.id}>
 			<header>
 				<figure>
 					<img className={style.Banner}

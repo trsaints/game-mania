@@ -2,7 +2,6 @@ import { IGamePageList } from './IGamePageList.ts'
 import style from './GamePageList.module.scss'
 import { CountFilter, GamesList, PageSelection } from '@views/components'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import {
 	GamePageListViewModel
 } from '@src/view-models/GamePageListViewModel.ts'
@@ -20,8 +19,6 @@ function GamePageList({ games }: IGamePageList) {
 									 itemCount + (currentPage * itemCount)
 	)
 
-	const navigator = useNavigate()
-
 	return (
 		<section className={style.GamePageList}>
 			<h3 className={style.ResultsCount}
@@ -37,7 +34,7 @@ function GamePageList({ games }: IGamePageList) {
 				games.length > 0 ?
 				<GamesList currentGames={currentGames}
 						   onHandleClick={(e) => {
-							   viewModel.openGamePage(e, navigator)
+							   viewModel.openGamePage(e)
 						   }}
 				/> : (
 					<aside className={style.EmptyPlaceholder}>
