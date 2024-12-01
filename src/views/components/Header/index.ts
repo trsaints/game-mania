@@ -1,2 +1,2 @@
 export * from './Header'
-export { MainMenu } from '@views/components/Header/MainMenu.tsx'
+export { MainMenu } from '@views/components/MainMenu/MainMenu.tsx'

@@ -1,5 +1,5 @@
 import style from './Header.module.scss'
-import { MainMenu } from '@views/components/Header/MainMenu.tsx'
+import { MainMenu } from '@views/components/MainMenu/MainMenu.tsx'
 
 
 function Header() {
