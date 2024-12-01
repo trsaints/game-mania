@@ -14,5 +14,15 @@ export class StylingUtils implements IStylingUtils {
 			}
 		)
 	}
+
+	getMetaCriticHighlightColor(game: Game): string {
+		if (game.metacritic >= 90) {
+			return '#52C539'
+		} else if (game.metacritic >= 70) {
+			return '#EAC324'
+		} else {
+			return '#EA2424'
+		}
+	}
 }
 

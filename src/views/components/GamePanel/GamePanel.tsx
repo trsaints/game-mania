@@ -18,7 +18,7 @@ function GamePanel({ game }: IGamePanel) {
 				 style={viewModel.stylingUtils.getInlineBanner(0.7, game)}
 		>
 			<article className={style.Content}>
-				<PanelHeader game={game}/>
+				<PanelHeader game={game} {...viewModel} />
 				<PanelBanner name={game.name} images={imagesToLoad}/>
 			</article>
 		</article>
