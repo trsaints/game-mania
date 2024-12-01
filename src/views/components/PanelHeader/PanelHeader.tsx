@@ -16,7 +16,7 @@ export function PanelHeader({ game, stylingUtils }: IPanelHeader) {
 			<h3>{game.name}</h3>
 
 			<p className={style.MetaCritic}>
-				meta critic:
+				rating:
 
 				<span style={inlineScoreStyles}>{game.metacritic}</span>
 			</p>
