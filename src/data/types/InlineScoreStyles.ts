@@ -1,13 +1,16 @@
+import { Property } from 'csstype'
+
+
 export type InlineScoreStyles = {
-	borderColor: string
-	color: string
-	display: string
-	marginLeft: string;
-	width: string;
-	height: string;
-	borderRadius: string;
-	backgroundColor: string;
-	border: string;
-	textAlign: string;
-	padding: string;
+	borderColor: Property.BorderColor
+	color: Property.Color
+	display: Property.Display
+	marginLeft: Property.MarginLeft
+	width: Property.Width
+	height: Property.Height
+	borderRadius: Property.BorderRadius
+	backgroundColor: Property.BackgroundColor
+	border: Property.Border
+	textAlign: Property.TextAlign
+	padding: Property.Padding
 }
