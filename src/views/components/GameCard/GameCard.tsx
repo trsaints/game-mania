@@ -7,21 +7,11 @@ import { Game } from '@data/types'
 export { GameCard }
 
 function GameCard({ game, lazyLoad }: IGameCard) {
-	const gameTags = game.tags.map(t => t.name).slice(0, 3).join(', ')
-
 	return (
 		<article className={style.GameCard} data-id={game.id}>
 			<CardHeader game={game} lazyLoad={lazyLoad}/>
 			<CardScore game={game}/>
-
-			<p className={style.Tags}>
-				tags: {gameTags}
-			</p>
-
-			<p className={style.Genres}>
-				<span className="sr-only">Genre:</span>
-				{game.genres[0]?.name ?? 'Not listed'}
-			</p>
+			<CardMeta game={game}/>
 		</article>
 	)
 }
@@ -44,5 +34,26 @@ function CardHeader({ game, lazyLoad }: ICardHeader) {
 				<figcaption className={style.Name}>{game.name}</figcaption>
 			</figure>
 		</header>
+	)
+}
+
+interface ICardMeta {
+	game: Game
+}
+
+function CardMeta({ game }: ICardMeta) {
+	const gameTags = game.tags.map(t => t.name).slice(0, 3).join(', ')
+
+	return (
+		<>
+			<p className={style.Tags}>
+				tags: {gameTags}
+			</p>
+
+			<p className={style.Genres}>
+				<span className="sr-only">Genre:</span>
+				{game.genres[0]?.name ?? 'Not listed'}
+			</p>
+		</>
 	)
 }
