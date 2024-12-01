@@ -1,5 +1,6 @@
 @use "src/palette";
 
+
 .GameCard {
 	$base-width      : clamp(150px, 25vw, 250px);
 	$base-height     : calc($base-width * 2);
@@ -18,26 +19,26 @@
 	}
 
 	&:hover, &:focus {
-		transform: scale(1.025);
+		transform : scale(1.025);
 
 		.Genres {
-			background-color: palette.$cyan;
+			background-color : palette.$cyan;
 		}
 
 		.Name {
-			color: palette.$cyan;
+			color : palette.$cyan;
 		}
 	}
 
 	&:active {
-		transform: scale(1);
+		transform : scale(1);
 
 		.Genres {
-			background-color: palette.$white-d6;
+			background-color : palette.$white-d6;
 		}
 
 		.Name {
-			color: palette.$white;
+			color : palette.$white;
 		}
 	}
 
@@ -50,6 +51,7 @@
 	}
 
 	.Name {
+		color          : palette.$white;
 		font-size      : 1.2rem;
 		margin-block   : 5vmin;
 		padding-inline : 2.5vmin;

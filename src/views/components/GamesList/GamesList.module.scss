@@ -6,4 +6,12 @@
 	gap                   : 5vmin;
 	margin-bottom         : 10vmax;
 	animation             : fade-in 0.2s forwards ease-out;
+
+	.CardAnchor {
+		text-decoration: none;
+
+		&:hover {
+			text-shadow: none;
+		}
+	}
 }
