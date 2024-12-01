@@ -7,6 +7,7 @@
 	margin-bottom : 10vmax;
 	position      : relative;
 	isolation     : isolate;
+	animation: fade-in 0.2s forwards ease-out;
 
 	.Content {
 		background-color : color.scale(palette.$black-d5, $alpha : -20%);
