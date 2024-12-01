@@ -21,6 +21,8 @@ function SearchPage() {
 						   ? `${style.SearchControls} ${style.filterVisible}`
 						   : style.SearchControls
 
+	const textSwitch = isVisible ? 'hide' : 'show'
+
 	return (
 		<div className={style.SearchPage}>
 			{(genres && publishers && platforms && tags)
@@ -37,7 +39,11 @@ function SearchPage() {
 						 <li>
 							 <button className={style.Switch}
 									 onClick={() => setIsVisible(! isVisible)}
-									 type="button"></button>
+									 type="button">
+								 <span className="sr-only">
+									 {textSwitch} filters
+								 </span>
+							 </button>
 						 </li>
 					 </menu>
 				 </aside>

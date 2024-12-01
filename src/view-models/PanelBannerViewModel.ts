@@ -2,7 +2,7 @@ import {
 	IPanelBannerViewModel
 } from '@src/view-models/interfaces/IPanelBannerViewModel.ts'
 import React, { Dispatch, SetStateAction } from 'react'
-import styles from '@views/components/ImageCard/ImageCard.module.scss'
+import styles from '@src/_animations.module.scss'
 
 export { PanelBannerViewModel }
 
@@ -19,11 +19,11 @@ class PanelBannerViewModel implements IPanelBannerViewModel {
 
 		const parsedIndex = listItem.dataset['index'] as unknown
 
-		mainBanner.classList.add(styles.setPlaceholder)
+		mainBanner.classList.add(styles.SetPlaceholder)
 
 		setTimeout(() => {
 			setCurrentIndex(parsedIndex as number)
-			mainBanner.classList.remove(styles.setPlaceholder)
+			mainBanner.classList.remove(styles.SetPlaceholder)
 		}, 200)
 	}
 }

@@ -4,4 +4,5 @@ import { ComponentProps } from 'react'
 
 export interface IGameCard extends ComponentProps<'article'> {
 	game: Game
+	lazyLoad?: boolean
 }

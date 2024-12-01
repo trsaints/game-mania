@@ -1,23 +1,36 @@
+@use "src/palette";
+
 .SearchPage {
 	.SearchControls {
 		position      : fixed;
-		top           : 10vh;
+		z-index       : 999;
+		top           : 50vh;
 		margin-bottom : 5vmax;
 		display       : flex;
-		right         : 100vw;
+		left          : 0;
+		transform     : translateX(-100%);
 
 		&.filterVisible {
-			right: 0;
-			left : 5vw;
+			transform : translateX(5vw);
 		}
 
 		.Switch {
 			padding                   : 1rem;
 			position                  : absolute;
-			height                    : calc(100% - 10vh);
-			margin-block              : 5vh;
+			height                    : 25%;
+			margin-top                : 5vmin;
 			border-top-left-radius    : 0;
 			border-bottom-left-radius : 0;
+
+			&:hover, &:focus {
+				background-color: palette.$cyan;
+				box-shadow: 0 0 8px palette.$cyan;
+			}
+
+			&:active {
+				background-color: palette.$white;
+				box-shadow: none;
+			}
 		}
 	}
 }
