@@ -64,6 +64,58 @@ export class TypeUtils implements ITypeUtils {
 			return parserUtils.mapToCamelCase(mainPlatform as never) as GamesPlatform
 		})
 	}
+
+	sortGames(games: Game[],
+			  sortKey: keyof Game,
+			  order: 'asc' | 'desc'): Game[] {
+		return games.sort((a, b) => {
+			switch (sortKey) {
+				case 'released': {
+					const aDate = new Date(a.released)
+					const bDate = new Date(b.released)
+
+					if (order === 'asc') {
+						return aDate.getTime() - bDate.getTime()
+					}
+
+					return bDate.getTime() - aDate.getTime()
+				}
+
+				case 'added': {
+					if (order === 'asc') {
+						return a.added - b.added
+					}
+
+					return b.added - a.added
+				}
+
+				case 'updated': {
+					const aDate = new Date(a.updated)
+					const bDate = new Date(b.updated)
+
+					if (order === 'asc') {
+						return aDate.getTime() - bDate.getTime()
+					}
+
+					return bDate.getTime() - aDate.getTime()
+				}
+
+				case 'metacritic': {
+					if (order === 'asc') {
+						return a.metacritic - b.metacritic
+					}
+
+					return b.metacritic - a.metacritic
+				}
+			}
+
+			if (order === 'asc') {
+				return a.name.localeCompare(b.name)
+			}
+
+			return b.name.localeCompare(a.name)
+		})
+	}
 }
 
 
