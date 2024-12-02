@@ -2,7 +2,7 @@ import {
 	Developer, Game, GamesPlatform, Genre, Platform, Publisher, Store, Tag
 } from '@data/types'
 import { IParserUtils, ITypeUtils } from '@utils/interfaces'
-
+import { SortKey } from '@data/types/SortKey.ts'
 
 export class TypeUtils implements ITypeUtils {
 	mapToGame(data: never, parserUtils: IParserUtils): Game {
@@ -66,9 +66,18 @@ export class TypeUtils implements ITypeUtils {
 	}
 
 	sortGames(games: Game[],
-			  sortKey: keyof Game,
-			  order: 'asc' | 'desc'): Game[] {
+			  order: 'asc' | 'desc',
+			  sortKey?: SortKey
+	): Game[] {
 		return games.sort((a, b) => {
+			if (! sortKey) {
+				if (order === 'asc') {
+					return a.name.localeCompare(b.name)
+				}
+
+				return b.name.localeCompare(a.name)
+			}
+
 			switch (sortKey) {
 				case 'released': {
 					const aDate = new Date(a.released)
