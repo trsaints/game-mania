@@ -8,15 +8,17 @@
 		margin-bottom : 5vmax;
 		display       : flex;
 		left          : 0;
-		transform     : translateX(-100%);
+		transform     : translateX(calc(clamp(275px, 100%, 25vw) * -1));
 
-		@media screen and (min-device-aspect-ratio : 1.7/1) {
-			position    : static;
-			transform   : translateX(0);
-			margin-left : 5vw;
+		@media screen and (min-device-aspect-ratio : 1.8/1) {
+			& {
+				position    : static;
+				transform   : translateX(0);
+				margin-left : 5vw;
 
-			.Switch {
-				display : none;
+				.Switch {
+					display : none;
+				}
 			}
 		}
 
