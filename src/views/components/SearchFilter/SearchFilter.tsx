@@ -26,6 +26,25 @@ function SearchFilter(props: ISearchFilter) {
 				<FilterSort parentViewModel={viewModel}/>
 			</li>
 
+			<li>
+				<fieldset>
+					<legend>order</legend>
+
+					<label htmlFor="sort-asc">ascending</label>
+					<input type="radio"
+						   name="order"
+						   value="asc"
+						   id="sort-asc"
+						   checked/>
+
+					<label htmlFor="sort-desc">descending</label>
+					<input type="radio"
+						   name="order"
+						   value="desc"
+						   id="sort-desc"/>
+				</fieldset>
+			</li>
+
 			<MetadataFilters {...viewModel}/>
 		</menu>
 	)

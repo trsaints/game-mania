@@ -58,6 +58,10 @@ input, label, summary, button, a, select, option, textarea, datalist {
 	cursor : pointer;
 }
 
+input[type="radio"]:checked {
+	background-color: palette.$cyan;
+}
+
 button.primary {
 	background-color : palette.$cyan;
 }
