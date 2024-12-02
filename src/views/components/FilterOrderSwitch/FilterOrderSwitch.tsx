@@ -8,7 +8,7 @@ export function FilterOrderSwitch() {
 				   name="order"
 				   value="asc"
 				   id="sort-asc"
-				   checked/>
+				   defaultChecked/>
 
 			<label htmlFor="sort-desc">descending</label>
 			<input type="radio"
