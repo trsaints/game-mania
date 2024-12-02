@@ -2,6 +2,7 @@
 
 .SearchPage {
 	.SearchControls {
+		grid-area     : controls;
 		position      : fixed;
 		z-index       : 999;
 		top           : 50vh;
@@ -12,8 +13,8 @@
 
 		@media screen and (min-device-aspect-ratio : 1.7/1) {
 			& {
-				position    : static;
-				transform   : translateX(0);
+				position  : static;
+				transform : translateX(0);
 
 				.Switch {
 					display : none;
