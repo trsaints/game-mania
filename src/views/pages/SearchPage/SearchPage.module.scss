@@ -10,6 +10,16 @@
 		left          : 0;
 		transform     : translateX(-100%);
 
+		@media screen and (min-device-aspect-ratio : 1.7/1) {
+			position    : static;
+			transform   : translateX(0);
+			margin-left : 5vw;
+
+			.Switch {
+				display : none;
+			}
+		}
+
 		&.filterVisible {
 			transform : translateX(5vw);
 		}
@@ -23,13 +33,13 @@
 			border-bottom-left-radius : 0;
 
 			&:hover, &:focus {
-				background-color: palette.$cyan;
-				box-shadow: 0 0 8px palette.$cyan;
+				background-color : palette.$cyan;
+				box-shadow       : 0 0 8px palette.$cyan;
 			}
 
 			&:active {
-				background-color: palette.$white;
-				box-shadow: none;
+				background-color : palette.$white;
+				box-shadow       : none;
 			}
 		}
 	}
