@@ -5,6 +5,7 @@ import { useState } from 'react'
 import {
 	GamePageListViewModel
 } from '@src/view-models/GamePageListViewModel.ts'
+import { Game } from '@data/types'
 
 
 export { GamePageList }
@@ -15,12 +16,8 @@ function GamePageList({ games }: IGamePageList) {
 	const [itemCount, setItemCount]     = useState(10)
 	const [currentPage, setCurrentPage] = useState(0)
 
-	const currentGames = games.slice(currentPage * itemCount,
-									 itemCount + (currentPage * itemCount)
-	)
-
 	return (
-		<section className={style.GamePageList}>
+		<article className={style.GamePageList}>
 			<h3 className={style.ResultsCount}
 				id="results-count">
 				{games.length} games found
@@ -30,21 +27,38 @@ function GamePageList({ games }: IGamePageList) {
 				viewModel.changeItemCount(e, setItemCount)
 			}}/>
 
-			{
-				games.length > 0 ?
-				<GamesList currentGames={currentGames}
-						   onHandleClick={(e) => {
-							   viewModel.openGamePage(e)
-						   }}
-				/> : <ListPlaceholder/>
-			}
+			<ListResults games={games}
+						 currentPage={currentPage}
+						 itemCount={itemCount}/>
 
 			<PageSelection gamesCount={games.length}
 						   itemCount={itemCount}
 						   setCurrentPage={setCurrentPage}
 						   parentViewModel={viewModel}/>
-		</section>
+		</article>
 	)
+}
+
+interface IListResults {
+	games: Game[]
+	currentPage: number
+	itemCount: number
+}
+
+function ListResults({ games, currentPage, itemCount }: IListResults) {
+
+	const currentGames = games.slice(currentPage * itemCount,
+									 itemCount + (currentPage * itemCount))
+
+	if (games.length > 0) {
+		return <GamesList currentGames={currentGames}
+						  onHandleClick={(e) => {
+							  viewModel.openGamePage(e)
+						  }}/>
+	}
+
+
+	return <ListPlaceholder/>
 }
 
 function ListPlaceholder() {
