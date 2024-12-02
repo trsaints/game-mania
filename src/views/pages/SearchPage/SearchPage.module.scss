@@ -10,7 +10,7 @@
 		left          : 0;
 		transform     : translateX(calc(clamp(275px, 100%, 25vw) * -1));
 
-		@media screen and (min-device-aspect-ratio : 1.8/1) {
+		@media screen and (min-device-aspect-ratio : 1.7/1) {
 			& {
 				position    : static;
 				transform   : translateX(0);
