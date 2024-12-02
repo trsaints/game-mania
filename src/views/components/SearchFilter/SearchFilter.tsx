@@ -16,8 +16,9 @@ export { SearchFilter }
 
 function SearchFilter(props: ISearchFilter) {
 	const [filters, setFilters] = useState<DataRequestParams>({})
+	const [order, setOrder]     = useState<'asc' | 'desc'>('asc')
 
-	useSearchPage(useContext(RootContext), filters)
+	useSearchPage(useContext(RootContext), order, filters)
 
 	const viewModel = new SearchFilterViewModel(props)
 
