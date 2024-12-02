@@ -1,23 +1,25 @@
-import { IRootContext } from '@data/context'
 import { useState } from 'react'
 import style from '@views/pages/SearchPage/SearchPage.module.scss'
 import { SearchFilter } from '@views/components'
 import { ControlsClose } from '@views/pages/ControlsClose/ControlsClose.tsx'
+import { Genre, Platform, Publisher, Tag } from '@data/types'
 
 
 interface ISearchControls {
-	context: IRootContext
+	genres?: Genre[]
+	publishers?: Publisher[]
+	platforms?: Platform[]
+	tags?: Tag[]
 }
 
-export function SearchControls({ context }: ISearchControls) {
+export function SearchControls(props: ISearchControls) {
 	const [isVisible, setIsVisible] = useState<boolean>(false)
 
 	const filterSelector = isVisible
 						   ? `${style.SearchControls} ${style.filterVisible}`
 						   : style.SearchControls
 
-
-	const { genres, publishers, platforms, tags } = context
+	const { genres, publishers, platforms, tags } = props
 
 	if (! genres || ! publishers || ! platforms || ! tags) return (<></>)
 

@@ -12,10 +12,9 @@ function SearchPage() {
 
 	const { games } = rootContext
 
-
 	return (
 		<div className={style.SearchPage}>
-			<SearchControls context={rootContext}/>
+			<SearchControls {...rootContext}/>
 
 			{games && <GamePageList games={games}/>}
 		</div>
