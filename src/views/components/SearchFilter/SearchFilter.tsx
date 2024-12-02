@@ -31,7 +31,7 @@ function SearchFilter(props: ISearchFilter) {
 			</li>
 
 			<li>
-				<FilterOrderSwitch/>
+				<FilterOrderSwitch setOrder={setOrder}/>
 			</li>
 
 			<MetadataFilters {...viewModel}/>

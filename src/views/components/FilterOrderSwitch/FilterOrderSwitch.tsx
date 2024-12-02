@@ -1,9 +1,20 @@
 import style from './FilterOrderSwitch.module.scss'
+import {
+	FilterOrderSwitchViewModel
+} from '@src/view-models/FilterOrderSwitchViewModel.ts'
+import { Dispatch, SetStateAction } from 'react'
 
 
-export function FilterOrderSwitch() {
+interface IFilterOrderSwitch {
+	setOrder: Dispatch<SetStateAction<'asc' | 'desc'>>
+}
+
+export function FilterOrderSwitch({ setOrder }: IFilterOrderSwitch) {
+	const viewModel = new FilterOrderSwitchViewModel()
+
 	return (
-		<fieldset className={style.FilterOrderSwitch}>
+		<fieldset className={style.FilterOrderSwitch}
+				  onClick={(e) => viewModel.switchFilterOrder(e, setOrder)}>
 			<legend>order:</legend>
 
 			<p>
