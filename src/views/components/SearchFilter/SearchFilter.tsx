@@ -19,7 +19,6 @@ function SearchFilter(props: ISearchFilter) {
 
 	const viewModel = new SearchFilterViewModel(props)
 
-
 	return (
 		<menu className={style.SearchFilter}
 			  onClick={(event) => viewModel.updateFilters(event, setFilters)}>
