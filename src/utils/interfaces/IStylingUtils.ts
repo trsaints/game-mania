@@ -1,6 +1,11 @@
 import { Game, InlineBannerStyle } from '@data/types'
+import { InlineScoreStyles } from '@data/types/InlineScoreStyles.ts'
 
 
 export interface IStylingUtils {
-	getInlineBanner(game?: Game): InlineBannerStyle
+	getInlineBanner(visibility: number, game?: Game): InlineBannerStyle
+
+	getInlineScoreStyles(game: Game): InlineScoreStyles
+
+	getScoreHighlightColor(game: Game): string
 }

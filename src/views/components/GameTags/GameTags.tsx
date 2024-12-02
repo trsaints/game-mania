@@ -2,7 +2,7 @@ import { IGameTags } from '@views/components/GameTags/IGameTags.ts'
 import style from './GameTags.module.scss'
 
 
-export function GameTags({ game, count }: IGameTags) {
+export function GameTags({ game, count, baseAlignment }: IGameTags) {
 	const gameGenres = game.genres
 						   .slice(0, count)
 						   .map(g =>
@@ -18,9 +18,13 @@ export function GameTags({ game, count }: IGameTags) {
 								  >{t.name}</li>
 						 )
 
+	const alignmentStyles = {
+		alignItems: baseAlignment
+	}
+
 	return (
 		<>
-			<dl className={style.GameTags}>
+			<dl className={style.GameTags} style={alignmentStyles}>
 				<dt>genres:</dt>
 				<dd className={style.Meta}>
 					<ul className={style.Tags}>
@@ -29,7 +33,7 @@ export function GameTags({ game, count }: IGameTags) {
 				</dd>
 			</dl>
 
-			<dl className={style.GameTags}>
+			<dl className={style.GameTags} style={alignmentStyles}>
 				<dt>tags:</dt>
 				<dd className={style.Meta}>
 					<ul className={style.Tags}>

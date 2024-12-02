@@ -12,7 +12,7 @@
 }
 
 html {
-	scroll-behavior: smooth !important;
+	scroll-behavior : smooth !important;
 }
 
 body {
@@ -20,7 +20,7 @@ body {
 	color            : palette.$white;
 
 	* {
-		transition: all 0.15s ease-in-out;
+		transition : all 0.15s ease-in-out;
 	}
 }
 
@@ -42,8 +42,8 @@ a {
 	color : palette.$cyan;
 
 	&:hover {
-		text-decoration: none;
-		text-shadow: 0 0 4px palette.$cyan;
+		text-decoration : none;
+		text-shadow     : 0 0 4px palette.$cyan;
 	}
 }
 
@@ -56,6 +56,14 @@ button {
 
 input, label, summary, button, a, select, option, textarea, datalist {
 	cursor : pointer;
+}
+
+input[type="radio"] {
+	border-radius : 100%;
+}
+
+input[type="radio"]:checked {
+	background-color : palette.$cyan;
 }
 
 button.primary {
@@ -79,17 +87,17 @@ button.secondary {
 }
 
 ::-webkit-scrollbar {
-	background: none;
-	width: 1vmin;
+	background : none;
+	width      : 1vmin;
 
 	&-thumb {
-		background-color: palette.$black-d5;
-		border-radius: 8px;
+		background-color : palette.$white-d6;
+		border-radius    : 8px;
 	}
 }
 
 @media (prefers-reduced-motion) {
 	body * {
-		animation: fade-in 0.2s ease-out;
+		animation : fade-in 0.2s ease-out;
 	}
 }

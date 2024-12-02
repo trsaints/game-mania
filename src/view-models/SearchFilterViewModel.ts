@@ -11,10 +11,7 @@ export { SearchFilterViewModel }
 
 class SearchFilterViewModel implements ISearchFilterViewModel {
 	constructor(props: ISearchFilter) {
-		this.ordering = [
-			'name', 'released', 'added', 'created', 'updated', 'rating',
-			'metacritic'
-		]
+		this.ordering = ['name', 'released', 'added', 'updated', 'metacritic']
 
 		this.metadataList = new Map([
 										['tags', props.tags],

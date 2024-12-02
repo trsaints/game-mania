@@ -21,7 +21,7 @@ export function useSearchSuggestions(apiMiddleware: IApiMiddleware | undefined,
 		const randomId = Math.floor(Math.random() * 1000)
 
 		apiMiddleware?.getById('games', randomId).then(game => {
-			setCurrentBanner(stylingUtils.getInlineBanner(game as Game))
+			setCurrentBanner(stylingUtils.getInlineBanner(0.9, game as Game))
 		})
 
 		apiMiddleware?.getAll('genres', { pageSize: 5 })

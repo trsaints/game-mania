@@ -3,14 +3,23 @@ import { GameTags } from '@views/components/GameTags/GameTags.tsx'
 import style from './PanelHeader.module.scss'
 
 
-export function PanelHeader({ game }: IPanelHeader) {
+export function PanelHeader({ game, stylingUtils }: IPanelHeader) {
 	const shortDescriptionPattern = /^(([^.]+\.){1,4})/
 	const shortDescription        = game.descriptionRaw.match(
 		shortDescriptionPattern)?.[0]
 
+	const inlineScoreStyles = stylingUtils.getInlineScoreStyles(
+		game)
+
 	return (
 		<header className={style.PanelHeader}>
 			<h3>{game.name}</h3>
+
+			<p className={style.MetaCritic}>
+				rating:
+
+				<span style={inlineScoreStyles}>{game.metacritic ?? '?'}</span>
+			</p>
 
 			<dl className={style.MetaData}>
 				<dt>release date:</dt>
@@ -37,7 +46,7 @@ export function PanelHeader({ game }: IPanelHeader) {
 
 			<p className={style.Description}>{shortDescription}</p>
 
-			<GameTags game={game} count={3}/>
+			<GameTags game={game} count={3} baseAlignment="center"/>
 		</header>
 	)
 }

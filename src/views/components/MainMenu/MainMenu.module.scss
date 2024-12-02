@@ -1,0 +1,51 @@
+@use "sass:color";
+@use "src/palette";
+
+.MainMenu {
+	background-color : transparent;
+	position         : relative;
+
+	summary {
+		white-space    : nowrap;
+		text-align     : center;
+		color          : palette.$cyan;
+		width          : min-content;
+		padding        : 0.5rem 1rem;
+		border-radius  : 8px;
+		text-transform : uppercase;
+		border         : 2px solid;
+
+		&:hover, &:focus {
+			transform        : scale(1.025);
+			background-color : palette.$cyan;
+			color            : palette.$black-d5;
+			box-shadow       : 0 0 8px palette.$cyan;
+			border-color     : palette.$cyan;
+		}
+
+		&:active {
+			transform        : scale(1);
+			background-color : palette.$black-d5;
+			color : palette.$cyan;
+			box-shadow       : 0 0 8px palette.$black-d5;
+		}
+	}
+
+	.RouteOptions {
+		position         : absolute;
+		top              : 0;
+		left             : 0;
+		margin-inline    : auto;
+		z-index          : 10;
+		margin-top       : calc(5vmin + 1rem + 4px + 12px);
+		box-shadow       : 0 0 4px palette.$black-d5;
+		border-radius    : 16px;
+		padding          : 5vmin;
+		background-color : palette.$black;
+		text-transform   : uppercase;
+		text-shadow      : 0 0 8px palette.$cyan;
+		gap              : 1rem;
+		display          : flex;
+		flex-direction   : column;
+	}
+}

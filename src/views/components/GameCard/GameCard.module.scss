@@ -1,75 +1,86 @@
 @use "src/palette";
 
-.GameCard {
-	$base-width      : clamp(150px, 25vw, 250px);
-	$base-height     : calc($base-width * 2);
-	background-color : palette.$black-d2;
-	border-radius    : 16px;
-	box-shadow       : 0 0 8px palette.$black-d5;
-	font-weight      : bold;
-	height           : 100%;
-	display          : grid;
-	cursor           : pointer;
-
-	@media screen and (min-width : 40rem) {
-		& {
-			max-width : calc(50vw - 10vmin);
-		}
-	}
-
+a {
 	&:hover, &:focus {
-		transform: scale(1.025);
+		outline : none;
+
+		.GameCard {
+			transform : scale(1.025);
+
+			.Name {
+				color : palette.$cyan;
+			}
+		}
+	}
+
+	.GameCard {
+		$base-width      : clamp(150px, 25vw, 250px);
+		$base-height     : calc($base-width * 2);
+		background-color : palette.$black-d2;
+		border-radius    : 8px;
+		font-weight      : bold;
+		height           : 100%;
+		display          : grid;
+		cursor           : pointer;
+		position         : relative;
+
+		@media screen and (min-width : 40rem) {
+			& {
+				max-width : calc(50vw - 10vmin);
+			}
+		}
+
+
+		&:active {
+			transform : scale(1);
+
+			.Genres {
+				background-color : palette.$white-d6;
+			}
+
+			.Name {
+				color : palette.$white;
+			}
+		}
+
+		header {
+			.Banner {
+				border-radius : 16px;
+				height        : calc($base-height * 0.6);
+				object-fit    : cover;
+				width         : 100%;
+			}
+
+			.Name {
+				color        : palette.$white;
+				font-size    : 1.2rem;
+				margin-block : 2.5vmin;
+				width        : 100%;
+			}
+		}
+
+		.MetaCritic {
+			text-transform: capitalize;
+			font-size: 0.8rem;
+			margin-bottom: 0.5rem;
+		}
+
+		.Tags {
+			text-transform: capitalize;
+			color     : palette.$white-d4;
+			font-size : 0.8rem;
+		}
 
 		.Genres {
-			background-color: palette.$cyan;
+			font-size        : 0.8rem;
+			margin-block     : 2.5vmin;
+			background-color : palette.$white-d6;
+			border-radius    : 16px;
+			color            : palette.$black-d2;
+			padding          : 1.25vmin 2.5vmin;
+			width            : fit-content;
+			align-self       : flex-end;
 		}
-
-		.Name {
-			color: palette.$cyan;
-		}
-	}
-
-	&:active {
-		transform: scale(1);
-
-		.Genres {
-			background-color: palette.$white-d6;
-		}
-
-		.Name {
-			color: palette.$white;
-		}
-	}
-
-	.Banner {
-		border-top-left-radius  : 16px;
-		border-top-right-radius : 16px;
-		height                  : calc($base-height * 0.6);
-		object-fit              : cover;
-		width                   : 100%;
-	}
-
-	.Name {
-		font-size      : 1.2rem;
-		margin-block   : 5vmin;
-		padding-inline : 2.5vmin;
-		width          : 100%;
-	}
-
-	.Tags {
-		color          : palette.$white-d4;
-		font-size      : 0.7rem;
-		padding-inline : 2.5vmin;
-	}
-
-	.Genres {
-		font-size        : 0.8rem;
-		margin           : 2.5vmin;
-		background-color : palette.$white-d6;
-		border-radius    : 16px;
-		color            : palette.$black-d2;
-		padding          : 1.25vmin 2.5vmin;
-		width            : fit-content;
-		align-self       : flex-end;
 	}
 }
+

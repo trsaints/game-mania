@@ -25,3 +25,11 @@ export { GamesList } from '@views/components/GamesList/GamesList.tsx'
 export {
 	MetadataFilters
 } from '@views/components/MetadataFilters/MetadataFilters.tsx'
+export { MainMenu } from '@views/components/Header'
+export { CardScore } from '@views/components/CardScore/CardScore.tsx'
+export { CardHeader } from '@views/components/CardHeader/CardHeader.tsx'
+export { CardMeta } from '@views/components/CardMeta/CardMeta.tsx'
+export { FilterSort } from '@views/components/FilterSort/FilterSort.tsx'
+export {
+	FilterOrderSwitch
+} from '@views/components/FilterOrderSwitch/FilterOrderSwitch.tsx'

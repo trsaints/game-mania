@@ -1,56 +1,20 @@
 import style from './SearchPage.module.scss'
-import { GamePageList, SearchFilter } from '@views/components'
-import { useContext, useState } from 'react'
+import { GamePageList } from '@views/components'
+import { useContext } from 'react'
 import { RootContext } from '@data/context'
 
 
 export { SearchPage }
 
 function SearchPage() {
-	const [isVisible, setIsVisible] = useState<boolean>(false)
+	const rootContext = useContext(RootContext)
 
-	const {
-			  games,
-			  genres,
-			  platforms,
-			  publishers,
-			  tags
-		  } = useContext(RootContext)
-
-	const filterSelector = isVisible
-						   ? `${style.SearchControls} ${style.filterVisible}`
-						   : style.SearchControls
-
-	const textSwitch = isVisible ? 'hide' : 'show'
+	const { games } = rootContext
 
 	return (
 		<div className={style.SearchPage}>
-			{(genres && publishers && platforms && tags)
-			 && (
-				 <aside className={filterSelector}>
-					 <SearchFilter
-						 publishers={publishers}
-						 platforms={platforms}
-						 genres={genres}
-						 tags={tags}
-					 />
-
-					 <menu>
-						 <li>
-							 <button className={style.Switch}
-									 onClick={() => setIsVisible(! isVisible)}
-									 type="button">
-								 <span className="sr-only">
-									 {textSwitch} filters
-								 </span>
-							 </button>
-						 </li>
-					 </menu>
-				 </aside>
-			 )
-			}
-
-			{games && <GamePageList games={games}/>}
+			{games && <GamePageList games={games} withFilter {...rootContext}/>}
 		</div>
 	)
 }
+

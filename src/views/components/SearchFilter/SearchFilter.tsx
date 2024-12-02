@@ -1,6 +1,8 @@
 import { ISearchFilter } from './ISearchFilter'
 import style from './SearchFilter.module.scss'
-import { MetadataFilters } from '@views/components'
+import {
+	FilterOrderSwitch, FilterSort, MetadataFilters
+} from '@views/components'
 import {
 	SearchFilterViewModel
 } from '@src/view-models/SearchFilterViewModel.ts'
@@ -10,32 +12,26 @@ import { useSearchPage } from '@src/hooks/useSearchPage.ts'
 import { RootContext } from '@data/context'
 
 
+export { SearchFilter }
+
 function SearchFilter(props: ISearchFilter) {
 	const [filters, setFilters] = useState<DataRequestParams>({})
+	const [order, setOrder]     = useState<'asc' | 'desc'>('asc')
 
-	useSearchPage(useContext(RootContext), filters)
+	useSearchPage(useContext(RootContext), order, filters)
 
 	const viewModel = new SearchFilterViewModel(props)
-
-	const orderingOptions = viewModel.ordering.map(o => {
-		return (
-			<option key={o}
-					value={o}>
-				{o}
-			</option>
-		)
-	})
 
 	return (
 		<menu className={style.SearchFilter}
 			  onClick={(event) => viewModel.updateFilters(event, setFilters)}>
 			<li>
-				<p>
-					<label htmlFor="ordering">order by</label>
-					<select name="result_order" id="ordering">
-						{orderingOptions}
-					</select>
-				</p>
+				<FilterSort parentViewModel={viewModel}
+							setFilters={setFilters}/>
+			</li>
+
+			<li>
+				<FilterOrderSwitch setOrder={setOrder}/>
 			</li>
 
 			<MetadataFilters {...viewModel}/>
@@ -43,4 +39,3 @@ function SearchFilter(props: ISearchFilter) {
 	)
 }
 
-export { SearchFilter }

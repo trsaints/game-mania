@@ -2,9 +2,11 @@ import { useEffect } from 'react'
 import { Game, Genre, Platform, Publisher, Tag } from '@data/types'
 import { IRootContext } from '@data/context'
 import { DataRequestParams } from '@data/request-parameters'
+import { TypeUtils } from '@src/utils'
 
 
 export function useSearchPage(context: IRootContext,
+							  order: 'asc' | 'desc',
 							  gameFilters?: DataRequestParams) {
 	const {
 			  apiMiddleware,
@@ -31,6 +33,13 @@ export function useSearchPage(context: IRootContext,
 					 .then(apiData => setGenres(apiData as Genre[]))
 
 		apiMiddleware?.getAll('games', { metacritic: '80,100', ...gameFilters })
-					 .then((apiData) => setGames(apiData as Game[]))
-	}, [gameFilters])
+					 .then((apiData) => {
+						 const games     = apiData as Game[]
+						 const typeUtils = new TypeUtils()
+
+						 setGames(typeUtils.sortGames(games,
+													  order,
+													  gameFilters?.ordering))
+					 })
+	}, [gameFilters, order])
 }

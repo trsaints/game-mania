@@ -3,7 +3,15 @@
 .GamePageList {
 	padding-inline : 5vw;
 
+	@media screen and (min-device-aspect-ratio : 1.7/1) {
+		display             : grid;
+		grid-template-areas : "heading heading" "filter filter" "controls results" "selection selection";
+		column-gap: 5vw;
+		grid-template-columns: 1fr 3fr;
+	}
+
 	.ResultsCount {
+		grid-area     : heading;
 		margin-bottom : 5vmax;
 	}
 
@@ -24,17 +32,17 @@
 	}
 
 	.EmptyPlaceholder {
-		$image-size: clamp(15rem, 50%, 20rem);
-		text-align: center;
-		background-image: url("/empty_placeholder.svg");
-		background-repeat: no-repeat;
-		padding-bottom: $image-size;
-		background-size: $image-size;
-		background-position: 50% calc($image-size / 2);
+		$image-size         : clamp(15rem, 50%, 20rem);
+		text-align          : center;
+		background-image    : url("/empty_placeholder.svg");
+		background-repeat   : no-repeat;
+		padding-bottom      : $image-size;
+		background-size     : $image-size;
+		background-position : 50% calc($image-size / 2);
 
 		p {
-			margin-bottom: 2rem;
-			font-size: 1.2rem;
+			margin-bottom : 2rem;
+			font-size     : 1.2rem;
 		}
 	}
 }

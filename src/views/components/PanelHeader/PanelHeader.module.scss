@@ -7,6 +7,16 @@
 		margin-bottom : 2rem;
 	}
 
+	.MetaCritic {
+		text-transform: capitalize;
+		color: palette.$white-d2;
+		margin-bottom: 1rem;
+
+		span {
+			margin-left: 1ch;
+		}
+	}
+
 	.MetaData {
 		text-transform : capitalize;
 		align-items    : center;

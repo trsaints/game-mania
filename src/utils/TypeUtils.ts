@@ -2,7 +2,7 @@ import {
 	Developer, Game, GamesPlatform, Genre, Platform, Publisher, Store, Tag
 } from '@data/types'
 import { IParserUtils, ITypeUtils } from '@utils/interfaces'
-
+import { SortKey } from '@data/types/SortKey.ts'
 
 export class TypeUtils implements ITypeUtils {
 	mapToGame(data: never, parserUtils: IParserUtils): Game {
@@ -62,6 +62,67 @@ export class TypeUtils implements ITypeUtils {
 				parserUtils.mapToCamelCase(mainPlatform.platform as never) as Platform
 
 			return parserUtils.mapToCamelCase(mainPlatform as never) as GamesPlatform
+		})
+	}
+
+	sortGames(games: Game[],
+			  order: 'asc' | 'desc',
+			  sortKey?: SortKey
+	): Game[] {
+		return games.sort((a, b) => {
+			if (! sortKey) {
+				if (order === 'asc') {
+					return a.name.localeCompare(b.name)
+				}
+
+				return b.name.localeCompare(a.name)
+			}
+
+			switch (sortKey) {
+				case 'released': {
+					const aDate = new Date(a.released)
+					const bDate = new Date(b.released)
+
+					if (order === 'asc') {
+						return aDate.getTime() - bDate.getTime()
+					}
+
+					return bDate.getTime() - aDate.getTime()
+				}
+
+				case 'added': {
+					if (order === 'asc') {
+						return a.added - b.added
+					}
+
+					return b.added - a.added
+				}
+
+				case 'updated': {
+					const aDate = new Date(a.updated)
+					const bDate = new Date(b.updated)
+
+					if (order === 'asc') {
+						return aDate.getTime() - bDate.getTime()
+					}
+
+					return bDate.getTime() - aDate.getTime()
+				}
+
+				case 'metacritic': {
+					if (order === 'asc') {
+						return a.metacritic - b.metacritic
+					}
+
+					return b.metacritic - a.metacritic
+				}
+			}
+
+			if (order === 'asc') {
+				return a.name.localeCompare(b.name)
+			}
+
+			return b.name.localeCompare(a.name)
 		})
 	}
 }

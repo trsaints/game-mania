@@ -2,28 +2,25 @@ import { IGamePageList } from './IGamePageList.ts'
 import style from './GamePageList.module.scss'
 import { CountFilter, GamesList, PageSelection } from '@views/components'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import {
 	GamePageListViewModel
 } from '@src/view-models/GamePageListViewModel.ts'
+import { Game } from '@data/types'
+import { SearchControls } from '@views/pages'
 
 
 export { GamePageList }
 
 const viewModel = new GamePageListViewModel()
 
-function GamePageList({ games }: IGamePageList) {
+function GamePageList(props: IGamePageList) {
 	const [itemCount, setItemCount]     = useState(10)
 	const [currentPage, setCurrentPage] = useState(0)
 
-	const currentGames = games.slice(currentPage * itemCount,
-									 itemCount + (currentPage * itemCount)
-	)
-
-	const navigator = useNavigate()
+	const { games, withFilter } = props
 
 	return (
-		<section className={style.GamePageList}>
+		<article className={style.GamePageList}>
 			<h3 className={style.ResultsCount}
 				id="results-count">
 				{games.length} games found
@@ -33,26 +30,48 @@ function GamePageList({ games }: IGamePageList) {
 				viewModel.changeItemCount(e, setItemCount)
 			}}/>
 
-			{
-				games.length > 0 ?
-				<GamesList currentGames={currentGames}
-						   onHandleClick={(e) => {
-							   viewModel.openGamePage(e, navigator)
-						   }}
-				/> : (
-					<aside className={style.EmptyPlaceholder}>
-						<h3>oops!</h3>
-						<p>We couldn't find any results based on your filters.
-							Maybe you should try to reset them</p>
-					</aside>
-				)
-			}
+			{withFilter && <SearchControls {...props} />}
+
+			<ListResults games={games}
+						 currentPage={currentPage}
+						 itemCount={itemCount}/>
 
 			<PageSelection gamesCount={games.length}
 						   itemCount={itemCount}
 						   setCurrentPage={setCurrentPage}
 						   parentViewModel={viewModel}/>
-		</section>
+		</article>
 	)
 }
 
+interface IListResults {
+	games: Game[]
+	currentPage: number
+	itemCount: number
+}
+
+function ListResults({ games, currentPage, itemCount }: IListResults) {
+
+	const currentGames = games.slice(currentPage * itemCount,
+									 itemCount + (currentPage * itemCount))
+
+	if (games.length > 0) {
+		return <GamesList currentGames={currentGames}
+						  onHandleClick={(e) => {
+							  viewModel.openGamePage(e)
+						  }}/>
+	}
+
+
+	return <ListPlaceholder/>
+}
+
+function ListPlaceholder() {
+	return (
+		<aside className={style.EmptyPlaceholder}>
+			<h3>oops!</h3>
+			<p>We couldn't find any results based on your filters.
+				Maybe you should try to reset them</p>
+		</aside>
+	)
+}

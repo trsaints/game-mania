@@ -11,7 +11,7 @@ export function useHomePage(context: IRootContext,
 	useEffect(() => {
 		console.log('loading Home page data')
 
-		apiMiddleware?.getAll('games', { pageSize: 20 })
+		apiMiddleware?.getAll('games', { pageSize: 40, metacritic: '90,100' })
 					 .then(gameData => setGames(gameData as Game[]))
 		apiMiddleware?.getAll('genres', { pageSize: 10 })
 					 .then(genreData => setGenres(genreData as Genre[]))
