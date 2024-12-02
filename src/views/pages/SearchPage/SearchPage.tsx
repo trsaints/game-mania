@@ -2,7 +2,6 @@ import style from './SearchPage.module.scss'
 import { GamePageList } from '@views/components'
 import { useContext } from 'react'
 import { RootContext } from '@data/context'
-import { SearchControls } from '@views/pages'
 
 
 export { SearchPage }
@@ -14,9 +13,7 @@ function SearchPage() {
 
 	return (
 		<div className={style.SearchPage}>
-			<SearchControls {...rootContext}/>
-
-			{games && <GamePageList games={games}/>}
+			{games && <GamePageList games={games} withFilter {...rootContext}/>}
 		</div>
 	)
 }
