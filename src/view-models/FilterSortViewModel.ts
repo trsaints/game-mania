@@ -9,7 +9,8 @@ export { FilterSortViewModel }
 
 class FilterSortViewModel implements IFilterSortViewModel {
 	sortResults(e: ChangeEvent,
-				setGames: Dispatch<SetStateAction<Game[] | undefined>>): void {
+				setGames: Dispatch<SetStateAction<Game[] | undefined>>,
+				order: 'asc' | 'desc'): void {
 		const target = e.target as HTMLSelectElement
 
 		if (! target) return
@@ -25,26 +26,46 @@ class FilterSortViewModel implements IFilterSortViewModel {
 						const aDate = new Date(a.released)
 						const bDate = new Date(b.released)
 
-						return aDate.getTime() - bDate.getTime()
+						if (order === 'asc') {
+							return aDate.getTime() - bDate.getTime()
+						}
+
+						return bDate.getTime() - aDate.getTime()
 					}
 
 					case 'added': {
-						return a.added - b.added
+						if (order === 'asc') {
+							return a.added - b.added
+						}
+
+						return b.added - a.added
 					}
 
 					case 'updated': {
 						const aDate = new Date(a.updated)
 						const bDate = new Date(b.updated)
 
-						return aDate.getTime() - bDate.getTime()
+						if (order === 'asc') {
+							return aDate.getTime() - bDate.getTime()
+						}
+
+						return bDate.getTime() - aDate.getTime()
 					}
 
 					case 'metacritic': {
-						return a.metacritic - b.metacritic
+						if (order === 'asc') {
+							return a.metacritic - b.metacritic
+						}
+
+						return b.metacritic - a.metacritic
 					}
 				}
 
-				return a.name.localeCompare(b.name)
+				if (order === 'asc') {
+					return a.name.localeCompare(b.name)
+				}
+
+				return b.name.localeCompare(a.name)
 			})
 		})
 	}

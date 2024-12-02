@@ -8,9 +8,10 @@ import { RootContext } from '@data/context'
 
 interface IFilterSort {
 	parentViewModel: ISearchFilterViewModel
+	order: 'asc' | 'desc'
 }
 
-export function FilterSort({ parentViewModel }: IFilterSort) {
+export function FilterSort({ parentViewModel, order }: IFilterSort) {
 	const viewModel = new FilterSortViewModel()
 
 	const { setGames } = useContext(RootContext)
@@ -29,7 +30,7 @@ export function FilterSort({ parentViewModel }: IFilterSort) {
 			<label htmlFor="ordering">order by</label>
 			<select name="result_order"
 					id="ordering"
-					onChange={(e) => viewModel.sortResults(e, setGames)}>
+					onChange={(e) => viewModel.sortResults(e, setGames, order)}>
 				{orderingOptions}
 			</select>
 		</p>

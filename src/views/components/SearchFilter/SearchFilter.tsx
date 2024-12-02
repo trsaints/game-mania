@@ -16,6 +16,7 @@ export { SearchFilter }
 
 function SearchFilter(props: ISearchFilter) {
 	const [filters, setFilters] = useState<DataRequestParams>({})
+	const [order, setOrder]     = useState<'asc' | 'desc'>('asc')
 
 	useSearchPage(useContext(RootContext), filters)
 
@@ -25,7 +26,7 @@ function SearchFilter(props: ISearchFilter) {
 		<menu className={style.SearchFilter}
 			  onClick={(event) => viewModel.updateFilters(event, setFilters)}>
 			<li>
-				<FilterSort parentViewModel={viewModel}/>
+				<FilterSort parentViewModel={viewModel} order={order}/>
 			</li>
 
 			<li>
