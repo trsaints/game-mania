@@ -6,15 +6,18 @@ import {
 	GamePageListViewModel
 } from '@src/view-models/GamePageListViewModel.ts'
 import { Game } from '@data/types'
+import { SearchControls } from '@views/pages'
 
 
 export { GamePageList }
 
 const viewModel = new GamePageListViewModel()
 
-function GamePageList({ games }: IGamePageList) {
+function GamePageList(props: IGamePageList) {
 	const [itemCount, setItemCount]     = useState(10)
 	const [currentPage, setCurrentPage] = useState(0)
+
+	const { games, withFilter } = props
 
 	return (
 		<article className={style.GamePageList}>
@@ -26,6 +29,8 @@ function GamePageList({ games }: IGamePageList) {
 			<CountFilter onHandleSubmit={(e) => {
 				viewModel.changeItemCount(e, setItemCount)
 			}}/>
+
+			{withFilter && <SearchControls {...props} />}
 
 			<ListResults games={games}
 						 currentPage={currentPage}

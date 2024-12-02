@@ -5,7 +5,7 @@ import { ControlsClose } from '@views/pages/ControlsClose/ControlsClose.tsx'
 import { Genre, Platform, Publisher, Tag } from '@data/types'
 
 
-interface ISearchControls {
+export interface ISearchControls {
 	genres?: Genre[]
 	publishers?: Publisher[]
 	platforms?: Platform[]
