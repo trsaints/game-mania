@@ -26,7 +26,8 @@ function SearchFilter(props: ISearchFilter) {
 		<menu className={style.SearchFilter}
 			  onClick={(event) => viewModel.updateFilters(event, setFilters)}>
 			<li>
-				<FilterSort parentViewModel={viewModel}/>
+				<FilterSort parentViewModel={viewModel}
+							setFilters={setFilters}/>
 			</li>
 
 			<li>
