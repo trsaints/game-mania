@@ -1,7 +1,8 @@
 import { IRootContext } from '@data/context'
-import { Dispatch, SetStateAction, useState } from 'react'
+import { useState } from 'react'
 import style from '@views/pages/SearchPage/SearchPage.module.scss'
 import { SearchFilter } from '@views/components'
+import { ControlsClose } from '@views/pages/ControlsClose/ControlsClose.tsx'
 
 
 interface ISearchControls {
@@ -34,25 +35,3 @@ export function SearchControls({ context }: ISearchControls) {
 	)
 }
 
-interface IControlsClose {
-	isVisible: boolean
-	setIsVisible: Dispatch<SetStateAction<boolean>>
-}
-
-function ControlsClose({ isVisible, setIsVisible }: IControlsClose) {
-	const textSwitch = isVisible ? 'hide' : 'show'
-
-	return (
-		<menu>
-			<li>
-				<button className={style.Switch}
-						onClick={() => setIsVisible(! isVisible)}
-						type="button">
-								 <span className="sr-only">
-									 {textSwitch} filters
-								 </span>
-				</button>
-			</li>
-		</menu>
-	)
-}
