@@ -18,7 +18,7 @@ export function PanelHeader({ game, stylingUtils }: IPanelHeader) {
 			<p className={style.MetaCritic}>
 				rating:
 
-				<span style={inlineScoreStyles}>{game.metacritic}</span>
+				<span style={inlineScoreStyles}>{game.metacritic ?? '?'}</span>
 			</p>
 
 			<dl className={style.MetaData}>
