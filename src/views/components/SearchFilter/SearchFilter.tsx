@@ -27,26 +27,32 @@ function SearchFilter(props: ISearchFilter) {
 			</li>
 
 			<li>
-				<fieldset>
-					<legend>order</legend>
-
-					<label htmlFor="sort-asc">ascending</label>
-					<input type="radio"
-						   name="order"
-						   value="asc"
-						   id="sort-asc"
-						   checked/>
-
-					<label htmlFor="sort-desc">descending</label>
-					<input type="radio"
-						   name="order"
-						   value="desc"
-						   id="sort-desc"/>
-				</fieldset>
+				<FilterOrderSwitch/>
 			</li>
 
 			<MetadataFilters {...viewModel}/>
 		</menu>
+	)
+}
+
+function FilterOrderSwitch() {
+	return (
+		<fieldset>
+			<legend>order</legend>
+
+			<label htmlFor="sort-asc">ascending</label>
+			<input type="radio"
+				   name="order"
+				   value="asc"
+				   id="sort-asc"
+				   checked/>
+
+			<label htmlFor="sort-desc">descending</label>
+			<input type="radio"
+				   name="order"
+				   value="desc"
+				   id="sort-desc"/>
+		</fieldset>
 	)
 }
 
