@@ -1,6 +1,8 @@
 import { ISearchFilter } from './ISearchFilter'
 import style from './SearchFilter.module.scss'
-import { FilterSort, MetadataFilters } from '@views/components'
+import {
+	FilterOrderSwitch, FilterSort, MetadataFilters
+} from '@views/components'
 import {
 	SearchFilterViewModel
 } from '@src/view-models/SearchFilterViewModel.ts'
@@ -32,27 +34,6 @@ function SearchFilter(props: ISearchFilter) {
 
 			<MetadataFilters {...viewModel}/>
 		</menu>
-	)
-}
-
-function FilterOrderSwitch() {
-	return (
-		<fieldset>
-			<legend>order</legend>
-
-			<label htmlFor="sort-asc">ascending</label>
-			<input type="radio"
-				   name="order"
-				   value="asc"
-				   id="sort-asc"
-				   checked/>
-
-			<label htmlFor="sort-desc">descending</label>
-			<input type="radio"
-				   name="order"
-				   value="desc"
-				   id="sort-desc"/>
-		</fieldset>
 	)
 }
 
