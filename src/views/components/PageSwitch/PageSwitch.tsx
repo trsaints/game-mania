@@ -18,7 +18,7 @@ export function PageSwitch(props: IPageSwitch) {
 		))
 
 	return (
-		<menu className={style.PageSelection}
+		<menu className={style.PageSwitch}
 			  onClick={(e) => viewModel.changePage(e, setCurrentPage)}>
 			{pageButtons}
 		</menu>
