@@ -36,13 +36,7 @@ function GamePageList({ games }: IGamePageList) {
 						   onHandleClick={(e) => {
 							   viewModel.openGamePage(e)
 						   }}
-				/> : (
-					<aside className={style.EmptyPlaceholder}>
-						<h3>oops!</h3>
-						<p>We couldn't find any results based on your filters.
-							Maybe you should try to reset them</p>
-					</aside>
-				)
+				/> : <ListPlaceholder/>
 			}
 
 			<PageSelection gamesCount={games.length}
@@ -53,3 +47,12 @@ function GamePageList({ games }: IGamePageList) {
 	)
 }
 
+function ListPlaceholder() {
+	return (
+		<aside className={style.EmptyPlaceholder}>
+			<h3>oops!</h3>
+			<p>We couldn't find any results based on your filters.
+				Maybe you should try to reset them</p>
+		</aside>
+	)
+}
