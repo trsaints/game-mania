@@ -12,7 +12,7 @@ export { SearchFilterViewModel }
 class SearchFilterViewModel implements ISearchFilterViewModel {
 	constructor(props: ISearchFilter) {
 		this.ordering = [
-			'name', 'released', 'added', 'created', 'updated', 'rating',
+			'name', 'released', 'added', 'updated', 'rating',
 			'metacritic'
 		]
 
