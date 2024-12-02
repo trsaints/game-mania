@@ -39,10 +39,6 @@ class FilterSortViewModel implements IFilterSortViewModel {
 						return aDate.getTime() - bDate.getTime()
 					}
 
-					case 'rating': {
-						return a.rating - b.rating
-					}
-
 					case 'metacritic': {
 						return a.metacritic - b.metacritic
 					}
