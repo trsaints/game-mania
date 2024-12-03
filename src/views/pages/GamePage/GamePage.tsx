@@ -38,7 +38,7 @@ function GamePage() {
 						<GamePageList games={games.slice(0, 20)}/>
 					</>
 				)
-						 : <LoadingScreen />
+						 : <LoadingScreen/>
 			}
 		</article>
 	)

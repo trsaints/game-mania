@@ -1,1 +1,1 @@
-export { GenreFilter} from './GenreFilter'
+export { GenreFilter } from './GenreFilter'

@@ -14,8 +14,8 @@
 	overflow-x       : hidden;
 	white-space      : nowrap;
 
-	@media screen and (min-device-aspect-ratio: 1.7/1) {
-		height: fit-content;
+	@media screen and (min-device-aspect-ratio : 1.7/1) {
+		height : fit-content;
 	}
 
 	label, summary, select {

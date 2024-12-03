@@ -18,6 +18,21 @@ import { LocalDbFilter } from '@src/filters/LocalDbFilter.ts'
 
 
 class RootViewModel implements IRootViewModel {
+	public readonly apiMiddleware: IApiMiddleware
+	public readonly localDb: ILocalDb<ApiData>
+	public readonly apiService: IApiService
+	private readonly _typeUtils: ITypeUtils
+	private readonly _parserUtils: IParserUtils
+	private readonly _startupUtils: IStartupUtils
+	private readonly _dataServiceDictionary: DataServiceDictionary
+	private readonly _apiMiddlewareFilter: IApiMiddlewareFilter
+	private readonly _localDbFilter: ILocalDbFilter
+	private readonly _gameService: IGameService
+	private readonly _genreService: IDataService<Genre>
+	private readonly _platformService: IDataService<Platform>
+	private readonly _publisherService: IDataService<Publisher>
+	private readonly _tagService: IDataService<Tag>
+
 	constructor() {
 		this._parserUtils         = new ParserUtils()
 		this._typeUtils           = new TypeUtils()
@@ -49,23 +64,6 @@ class RootViewModel implements IRootViewModel {
 											   this._localDbFilter
 		)
 	}
-
-	private readonly _typeUtils: ITypeUtils
-	private readonly _parserUtils: IParserUtils
-	private readonly _startupUtils: IStartupUtils
-	private readonly _dataServiceDictionary: DataServiceDictionary
-	private readonly _apiMiddlewareFilter: IApiMiddlewareFilter
-	private readonly _localDbFilter: ILocalDbFilter
-
-	private readonly _gameService: IGameService
-	private readonly _genreService: IDataService<Genre>
-	private readonly _platformService: IDataService<Platform>
-	private readonly _publisherService: IDataService<Publisher>
-	private readonly _tagService: IDataService<Tag>
-
-	public readonly apiMiddleware: IApiMiddleware
-	public readonly localDb: ILocalDb<ApiData>
-	public readonly apiService: IApiService
 
 	async initializeDb(): Promise<void> {
 		if (this.localDb.isCreated()) return Promise.resolve()

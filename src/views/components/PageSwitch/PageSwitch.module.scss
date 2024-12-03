@@ -25,7 +25,7 @@
 		&:hover, &:focus {
 			transform        : scale(1.025);
 			background-color : palette.$cyan;
-			box-shadow: 0 0 8px palette.$cyan;
+			box-shadow       : 0 0 8px palette.$cyan;
 		}
 	}
 }

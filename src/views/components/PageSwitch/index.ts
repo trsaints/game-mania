@@ -1,1 +1,1 @@
-export { PageSwitch} from './PageSwitch'
+export { PageSwitch } from './PageSwitch'

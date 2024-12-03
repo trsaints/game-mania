@@ -10,31 +10,31 @@
 	}
 
 	.Menu {
-		display   : flex;
-		flex-wrap : wrap;
-		gap       : 2vmin;
-		max-width : clamp(350px, 100%, 50vw);
+		display       : flex;
+		flex-wrap     : wrap;
+		gap           : 2vmin;
+		max-width     : clamp(350px, 100%, 50vw);
 		margin-bottom : 5vmax;
 
 		.Option {
 			text-transform : uppercase;
 			border-radius  : 64px;
-			font-size: 0.9rem;
+			font-size      : 0.9rem;
 
 			&:hover, &:focus {
-				background-color: palette.$cyan;
-				box-shadow: 0 0 8px palette.$cyan;
-				transform: scale(1.025);
+				background-color : palette.$cyan;
+				box-shadow       : 0 0 8px palette.$cyan;
+				transform        : scale(1.025);
 			}
 
 			&:active {
-				transform: scale(1);
+				transform : scale(1);
 			}
 		}
 	}
 }
 
 .selected {
-	background-color: palette.$cyan;
-	box-shadow: 0 0 8px palette.$cyan;
+	background-color : palette.$cyan;
+	box-shadow       : 0 0 8px palette.$cyan;
 }

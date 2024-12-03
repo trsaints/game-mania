@@ -1,1 +1,1 @@
-export {GamePanel } from './GamePanel'
+export { GamePanel } from './GamePanel'

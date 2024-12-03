@@ -1,20 +1,20 @@
 .FilterOrderSwitch {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	column-gap: 2ch;
+	display               : grid;
+	grid-template-columns : 1fr 1fr;
+	column-gap            : 2ch;
 
 	legend {
-		text-transform: uppercase;
-		margin-bottom: 1ch;
+		text-transform : uppercase;
+		margin-bottom  : 1ch;
 	}
 
 	label {
-		margin-right: 1ch;
+		margin-right : 1ch;
 	}
 
 	p {
-		display: grid;
-		grid-template-columns: auto 1fr;
-		width: fit-content;
+		display               : grid;
+		grid-template-columns : auto 1fr;
+		width                 : fit-content;
 	}
 }

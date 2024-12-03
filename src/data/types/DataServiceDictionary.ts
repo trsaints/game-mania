@@ -3,6 +3,12 @@ import { IDataService, IGameService } from '@src/services'
 
 
 export class DataServiceDictionary {
+	public readonly games: IGameService
+	public readonly genres: IDataService<Genre>
+	public readonly platforms: IDataService<Platform>
+	public readonly publishers: IDataService<Publisher>
+	public readonly tags: IDataService<Tag>
+
 	constructor(
 		gameService: IGameService,
 		genreService: IDataService<Genre>,
@@ -16,10 +22,4 @@ export class DataServiceDictionary {
 		this.publishers = publisherService
 		this.tags       = tagService
 	}
-
-	public readonly games: IGameService
-	public readonly genres: IDataService<Genre>
-	public readonly platforms: IDataService<Platform>
-	public readonly publishers: IDataService<Publisher>
-	public readonly tags: IDataService<Tag>
 }

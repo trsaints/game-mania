@@ -1,1 +1,1 @@
-export { ScreenshotsList} from './ScreenshotsList'
+export { ScreenshotsList } from './ScreenshotsList'

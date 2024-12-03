@@ -1,1 +1,1 @@
-export { FilterOrderSwitch} from './FilterOrderSwitch'
+export { FilterOrderSwitch } from './FilterOrderSwitch'

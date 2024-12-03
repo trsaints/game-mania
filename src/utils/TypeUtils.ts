@@ -4,6 +4,7 @@ import {
 import { IParserUtils, ITypeUtils } from '@utils/interfaces'
 import { SortKey } from '@data/types/SortKey.ts'
 
+
 export class TypeUtils implements ITypeUtils {
 	mapToGame(data: never, parserUtils: IParserUtils): Game {
 		const mappedData = parserUtils.mapToCamelCase(data) as Game
@@ -40,29 +41,6 @@ export class TypeUtils implements ITypeUtils {
 		}
 
 		return mappedData
-	}
-
-	private mapToStores(stores: Store[], parserUtils: IParserUtils): Store[] {
-		return stores.map(store => {
-			store.store
-				=
-				parserUtils.mapToCamelCase(store.store as never) as typeof store.store
-
-			return store
-		})
-	}
-
-	private mapToGamesPlatforms(platforms: GamesPlatform[],
-								parserUtils: IParserUtils
-	): GamesPlatform[] {
-		if (platforms === null) return []
-
-		return platforms.map(mainPlatform => {
-			mainPlatform.platform =
-				parserUtils.mapToCamelCase(mainPlatform.platform as never) as Platform
-
-			return parserUtils.mapToCamelCase(mainPlatform as never) as GamesPlatform
-		})
 	}
 
 	sortGames(games: Game[],
@@ -123,6 +101,29 @@ export class TypeUtils implements ITypeUtils {
 			}
 
 			return b.name.localeCompare(a.name)
+		})
+	}
+
+	private mapToStores(stores: Store[], parserUtils: IParserUtils): Store[] {
+		return stores.map(store => {
+			store.store
+				=
+				parserUtils.mapToCamelCase(store.store as never) as typeof store.store
+
+			return store
+		})
+	}
+
+	private mapToGamesPlatforms(platforms: GamesPlatform[],
+								parserUtils: IParserUtils
+	): GamesPlatform[] {
+		if (platforms === null) return []
+
+		return platforms.map(mainPlatform => {
+			mainPlatform.platform =
+				parserUtils.mapToCamelCase(mainPlatform.platform as never) as Platform
+
+			return parserUtils.mapToCamelCase(mainPlatform as never) as GamesPlatform
 		})
 	}
 }

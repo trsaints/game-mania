@@ -18,7 +18,7 @@ class PageSwitchViewModel implements IPageSwitchViewModel {
 		setCurrentPage(Number(pressedButton.dataset['page']))
 
 		setTimeout(() => {
-			const pageHeader = document.getElementById("results-count")
+			const pageHeader = document.getElementById('results-count')
 
 			if (pageHeader) {
 				pageHeader.scrollIntoView({ behavior: 'smooth' })

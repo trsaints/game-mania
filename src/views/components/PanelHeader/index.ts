@@ -1,1 +1,1 @@
-export { PanelHeader} from './PanelHeader'
+export { PanelHeader } from './PanelHeader'

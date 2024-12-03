@@ -7,7 +7,7 @@
 	margin-bottom : 10vmax;
 	position      : relative;
 	isolation     : isolate;
-	animation: fade-in 0.2s forwards ease-out;
+	animation     : fade-in 0.2s forwards ease-out;
 
 	.Content {
 		background-color : color.scale(palette.$black-d5, $alpha : -20%);
@@ -33,7 +33,7 @@
 	height            : 100%;
 	animation         : fade-in-out 2s forwards ease-out;
 
-	@media screen and (min-device-aspect-ratio: 1.7/1) {
+	@media screen and (min-device-aspect-ratio : 1.7/1) {
 		background-image : url("/GamePanel_Skeleton-Desktop.svg");
 	}
 }
