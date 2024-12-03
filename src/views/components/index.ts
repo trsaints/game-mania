@@ -33,3 +33,4 @@ export { FilterSort } from '@views/components/FilterSort'
 export {
 	FilterOrderSwitch
 } from '@views/components/FilterOrderSwitch'
+export { SearchControls } from '@views/components/SearchControls'

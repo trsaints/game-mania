@@ -6,7 +6,7 @@ import {
 	GamePageListViewModel
 } from '@src/view-models/GamePageListViewModel.ts'
 import { Game } from '@data/types'
-import { SearchControls } from '@views/pages'
+import { SearchControls } from '@views/components'
 
 
 export { GamePageList }
