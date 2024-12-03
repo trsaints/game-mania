@@ -1,5 +1,5 @@
 import style from './SearchPage.module.scss'
-import { CountFilter, GamePageList } from '@views/components'
+import { CountFilter, GamePageList, PageSelection } from '@views/components'
 import { useContext } from 'react'
 import { RootContext } from '@data/context'
 import { usePageList } from '@src/hooks/usePageList.ts'
@@ -28,6 +28,9 @@ function SearchPage() {
 					<GamePageList.ListResults games={games}
 											  {...pageStates}
 											  viewModel={pageListViewModel}/>
+					<PageSelection gamesCount={games.length}
+								   {...pageStates}
+								   parentViewModel={pageListViewModel}/>
 				</GamePageList.Root>
 			)}
 		</div>

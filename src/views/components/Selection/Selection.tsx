@@ -1,7 +1,7 @@
 import { ISelection } from './ISelection'
 import style from './Selection.module.scss'
 import { useState } from 'react'
-import { CountFilter, GamePageList } from '@views/components'
+import { CountFilter, GamePageList, PageSelection } from '@views/components'
 import { SelectionViewModel } from '@src/view-models/SelectionViewModel.ts'
 import { GenreFilter } from '@views/components/GenreFilter/GenreFilter.tsx'
 import { usePageList } from '@src/hooks/usePageList.ts'
@@ -34,6 +34,9 @@ export function Selection({ games, genres }: ISelection) {
 				<GamePageList.ListResults games={filteredGames}
 										  {...pageStates}
 										  viewModel={pageListViewModel}/>
+				<PageSelection gamesCount={filteredGames.length}
+							   {...pageStates}
+							   parentViewModel={pageListViewModel}/>
 			</GamePageList.Root>
 		</article>)
 }

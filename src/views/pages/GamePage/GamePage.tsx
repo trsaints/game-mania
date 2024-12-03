@@ -3,7 +3,9 @@ import { useContext, useState } from 'react'
 import { RootContext } from '@data/context'
 import { useLoaderData } from 'react-router-dom'
 import { Game } from '@data/types'
-import { CountFilter, GamePageList, GamePanel } from '@views/components'
+import {
+	CountFilter, GamePageList, GamePanel, PageSelection
+} from '@views/components'
 import { useGamePage } from '@src/hooks/useGamePage.ts'
 import { GameDetails } from '@views/components/GameDetails'
 import { LoadingScreen } from '@views/components/LoadingScreen'
@@ -27,30 +29,33 @@ function GamePage() {
 
 	useGamePage(rootContext, searchParams, setSelectedGame, gameGenres)
 	const pageListViewModel = new GamePageListViewModel()
+	const filteredGames     = games?.slice(0, 20) ?? []
 
 	return (
 		<article className={style.GamePage}
 				 id="game-page"
 		>
 			{
-				selectedGame
-				&& games ? (
-					<>
-						<GamePanel game={selectedGame}/>
-						<GameDetails game={selectedGame}/>
+				selectedGame ? (
+								 <>
+									 <GamePanel game={selectedGame}/>
+									 <GameDetails game={selectedGame}/>
 
-						<GamePageList.Root games={games.slice(0, 20)}>
-							<CountFilter onHandleSubmit={(e) => {
-								pageListViewModel.changeItemCount(e,
-																  pageStates.setItemCount)
-							}}/>
-							<GamePageList.ListResults games={games.slice(0, 20)}
-													  {...pageStates}
-													  viewModel={pageListViewModel}/>
-						</GamePageList.Root>
-					</>
-				)
-						 : <LoadingScreen/>
+									 <GamePageList.Root games={filteredGames}>
+										 <CountFilter onHandleSubmit={(e) => {
+											 pageListViewModel.changeItemCount(e,
+																			   pageStates.setItemCount)
+										 }}/>
+										 <GamePageList.ListResults games={filteredGames}
+																   {...pageStates}
+																   viewModel={pageListViewModel}/>
+										 <PageSelection gamesCount={filteredGames.length}
+														{...pageStates}
+														parentViewModel={pageListViewModel}/>
+									 </GamePageList.Root>
+								 </>
+							 )
+							 : <LoadingScreen/>
 			}
 		</article>
 	)
