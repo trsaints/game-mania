@@ -8,6 +8,9 @@ import { useGamePage } from '@src/hooks/useGamePage.ts'
 import { GameDetails } from '@views/components/GameDetails'
 import { LoadingScreen } from '@views/components/LoadingScreen'
 import { usePageList } from '@src/hooks/usePageList.ts'
+import {
+	GamePageListViewModel
+} from '@src/view-models/GamePageListViewModel.ts'
 
 
 export type GameId = { id: string }
@@ -33,12 +36,12 @@ function GamePage() {
 				&& games ? (
 					<>
 						<GamePanel game={selectedGame}/>
-
 						<GameDetails game={selectedGame}/>
 
-
 						<GamePageList.Root games={games.slice(0, 20)}>
-
+							<GamePageList.ListResults games={games.slice(0, 20)}
+													  {...pageStates}
+													  viewModel={new GamePageListViewModel()}/>
 						</GamePageList.Root>
 					</>
 				)

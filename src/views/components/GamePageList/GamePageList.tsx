@@ -1,19 +1,18 @@
 import { IGamePageList } from './IGamePageList.ts'
 import style from './GamePageList.module.scss'
 import { GamesList } from '@views/components'
-import {
-	GamePageListViewModel
-} from '@src/view-models/GamePageListViewModel.ts'
 import { Game } from '@data/types'
+import {
+	IGamePageListViewModel
+} from '@src/view-models/interfaces/IGamePageListViewModel.ts'
 
 
 export const GamePageList = {
-	Root
+	Root,
+	ListResults
 }
 
 function Root(props: IGamePageList) {
-	const viewModel = new GamePageListViewModel()
-
 	const { games, children } = props
 
 	return (
@@ -32,9 +31,12 @@ interface IListResults {
 	games: Game[]
 	currentPage: number
 	itemCount: number
+	viewModel: IGamePageListViewModel
 }
 
-function ListResults({ games, currentPage, itemCount }: IListResults) {
+function ListResults(props: IListResults) {
+	const { games, currentPage, itemCount, viewModel } = props
+
 	const currentGames = games.slice(currentPage * itemCount,
 									 itemCount + (currentPage * itemCount))
 
