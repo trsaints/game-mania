@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import style from '@views/pages/SearchPage/SearchPage.module.scss'
 import { SearchFilter } from '@views/components'
-import { ControlsClose } from '@views/components/ControlsClose/ControlsClose.tsx'
+import {
+	ControlsClose
+} from '@views/components/ControlsClose/ControlsClose.tsx'
 import { Genre, Platform, Publisher, Tag } from '@data/types'
 
 

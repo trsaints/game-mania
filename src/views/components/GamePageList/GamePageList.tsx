@@ -1,12 +1,13 @@
 import { IGamePageList } from './IGamePageList.ts'
 import style from './GamePageList.module.scss'
-import { CountFilter, GamesList, PageSelection } from '@views/components'
+import {
+	CountFilter, GamesList, PageSelection, SearchControls
+} from '@views/components'
 import { useState } from 'react'
 import {
 	GamePageListViewModel
 } from '@src/view-models/GamePageListViewModel.ts'
 import { Game } from '@data/types'
-import { SearchControls } from '@views/components'
 
 
 export { GamePageList }

@@ -1,1 +1,1 @@
-export {SearchControls} from './SearchControls.tsx'
+export { SearchControls } from './SearchControls.tsx'
