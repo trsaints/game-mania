@@ -25,9 +25,11 @@ export function Selection({ games, genres }: ISelection) {
 			<h3 className={style.MainHeader}>Navigate by genre</h3>
 
 			<GenreFilter genres={genres}/>
+
 			<GamePageList.Root games={filteredGames}>
 				<CountFilter onHandleSubmit={(e) => {
-					pageListViewModel.changeItemCount(e, pageStates.setItemCount)
+					pageListViewModel.changeItemCount(e,
+													  pageStates.setItemCount)
 				}}/>
 				<GamePageList.ListResults games={filteredGames}
 										  {...pageStates}

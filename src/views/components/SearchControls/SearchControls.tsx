@@ -8,10 +8,10 @@ import { Genre, Platform, Publisher, Tag } from '@data/types'
 
 
 export interface ISearchControls {
-	genres?: Genre[]
-	publishers?: Publisher[]
-	platforms?: Platform[]
-	tags?: Tag[]
+	genres: Genre[]
+	publishers: Publisher[]
+	platforms: Platform[]
+	tags: Tag[]
 }
 
 export function SearchControls(props: ISearchControls) {
@@ -22,8 +22,6 @@ export function SearchControls(props: ISearchControls) {
 						   : style.SearchControls
 
 	const { genres, publishers, platforms, tags } = props
-
-	if (! genres || ! publishers || ! platforms || ! tags) return (<></>)
 
 	return (
 		<aside className={filterSelector}>
