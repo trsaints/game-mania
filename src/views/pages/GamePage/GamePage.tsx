@@ -7,12 +7,14 @@ import { GamePageList, GamePanel } from '@views/components'
 import { useGamePage } from '@src/hooks/useGamePage.ts'
 import { GameDetails } from '@views/components/GameDetails'
 import { LoadingScreen } from '@views/components/LoadingScreen'
+import { usePageList } from '@src/hooks/usePageList.ts'
 
 
 export type GameId = { id: string }
 
 function GamePage() {
 	const rootContext = useContext(RootContext)
+	const pageStates  = usePageList()
 	const { games }   = rootContext
 
 	const searchParams = useLoaderData() as GameId
@@ -35,7 +37,7 @@ function GamePage() {
 						<GameDetails game={selectedGame}/>
 
 
-						<GamePageList.Root games={games.slice(0,20)}>
+						<GamePageList.Root games={games.slice(0, 20)}>
 
 						</GamePageList.Root>
 					</>

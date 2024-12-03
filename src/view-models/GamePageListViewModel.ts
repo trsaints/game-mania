@@ -45,6 +45,4 @@ class GamePageListViewModel implements IGamePageListViewModel {
 
 		setItemCount(newCount)
 	}
-
-
 }

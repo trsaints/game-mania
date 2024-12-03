@@ -1,7 +1,6 @@
 import { IGamePageList } from './IGamePageList.ts'
 import style from './GamePageList.module.scss'
 import { GamesList } from '@views/components'
-import { useState } from 'react'
 import {
 	GamePageListViewModel
 } from '@src/view-models/GamePageListViewModel.ts'
@@ -14,9 +13,6 @@ export const GamePageList = {
 
 function Root(props: IGamePageList) {
 	const viewModel = new GamePageListViewModel()
-
-	const [itemCount, setItemCount]     = useState(10)
-	const [currentPage, setCurrentPage] = useState(0)
 
 	const { games, children } = props
 
@@ -39,7 +35,6 @@ interface IListResults {
 }
 
 function ListResults({ games, currentPage, itemCount }: IListResults) {
-
 	const currentGames = games.slice(currentPage * itemCount,
 									 itemCount + (currentPage * itemCount))
 
