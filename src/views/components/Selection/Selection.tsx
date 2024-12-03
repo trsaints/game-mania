@@ -19,7 +19,7 @@ export function Selection({ games, genres }: ISelection) {
 			<h3 className={style.MainHeader}>Navigate by genre</h3>
 
 			<GenreFilter genres={genres}/>
-			<GamePageList games={filteredGames}/>
+			<GamePageList.Root games={filteredGames}></GamePageList.Root>
 		</article>)
 }
 

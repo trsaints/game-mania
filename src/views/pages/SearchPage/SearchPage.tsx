@@ -13,7 +13,7 @@ function SearchPage() {
 
 	return (
 		<div className={style.SearchPage}>
-			{games && <GamePageList games={games} withFilter {...rootContext}/>}
+			{games && <GamePageList.Root games={games}></GamePageList.Root>}
 		</div>
 	)
 }

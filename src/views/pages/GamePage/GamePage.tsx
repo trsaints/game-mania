@@ -35,7 +35,9 @@ function GamePage() {
 						<GameDetails game={selectedGame}/>
 
 
-						<GamePageList games={games.slice(0, 20)}/>
+						<GamePageList.Root games={games.slice(0,20)}>
+
+						</GamePageList.Root>
 					</>
 				)
 						 : <LoadingScreen/>

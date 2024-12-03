@@ -1,8 +1,6 @@
 import { IGamePageList } from './IGamePageList.ts'
 import style from './GamePageList.module.scss'
-import {
-	CountFilter, GamesList, PageSelection, SearchControls
-} from '@views/components'
+import { GamesList } from '@views/components'
 import { useState } from 'react'
 import {
 	GamePageListViewModel
@@ -10,15 +8,17 @@ import {
 import { Game } from '@data/types'
 
 
-export { GamePageList }
+export const GamePageList = {
+	Root
+}
 
-const viewModel = new GamePageListViewModel()
+function Root(props: IGamePageList) {
+	const viewModel = new GamePageListViewModel()
 
-function GamePageList(props: IGamePageList) {
 	const [itemCount, setItemCount]     = useState(10)
 	const [currentPage, setCurrentPage] = useState(0)
 
-	const { games, withFilter } = props
+	const { games, children } = props
 
 	return (
 		<article className={style.GamePageList}>
@@ -27,20 +27,7 @@ function GamePageList(props: IGamePageList) {
 				{games.length} games found
 			</h3>
 
-			<CountFilter onHandleSubmit={(e) => {
-				viewModel.changeItemCount(e, setItemCount)
-			}}/>
-
-			{withFilter && <SearchControls {...props} />}
-
-			<ListResults games={games}
-						 currentPage={currentPage}
-						 itemCount={itemCount}/>
-
-			<PageSelection gamesCount={games.length}
-						   itemCount={itemCount}
-						   setCurrentPage={setCurrentPage}
-						   parentViewModel={viewModel}/>
+			{children}
 		</article>
 	)
 }

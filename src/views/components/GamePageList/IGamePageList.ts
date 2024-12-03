@@ -8,5 +8,4 @@ import {
 export interface IGamePageList extends ComponentProps<'article'>,
 									   ISearchControls {
 	games: Game[]
-	withFilter?: boolean
 }
