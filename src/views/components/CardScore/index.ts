@@ -1,0 +1,1 @@
+export { CardScore } from './CardScore'

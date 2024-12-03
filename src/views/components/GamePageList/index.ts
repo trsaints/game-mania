@@ -1,1 +1,1 @@
-export * from './GamePageList'
+export {GamePageList} from './GamePageList'
