@@ -1,1 +1,1 @@
-export { SearchWidget } from './SearchWidget.ts'
+export { SearchWidget } from './SearchWidget'
