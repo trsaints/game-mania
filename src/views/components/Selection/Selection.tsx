@@ -10,19 +10,19 @@ import {
 } from '@src/view-models/GamePageListViewModel.ts'
 
 
-const viewModel = new SelectionViewModel()
-
 export function Selection({ games, genres }: ISelection) {
-	const [selectedGenre, setSelectedGenre] = useState<string>('action')
-	const pageStates                        = usePageList()
-
-	const filteredGames     = viewModel.filterByGenre(games, selectedGenre)
+	const viewModel         = new SelectionViewModel()
 	const pageListViewModel = new GamePageListViewModel()
+
+	const [selectedGenre, setSelectedGenre] = useState<string>('action')
+
+	const pageStates    = usePageList()
+	const filteredGames = viewModel.filterByGenre(games, selectedGenre)
 
 	return (
 		<article className={style.Selection}
 				 onClick={(e) => viewModel.displayByGenre(e, setSelectedGenre)}>
-			<h3 className={style.MainHeader}>Navigate by genre</h3>
+			<h3 className={style.MainHeader}>navigate by genre</h3>
 
 			<GenreFilter genres={genres}/>
 
