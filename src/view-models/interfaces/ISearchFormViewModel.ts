@@ -9,6 +9,6 @@ export interface ISearchFormViewModel {
 	search(e: React.FormEvent<HTMLFormElement>,
 		   apiMiddleware: IApiMiddleware | undefined,
 		   navigator: NavigateFunction,
-		   setGames: Dispatch<React.SetStateAction<Game[] | undefined>>
+		   setGames: Dispatch<React.SetStateAction<Game[]>>
 	): void
 }

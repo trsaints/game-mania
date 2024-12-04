@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useEffect } from 'react'
 import { Game } from '@data/types'
 import { IRootContext } from '@data/context'
-import { GameId } from '@views/pages'
+import { GameId } from '@data/types/GameId.ts'
 
 
 export function useGamePage(context: IRootContext,
