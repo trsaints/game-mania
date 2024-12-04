@@ -97,9 +97,15 @@
 		padding          : 2.5vmin 5vmin;
 
 		.SearchSection {
-			&[open] .SearchOptions {
-				position  : absolute;
-				animation : fade-in 0.1s ease-in forwards;
+			&[open] {
+				.SearchOptions {
+					position  : absolute;
+					animation : fade-in 0.1s ease-in forwards;
+				}
+
+				summary svg {
+					transform: rotate(90deg);
+				}
 			}
 
 			.SearchOptions {

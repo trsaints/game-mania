@@ -26,6 +26,10 @@
 	details[open] {
 		summary {
 			margin-bottom : 2vmax;
+
+			svg {
+				transform: rotate(90deg);
+			}
 		}
 	}
 

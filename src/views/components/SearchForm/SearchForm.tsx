@@ -3,6 +3,8 @@ import { RootContext } from '@data/context'
 import { Form, useNavigate } from 'react-router-dom'
 import style from '@views/components/SearchWidget/SearchWidget.module.scss'
 import { SearchFormViewModel } from '@src/view-models/SearchFormViewModel.ts'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 
 const viewModel = new SearchFormViewModel()
@@ -36,6 +38,7 @@ export function SearchForm() {
 					type="submit"
 			>
 				Search
+				<FontAwesomeIcon icon={faSearch} className='icon--right' />
 			</button>
 		</Form>
 	)

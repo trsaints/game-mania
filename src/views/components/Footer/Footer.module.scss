@@ -13,6 +13,10 @@
 	.Navigation {
 		text-transform : capitalize;
 
+		&[open] summary svg {
+			transform: rotate(90deg);
+		}
+
 		summary {
 			font-size : 1.2rem;
 		}
