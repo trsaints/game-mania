@@ -4,16 +4,18 @@
 .MainMenu {
 	background-color : transparent;
 	position         : relative;
+	white-space      : nowrap;
 
-	summary {
-		white-space    : nowrap;
-		text-align     : center;
-		color          : palette.$cyan;
-		width          : min-content;
-		padding        : 0.5rem 1rem;
-		border-radius  : 8px;
-		text-transform : uppercase;
-		border         : 2px solid;
+	button {
+		white-space      : nowrap;
+		text-align       : center;
+		background-color : palette.$black-d5;
+		color            : palette.$cyan;
+		width            : min-content;
+		padding          : 0.5rem 1rem;
+		border-radius    : 8px;
+		text-transform   : uppercase;
+		border           : 2px solid;
 
 		&:hover, &:focus {
 			transform        : scale(1.025);
@@ -36,7 +38,6 @@
 		top              : 0;
 		left             : 0;
 		margin-inline    : auto;
-		z-index          : 10;
 		margin-top       : calc(5vmin + 1rem + 4px + 12px);
 		box-shadow       : 0 0 4px palette.$black-d5;
 		border-radius    : 16px;

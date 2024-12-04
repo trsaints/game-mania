@@ -10,6 +10,9 @@
 	right            : 5vmin;
 	border-radius    : 8px;
 	box-shadow       : 0 0 8px palette.$black-d5;
+	text-align       : center;
+	padding          : 1rem;
+	color            : black;
 
 	&:hover, &:focus {
 		transform  : scale(1.025);
