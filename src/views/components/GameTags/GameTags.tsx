@@ -1,21 +1,30 @@
 import { IGameTags } from '@views/components/GameTags/IGameTags.ts'
 import style from './GameTags.module.scss'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleInfo, faTags } from '@fortawesome/free-solid-svg-icons'
 
 
 export function GameTags({ game, count, baseAlignment }: IGameTags) {
 	const gameGenres = game.genres
 						   .slice(0, count)
-						   .map(g =>
+						   .map(g => (
 									<li className={style.GenreTag}
 										key={`t-${g.id}`}
-									>{g.name}</li>
+									>
+										{g.name}
+										<FontAwesomeIcon icon={faCircleInfo} className='icon--right'/>
+									</li>
+								)
 						   )
 
 	const gameTags = game.tags.slice(0, count)
-						 .map(t =>
+						 .map(t => (
 								  <li className={style.GenreTag}
 									  key={`t-${t.id}`}
-								  >{t.name}</li>
+								  >
+									  {t.name} <FontAwesomeIcon icon={faTags} className='icon--right'/>
+								  </li>
+							  )
 						 )
 
 	const alignmentStyles = {

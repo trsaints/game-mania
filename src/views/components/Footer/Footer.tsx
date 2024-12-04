@@ -1,4 +1,9 @@
 import style from './Footer.module.scss'
+import {
+	faArrowUpRightFromSquare, faCircleChevronRight
+} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Link } from 'react-router-dom'
 
 
 function Footer() {
@@ -18,12 +23,25 @@ function Footer() {
 			</header>
 
 			<details className={style.Navigation}>
-				<summary>navigate by</summary>
+				<summary>
+					navigate by
+					<FontAwesomeIcon icon={faCircleChevronRight}
+									 className="icon--right"/>
+				</summary>
 
 				<nav>
-					<a href="#genres">genres</a>
-					<a href="#tags">tags</a>
-					<a href="#publishers">publishers</a>
+					<Link to="/search">genres
+						<FontAwesomeIcon icon={faArrowUpRightFromSquare}
+										 className="icon--right"/>
+					</Link>
+					<Link to="/search">tags
+						<FontAwesomeIcon icon={faArrowUpRightFromSquare}
+										 className="icon--right"/>
+					</Link>
+					<Link to="/search">publishers
+						<FontAwesomeIcon icon={faArrowUpRightFromSquare}
+										 className="icon--right"/>
+					</Link>
 				</nav>
 			</details>
 

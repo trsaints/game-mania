@@ -1,1 +1,1 @@
-export { SearchNavbar } from './SearchNavbar'
+export { SearchMenu } from './SearchMenu.tsx'

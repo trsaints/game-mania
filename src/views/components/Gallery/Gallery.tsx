@@ -3,6 +3,8 @@ import { IGallery } from './IGallery'
 import { PanelBanner } from '@views/components'
 import { ImageCommons } from '@data/types'
 import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
 
 
 export { Gallery }
@@ -17,7 +19,11 @@ function Gallery({ game }: IGallery) {
 
 			<PanelBanner name={game.name} images={imagesToLoad}/>
 
-			<Link to={`search/${game.id}`}>visit "{game.name}" game page</Link>
+			<Link to={`search/${game.id}`}>
+				visit "{game.name}" game page
+				<FontAwesomeIcon icon={faArrowUpRightFromSquare}
+								 className="icon--right"/>
+			</Link>
 		</aside>
 	)
 }

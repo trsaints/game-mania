@@ -5,6 +5,8 @@ import {
 	CustomPageSelectionViewModel
 } from '@src/view-models/CustomPageSelectionViewModel.ts'
 import style from './CustomPageSelection.module.scss'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons'
 
 
 const viewModel = new CustomPageSelectionViewModel()
@@ -21,7 +23,10 @@ export function CustomPageSelection(props: ICustomPageSelection) {
 				<input type="tel" name="custom-page" id="custom-page"/>
 			</p>
 
-			<button type="submit">save</button>
+			<button type="submit">
+				save
+				<FontAwesomeIcon icon={faArrowsRotate} className='icon--right' />
+			</button>
 		</form>
 	)
 }
