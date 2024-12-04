@@ -2,7 +2,7 @@ import style from './GamePage.module.scss'
 import { useContext, useState } from 'react'
 import { RootContext } from '@data/context'
 import { useLoaderData } from 'react-router-dom'
-import { Game } from '@data/types'
+import { Game, GameId } from '@data/types'
 import {
 	CountFilter, GamePageList, GamePanel, PageSelection
 } from '@views/components'
@@ -14,8 +14,6 @@ import {
 	GamePageListViewModel
 } from '@src/view-models/GamePageListViewModel.ts'
 
-
-export type GameId = { id: string }
 
 function GamePage() {
 	const rootContext = useContext(RootContext)
