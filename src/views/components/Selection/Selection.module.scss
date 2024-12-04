@@ -1,7 +1,7 @@
 @use "src/palette";
 
 .Selection {
-	.MainHeader, .Menu {
+	.MainHeader, .GenreFilter {
 		padding-inline : 5vw;
 	}
 
@@ -9,7 +9,7 @@
 		margin-bottom : 5vmax;
 	}
 
-	.Menu {
+	.GenreFilter {
 		display       : flex;
 		flex-wrap     : wrap;
 		gap           : 2vmin;
