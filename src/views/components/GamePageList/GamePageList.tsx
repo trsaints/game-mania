@@ -13,10 +13,14 @@ export const GamePageList = {
 }
 
 function Root(props: IGamePageList) {
-	const { games, children } = props
+	const { games, children, withFilter } = props
+
+	const className = withFilter
+					  ? `${style.GamePageList} ${style.WithFilter}`
+					  : style.GamePageList
 
 	return (
-		<article className={style.GamePageList}>
+		<article className={className}>
 			<h3 className={style.ResultsCount}
 				id="results-count">
 				{games.length} games found

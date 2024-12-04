@@ -30,7 +30,7 @@ function SearchPage() {
 	return (
 		<div className={style.SearchPage}>
 			{games && (
-				<GamePageList.Root games={games}>
+				<GamePageList.Root games={games} withFilter>
 					<CountFilter onHandleSubmit={(e) => {
 						pageListViewModel.changeItemCount(e,
 														  pageStates.setItemCount)

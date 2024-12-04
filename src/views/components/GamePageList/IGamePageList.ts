@@ -4,4 +4,5 @@ import { Game } from '@data/types'
 
 export interface IGamePageList extends ComponentProps<'article'> {
 	games: Game[]
+	withFilter?: boolean
 }
