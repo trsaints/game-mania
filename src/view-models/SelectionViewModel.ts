@@ -3,6 +3,7 @@ import {
 	ISelectionViewModel
 } from '@src/view-models/interfaces/ISelectionViewModel.ts'
 import React, { Dispatch, SetStateAction } from 'react'
+import style from '@views/components/Selection/Selection.module.scss'
 
 
 export { SelectionViewModel }
@@ -26,6 +27,26 @@ class SelectionViewModel implements ISelectionViewModel {
 			return
 		}
 
-		setSelectedGenre(listItem.dataset['slug'] ?? '')
+		const slug = listItem.dataset['slug'] as string
+
+		setSelectedGenre(slug)
+		this.highlightSelectedGenre(slug)
+	}
+
+	highlightSelectedGenre(slug: string): void {
+		const genreList = document.querySelectorAll('[data-slug]')
+
+		genreList.forEach((li) => {
+			const target = li as HTMLElement
+			const button = target.querySelector('button') as HTMLButtonElement
+
+			if (! button) return
+
+			if (target.dataset['slug'] === slug) {
+				button.classList.add(style.Selected)
+			} else {
+				button.classList.remove(style.Selected)
+			}
+		})
 	}
 }
