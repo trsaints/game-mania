@@ -1,1 +1,1 @@
-export * from './GamePage.tsx'
+export { GamePage } from './GamePage.tsx'

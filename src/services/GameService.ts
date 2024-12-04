@@ -6,13 +6,13 @@ import { IParserUtils, ITypeUtils } from '@src/utils'
 
 
 export class GameService implements IGameService {
+	private readonly _parserUtils: IParserUtils
+	private readonly _typeUtils: ITypeUtils
+
 	constructor(parserUtils: IParserUtils, typeUtils: ITypeUtils) {
 		this._parserUtils = parserUtils
 		this._typeUtils   = typeUtils
 	}
-
-	private readonly _parserUtils: IParserUtils
-	private readonly _typeUtils: ITypeUtils
 
 	async getAll(params: DataRequestParams,
 				 apiService: IApiService

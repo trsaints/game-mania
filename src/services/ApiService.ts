@@ -9,7 +9,8 @@ export class ApiService implements IApiService {
 										   })
 
 	createRouteUrl(route: string): string {
-		console.log("generated route url: ", `${import.meta.env.VITE_API_URL_BACKEND}/${route}`)
+		console.log('generated route url: ',
+					`${import.meta.env.VITE_API_URL_BACKEND}/${route}`)
 
 		return `${import.meta.env.VITE_API_URL_BACKEND}/${route}`
 	}

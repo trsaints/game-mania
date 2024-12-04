@@ -1,1 +1,1 @@
-export * from './SearchFilter'
+export { SearchFilter } from './SearchFilter'

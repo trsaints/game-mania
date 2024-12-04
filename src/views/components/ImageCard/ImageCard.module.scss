@@ -11,9 +11,9 @@
 	width         : clamp(100px, 150px, 25vmax);
 
 	button {
-		text-transform: capitalize;
+		text-transform   : capitalize;
 		background-color : color.scale(palette.$black-d5, $alpha : -40%);
-		box-shadow: 0 0 4px palette.$black-d5;
+		box-shadow       : 0 0 4px palette.$black-d5;
 		color            : palette.$white;
 		font-weight      : bold;
 		height           : 100%;
@@ -24,12 +24,12 @@
 
 		&:hover, &:focus {
 			background-color : color.scale(palette.$black-d5, $alpha : -20%);
-			color: palette.$cyan;
+			color            : palette.$cyan;
 		}
 
 		&:active {
 			background-color : color.scale(palette.$black, $alpha : -20%);
-			color: palette.$white;
+			color            : palette.$white;
 		}
 	}
 

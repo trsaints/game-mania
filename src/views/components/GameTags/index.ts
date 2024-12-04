@@ -1,0 +1,1 @@
+export { GameTags } from './GameTags'

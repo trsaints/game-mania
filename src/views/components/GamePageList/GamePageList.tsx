@@ -1,45 +1,32 @@
 import { IGamePageList } from './IGamePageList.ts'
 import style from './GamePageList.module.scss'
-import { CountFilter, GamesList, PageSelection } from '@views/components'
-import { useState } from 'react'
-import {
-	GamePageListViewModel
-} from '@src/view-models/GamePageListViewModel.ts'
+import { GamesList } from '@views/components'
 import { Game } from '@data/types'
-import { SearchControls } from '@views/pages'
+import {
+	IGamePageListViewModel
+} from '@src/view-models/interfaces/IGamePageListViewModel.ts'
 
 
-export { GamePageList }
+export const GamePageList = {
+	Root,
+	ListResults
+}
 
-const viewModel = new GamePageListViewModel()
+function Root(props: IGamePageList) {
+	const { games, children, withFilter } = props
 
-function GamePageList(props: IGamePageList) {
-	const [itemCount, setItemCount]     = useState(10)
-	const [currentPage, setCurrentPage] = useState(0)
-
-	const { games, withFilter } = props
+	const className = withFilter
+					  ? `${style.GamePageList} ${style.WithFilter}`
+					  : style.GamePageList
 
 	return (
-		<article className={style.GamePageList}>
+		<article className={className}>
 			<h3 className={style.ResultsCount}
 				id="results-count">
 				{games.length} games found
 			</h3>
 
-			<CountFilter onHandleSubmit={(e) => {
-				viewModel.changeItemCount(e, setItemCount)
-			}}/>
-
-			{withFilter && <SearchControls {...props} />}
-
-			<ListResults games={games}
-						 currentPage={currentPage}
-						 itemCount={itemCount}/>
-
-			<PageSelection gamesCount={games.length}
-						   itemCount={itemCount}
-						   setCurrentPage={setCurrentPage}
-						   parentViewModel={viewModel}/>
+			{children}
 		</article>
 	)
 }
@@ -48,9 +35,11 @@ interface IListResults {
 	games: Game[]
 	currentPage: number
 	itemCount: number
+	viewModel: IGamePageListViewModel
 }
 
-function ListResults({ games, currentPage, itemCount }: IListResults) {
+function ListResults(props: IListResults) {
+	const { games, currentPage, itemCount, viewModel } = props
 
 	const currentGames = games.slice(currentPage * itemCount,
 									 itemCount + (currentPage * itemCount))

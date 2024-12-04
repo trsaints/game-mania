@@ -1,14 +1,14 @@
-@use 'src/palette';
+@use "src/palette";
 
 .LoadingScreen {
-	margin-block: 10vmax;
+	margin-block : 10vmax;
 
 	h2 {margin-bottom : 2rem !important;}
 
 	p {
 		padding-inline : 5vw;
-		text-transform: uppercase;
-		color: palette.$cyan;
-		text-shadow: 0 0 8px palette.$cyan;
+		text-transform : uppercase;
+		color          : palette.$cyan;
+		text-shadow    : 0 0 8px palette.$cyan;
 	}
 }

@@ -8,7 +8,7 @@ function Header() {
 			<h1 className="sr-only">Game Mania</h1>
 
 			<img className={style.Banner} src="/logo_solo.svg"
-				 alt='Website logo: a 3d look alike cube, colored in cyan'
+				 alt="Website logo: a 3d look alike cube, colored in cyan"
 			/>
 
 			<MainMenu/>

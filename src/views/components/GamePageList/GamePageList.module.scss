@@ -4,10 +4,12 @@
 	padding-inline : 5vw;
 
 	@media screen and (min-device-aspect-ratio : 1.7/1) {
-		display             : grid;
-		grid-template-areas : "heading heading" "filter filter" "controls results" "selection selection";
-		column-gap: 5vw;
-		grid-template-columns: 1fr 3fr;
+		&.WithFilter {
+			display               : grid;
+			grid-template-areas   : "heading heading" "filter filter" "controls results" "selection selection";
+			column-gap            : 5vw;
+			grid-template-columns : 1fr 3fr;
+		}
 	}
 
 	.ResultsCount {

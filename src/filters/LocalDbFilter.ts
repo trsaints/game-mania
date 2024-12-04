@@ -6,11 +6,11 @@ import { ILocalDbFilter } from '@src/filters/interfaces/ILocalDbFilter.ts'
 
 
 export class LocalDbFilter implements ILocalDbFilter {
+	private readonly _parserUtils: IParserUtils
+
 	constructor(parserUtils: IParserUtils) {
 		this._parserUtils = parserUtils
 	}
-
-	private readonly _parserUtils: IParserUtils
 
 	concatFields(data: ApiData, dataType: keyof DataServiceDictionary): string {
 		if (dataType !== 'games') {

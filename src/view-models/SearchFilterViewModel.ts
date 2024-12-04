@@ -10,6 +10,9 @@ import { DataRequestParams } from '@data/request-parameters'
 export { SearchFilterViewModel }
 
 class SearchFilterViewModel implements ISearchFilterViewModel {
+	public readonly ordering: string[]
+	public readonly metadataList: Map<string, Tag[] | Genre[] | Platform[] | Publisher[]>
+
 	constructor(props: ISearchFilter) {
 		this.ordering = ['name', 'released', 'added', 'updated', 'metacritic']
 
@@ -20,9 +23,6 @@ class SearchFilterViewModel implements ISearchFilterViewModel {
 										['publishers', props.publishers]
 									])
 	}
-
-	public readonly ordering: string[]
-	public readonly metadataList: Map<string, Tag[] | Genre[] | Platform[] | Publisher[]>
 
 	updateFilters(event: React.MouseEvent<HTMLElement>,
 				  setFilters: Dispatch<SetStateAction<DataRequestParams>>): void {

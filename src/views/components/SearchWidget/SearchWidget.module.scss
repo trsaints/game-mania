@@ -84,9 +84,9 @@
 
 	.SearchMenu {
 		color            : palette.$cyan;
-		font-size: 0.9rem;
+		font-size        : 0.9rem;
 		display          : flex;
-		width: fit-content;
+		width            : fit-content;
 		justify-content  : center;
 		text-transform   : uppercase;
 		gap              : 2ch;
@@ -98,13 +98,13 @@
 
 		.SearchSection {
 			&[open] .SearchOptions {
-				position : absolute;
-				animation: fade-in 0.1s ease-in forwards;
+				position  : absolute;
+				animation : fade-in 0.1s ease-in forwards;
 			}
 
 			.SearchOptions {
-				max-height: calc(((1ch + 1rem ) * 11) + 1rem);
-				overflow-y: auto;
+				max-height       : calc(((1ch + 1rem) * 11) + 1rem);
+				overflow-y       : auto;
 				margin-top       : 1rem;
 				padding          : 2vmin 5vmin;
 				line-height      : 200%;

@@ -8,6 +8,12 @@ import { ILocalDbFilter } from '@src/filters/interfaces/ILocalDbFilter.ts'
 
 
 export class ApiMiddleware implements IApiMiddleware {
+	private readonly _dataServiceDictionary: DataServiceDictionary
+	private readonly _apiService: IApiService
+	private readonly _localDb: ILocalDb<ApiData>
+	private readonly _apiMiddlewareFilter: IApiMiddlewareFilter
+	private readonly _localDbFilter: ILocalDbFilter
+
 	constructor(dataServiceDictionary: DataServiceDictionary,
 				apiService: IApiService,
 				localDb: ILocalDb<ApiData>,
@@ -20,12 +26,6 @@ export class ApiMiddleware implements IApiMiddleware {
 		this._apiMiddlewareFilter   = apiMiddlewareFilter
 		this._localDbFilter         = localDbFilter
 	}
-
-	private readonly _dataServiceDictionary: DataServiceDictionary
-	private readonly _apiService: IApiService
-	private readonly _localDb: ILocalDb<ApiData>
-	private readonly _apiMiddlewareFilter: IApiMiddlewareFilter
-	private readonly _localDbFilter: ILocalDbFilter
 
 	async getAll(route: keyof DataServiceDictionary,
 				 params: DataRequestParams

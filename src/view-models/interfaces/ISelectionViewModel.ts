@@ -9,4 +9,6 @@ export interface ISelectionViewModel {
 	): void
 
 	filterByGenre(games: Game[], selectedGenre: string): Game[]
+
+	highlightSelectedGenre(slug: string): void
 }

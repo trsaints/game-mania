@@ -5,11 +5,11 @@ import { IParserUtils } from '@src/utils'
 
 
 export class TagService implements IDataService<Tag> {
+	private readonly _parserUtils: IParserUtils
+
 	constructor(parserUtils: IParserUtils) {
 		this._parserUtils = parserUtils
 	}
-
-	private readonly _parserUtils: IParserUtils
 
 	async getAll(params: DataRequestParams,
 				 apiService: IApiService

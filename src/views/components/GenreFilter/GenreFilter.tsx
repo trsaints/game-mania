@@ -14,7 +14,7 @@ export function GenreFilter({ genres }: IGenreFilter) {
 	})
 
 	return (
-		<menu className={style.Menu}>
+		<menu className={style.GenreFilter}>
 			{genreList}
 		</menu>
 	)

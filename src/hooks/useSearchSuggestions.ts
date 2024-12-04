@@ -1,15 +1,9 @@
-import { Dispatch, SetStateAction, useEffect } from 'react'
-import { Game, Genre, InlineBannerStyle, Publisher, Tag } from '@data/types'
+import { useEffect } from 'react'
+import { Game, Genre, Publisher, Tag } from '@data/types'
 import { IApiMiddleware } from '@src/middlewares'
 import { IStylingUtils } from '@src/utils'
+import { SearchStates } from '@data/types/SearchStates.ts'
 
-
-export type SearchStates = {
-	setGenres: Dispatch<SetStateAction<Genre[]>>
-	setTags: Dispatch<SetStateAction<Tag[]>>
-	setPublishers: Dispatch<SetStateAction<Publisher[]>>
-	setCurrentBanner: Dispatch<SetStateAction<InlineBannerStyle>>
-}
 
 export function useSearchSuggestions(apiMiddleware: IApiMiddleware | undefined,
 									 searchStates: SearchStates,

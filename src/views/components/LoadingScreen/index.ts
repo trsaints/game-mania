@@ -1,1 +1,1 @@
-export * from './LoadingScreen'
+export { LoadingScreen } from './LoadingScreen'
