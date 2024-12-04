@@ -7,7 +7,12 @@ const RootContext = createContext<IRootContext>({
 													setGames     : () => {},
 													setPlatforms : () => {},
 													setPublishers: () => {},
-													setTags      : () => {}
+													setTags      : () => {},
+													genres       : [],
+													platforms    : [],
+													games        : [],
+													publishers   : [],
+													tags         : []
 												})
 
 export { RootContext }
