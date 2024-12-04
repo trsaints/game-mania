@@ -9,10 +9,10 @@ export interface IRootContext {
 	platforms: Platform[]
 	publishers: Publisher[]
 	tags: Tag[],
-	setGames: Dispatch<SetStateAction<Game[] | undefined>>
-	setGenres: Dispatch<SetStateAction<Genre[] | undefined>>
-	setPlatforms: Dispatch<SetStateAction<Platform[] | undefined>>
-	setPublishers: Dispatch<SetStateAction<Publisher[] | undefined>>
-	setTags: Dispatch<SetStateAction<Tag[] | undefined>>
+	setGames: Dispatch<SetStateAction<Game[]>>
+	setGenres: Dispatch<SetStateAction<Genre[]>>
+	setPlatforms: Dispatch<SetStateAction<Platform[]>>
+	setPublishers: Dispatch<SetStateAction<Publisher[]>>
+	setTags: Dispatch<SetStateAction<Tag[]>>
 	apiMiddleware?: IApiMiddleware
 }

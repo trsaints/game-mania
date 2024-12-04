@@ -13,7 +13,7 @@ class SearchFormViewModel implements ISearchFormViewModel {
 	search(e: React.FormEvent<HTMLFormElement>,
 		   apiMiddleware: IApiMiddleware | undefined,
 		   navigator: NavigateFunction,
-		   setGames: Dispatch<SetStateAction<Game[] | undefined>>
+		   setGames: Dispatch<SetStateAction<Game[]>>
 	): void {
 		e.preventDefault()
 

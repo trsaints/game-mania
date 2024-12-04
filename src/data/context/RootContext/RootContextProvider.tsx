@@ -9,11 +9,11 @@ import {
 function RootContextProvider(props: IRootContextProvider) {
 	const { children, apiMiddleware } = props
 
-	const [games, setGames]           = useState<Game[]>()
-	const [genres, setGenres]         = useState<Genre[]>()
-	const [platforms, setPlatforms]   = useState<Platform[]>()
-	const [publishers, setPublishers] = useState<Publisher[]>()
-	const [tags, setTags]             = useState<Tag[]>()
+	const [games, setGames]           = useState<Game[]>([])
+	const [genres, setGenres]         = useState<Genre[]>([])
+	const [platforms, setPlatforms]   = useState<Platform[]>([])
+	const [publishers, setPublishers] = useState<Publisher[]>([])
+	const [tags, setTags]             = useState<Tag[]>([])
 
 	const context: IRootContext = {
 		games,
